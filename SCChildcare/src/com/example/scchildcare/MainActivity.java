@@ -1,3 +1,9 @@
+/**
+ * Edited by Ben Gaddy (heavenscloud001) @ 7:00pm 11/3/2013
+ * 
+ * 
+ * 
+**/
 package com.example.scchildcare;
 
 import android.os.Bundle;
