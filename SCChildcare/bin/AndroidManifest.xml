@@ -5,7 +5,11 @@
     android:versionName="1.0" >
 
     <uses-sdk
+<<<<<<< HEAD
         android:minSdkVersion="11"
+=======
+        android:minSdkVersion="8"
+>>>>>>> da602f28bc301c835559bfba8d9c1ada2abf4af8
         android:targetSdkVersion="18" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
