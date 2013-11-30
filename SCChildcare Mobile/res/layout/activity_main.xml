@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:facebook="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" >
+
+    <EditText
+        android:id="@+id/edit_message"
+        android:layout_width="221dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_message" />
+
+    <TextView
+        android:id="@+id/selection_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="10dp"
+        android:textColor="#333"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/edit_message"
+        android:onClick="sendMessage"
+        android:text="@string/button_send" />
+    <TextView
+            android:id="@+id/geocodeLabel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            />
+
+    <com.facebook.widget.LoginButton
+        android:id="@+id/authButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button1"
+        android:layout_marginTop="65dp"
+        android:layout_toLeftOf="@+id/button1" />
+
+    <Button
+        android:id="@+id/get_location_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/lat_lng"
+        android:layout_alignRight="@+id/authButton"
+        android:layout_marginBottom="34dp"
+        android:onClick="getLocation"
+        android:text="@string/get_location" />
+
+    <TextView
+        android:id="@+id/label_lat_lng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/get_location_button"
+        android:layout_centerHorizontal="true"
+        android:text="@string/latlng"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/lat_lng"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/authButton"
+        android:layout_alignParentBottom="true"
+        android:textIsSelectable="true"
+        android:textSize="20sp" />
+
+    <EditText
+        android:id="@+id/addressText"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignTop="@+id/label_lat_lng"
+        android:ems="10"
+        android:inputType="text" >
+
+        <requestFocus />
+    </EditText>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addressText"
+        android:layout_marginBottom="17dp"
+        android:layout_toLeftOf="@+id/button1"
+        android:onClick="locate"
+        android:text="@string/button_locate" />
+
+</RelativeLayout>
