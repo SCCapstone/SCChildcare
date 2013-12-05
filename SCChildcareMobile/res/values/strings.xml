@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">SCChildcare Mobile</string>
+    <string name="edit_message">Enter a provider name, address, or city</string>
+    <string name="button_send">Send</string>
+    <string name="action_settings">FAQ\'s</string>
+    <string name="action_search">Search</string>
+    <string name="title_activity_main">SCChildcare</string>
+    <string name="title_activity_display_message">Search Results</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="comma">,&#160;</string>
+    <string name="results">Results:</string>
+    <string name="sorry">We are sorry, your search did not return anything</string>
+    <string name="button_search">Search</string>
+    <string name="connectionError">Oops! Something went wrong, please try again!</string>
+    <string name="geocode_label">Enter an an address or Zipcode</string>
+    <!-- button string -->
+    <string name="button_locate">Get</string>
+    <string name="latlng">latlng</string>
+    <!-- Latitude, longitude format -->
+    <string name="latitude_longitude">%1$.8f, %2$.8f</string>
+    <string name="latlng1">latlng</string>
+    <!-- Latitude, longitude format -->
+    <string name="get_location">Get Location</string>
+    <string name="app_id">434134920041249</string>
+    <string name="str">button</string>
+    <string name="desc">Description</string>
+
+</resources>
