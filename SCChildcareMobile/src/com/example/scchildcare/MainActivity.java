@@ -1,26 +1,18 @@
 package com.example.scchildcare;
 
-import java.util.List;
-import java.util.Locale;
-
 import android.app.Activity;
 import android.app.Dialog;
-import android.support.v4.app.DialogFragment;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.location.Address;
-import android.location.Geocoder;
 import android.location.Location;
-import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,20 +23,20 @@ import com.google.android.gms.location.LocationClient;
 
 public class MainActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
 GooglePlayServicesClient.OnConnectionFailedListener{
-	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-	public final static String EXTRA_LONGITUDE = null;
-	public final static String EXTRA_LATITUDE = null;
+	public final static String EXTRA_MESSAGE = "com.example.scchildcare.MESSAGE";
+	public final static String EXTRA_LONG_PARAM = null;
+	public final static String EXTRA_LAT_PARAM = null;
 	
 	// Label instructing input for EditText
 		TextView geocodeLabel;
 		//EditText textbox1;  //new hidden textbox
-		Button button1;
+		ImageButton button1;
 		// Text box for entering address
 		EditText addressText;
 		//android:onClick="getLocation"android:onClick="getLocation"private TextView LongLat;
 		private LocationClient mLocationClient;
 		Location mCurrentLocation;
-		private TextView LongLat1;
+		//private TextView LongLat1;
 		private final static int
 		CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 		private MainFragment mainFragment;
@@ -132,7 +124,7 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 		
 		mLocationClient = new LocationClient(this, this, this);
 		//LongLat1 = (TextView) findViewById(R.id.lat_lng1);
-		button1 = (Button) findViewById(R.id.button1);
+		button1 = (ImageButton) findViewById(R.id.button1);
 		
 		
 		if (savedInstanceState == null) {
@@ -147,6 +139,8 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 			mainFragment = (MainFragment) getSupportFragmentManager()
 					.findFragmentById(android.R.id.content);
 		}
+		
+		
 
 		// // gets the activity's default ActionBar
 		// ActionBar actionBar = getActionBar();
@@ -261,14 +255,23 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 			double longitude = mCurrentLocation.getLongitude();
 			String longlat = "latitude " + Double.toString(latitude) + " " + "longitude "
 					+  Double.toString(longitude);
-			System.out.println(longlat);
+			System.out.println("LONGLAT: " +longlat);
 			//LongLat1.setText(longlat);
 			
+			String stringLatitude = Double.toString(latitude);
+			String stringLongitude = Double.toString(longitude);
+			
+			System.out.println("Latitude: " + stringLatitude + " Longitude: " + stringLongitude);
+			
 			makeToast("Searching, Please wait...");
-			Intent gpsSearch = new Intent(this, GPS_SearchResultsActivity.class);
+			Intent gpsSearch = new Intent(MainActivity.this, GPS_SearchResultsActivity.class);
+			Bundle GPS_params = new Bundle();
 			System.out.println("GPS_SearchResultsActivity created");
-			gpsSearch.putExtra(EXTRA_LONGITUDE, longitude);
-			gpsSearch.putExtra(EXTRA_LATITUDE, latitude);
+			GPS_params.putString("EXTRA_LAT_PARAM", stringLatitude);
+			
+			GPS_params.putString("EXTRA_LONG_PARAM", stringLongitude);
+			
+			gpsSearch.putExtras(GPS_params);
 			startActivity(gpsSearch);
 			
 		}
@@ -319,6 +322,7 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 		
 
 	}
+	
 
 	public void makeToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
