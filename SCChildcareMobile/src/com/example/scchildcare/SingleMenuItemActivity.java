@@ -22,8 +22,8 @@ public class SingleMenuItemActivity extends Activity {
 	// private static final String TAG_LONGITUDE = "longitude";
 	// private static final String TAG_LATITUDE = "latitude";
 	private static final String TAG_CAPACITY = "capacity";
-	private static final String TAG_OPENTIME = "openTime";
-	private static final String TAG_CLOSETIME = "closeTime";
+	//	private static final String TAG_OPENTIME = "openTime";
+	//	private static final String TAG_CLOSETIME = "closeTime";
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
@@ -53,14 +53,15 @@ public class SingleMenuItemActivity extends Activity {
 		String zipCode = in.getStringExtra(TAG_ZIPCODE);
 		String phoneNumber = in.getStringExtra(TAG_PHONENUMBER);
 		String capacity = in.getStringExtra(TAG_CAPACITY);
-		String openTime = in.getStringExtra(TAG_OPENTIME);
-		String closeTime = in.getStringExtra(TAG_CLOSETIME);
+		//String openTime = in.getStringExtra(TAG_OPENTIME);
+		//String closeTime = in.getStringExtra(TAG_CLOSETIME);
 		String specialist = in.getStringExtra(TAG_SPECIALIST);
 		String specialistPhone = in.getStringExtra(TAG_SPECIALISTPHONE);
 		String qualityLevel = in.getStringExtra(TAG_QUALITY);
 
 		// Displaying all values on the screen
 		TextView lblName = (TextView) findViewById(R.id.name_label);
+		
 		TextView lblLicense = (TextView) findViewById(R.id.license_label);
 		TextView lblOwner = (TextView) findViewById(R.id.owner_label);
 		TextView lblAddress = (TextView) findViewById(R.id.address_label);
@@ -69,8 +70,8 @@ public class SingleMenuItemActivity extends Activity {
 		// TextView lblZipcode = (TextView) findViewById(R.id.zipcode_label);
 		TextView lblPhone = (TextView) findViewById(R.id.phone_label);
 		TextView lblCapacity = (TextView) findViewById(R.id.capacity_label);
-		TextView lblOpen = (TextView) findViewById(R.id.openTime_label);
-		TextView lblClose = (TextView) findViewById(R.id.closeTime_label);
+		//TextView lblOpen = (TextView) findViewById(R.id.openTime_label);
+		//TextView lblClose = (TextView) findViewById(R.id.closeTime_label);
 		TextView lblSpecialist = (TextView) findViewById(R.id.specialist_label);
 		TextView lblSpecialistPhone = (TextView) findViewById(R.id.specialistPhone_label);
 		TextView lblQuality = (TextView) findViewById(R.id.qualityLevel_label);
@@ -83,10 +84,10 @@ public class SingleMenuItemActivity extends Activity {
 		// lblState.setText(state);
 		// lblZipcode.setText(zipCode);
 		lblPhone.setText(phoneNumber);
-		System.out.println(phoneNumber);
+		//System.out.println(phoneNumber);
 		lblCapacity.setText(capacity);
-		lblOpen.setText(openTime);
-		lblClose.setText(closeTime);
+		//lblOpen.setText(openTime);
+		//lblClose.setText(closeTime);
 		lblSpecialist.setText(specialist);
 		lblSpecialistPhone.setText(specialistPhone);
 		lblQuality.setText(qualityLevel);

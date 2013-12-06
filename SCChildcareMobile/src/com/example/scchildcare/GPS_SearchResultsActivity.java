@@ -55,7 +55,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
 
-	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
+	//public static final String SORRY_MESSAGE = "com.example.scchildcare.SORRY";
 
 	// providers JSONArray
 	JSONArray providers = null;
@@ -82,10 +82,11 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		StrictMode.setThreadPolicy(tp);
 
 		// Get the message from the intent
-		Intent intent = getIntent();
-		String param_longitude = intent.getStringExtra(MainActivity.EXTRA_LONGITUDE);
-		String param_latitude = intent.getStringExtra(MainActivity.EXTRA_LATITUDE);
-		//System.out.println(message);
+		Intent gpsSearch = getIntent();
+		Bundle GPS_params = gpsSearch.getExtras();
+		String param_latitude = GPS_params.getString("EXTRA_LAT_PARAM");
+		String param_longitude = GPS_params.getString("EXTRA_LONG_PARAM");
+		
 		fullGPS_URL = gpsURL_1+ param_longitude + gpsURL_2 + param_latitude;
 
 		System.out.println("Beginning JSON Parse");
