@@ -23,13 +23,7 @@
         android:id="@+id/edit_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="25dip"
-        android:inputType="text"
-        android:onClick="clearText"
-        android:singleLine="true" >
-
-        
-
+        android:hint="@string/edit_message">
     </EditText>
 
     <LinearLayout
@@ -42,20 +36,18 @@
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:src="@drawable/gps"
             android:contentDescription="@string/gps_desc"
+            android:gravity="center"
             android:onClick="getLocation"
-            />
+            android:src="@drawable/gps" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:contentDescription="@string/search_desc"
-            android:src="@drawable/search"
             android:gravity="center"
             android:onClick="sendMessage"
-            />
+            android:src="@drawable/search" />
     </LinearLayout>
 
     <LinearLayout

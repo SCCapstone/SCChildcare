@@ -237,6 +237,7 @@ int string auth_client_needs_update_title 0x7f070030
 int string auth_client_play_services_err_notification_msg 0x7f070031
 int string auth_client_requested_by_msg 0x7f070032
 int string auth_client_using_bad_version_title 0x7f07002d
+int string blank 0x7f070051
 int string button_locate 0x7f070041
 int string button_search 0x7f07003e
 int string button_send 0x7f070035
