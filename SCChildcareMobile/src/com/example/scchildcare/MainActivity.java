@@ -139,6 +139,8 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 			mainFragment = (MainFragment) getSupportFragmentManager()
 					.findFragmentById(android.R.id.content);
 		}
+		
+		
 
 		// // gets the activity's default ActionBar
 		// ActionBar actionBar = getActionBar();
@@ -320,6 +322,7 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 		
 
 	}
+	
 
 	public void makeToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
