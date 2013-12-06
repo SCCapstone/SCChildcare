@@ -26,5 +26,14 @@
     <string name="app_id">434134920041249</string>
     <string name="str">button</string>
     <string name="desc">Description</string>
+    <string name="license">License Info: </string>
+    <string name="operator">Operator Name: </string>
+    <string name="capacity">Facility Capacity: </string>
+    <string name="DSS_Specialist">DSS Specialist: </string>
+    <string name="DSS_Spec_Phone">DSS Specialist\'s Phone: </string>
+    <string name="Quality">ABC Quality Level: </string>
+    <string name="gps_desc">GPS Search</string>
+    <string name="search_desc">Search</string>
+    
 
 </resources>
