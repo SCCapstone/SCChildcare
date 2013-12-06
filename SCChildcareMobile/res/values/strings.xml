@@ -34,6 +34,6 @@
     <string name="Quality">ABC Quality Level: </string>
     <string name="gps_desc">GPS Search</string>
     <string name="search_desc">Search</string>
-    
+    <string name="blank"> </string>
 
 </resources>

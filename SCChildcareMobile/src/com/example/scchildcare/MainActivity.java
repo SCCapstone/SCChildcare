@@ -43,7 +43,7 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 
 
 		public static final String APPTAG = "Location Updates";
-	
+		EditText editText;
 	
 		@Override
 		protected void onActivityResult(
@@ -121,7 +121,7 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 		//geocodeLabel.setText(getString(R.string.geocode_label));
 		//LongLat = (TextView) findViewById(R.id.lat_lng);
 		
-		
+		editText = (EditText) findViewById(R.id.edit_message);
 		mLocationClient = new LocationClient(this, this, this);
 		//LongLat1 = (TextView) findViewById(R.id.lat_lng1);
 		button1 = (ImageButton) findViewById(R.id.button1);
@@ -202,6 +202,7 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 	protected void onResume() {
 		//addressText.getText().toString();
 		//addressText = (EditText) findViewById(R.id.addressText);  
+		editText = (EditText) findViewById(R.id.edit_message);
 		System.out.println("I've resumed");
 		super.onResume();
 	}
@@ -306,10 +307,11 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 		makeToast("Searching, Please wait...");
 		Intent intent = new Intent(this, SearchResultsActivity.class);
 		
-		//String message = editText.getText().toString();
+		String message = editText.getText().toString();
 		
 		
-		String message = mainFragment.locate2(view);
+		//String message = mainFragment.locate2(view);
+		System.out.println(message);
 		intent.putExtra(EXTRA_MESSAGE, message);
 		/**
 		 * If there is no Connection to the server, this will error out.
