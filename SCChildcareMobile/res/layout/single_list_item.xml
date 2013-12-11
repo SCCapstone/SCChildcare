@@ -1,242 +1,212 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent" >
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <!-- Name Label -->
+
+    <TextView
+        android:id="@+id/name_label"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dip"
+        android:paddingTop="25dip"
+        android:textColor="#000000"
+        android:textSize="25sp"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/address_label"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical" >
+            android:textColor="#21628d"
+            android:textSize="22sp" />
 
-            <!-- Name Label -->
-
-            <TextView
-                android:id="@+id/name_label"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:paddingBottom="10dip"
-                android:paddingTop="25dip"
-                android:textColor="#21628d"
-                android:textSize="25sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- License Label -->
-
-        <LinearLayout
+        <TextView
+            android:id="@+id/city_label"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/address_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textColor="#21628d"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/city_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="left"
-                android:textColor="#21628d"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/phone_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|left"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/license"
-                android:layout_width="138dp"
-                android:layout_height="wrap_content"
-                android:text="@string/license"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/license_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- Owner Label -->
-        <!-- Address Label -->
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|left"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/owner"
-                android:layout_width="169dp"
-                android:layout_height="wrap_content"
-                android:text="@string/operator"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/owner_label"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <!-- City Label -->
-        <!-- State Label -->
-        <!-- <TextView android:id="@+id/state_label" -->
-        <!-- android:layout_width="fill_parent" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:textSize="20sp" -->
-        <!-- android:textStyle="bold"/> -->
-        <!-- Zipcode Label -->
-        <!-- <TextView android:id="@+id/zipcode_label" -->
-        <!-- android:layout_width="fill_parent" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:textSize="20sp" -->
-        <!-- android:textStyle="bold"/> -->
-        <!-- PhoneNumber Label -->
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/capacity"
-                android:layout_width="178dp"
-                android:layout_height="wrap_content"
-                android:text="@string/capacity"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/capacity_label"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|left"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/specialist"
-                android:layout_width="160dp"
-                android:layout_height="wrap_content"
-                android:text="@string/DSS_Specialist"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/specialist_label"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <!-- Capacity Label -->
-        <!-- OpenTime Label -->
-        <!-- <TextView android:id="@+id/openTime_label" -->
-        <!-- android:layout_width="fill_parent" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:textSize="20sp" -->
-        <!-- android:textStyle="bold"/> -->
-        <!-- CloseTime Label -->
-        <!-- <TextView android:id="@+id/closeTime_label" -->
-        <!-- android:layout_width="fill_parent" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:textSize="20sp" -->
-        <!-- android:textStyle="bold"/> -->
-        <!-- Specialist Label -->
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|left"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/specialistPhone"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/DSS_Spec_Phone"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/specialistPhone_label"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-        <!-- SpecialistPhone Label -->
-        <!-- ABC Quality Level Label -->
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center|left"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/quality"
-                android:layout_width="187dp"
-                android:layout_height="wrap_content"
-                android:text="@string/Quality"
-                android:textColor="#000000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/qualityLevel_label"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-        </LinearLayout>
+            android:textColor="#21628d"
+            android:textSize="20sp"
+            android:textStyle="bold" />
     </LinearLayout>
 
-</ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/license_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/ownerNameLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/owner"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/owner_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/phone_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/capacityNumberLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/capacity"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/capacity_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/openLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/openTime"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/openTime_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/closeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/closeTime"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/closeTime_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/specialistLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/specialist"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/specialist_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/specialistPhoneLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/specialistPhone"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/specialistPhone_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/qualityLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/quality"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/qualityLevel_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="419dp" />
+
+</LinearLayout>

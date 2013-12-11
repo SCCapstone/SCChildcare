@@ -124,6 +124,27 @@
         android:textSize="0sp"
         android:textColor="#acacac" >
     </TextView>
+    
+    <!-- Latitude label -->
+
+    <TextView
+        android:id="@+id/latitude"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="0sp"
+        android:textColor="#acacac" >
+    </TextView>
+    
+    <!-- Longitude label -->
+
+    <TextView
+        android:id="@+id/longitude"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textSize="0sp"
+        android:textColor="#acacac" >
+    </TextView>
+    
     <!-- Capacity label -->
 
     <TextView

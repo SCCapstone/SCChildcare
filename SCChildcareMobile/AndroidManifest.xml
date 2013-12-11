@@ -4,19 +4,33 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <!--
+     The following two permissions are not required to use
+     Google Maps Android API v2, but are recommended.
+    -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_scchildcare_logo"
+        android:icon="@drawable/ic_scchildcare_logo_small"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <!-- Main Page View -->
         <activity
@@ -52,7 +66,7 @@
         <!-- Single List Item View -->
         <!--
      BUG REPORT: When the parent activity up arrow is used, this will attempt to fill the list view with an empty array, sending it to 
-	the sorry page immediately, need to figure out how to fix this
+	the sorry page immediately, need to figure out how to fix this
         -->
         <activity
             android:name="com.example.scchildcare.SingleMenuItemActivity"
@@ -97,6 +111,10 @@
             android:name="com.facebook.LoginActivity"
             android:label="@string/app_name" >
         </activity>
+
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyC7IZvajDz3J-XIiwqLh08a8diCW5g-gAA" />
     </application>
 
 </manifest>
