@@ -16,21 +16,14 @@
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_scc_logo_full" />
+            android:src="@drawable/ic_scchildcare_logo" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/edit_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="25dip"
-        android:inputType="text"
-        android:onClick="clearText"
-        android:singleLine="true" >
-
-        
-
-    </EditText>
+        android:hint="@string/edit_message" />
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -40,22 +33,24 @@
 
         <ImageButton
             android:id="@+id/button1"
+            android:contentDescription="@string/GPSDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:src="@drawable/gps"
-            android:contentDescription="@string/gps_desc"
+            android:gravity="center"
             android:onClick="getLocation"
-            />
+            android:text="@string/button_locate" />
 
         <ImageButton
             android:layout_width="wrap_content"
+            android:contentDescription="@string/searchDesc"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/search_desc"
-            android:src="@drawable/search"
             android:gravity="center"
+            android:src="@drawable/search"
             android:onClick="sendMessage"
-            />
+            android:text="@string/button_search" />
+
+        <requestFocus />
     </LinearLayout>
 
     <LinearLayout
@@ -78,14 +73,12 @@
         <!-- android:layout_height="wrap_content" -->
         <!-- android:textSize="20sp" /> -->
 
-
-        <!-- <com.facebook.widget.LoginButton -->
-        <!-- android:id="@+id/authButton" -->
-        <!-- android:layout_width="wrap_content" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:layout_marginBottom="15dp" -->
-        <!-- android:gravity="center" /> -->
-
+        <com.facebook.widget.LoginButton
+            android:id="@+id/authButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center" />
 
         <!-- <TextView -->
         <!-- android:id="@+id/lat_lng" -->

@@ -7,8 +7,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.scchildcare.R;
-
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
 import android.content.Intent;
@@ -26,10 +24,17 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
+
 //import com.example.myfirstapp.trackdata.TrackData;
 
 public class GPS_SearchResultsActivity extends ListActivity {
-	private static final String gpsURL_1 = "http://10.30.100.155:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
+	private static final String gpsURL_1 = "http://10.1.1.119:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
 	private static final String gpsURL_2 = "&lat=";
 	// private static byte[] buff = new byte[1024];
 	// private static String result = null;
@@ -55,7 +60,10 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
 
-	//public static final String SORRY_MESSAGE = "com.example.scchildcare.SORRY";
+	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
+	
+	
+	GoogleMap mMap;
 
 	// providers JSONArray
 	JSONArray providers = null;
@@ -82,11 +90,12 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		StrictMode.setThreadPolicy(tp);
 
 		// Get the message from the intent
-		Intent gpsSearch = getIntent();
-		Bundle GPS_params = gpsSearch.getExtras();
-		String param_latitude = GPS_params.getString("EXTRA_LAT_PARAM");
-		String param_longitude = GPS_params.getString("EXTRA_LONG_PARAM");
+		Intent intent = getIntent();
+		Bundle coordinates = intent.getExtras();
 		
+		String param_longitude = coordinates.getString("EXTRA_LONGITUDE");
+		String param_latitude = coordinates.getString("EXTRA_LATITUDE");
+		System.out.println(param_latitude + ", " +param_longitude);
 		fullGPS_URL = gpsURL_1+ param_longitude + gpsURL_2 + param_latitude;
 
 		System.out.println("Beginning JSON Parse");
@@ -163,6 +172,25 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
 					providerList.add(map);
+					
+					
+					double dbl_latitude = Double.parseDouble(latitude);
+					double dbl_longitude = Double.parseDouble(longitude);
+					
+					double your_latitude = Double.parseDouble(param_latitude);
+					double your_longitude = Double.parseDouble(param_longitude);
+					
+					LatLng YOUR_LOCATION = new LatLng(your_latitude, your_longitude);
+					
+					mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+					mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+					mMap.setMyLocationEnabled(true);
+
+						mMap.addMarker(new MarkerOptions()
+							.position(new LatLng(dbl_latitude, dbl_longitude))
+							.title("Hello world"));
+						
+						mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(YOUR_LOCATION, 12));
 
 				}
 			}
