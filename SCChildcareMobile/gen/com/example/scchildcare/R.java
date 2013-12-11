@@ -543,7 +543,6 @@ containing a value of this type.
         [CHAR LIMIT=70] 
          */
         public static final int auth_client_using_bad_version_title=0x7f07002d;
-        public static final int blank=0x7f070051;
         /**  button string 
          */
         public static final int button_locate=0x7f070041;
