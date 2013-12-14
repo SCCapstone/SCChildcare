@@ -203,12 +203,12 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		 R.layout.list_item,
 		 new String[]{TAG_PROVIDERNAME, TAG_LICENSEINFO, TAG_OWNERNAME,
 		 TAG_ADDRESS, TAG_CITY, TAG_STATE,
-		 TAG_ZIPCODE, TAG_PHONENUMBER, TAG_CAPACITY, TAG_OPENTIME,
+		 TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE, TAG_LONGITUDE, TAG_CAPACITY, TAG_OPENTIME,
 		 TAG_CLOSETIME, TAG_SPECIALIST,
 		 TAG_SPECIALISTPHONE, TAG_QUALITY}, new int[]
 		 {R.id.name, R.id.licenseInfo, R.id.ownerName, R.id.address,
 		 R.id.city, R.id.state, R.id.zipCode,
-		 R.id.phone, R.id.capacity, R.id.openTime, R.id.closeTime,
+		 R.id.phone, R.id.latitude, R.id.longitude, R.id.capacity, R.id.openTime, R.id.closeTime,
 		 R.id.specialist, R.id.specialistPhone,
 		 R.id.qualityLevel});
 
@@ -233,6 +233,8 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				String licenseInfo = ((TextView) view.findViewById(R.id.licenseInfo)).getText().toString();
 				String ownerName = ((TextView) view.findViewById(R.id.ownerName)).getText().toString();
 				String address = ((TextView) view.findViewById(R.id.address)).getText().toString();
+				String latitude = ((TextView) view.findViewById(R.id.latitude)).getText().toString();
+				String longitude = ((TextView) view.findViewById(R.id.longitude)).getText().toString();
 				String city = ((TextView) view.findViewById(R.id.city)).getText().toString();			
 			    String state = ((TextView) view.findViewById(R.id.state)).getText().toString();
 				String zipCode = ((TextView) view.findViewById(R.id.zipCode)).getText().toString();
@@ -255,6 +257,8 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				in.putExtra(TAG_STATE, state);
 				in.putExtra(TAG_ZIPCODE, zipCode);
 				in.putExtra(TAG_PHONENUMBER, phoneNumber);
+				in.putExtra(TAG_LATITUDE, latitude);
+				in.putExtra(TAG_LONGITUDE, longitude);
 				in.putExtra(TAG_CAPACITY, capacity);
 				in.putExtra(TAG_OPENTIME, openTime);
 				in.putExtra(TAG_CLOSETIME, closeTime);
