@@ -27,10 +27,10 @@ public class MainFragment extends Fragment {
 		}
 	};
 
-//	public String locate2(View view) {
-//		String message = editText.getText().toString();
-//		return message;
-//	}
+	public String locate2(View view) {
+		String message = editText.getText().toString();
+		return message;
+	}
 
 //	@Override
 //	public View onCreateView(LayoutInflater inflater, ViewGroup container,
