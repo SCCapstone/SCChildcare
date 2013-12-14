@@ -29,6 +29,8 @@ public class MainActivity extends FragmentActivity implements
 	public final static String EXTRA_LONGITUDE = null;
 	public final static String EXTRA_LATITUDE = null;
 
+	
+	EditText editText;
 	// Label instructing input for EditText
 	TextView geocodeLabel;
 	// EditText textbox1; //new hidden textbox
@@ -289,9 +291,9 @@ public class MainActivity extends FragmentActivity implements
 		makeToast("Searching, Please wait...");
 		Intent intent = new Intent(this, SearchResultsActivity.class);
 
-		// String message = editText.getText().toString();
+		String message = editText.getText().toString();
 
-		String message = mainFragment.locate2(view);
+		//String message = mainFragment.locate2(view);
 		intent.putExtra(EXTRA_MESSAGE, message);
 		/**
 		 * If there is no Connection to the server, this will error out.
