@@ -16,7 +16,7 @@
             android:id="@+id/imageView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_scc_logo_full" />
+            android:src="@drawable/ic_scchildcare_logo" />
     </LinearLayout>
 
     <EditText
@@ -35,20 +35,20 @@
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="@string/GPSDesc"
             android:gravity="center"
-            android:src="@drawable/gps"
-            android:contentDescription="@string/gps_desc"
             android:onClick="getLocation"
-            />
+            android:src="@drawable/gps"
+            android:text="@string/button_locate" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:contentDescription="@string/search_desc"
-            android:src="@drawable/search"
+            android:contentDescription="@string/searchDesc"
             android:gravity="center"
             android:onClick="sendMessage"
-            />
+            android:src="@drawable/search"
+            android:text="@string/button_search" />
 
         <requestFocus />
     </LinearLayout>
@@ -73,14 +73,12 @@
         <!-- android:layout_height="wrap_content" -->
         <!-- android:textSize="20sp" /> -->
 
-
-        <!-- <com.facebook.widget.LoginButton -->
-        <!-- android:id="@+id/authButton" -->
-        <!-- android:layout_width="wrap_content" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:layout_marginBottom="15dp" -->
-        <!-- android:gravity="center" /> -->
-
+        <com.facebook.widget.LoginButton
+            android:id="@+id/authButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:gravity="center" />
 
         <!-- <TextView -->
         <!-- android:id="@+id/lat_lng" -->

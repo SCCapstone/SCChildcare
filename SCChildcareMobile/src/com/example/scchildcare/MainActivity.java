@@ -11,6 +11,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -21,119 +22,108 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 
-public class MainActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks,
-GooglePlayServicesClient.OnConnectionFailedListener{
-	public final static String EXTRA_MESSAGE = "com.example.scchildcare.MESSAGE";
-	public final static String EXTRA_LONG_PARAM = null;
-	public final static String EXTRA_LAT_PARAM = null;
+public class MainActivity extends FragmentActivity implements
+		GooglePlayServicesClient.ConnectionCallbacks,
+		GooglePlayServicesClient.OnConnectionFailedListener {
+	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+	public final static String EXTRA_LONGITUDE = null;
+	public final static String EXTRA_LATITUDE = null;
+
 	
+	EditText editText;
 	// Label instructing input for EditText
-		TextView geocodeLabel;
-		//EditText textbox1;  //new hidden textbox
-		ImageButton button1;
-		// Text box for entering address
-		EditText addressText;
-		//android:onClick="getLocation"android:onClick="getLocation"private TextView LongLat;
-		private LocationClient mLocationClient;
-		Location mCurrentLocation;
-		//private TextView LongLat1;
-		private final static int
-		CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-		private MainFragment mainFragment;
+	TextView geocodeLabel;
+	// EditText textbox1; //new hidden textbox
+	ImageButton button1;
+	// Text box for entering address
+	EditText addressText;
+	// android:onClick="getLocation"android:onClick="getLocation"private
+	// TextView LongLat;
+	private LocationClient mLocationClient;
+	Location mCurrentLocation;
+	private TextView LongLat1;
+	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+	private MainFragment mainFragment;
 
+	public static final String APPTAG = "Location Updates";
 
-		public static final String APPTAG = "Location Updates";
-	
-	
-		@Override
-		protected void onActivityResult(
-				int requestCode, int resultCode, Intent data) {
-			// Decide what to do based on the original request code
-			switch (requestCode) {
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// Decide what to do based on the original request code
+		switch (requestCode) {
 
-			case CONNECTION_FAILURE_RESOLUTION_REQUEST :
+		case CONNECTION_FAILURE_RESOLUTION_REQUEST:
+			/*
+			 * If the result code is Activity.RESULT_OK, try to connect again
+			 */
+			switch (resultCode) {
+			case Activity.RESULT_OK:
 				/*
-				 * If the result code is Activity.RESULT_OK, try
-				 * to connect again
+				 * Try the request again
 				 */
-				switch (resultCode) {
-				case Activity.RESULT_OK :
-					/*
-					 * Try the request again
-					 */
 
-					break;
-				}
-
-			}
-			super.onActivityResult(requestCode, resultCode, data);
-		}
-	
-		private boolean servicesConnected() {
-			// Check that Google Play services is available
-			int resultCode =
-					GooglePlayServicesUtil.
-					isGooglePlayServicesAvailable(this);
-			// If Google Play services is available
-			if (ConnectionResult.SUCCESS == resultCode) {
-				// In debug mode, log the status
-				Log.d("Location Updates",
-						"Google Play services is available.");
-				// Continue
-				return true;
-				// Google Play services was not available for some reason
-			} else {
-				// Get the error code
-				// Get the error dialog from Google Play services
-				Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
-						resultCode,
-						this,
-						CONNECTION_FAILURE_RESOLUTION_REQUEST);
-
-				// If Google Play services can provide an error dialog
-				if (errorDialog != null) {
-					// Create a new DialogFragment for the error dialog
-					ErrorDialogFragment errorFragment =
-							new ErrorDialogFragment();
-					// Set the dialog in the DialogFragment
-					errorFragment.setDialog(errorDialog);
-					// Show the error dialog in the DialogFragment
-					errorFragment.show(getSupportFragmentManager(), APPTAG);
-				}
-				return false;
+				break;
 			}
 
 		}
-	
-		@Override
-		public void onConnected(Bundle dataBundle) {
-			// Display the connection status
-			Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+		super.onActivityResult(requestCode, resultCode, data);
+	}
 
+	private boolean servicesConnected() {
+		// Check that Google Play services is available
+		int resultCode = GooglePlayServicesUtil
+				.isGooglePlayServicesAvailable(this);
+		// If Google Play services is available
+		if (ConnectionResult.SUCCESS == resultCode) {
+			// In debug mode, log the status
+			Log.d("Location Updates", "Google Play services is available.");
+			// Continue
+			return true;
+			// Google Play services was not available for some reason
+		} else {
+			// Get the error code
+			// Get the error dialog from Google Play services
+			Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
+					resultCode, this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
+
+			// If Google Play services can provide an error dialog
+			if (errorDialog != null) {
+				// Create a new DialogFragment for the error dialog
+				ErrorDialogFragment errorFragment = new ErrorDialogFragment();
+				// Set the dialog in the DialogFragment
+				errorFragment.setDialog(errorDialog);
+				// Show the error dialog in the DialogFragment
+				errorFragment.show(getSupportFragmentManager(), APPTAG);
+			}
+			return false;
 		}
-		
-		
+
+	}
+
+	@Override
+	public void onConnected(Bundle dataBundle) {
+		// Display the connection status
+		Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+
+	}
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//geocodeLabel = (TextView) findViewById(R.id.geocodeLabel);
-		//geocodeLabel.setText(getString(R.string.geocode_label));
-		//LongLat = (TextView) findViewById(R.id.lat_lng);
-		
+		// geocodeLabel = (TextView) findViewById(R.id.geocodeLabel);
+		// geocodeLabel.setText(getString(R.string.geocode_label));
+		// LongLat = (TextView) findViewById(R.id.lat_lng);
 		
 		mLocationClient = new LocationClient(this, this, this);
-		//LongLat1 = (TextView) findViewById(R.id.lat_lng1);
+		// LongLat1 = (TextView) findViewById(R.id.lat_lng1);
 		button1 = (ImageButton) findViewById(R.id.button1);
-		
-		
+
 		if (savedInstanceState == null) {
 			// Add the fragment on initial activity setup
 			mainFragment = new MainFragment();
-			getSupportFragmentManager()
-			.beginTransaction()
-			.add(android.R.id.content, mainFragment)
-			.commit();
+			getSupportFragmentManager().beginTransaction()
+					.add(android.R.id.content, mainFragment).commit();
 		} else {
 			// Or set the fragment from restored state info
 			mainFragment = (MainFragment) getSupportFragmentManager()
@@ -145,28 +135,24 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 		// actionBar.show();
 	}
 
-	
 	@Override
 	public void onDisconnected() {
 		// Display the connection status
 		Toast.makeText(this, "Disconnected. Please re-connect.",
 				Toast.LENGTH_SHORT).show();
 	}
-	
-	
+
 	@Override
 	public void onConnectionFailed(ConnectionResult connectionResult) {
 		/*
-		 * Google Play services can resolve some errors it detects.
-		 * If the error has a resolution, try sending an Intent to
-		 * start a Google Play services activity that can resolve
-		 * error.
+		 * Google Play services can resolve some errors it detects. If the error
+		 * has a resolution, try sending an Intent to start a Google Play
+		 * services activity that can resolve error.
 		 */
 		if (connectionResult.hasResolution()) {
 			try {
 				// Start an Activity that tries to resolve the error
-				connectionResult.startResolutionForResult(
-						this,
+				connectionResult.startResolutionForResult(this,
 						CONNECTION_FAILURE_RESOLUTION_REQUEST);
 				/*
 				 * Thrown if Google Play services canceled the original
@@ -178,15 +164,13 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 			}
 		} else {
 			/*
-			 * If no resolution is available, display a dialog to the
-			 * user with the error.
+			 * If no resolution is available, display a dialog to the user with
+			 * the error.
 			 */
 			showErrorDialog(connectionResult.getErrorCode());
 		}
 	}
-	
 
-	
 	protected void onDestroy() {
 		super.onDestroy();
 	}
@@ -198,11 +182,12 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 
 	@Override
 	protected void onResume() {
-		//addressText.getText().toString();
-		//addressText = (EditText) findViewById(R.id.addressText);  
+		// addressText.getText().toString();
+		// addressText = (EditText) findViewById(R.id.addressText);
 		System.out.println("I've resumed");
 		super.onResume();
 	}
+
 	@Override
 	protected void onStart() {
 		super.onStart();
@@ -216,14 +201,12 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 		mLocationClient.disconnect();
 		super.onStop();
 	}
-	
+
 	private void showErrorDialog(int errorCode) {
 
 		// Get the error dialog from Google Play services
-		Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(
-				errorCode,
-				this,
-				CONNECTION_FAILURE_RESOLUTION_REQUEST);
+		Dialog errorDialog = GooglePlayServicesUtil.getErrorDialog(errorCode,
+				this, CONNECTION_FAILURE_RESOLUTION_REQUEST);
 
 		// If Google Play services can provide an error dialog
 		if (errorDialog != null) {
@@ -239,53 +222,57 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 		}
 
 	}
-	
+
 	public void getLocation(View v) {
 
 		// If Google Play Services is available
 		if (servicesConnected()) {
 
 			// Get the current location
-			mCurrentLocation = mLocationClient.getLastLocation(); 
+			mCurrentLocation = mLocationClient.getLastLocation();
 
 			// Display the current location in the UI
 			double latitude = mCurrentLocation.getLatitude();
 			double longitude = mCurrentLocation.getLongitude();
-			String longlat = "latitude " + Double.toString(latitude) + " " + "longitude "
-					+  Double.toString(longitude);
-			System.out.println("LONGLAT: " +longlat);
-			//LongLat1.setText(longlat);
-			
-			String stringLatitude = Double.toString(latitude);
-			String stringLongitude = Double.toString(longitude);
-			
-			System.out.println("Latitude: " + stringLatitude + " Longitude: " + stringLongitude);
-			
+			String longlat = "latitude " + Double.toString(latitude) + " "
+					+ "longitude " + Double.toString(longitude);
+			System.out.println(longlat);
+			// LongLat1.setText(longlat);
+
+			String param_latitude = Double.toString(latitude);
+			String param_longitude = Double.toString(longitude);
+
+			System.out.println(param_latitude + ", " + param_longitude);
+
 			makeToast("Searching, Please wait...");
-			Intent gpsSearch = new Intent(MainActivity.this, GPS_SearchResultsActivity.class);
-			Bundle GPS_params = new Bundle();
+			Intent gpsSearch = new Intent(this, GPS_SearchResultsActivity.class);
 			System.out.println("GPS_SearchResultsActivity created");
-			GPS_params.putString("EXTRA_LAT_PARAM", stringLatitude);
-			
-			GPS_params.putString("EXTRA_LONG_PARAM", stringLongitude);
-			
-			gpsSearch.putExtras(GPS_params);
+			Bundle coordinates = new Bundle();
+			coordinates.putString("EXTRA_LATITUDE", param_latitude);
+			coordinates.putString("EXTRA_LONGITUDE", param_longitude);
+
+			System.out.println(coordinates);
+			gpsSearch.putExtras(coordinates);
 			startActivity(gpsSearch);
-			
+
 		}
-	}  
+	}
+
 	public static class ErrorDialogFragment extends DialogFragment {
 		// Global field to contain the error dialog
 		private Dialog mDialog;
+
 		// Default constructor. Sets the dialog field to null
 		public ErrorDialogFragment() {
 			super();
 			mDialog = null;
 		}
+
 		// Set the dialog to display
 		public void setDialog(Dialog dialog) {
 			mDialog = dialog;
 		}
+
 		// Return a Dialog to the DialogFragment.
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -303,11 +290,10 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 	public void sendMessage(View view) {
 		makeToast("Searching, Please wait...");
 		Intent intent = new Intent(this, SearchResultsActivity.class);
-		
-		//String message = editText.getText().toString();
-		
-		
-		String message = mainFragment.locate2(view);
+		EditText editText = (EditText) findViewById(R.id.edit_message);
+		String message = editText.getText().toString().replace(" ", "%20");
+
+		//String message = mainFragment.locate2(view);
 		intent.putExtra(EXTRA_MESSAGE, message);
 		/**
 		 * If there is no Connection to the server, this will error out.
@@ -315,9 +301,8 @@ GooglePlayServicesClient.OnConnectionFailedListener{
 		 * Possibly a try/catch on the getJSONFromURL method in
 		 * SearchResultsActivity?
 		 */
-	
+
 		startActivity(intent);
-		
 
 	}
 
