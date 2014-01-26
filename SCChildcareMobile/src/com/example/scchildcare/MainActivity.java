@@ -1,4 +1,16 @@
+/**
+ * 
+ * Version 0.0.7
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 package com.example.scchildcare;
+
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -11,7 +23,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
+//import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -41,7 +53,7 @@ public class MainActivity extends FragmentActivity implements
 	// TextView LongLat;
 	private LocationClient mLocationClient;
 	Location mCurrentLocation;
-	private TextView LongLat1;
+	//private TextView LongLat1;
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 	private MainFragment mainFragment;
 
