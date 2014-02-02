@@ -39,7 +39,8 @@
             android:gravity="center"
             android:onClick="getLocation"
             android:src="@drawable/gps"
-            android:text="@string/button_locate" />
+            android:text="@string/button_locate" 
+            android:background="@android:color/transparent"/>
 
         <ImageButton
             android:layout_width="wrap_content"
@@ -48,7 +49,8 @@
             android:gravity="center"
             android:onClick="sendMessage"
             android:src="@drawable/search"
-            android:text="@string/button_search" />
+            android:text="@string/button_search" 
+            android:background="@android:color/transparent"/>
 
         <requestFocus />
     </LinearLayout>
