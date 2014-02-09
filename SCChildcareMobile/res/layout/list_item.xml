@@ -154,24 +154,16 @@
         android:textSize="0sp"
         android:textColor="#acacac" >
     </TextView>
-    <!-- OpenTime label -->
+    <!-- Hours label -->
 
     <TextView
-        android:id="@+id/openTime"
+        android:id="@+id/hours"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textSize="0sp"
         android:textColor="#acacac" >
     </TextView>
-    <!-- CloseTime label -->
-
-    <TextView
-        android:id="@+id/closeTime"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
-    </TextView>
+    
     <!-- Specialist label -->
 
     <TextView
