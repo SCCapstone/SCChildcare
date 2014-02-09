@@ -514,10 +514,10 @@ containing a value of this type.
         public static final int sorry_message=0x7f0a0004;
     }
     public static final class string {
-        public static final int GPSDesc=0x7f070051;
-        public static final int action_search=0x7f070037;
-        public static final int action_settings=0x7f070036;
-        public static final int app_id=0x7f070046;
+        public static final int GPSDesc=0x7f070052;
+        public static final int action_search=0x7f070038;
+        public static final int action_settings=0x7f070037;
+        public static final int app_id=0x7f070047;
         public static final int app_name=0x7f070033;
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
@@ -544,11 +544,11 @@ containing a value of this type.
         public static final int auth_client_using_bad_version_title=0x7f07002d;
         /**  button string 
          */
-        public static final int button_locate=0x7f070041;
-        public static final int button_search=0x7f07003e;
-        public static final int button_send=0x7f070035;
-        public static final int capacity=0x7f07004a;
-        public static final int closeTime=0x7f07004c;
+        public static final int button_locate=0x7f070042;
+        public static final int button_search=0x7f07003f;
+        public static final int button_send=0x7f070036;
+        public static final int capacity=0x7f07004b;
+        public static final int closeTime=0x7f07004d;
         public static final int com_facebook_choose_friends=0x7f07000f;
         public static final int com_facebook_dialogloginactivity_ok_button=0x7f070000;
         public static final int com_facebook_internet_permission_error_message=0x7f070013;
@@ -574,7 +574,7 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_log_in_button=0x7f070008;
         public static final int com_facebook_usersettingsfragment_logged_in=0x7f070009;
         public static final int com_facebook_usersettingsfragment_not_logged_in=0x7f07000a;
-        public static final int comma=0x7f07003b;
+        public static final int comma=0x7f07003c;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -646,30 +646,31 @@ containing a value of this type.
         /**  Long form sign-in button text [CHAR LIMIT=30] 
          */
         public static final int common_signin_button_text_long=0x7f07002c;
-        public static final int connectionError=0x7f07003f;
-        public static final int desc=0x7f070048;
-        public static final int edit_message=0x7f070034;
-        public static final int geocode_label=0x7f070040;
+        public static final int connectionError=0x7f070040;
+        public static final int desc=0x7f070049;
+        public static final int edit_message=0x7f070035;
+        public static final int geocode_label=0x7f070041;
         /**  Latitude, longitude format 
          */
-        public static final int get_location=0x7f070045;
-        public static final int hello_world=0x7f07003a;
+        public static final int get_location=0x7f070046;
+        public static final int hello_world=0x7f07003b;
         /**  Latitude, longitude format 
          */
-        public static final int latitude_longitude=0x7f070043;
-        public static final int latlng=0x7f070042;
-        public static final int latlng1=0x7f070044;
-        public static final int openTime=0x7f07004b;
-        public static final int owner=0x7f070049;
-        public static final int quality=0x7f07004f;
-        public static final int results=0x7f07003c;
-        public static final int searchDesc=0x7f070050;
-        public static final int sorry=0x7f07003d;
-        public static final int specialist=0x7f07004d;
-        public static final int specialistPhone=0x7f07004e;
-        public static final int str=0x7f070047;
-        public static final int title_activity_display_message=0x7f070039;
-        public static final int title_activity_main=0x7f070038;
+        public static final int latitude_longitude=0x7f070044;
+        public static final int latlng=0x7f070043;
+        public static final int latlng1=0x7f070045;
+        public static final int logo=0x7f070034;
+        public static final int openTime=0x7f07004c;
+        public static final int owner=0x7f07004a;
+        public static final int quality=0x7f070050;
+        public static final int results=0x7f07003d;
+        public static final int searchDesc=0x7f070051;
+        public static final int sorry=0x7f07003e;
+        public static final int specialist=0x7f07004e;
+        public static final int specialistPhone=0x7f07004f;
+        public static final int str=0x7f070048;
+        public static final int title_activity_display_message=0x7f07003a;
+        public static final int title_activity_main=0x7f070039;
     }
     public static final class style {
         /** 
