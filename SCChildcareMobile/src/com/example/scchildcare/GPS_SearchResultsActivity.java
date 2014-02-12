@@ -28,7 +28,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
+//import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 //import com.example.myfirstapp.trackdata.TrackData;
@@ -54,8 +54,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_LONGITUDE = "longitude";
 	private static final String TAG_LATITUDE = "latitude";
 	private static final String TAG_CAPACITY = "capacity";
-	private static final String TAG_OPENTIME = "openTime";
-	private static final String TAG_CLOSETIME = "closeTime";
+	private static final String TAG_HOURS = "hours";
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
@@ -142,8 +141,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					String longitude = p.getString(TAG_LONGITUDE);
 					String latitude = p.getString(TAG_LATITUDE);
 					String capacity = p.getString(TAG_CAPACITY);
-					String openTime = p.getString(TAG_OPENTIME);
-					String closeTime = p.getString(TAG_CLOSETIME);
+					String hours = p.getString(TAG_HOURS);
 					String specialist = p.getString(TAG_SPECIALIST);
 					String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
 					String qualityLevel = p.getString(TAG_QUALITY);
@@ -162,8 +160,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					map.put(TAG_LONGITUDE, longitude);
 					map.put(TAG_LATITUDE, latitude);
 					map.put(TAG_CAPACITY, capacity);
-					map.put(TAG_OPENTIME, openTime);
-					map.put(TAG_CLOSETIME, closeTime);
+					map.put(TAG_HOURS, hours);
 					map.put(TAG_SPECIALIST, specialist);
 					map.put(TAG_SPECIALISTPHONE, specialistPhone);
 					map.put(TAG_QUALITY, qualityLevel);
@@ -203,12 +200,11 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		 R.layout.list_item,
 		 new String[]{TAG_PROVIDERNAME, TAG_LICENSEINFO, TAG_OWNERNAME,
 		 TAG_ADDRESS, TAG_CITY, TAG_STATE,
-		 TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE, TAG_LONGITUDE, TAG_CAPACITY, TAG_OPENTIME,
-		 TAG_CLOSETIME, TAG_SPECIALIST,
+		 TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE, TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST,
 		 TAG_SPECIALISTPHONE, TAG_QUALITY}, new int[]
 		 {R.id.name, R.id.licenseInfo, R.id.ownerName, R.id.address,
 		 R.id.city, R.id.state, R.id.zipCode,
-		 R.id.phone, R.id.latitude, R.id.longitude, R.id.capacity, R.id.openTime, R.id.closeTime,
+		 R.id.phone, R.id.latitude, R.id.longitude, R.id.capacity, R.id.hours,
 		 R.id.specialist, R.id.specialistPhone,
 		 R.id.qualityLevel});
 
@@ -240,8 +236,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				String zipCode = ((TextView) view.findViewById(R.id.zipCode)).getText().toString();
 				String phoneNumber = ((TextView) view.findViewById(R.id.phone)).getText().toString();
 				String capacity = ((TextView) view.findViewById(R.id.capacity)).getText().toString();
-				String openTime = ((TextView) view.findViewById(R.id.openTime)).getText().toString();
-				String closeTime = ((TextView) view.findViewById(R.id.closeTime)).getText().toString();
+				String hours = ((TextView) view.findViewById(R.id.hours)).getText().toString();
 				String specialist = ((TextView) view.findViewById(R.id.specialist)).getText().toString();
 				String specialistPhone = ((TextView) view.findViewById(R.id.specialistPhone)).getText().toString();
 				String qualityLevel = ((TextView) view.findViewById(R.id.qualityLevel)).getText().toString();
@@ -260,8 +255,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				in.putExtra(TAG_LATITUDE, latitude);
 				in.putExtra(TAG_LONGITUDE, longitude);
 				in.putExtra(TAG_CAPACITY, capacity);
-				in.putExtra(TAG_OPENTIME, openTime);
-				in.putExtra(TAG_CLOSETIME, closeTime);
+				in.putExtra(TAG_HOURS, hours);
 				in.putExtra(TAG_SPECIALIST, specialist);
 				in.putExtra(TAG_SPECIALISTPHONE, specialistPhone);
 				in.putExtra(TAG_QUALITY, qualityLevel);
