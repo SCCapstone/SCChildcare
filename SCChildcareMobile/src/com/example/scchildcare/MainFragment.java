@@ -4,15 +4,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
+//import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+//import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.facebook.Session;
 import com.facebook.SessionState;
 import com.facebook.UiLifecycleHelper;
-import com.facebook.widget.LoginButton;
+//import com.facebook.widget.LoginButton;
 
 public class MainFragment extends Fragment {
 	private UiLifecycleHelper uiHelper;
@@ -32,18 +32,18 @@ public class MainFragment extends Fragment {
 		return message;
 	}
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-
-		View view = inflater.inflate(R.layout.activity_main, container, false);
-		editText = (EditText) view.findViewById(R.id.edit_message);
-		// LoginButton authButton = (LoginButton)
-		// view.findViewById(R.id.authButton);
-		// authButton.setFragment(this);
-		System.out.println("Hey I'm in onCreateView");
-		return view;
-	}
+//	@Override
+//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//			Bundle savedInstanceState) {
+//
+//		View view = inflater.inflate(R.layout.activity_main, container, false);
+//		editText = (EditText) view.findViewById(R.id.edit_message);
+//		// LoginButton authButton = (LoginButton)
+//		// view.findViewById(R.id.authButton);
+//		// authButton.setFragment(this);
+//		System.out.println("Hey I'm in onCreateView");
+//		return view;
+//	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

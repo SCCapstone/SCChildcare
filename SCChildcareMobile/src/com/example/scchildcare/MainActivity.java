@@ -1,4 +1,16 @@
+/**
+ * 
+ * Version 0.0.7
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ * 
+ */
 package com.example.scchildcare;
+
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -11,7 +23,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
+//import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -29,6 +41,8 @@ public class MainActivity extends FragmentActivity implements
 	public final static String EXTRA_LONGITUDE = null;
 	public final static String EXTRA_LATITUDE = null;
 
+	
+	EditText editText;
 	// Label instructing input for EditText
 	TextView geocodeLabel;
 	// EditText textbox1; //new hidden textbox
@@ -39,7 +53,7 @@ public class MainActivity extends FragmentActivity implements
 	// TextView LongLat;
 	private LocationClient mLocationClient;
 	Location mCurrentLocation;
-	private TextView LongLat1;
+	//private TextView LongLat1;
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 	private MainFragment mainFragment;
 
@@ -112,7 +126,7 @@ public class MainActivity extends FragmentActivity implements
 		// geocodeLabel = (TextView) findViewById(R.id.geocodeLabel);
 		// geocodeLabel.setText(getString(R.string.geocode_label));
 		// LongLat = (TextView) findViewById(R.id.lat_lng);
-
+		
 		mLocationClient = new LocationClient(this, this, this);
 		// LongLat1 = (TextView) findViewById(R.id.lat_lng1);
 		button1 = (ImageButton) findViewById(R.id.button1);
@@ -288,10 +302,10 @@ public class MainActivity extends FragmentActivity implements
 	public void sendMessage(View view) {
 		makeToast("Searching, Please wait...");
 		Intent intent = new Intent(this, SearchResultsActivity.class);
+		EditText editText = (EditText) findViewById(R.id.edit_message);
+		String message = editText.getText().toString().replace(" ", "%20");
 
-		// String message = editText.getText().toString();
-
-		String message = mainFragment.locate2(view);
+		//String message = mainFragment.locate2(view);
 		intent.putExtra(EXTRA_MESSAGE, message);
 		/**
 		 * If there is no Connection to the server, this will error out.
