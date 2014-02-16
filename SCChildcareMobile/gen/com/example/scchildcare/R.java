@@ -408,6 +408,7 @@ containing a value of this type.
         public static final int search=0x7f020043;
     }
     public static final class id {
+<<<<<<< HEAD
         public static final int action_search=0x7f040046;
         public static final int action_settings=0x7f040047;
         public static final int address=0x7f040023;
@@ -480,6 +481,78 @@ containing a value of this type.
         public static final int state=0x7f040026;
         public static final int terrain=0x7f040005;
         public static final int zipCode=0x7f040029;
+=======
+        public static final int action_search=0x7f050044;
+        public static final int action_settings=0x7f050045;
+        public static final int address=0x7f050023;
+        public static final int address_label=0x7f050033;
+        public static final int authButton=0x7f05000a;
+        public static final int button1=0x7f050009;
+        public static final int capacity=0x7f05002d;
+        public static final int capacityNumberLabel=0x7f050039;
+        public static final int capacity_label=0x7f05003a;
+        public static final int city=0x7f050024;
+        public static final int city_label=0x7f050034;
+        public static final int closeLabel=0x7f05003c;
+        public static final int closeTime_label=0x7f05003d;
+        public static final int com_facebook_login_activity_progress_bar=0x7f05000f;
+        public static final int com_facebook_picker_activity_circle=0x7f05000e;
+        public static final int com_facebook_picker_checkbox=0x7f050011;
+        public static final int com_facebook_picker_checkbox_stub=0x7f050015;
+        public static final int com_facebook_picker_divider=0x7f050019;
+        public static final int com_facebook_picker_done_button=0x7f050018;
+        public static final int com_facebook_picker_image=0x7f050012;
+        public static final int com_facebook_picker_list_section_header=0x7f050016;
+        public static final int com_facebook_picker_list_view=0x7f05000d;
+        public static final int com_facebook_picker_profile_pic_stub=0x7f050013;
+        public static final int com_facebook_picker_row_activity_circle=0x7f050010;
+        public static final int com_facebook_picker_search_text=0x7f05001e;
+        public static final int com_facebook_picker_title=0x7f050014;
+        public static final int com_facebook_picker_title_bar=0x7f05001b;
+        public static final int com_facebook_picker_title_bar_stub=0x7f05001a;
+        public static final int com_facebook_picker_top_bar=0x7f050017;
+        public static final int com_facebook_search_bar_view=0x7f05001d;
+        public static final int com_facebook_usersettingsfragment_login_button=0x7f050021;
+        public static final int com_facebook_usersettingsfragment_logo_image=0x7f05001f;
+        public static final int com_facebook_usersettingsfragment_profile_name=0x7f050020;
+        public static final int comma=0x7f050025;
+        public static final int edit_message=0x7f050008;
+        public static final int hours=0x7f05002e;
+        public static final int hours_label=0x7f05003b;
+        public static final int hybrid=0x7f050004;
+        public static final int imageView1=0x7f050007;
+        public static final int large=0x7f050006;
+        public static final int latitude=0x7f05002b;
+        public static final int licenseInfo=0x7f050027;
+        public static final int license_label=0x7f050035;
+        public static final int longitude=0x7f05002c;
+        public static final int map=0x7f05000b;
+        public static final int name=0x7f050022;
+        public static final int name_label=0x7f050032;
+        public static final int none=0x7f050000;
+        public static final int normal=0x7f050001;
+        public static final int ownerName=0x7f050028;
+        public static final int ownerNameLabel=0x7f050036;
+        public static final int owner_label=0x7f050037;
+        public static final int phone=0x7f05002a;
+        public static final int phone_label=0x7f050038;
+        public static final int picker_subtitle=0x7f05001c;
+        public static final int qualityLabel=0x7f050042;
+        public static final int qualityLevel=0x7f050031;
+        public static final int qualityLevel_label=0x7f050043;
+        public static final int satellite=0x7f050002;
+        public static final int small=0x7f050005;
+        public static final int sorry_label=0x7f05000c;
+        public static final int specialist=0x7f05002f;
+        public static final int specialistLabel=0x7f05003e;
+        public static final int specialistPhone=0x7f050030;
+        public static final int specialistPhoneLabel=0x7f050040;
+        public static final int specialistPhone_label=0x7f050041;
+        public static final int specialist_label=0x7f05003f;
+        public static final int state=0x7f050026;
+        public static final int terrain=0x7f050003;
+        public static final int zipCode=0x7f050029;
+>>>>>>> 48d1812... Fixed layout errors caused by new DB tables
     }
     public static final class integer {
         public static final int google_play_services_version=0x7f090000;
@@ -514,11 +587,19 @@ containing a value of this type.
         public static final int sorry_message=0x7f0a0004;
     }
     public static final class string {
+<<<<<<< HEAD
         public static final int GPSDesc=0x7f070052;
         public static final int action_search=0x7f070038;
         public static final int action_settings=0x7f070037;
         public static final int app_id=0x7f070047;
         public static final int app_name=0x7f070033;
+=======
+        public static final int GPSDesc=0x7f060052;
+        public static final int action_search=0x7f060037;
+        public static final int action_settings=0x7f060036;
+        public static final int app_id=0x7f060046;
+        public static final int app_name=0x7f060033;
+>>>>>>> 48d1812... Fixed layout errors caused by new DB tables
         /**   Title for notification shown when GooglePlayServices needs to be
         enabled for a application to work. [CHAR LIMIT=70] 
          */
@@ -652,6 +733,7 @@ containing a value of this type.
         public static final int geocode_label=0x7f070041;
         /**  Latitude, longitude format 
          */
+<<<<<<< HEAD
         public static final int get_location=0x7f070046;
         public static final int hello_world=0x7f07003b;
         /**  Latitude, longitude format 
@@ -671,6 +753,27 @@ containing a value of this type.
         public static final int str=0x7f070048;
         public static final int title_activity_display_message=0x7f07003a;
         public static final int title_activity_main=0x7f070039;
+=======
+        public static final int get_location=0x7f060045;
+        public static final int hello_world=0x7f06003a;
+        public static final int hours=0x7f06004d;
+        /**  Latitude, longitude format 
+         */
+        public static final int latitude_longitude=0x7f060043;
+        public static final int latlng=0x7f060042;
+        public static final int latlng1=0x7f060044;
+        public static final int openTime=0x7f06004b;
+        public static final int owner=0x7f060049;
+        public static final int quality=0x7f060050;
+        public static final int results=0x7f06003c;
+        public static final int searchDesc=0x7f060051;
+        public static final int sorry=0x7f06003d;
+        public static final int specialist=0x7f06004e;
+        public static final int specialistPhone=0x7f06004f;
+        public static final int str=0x7f060047;
+        public static final int title_activity_display_message=0x7f060039;
+        public static final int title_activity_main=0x7f060038;
+>>>>>>> 48d1812... Fixed layout errors caused by new DB tables
     }
     public static final class style {
         /** 
