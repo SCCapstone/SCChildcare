@@ -10,7 +10,7 @@
 
 # generated files
 SCChildcareMobile/bin/*
-SCCHildcareMobile/gen/*
+SCChildcareMobile/gen/*
 
 # Local configuration file (sdk path, etc)
 local.properties
