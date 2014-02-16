@@ -35,6 +35,7 @@
         <!-- Main Page View -->
         <activity
             android:name="com.example.scchildcare.MainActivity"
+            android:screenOrientation="portrait" 
             android:theme="@style/MyTheme" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,6 +47,7 @@
         <!-- Search Results Page View -->
         <activity
             android:name="com.example.scchildcare.SearchResultsActivity"
+            android:screenOrientation="portrait" 
             android:parentActivityName="com.example.scchildcare.MainActivity"
             android:theme="@style/MyTheme" >
             <meta-data
@@ -56,6 +58,7 @@
         <!-- GPS Search Results Page View -->
         <activity
             android:name="com.example.scchildcare.GPS_SearchResultsActivity"
+            android:screenOrientation="portrait" 
             android:parentActivityName="com.example.scchildcare.MainActivity"
             android:theme="@style/MyTheme" >
             <meta-data
@@ -70,6 +73,7 @@
         -->
         <activity
             android:name="com.example.scchildcare.SingleMenuItemActivity"
+            android:screenOrientation="portrait" 
             android:label="Single Menu Item"
             android:parentActivityName="com.example.scchildcare.SearchResultsActivity"
             android:theme="@style/MyTheme" >
@@ -81,6 +85,7 @@
         <!-- Sorry Page View -->
         <activity
             android:name="com.example.scchildcare.SorryMessageActivity"
+            android:screenOrientation="portrait" 
             android:label="Oops!"
             android:parentActivityName="com.example.scchildcare.MainActivity"
             android:theme="@style/MyTheme" >
@@ -92,6 +97,7 @@
         <!-- HTTP Error Page View -->
         <activity
             android:name="com.example.scchildcare.ConnectionErrorActivity"
+            android:screenOrientation="portrait" 
             android:label="Oops!"
             android:parentActivityName="com.example.scchildcare.MainActivity"
             android:theme="@style/MyTheme" >
@@ -109,6 +115,7 @@
 
         <activity
             android:name="com.facebook.LoginActivity"
+            android:screenOrientation="portrait" 
             android:label="@string/app_name" >
         </activity>
 
