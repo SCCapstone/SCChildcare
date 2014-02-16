@@ -6,13 +6,15 @@ import com.example.scchildcare.*;
 
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.TextView;
 
 /**
  * @author Confederate803
  *
  */
 public class SorryMessageTest extends ActivityInstrumentationTestCase2<SorryMessageActivity> {
-
+	private SorryMessageActivity smessageactivity; 
+	private TextView tview; 
 	/**
 	 * @param name
 	 */
@@ -25,6 +27,9 @@ public class SorryMessageTest extends ActivityInstrumentationTestCase2<SorryMess
 	 */
 	protected void setUp() throws Exception {
 		super.setUp();
+		smessageactivity = getActivity();
+		tview = (TextView) smessageactivity.findViewById(com.example.scchildcare.R.id.sorry_label);
 	}
+	
 
 }
