@@ -55,7 +55,7 @@ public class MainActivity extends FragmentActivity implements
 	Location mCurrentLocation;
 	//private TextView LongLat1;
 	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-//	private MainFragment mainFragment;
+	private MainFragment mainFragment;
 
 	public static final String APPTAG = "Location Updates";
 
@@ -130,7 +130,7 @@ public class MainActivity extends FragmentActivity implements
 		mLocationClient = new LocationClient(this, this, this);
 		// LongLat1 = (TextView) findViewById(R.id.lat_lng1);
 		button1 = (ImageButton) findViewById(R.id.button1);
-/*
+
 		if (savedInstanceState == null) {
 			// Add the fragment on initial activity setup
 			mainFragment = new MainFragment();
@@ -141,9 +141,9 @@ public class MainActivity extends FragmentActivity implements
 			// Or set the fragment from restored state info
 			mainFragment = (MainFragment) getSupportFragmentManager()
 					.findFragmentById(android.R.id.content);
-		  // editText = (EditText) findViewById(R.id.edit_message);
+		 // editText = (EditText) findViewById(R.id.edit_message);
 		}
-    */
+    
 		// // gets the activity's default ActionBar
 		// ActionBar actionBar = getActionBar();
 		// actionBar.show();
@@ -325,12 +325,12 @@ public class MainActivity extends FragmentActivity implements
 	}
 	
 	
-	
+	/*
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 	
 	}
-	
+	*/
 	
 	
 	
