@@ -1,5 +1,10 @@
 package com.example.scchildcare;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
@@ -16,7 +21,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class SingleMenuItemActivity extends Activity {
 
-	// JSON node keys
+	// JSON node keys for providers
 	private static final String TAG_PROVIDERNAME = "providerName";
 	private static final String TAG_LICENSEINFO = "licenseInfo";
 	private static final String TAG_OWNERNAME = "ownerName";
@@ -32,12 +37,30 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
-	
+
+
+
+	//JSON node keys for Permits
+	private static final String TAG_PERMITS = "permits";
+	private static final String TAG_PERMITNAME = "permitName";
+	private static final String TAG_PERMITEXPIRATION = "permitExpiration";
+	JSONArray permits = null;
+	ArrayList<HashMap<String, String>> permitList = new ArrayList<HashMap<String, String>>();
+
+
+	//JSON node keys for Complaints
+	private static final String TAG_COMPLAINTS = "complaints";
+	private static final String TAG_COMPLAINTRESOLVED = "complaintResolved";
+	private static final String TAG_COMPLAINTNAME = "complaintName";
+	JSONArray complaints = null;
+	ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
+
+	//HTTP Stuff 
 	private static final String permitSearchURL = "http://54.201.44.59:3000/providerpermits.json?utf8=%E2%9C%93&search=";
 	private static final String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
 	private static String permitFullSearchURL = null;
 	private static String complaintFullSearchURL = null;
-	
+
 
 	GoogleMap mMap;
 
@@ -89,7 +112,7 @@ public class SingleMenuItemActivity extends Activity {
 		TextView lblQuality = (TextView) findViewById(R.id.qualityLevel_label);
 
 		/** DISPLAY PROVIDER INFO **/
-		
+
 		lblName.setText(providerName);
 		lblLicense.setText(licenseInfo);
 		lblOwner.setText(ownerName);
@@ -104,40 +127,143 @@ public class SingleMenuItemActivity extends Activity {
 		lblSpecialistPhone.setText(specialistPhone);
 		lblQuality.setText(qualityLevel);
 
-		
+
 		/**DISPLAY MAP **/
 		double dbl_latitude = Double.parseDouble(latitude);
 		double dbl_longitude = Double.parseDouble(longitude);
-		
+
 		LatLng PROVIDER_LOCATION = new LatLng(dbl_latitude, dbl_longitude);
 
 		mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
 				.getMap();
 		mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-	
+
 		mMap.addMarker(new MarkerOptions()
 		.position(new LatLng(dbl_latitude, dbl_longitude))
-				.title(providerName));
-		
+		.title(providerName));
+
 		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PROVIDER_LOCATION, 14));
-		
-		
+
+
 		/**DISPLAY PERMIT DATA **/
-		permitFullSearchURL = permitSearchURL + providerName;
 		
+		//Parse Data
+		permitFullSearchURL = permitSearchURL + providerName;
+
 		JSONParser jPermitParser = new JSONParser();
 		JSONObject permitjson = jPermitParser.getJSONFromUrl(permitFullSearchURL);
+
+		System.out.println("PERMIT HTTP SUCCESSFUL");
+		try {
+			// get the array of providers
+			System.out.println("CREATING THE PERMITS JSON ARRAY");
+
+			permits = permitjson.getJSONArray(TAG_PERMITS);
+
+			System.out.println("Beginning For Loop to go through array");
+
+			if (permits.length() == 0) {
+				System.out.println("No Return on Search");
+				// String sorry =
+				// "We are sorry, your search did not return anything";
+				// TextView textView = new TextView(this);
+				// textView.setTextSize(40);
+				// textView.setText(sorry);
+				Intent sorryIntent = new Intent(this,
+						SorryMessageActivity.class);
+				// intent.putExtra(SORRY_MESSAGE, sorry);
+				startActivity(sorryIntent);
+			} else {
+				for (int i = 0; i < permits.length(); i++) {
+					JSONObject permit = permits.getJSONObject(i);
+
+
+					// store the json items in variables
+
+					String permitName = permit.getString(TAG_PERMITNAME);
+					String permitExpiration = permit.getString(TAG_PERMITEXPIRATION);
+
+					HashMap<String, String> map = new HashMap<String, String>();
+
+
+					map.put(TAG_PERMITNAME, permitName);
+					map.put(TAG_PERMITEXPIRATION, permitExpiration);
+
+
+					// add Hashlist to ArrayList
+					System.out
+					.println("Adding Tags to Map, adding map to providerList");
+					permitList.add(map);
+
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+
 		
+		//Display parsed Permit data-DO THIS********************
 		
-		
-		
+
+
 		/**DISPLAY COMPLAINT DATA **/
-		
+
 		complaintFullSearchURL = complaintSearchURL + providerName;
-		
+
 		JSONParser jComplaintParser = new JSONParser();
 		JSONObject complaintjson = jComplaintParser.getJSONFromUrl(complaintFullSearchURL);
 		
+		System.out.println("COMPLAINT HTTP SUCCESSFUL");
+		try {
+			// get the array of providers
+			System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
+
+			complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
+			System.out.println("Beginning For Loop to go through array");
+
+			if (complaints.length() == 0) {
+				System.out.println("No Return on Search");
+				// String sorry =
+				// "We are sorry, your search did not return anything";
+				// TextView textView = new TextView(this);
+				// textView.setTextSize(40);
+				// textView.setText(sorry);
+				Intent sorryIntent = new Intent(this,
+						SorryMessageActivity.class);
+				// intent.putExtra(SORRY_MESSAGE, sorry);
+				startActivity(sorryIntent);
+			} else {
+				for (int i = 0; i < complaints.length(); i++) {
+					JSONObject permit = complaints.getJSONObject(i);
+
+
+					// store the json items in variables
+
+					String complaintName = permit.getString(TAG_COMPLAINTNAME);
+					String complaintResolved = permit.getString(TAG_COMPLAINTRESOLVED);
+
+					HashMap<String, String> map = new HashMap<String, String>();
+
+
+					map.put(TAG_COMPLAINTNAME, complaintName);
+					map.put(TAG_COMPLAINTRESOLVED, complaintResolved);
+
+
+					// add Hashlist to ArrayList
+					System.out
+					.println("Adding Tags to Map, adding map to providerList");
+					permitList.add(map);
+
+				}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}
+		
+		//Display parsed Complaint data-DO THIS********************
+		
+		
+
 
 	}
 
