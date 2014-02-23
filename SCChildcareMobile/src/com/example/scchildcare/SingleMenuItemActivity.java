@@ -34,7 +34,7 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_QUALITY = "qualityLevel";
 	
 	private static final String permitSearchURL = "http://54.201.44.59:3000/providerpermits.json?utf8=%E2%9C%93&search=";
-	private static final String complaintSearchURL = "http://54.201.44.59:3000/providerpermits.json?utf8=%E2%9C%93&search=";
+	private static final String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
 	private static String permitFullSearchURL = null;
 	private static String complaintFullSearchURL = null;
 	
@@ -125,15 +125,18 @@ public class SingleMenuItemActivity extends Activity {
 		/**DISPLAY PERMIT DATA **/
 		permitFullSearchURL = permitSearchURL + providerName;
 		
-		JSONParser jParser = new JSONParser();
-		JSONObject json = jParser.getJSONFromUrl(permitFullSearchURL);
+		JSONParser jPermitParser = new JSONParser();
+		JSONObject permitjson = jPermitParser.getJSONFromUrl(permitFullSearchURL);
 		
 		
 		
 		
 		/**DISPLAY COMPLAINT DATA **/
 		
+		complaintFullSearchURL = complaintSearchURL + providerName;
 		
+		JSONParser jComplaintParser = new JSONParser();
+		JSONObject complaintjson = jComplaintParser.getJSONFromUrl(complaintFullSearchURL);
 		
 
 	}
