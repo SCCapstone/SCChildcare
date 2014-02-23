@@ -1,5 +1,7 @@
 package com.example.scchildcare;
 
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -30,6 +32,12 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
+	
+	private static final String permitSearchURL = "http://54.201.44.59:3000/providerpermits.json?utf8=%E2%9C%93&search=";
+	private static final String complaintSearchURL = "http://54.201.44.59:3000/providerpermits.json?utf8=%E2%9C%93&search=";
+	private static String permitFullSearchURL = null;
+	private static String complaintFullSearchURL = null;
+	
 
 	GoogleMap mMap;
 
@@ -80,6 +88,8 @@ public class SingleMenuItemActivity extends Activity {
 		TextView lblSpecialistPhone = (TextView) findViewById(R.id.specialistPhone_label);
 		TextView lblQuality = (TextView) findViewById(R.id.qualityLevel_label);
 
+		/** DISPLAY PROVIDER INFO **/
+		
 		lblName.setText(providerName);
 		lblLicense.setText(licenseInfo);
 		lblOwner.setText(ownerName);
@@ -94,6 +104,8 @@ public class SingleMenuItemActivity extends Activity {
 		lblSpecialistPhone.setText(specialistPhone);
 		lblQuality.setText(qualityLevel);
 
+		
+		/**DISPLAY MAP **/
 		double dbl_latitude = Double.parseDouble(latitude);
 		double dbl_longitude = Double.parseDouble(longitude);
 		
@@ -108,6 +120,19 @@ public class SingleMenuItemActivity extends Activity {
 				.title(providerName));
 		
 		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PROVIDER_LOCATION, 14));
+		
+		
+		/**DISPLAY PERMIT DATA **/
+		permitFullSearchURL = permitSearchURL + providerName;
+		
+		JSONParser jParser = new JSONParser();
+		JSONObject json = jParser.getJSONFromUrl(permitFullSearchURL);
+		
+		
+		
+		
+		/**DISPLAY COMPLAINT DATA **/
+		
 		
 		
 

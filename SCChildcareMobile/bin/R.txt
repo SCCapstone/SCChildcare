@@ -136,7 +136,6 @@ int drawable ic_scchildcare_logo 0x7f020041
 int drawable ic_scchildcare_logo_small 0x7f020042
 int drawable icon 0x7f020043
 int drawable search 0x7f020044
-<<<<<<< HEAD
 int id action_search 0x7f050044
 int id action_settings 0x7f050045
 int id address 0x7f050023
@@ -150,22 +149,6 @@ int id city 0x7f050024
 int id city_label 0x7f050034
 int id closeLabel 0x7f05003c
 int id closeTime_label 0x7f05003d
-=======
-int id action_search 0x7f050046
-int id action_settings 0x7f050047
-int id address 0x7f050023
-int id address_label 0x7f050034
-int id authButton 0x7f05000a
-int id button1 0x7f050009
-int id capacity 0x7f05002d
-int id capacityNumberLabel 0x7f05003a
-int id capacity_label 0x7f05003b
-int id city 0x7f050024
-int id city_label 0x7f050035
-int id closeLabel 0x7f05003e
-int id closeTime 0x7f05002f
-int id closeTime_label 0x7f05003f
->>>>>>> master
 int id com_facebook_login_activity_progress_bar 0x7f05000f
 int id com_facebook_picker_activity_circle 0x7f05000e
 int id com_facebook_picker_checkbox 0x7f050011
@@ -188,17 +171,13 @@ int id com_facebook_usersettingsfragment_logo_image 0x7f05001f
 int id com_facebook_usersettingsfragment_profile_name 0x7f050020
 int id comma 0x7f050025
 int id edit_message 0x7f050008
-<<<<<<< HEAD
 int id hours 0x7f05002e
 int id hours_label 0x7f05003b
-=======
->>>>>>> master
 int id hybrid 0x7f050004
 int id imageView1 0x7f050007
 int id large 0x7f050006
 int id latitude 0x7f05002b
 int id licenseInfo 0x7f050027
-<<<<<<< HEAD
 int id license_label 0x7f050035
 int id longitude 0x7f05002c
 int id map 0x7f05000b
@@ -224,36 +203,6 @@ int id specialistPhone 0x7f050030
 int id specialistPhoneLabel 0x7f050040
 int id specialistPhone_label 0x7f050041
 int id specialist_label 0x7f05003f
-=======
-int id license_label 0x7f050036
-int id longitude 0x7f05002c
-int id map 0x7f05000b
-int id name 0x7f050022
-int id name_label 0x7f050033
-int id none 0x7f050000
-int id normal 0x7f050001
-int id openLabel 0x7f05003c
-int id openTime 0x7f05002e
-int id openTime_label 0x7f05003d
-int id ownerName 0x7f050028
-int id ownerNameLabel 0x7f050037
-int id owner_label 0x7f050038
-int id phone 0x7f05002a
-int id phone_label 0x7f050039
-int id picker_subtitle 0x7f05001c
-int id qualityLabel 0x7f050044
-int id qualityLevel 0x7f050032
-int id qualityLevel_label 0x7f050045
-int id satellite 0x7f050002
-int id small 0x7f050005
-int id sorry_label 0x7f05000c
-int id specialist 0x7f050030
-int id specialistLabel 0x7f050040
-int id specialistPhone 0x7f050031
-int id specialistPhoneLabel 0x7f050042
-int id specialistPhone_label 0x7f050043
-int id specialist_label 0x7f050041
->>>>>>> master
 int id state 0x7f050026
 int id terrain 0x7f050003
 int id zipCode 0x7f050029
@@ -283,11 +232,7 @@ int menu main 0x7f0a0001
 int menu search_results 0x7f0a0002
 int menu single_result 0x7f0a0003
 int menu sorry_message 0x7f0a0004
-<<<<<<< HEAD
 int string GPSDesc 0x7f060052
-=======
-int string GPSDesc 0x7f060051
->>>>>>> master
 int string action_search 0x7f060037
 int string action_settings 0x7f060036
 int string app_id 0x7f060046
@@ -355,30 +300,18 @@ int string edit_message 0x7f060034
 int string geocode_label 0x7f060040
 int string get_location 0x7f060045
 int string hello_world 0x7f06003a
-<<<<<<< HEAD
 int string hours 0x7f06004d
-=======
->>>>>>> master
 int string latitude_longitude 0x7f060043
 int string latlng 0x7f060042
 int string latlng1 0x7f060044
 int string openTime 0x7f06004b
 int string owner 0x7f060049
-<<<<<<< HEAD
 int string quality 0x7f060050
 int string results 0x7f06003c
 int string searchDesc 0x7f060051
 int string sorry 0x7f06003d
 int string specialist 0x7f06004e
 int string specialistPhone 0x7f06004f
-=======
-int string quality 0x7f06004f
-int string results 0x7f06003c
-int string searchDesc 0x7f060050
-int string sorry 0x7f06003d
-int string specialist 0x7f06004d
-int string specialistPhone 0x7f06004e
->>>>>>> master
 int string str 0x7f060047
 int string title_activity_display_message 0x7f060039
 int string title_activity_main 0x7f060038
