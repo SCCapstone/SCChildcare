@@ -11,6 +11,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.widget.ListAdapter;
+import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -203,7 +205,15 @@ public class SingleMenuItemActivity extends Activity {
 
 		
 		//Display parsed Permit data-DO THIS********************
+		ListAdapter permitAdapter = new SimpleAdapter(this, permitList,
+				R.layout.list_item, new String[] { TAG_PERMITNAME, TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
+						R.id.ownerName, R.id.address, R.id.city, R.id.state,
+						R.id.zipCode, R.id.phone, R.id.latitude,
+						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
+						R.id.qualityLevel });
 		
+		
+		//******setListAdapter(permitAdapter);
 
 
 		/**DISPLAY COMPLAINT DATA **/
@@ -262,9 +272,20 @@ public class SingleMenuItemActivity extends Activity {
 		
 		//Display parsed Complaint data-DO THIS********************
 		
+		ListAdapter complaintAdapter = new SimpleAdapter(this, complaintList,
+				R.layout.list_item, new String[] { TAG_PERMITNAME, TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
+						R.id.ownerName, R.id.address, R.id.city, R.id.state,
+						R.id.zipCode, R.id.phone, R.id.latitude,
+						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
+						R.id.qualityLevel });
+		
+		
+		//******setListAdapter(complaintAdapter);
 		
 
 
 	}
+
+	
 
 }

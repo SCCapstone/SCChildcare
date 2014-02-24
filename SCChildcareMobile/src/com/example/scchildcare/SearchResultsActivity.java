@@ -186,7 +186,7 @@ public class SearchResultsActivity extends ListActivity {
 			e.printStackTrace();
 		}
 
-		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
+		
 		ListAdapter adapter = new SimpleAdapter(this, providerList,
 				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
