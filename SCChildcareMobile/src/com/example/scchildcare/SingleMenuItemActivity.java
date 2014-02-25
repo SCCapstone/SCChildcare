@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
@@ -153,7 +154,10 @@ public class SingleMenuItemActivity extends Activity {
 		permitFullSearchURL = permitSearchURL + providerName;
 
 		JSONParser jPermitParser = new JSONParser();
-		JSONObject permitjson = jPermitParser.getJSONFromUrl(permitFullSearchURL);
+		String permitActualSearch = permitFullSearchURL.replace(" ", "+");
+		Log.d("TESTING FOR PROPER SEARCH", permitActualSearch);
+		
+		JSONObject permitjson = jPermitParser.getJSONFromUrl(permitActualSearch);
 
 		System.out.println("PERMIT HTTP SUCCESSFUL");
 		try {
@@ -204,13 +208,13 @@ public class SingleMenuItemActivity extends Activity {
 		}
 
 		
-		//Display parsed Permit data-DO THIS********************
-		ListAdapter permitAdapter = new SimpleAdapter(this, permitList,
-				R.layout.list_item, new String[] { TAG_PERMITNAME, TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
-						R.id.ownerName, R.id.address, R.id.city, R.id.state,
-						R.id.zipCode, R.id.phone, R.id.latitude,
-						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
-						R.id.qualityLevel });
+//		//Display parsed Permit data-DO THIS********************
+//		ListAdapter permitAdapter = new SimpleAdapter(this, permitList,
+//				R.layout.list_item, new String[] { TAG_PERMITNAME, TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
+//						R.id.ownerName, R.id.address, R.id.city, R.id.state,
+//						R.id.zipCode, R.id.phone, R.id.latitude,
+//						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
+//						R.id.qualityLevel });
 		
 		
 		//******setListAdapter(permitAdapter);
@@ -221,7 +225,8 @@ public class SingleMenuItemActivity extends Activity {
 		complaintFullSearchURL = complaintSearchURL + providerName;
 
 		JSONParser jComplaintParser = new JSONParser();
-		JSONObject complaintjson = jComplaintParser.getJSONFromUrl(complaintFullSearchURL);
+		String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
+		JSONObject complaintjson = jComplaintParser.getJSONFromUrl(complaintActualSearch);
 		
 		System.out.println("COMPLAINT HTTP SUCCESSFUL");
 		try {
@@ -270,15 +275,15 @@ public class SingleMenuItemActivity extends Activity {
 			e.printStackTrace();
 		}
 		
-		//Display parsed Complaint data-DO THIS********************
-		
-		ListAdapter complaintAdapter = new SimpleAdapter(this, complaintList,
-				R.layout.list_item, new String[] { TAG_PERMITNAME, TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
-						R.id.ownerName, R.id.address, R.id.city, R.id.state,
-						R.id.zipCode, R.id.phone, R.id.latitude,
-						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
-						R.id.qualityLevel });
-		
+//		//Display parsed Complaint data-DO THIS********************
+//		
+//		ListAdapter complaintAdapter = new SimpleAdapter(this, complaintList,
+//				R.layout.list_item, new String[] { TAG_PERMITNAME, TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
+//						R.id.ownerName, R.id.address, R.id.city, R.id.state,
+//						R.id.zipCode, R.id.phone, R.id.latitude,
+//						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
+//						R.id.qualityLevel });
+//		
 		
 		//******setListAdapter(complaintAdapter);
 		

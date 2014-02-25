@@ -303,7 +303,7 @@ public class MainActivity extends FragmentActivity implements
 		makeToast("Searching, Please wait...");
 		Intent intent = new Intent(this, SearchResultsActivity.class);
 		EditText editText = (EditText) findViewById(R.id.edit_message);
-		String message = editText.getText().toString().replace(" ", "%20");
+		String message = editText.getText().toString().replace(" ", "+");
 
 		//String message = mainFragment.locate2(view);
 		intent.putExtra(EXTRA_MESSAGE, message);
