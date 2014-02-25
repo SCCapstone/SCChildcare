@@ -31,7 +31,7 @@ public class MainFragment extends Fragment {
 	};
 
 	public String locate2(View view) {
-		String message = editText.getText().toString();
+		String message = editText.getText().toString().replace(" ", "%20");
 		return message;
 	}
 
@@ -40,11 +40,11 @@ public class MainFragment extends Fragment {
 			Bundle savedInstanceState) {
 
 		View view = inflater.inflate(R.layout.activity_main, container, false);
-		editText = (EditText) view.findViewById(R.id.edit_message);
+	//	editText = (EditText) view.findViewById(R.id.edit_message);
 		 LoginButton authButton = (LoginButton)
 		 view.findViewById(R.id.authButton);
 		 authButton.setFragment(this);
-		System.out.println("Hey I'm in onCreateView");
+	//	System.out.println("Hey I'm in onCreateView");
 		return view;
 	}
 

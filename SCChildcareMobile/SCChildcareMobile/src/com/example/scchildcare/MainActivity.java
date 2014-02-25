@@ -123,30 +123,23 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		// geocodeLabel = (TextView) findViewById(R.id.geocodeLabel);
-		// geocodeLabel.setText(getString(R.string.geocode_label));
-		// LongLat = (TextView) findViewById(R.id.lat_lng);
-		
 		mLocationClient = new LocationClient(this, this, this);
-		// LongLat1 = (TextView) findViewById(R.id.lat_lng1);
 		button1 = (ImageButton) findViewById(R.id.button1);
 
+		editText = (EditText)findViewById(R.id.edit_message);
+		
 		if (savedInstanceState == null) {
 			// Add the fragment on initial activity setup
 			mainFragment = new MainFragment();
 			getSupportFragmentManager().beginTransaction()
 					.add(android.R.id.content, mainFragment).commit();
-		  // editText = (EditText) findViewById(R.id.edit_message);
 		} else {
 			// Or set the fragment from restored state info
 			mainFragment = (MainFragment) getSupportFragmentManager()
 					.findFragmentById(android.R.id.content);
-		 // editText = (EditText) findViewById(R.id.edit_message);
 		}
-    
-		// // gets the activity's default ActionBar
-		// ActionBar actionBar = getActionBar();
-		// actionBar.show();
+		
+		
 	}
 
 	@Override
@@ -195,11 +188,10 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	@Override
-	protected void onResume() {
-		// addressText.getText().toString();
-		// addressText = (EditText) findViewById(R.id.addressText);
-		System.out.println("I've resumed");
+	protected void onResume()
+	{
 		super.onResume();
+		
 	}
 
 	@Override
@@ -304,8 +296,9 @@ public class MainActivity extends FragmentActivity implements
 	public void sendMessage(View view) {
 		makeToast("Searching, Please wait...");
 		Intent intent = new Intent(this, SearchResultsActivity.class);
-		 editText = (EditText)findViewById(R.id.edit_message);
-		String message = editText.getText().toString().replace(" ", "%20");
+	//	 editText = (EditText)findViewById(R.id.edit_message);
+		
+     String message = editText.getText().toString().replace(" ", "%20");
 
 		//String message = mainFragment.locate2(view);
 		intent.putExtra(EXTRA_MESSAGE, message);
