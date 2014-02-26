@@ -1,3 +1,4 @@
+
 package com.example.scchildcare;
 
 import java.util.ArrayList;
@@ -312,3 +313,4 @@ public class SingleMenuItemActivity extends Activity {
 	}
 
 }
+

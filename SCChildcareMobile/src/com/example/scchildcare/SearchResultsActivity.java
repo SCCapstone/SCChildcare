@@ -1,3 +1,4 @@
+
 package com.example.scchildcare;
 
 import java.util.ArrayList;
@@ -281,5 +282,6 @@ public class SearchResultsActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 
 }
