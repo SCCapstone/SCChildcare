@@ -209,9 +209,13 @@ public class SingleMenuItemActivity extends Activity {
 		permitsTableLabel.setText("Permits: ");
 		
 		TableLayout permitTable = (TableLayout) findViewById(R.id.permitTable);
+		
+		System.out.println("Building Table");
+
 
 		TableRow permitRow;
 		for (int i = 0; i < permitList.size(); i++) {
+			System.out.println("Building Table");
 			LayoutInflater inflater = LayoutInflater
 					.from(SingleMenuItemActivity.this);
 			permitRow = (TableRow) inflater.inflate(R.id.permitTableRow,
@@ -220,6 +224,10 @@ public class SingleMenuItemActivity extends Activity {
 			String permitNameData = permitList.get(i).get(TAG_PERMITNAME);
 			String permitExpirationData = permitList.get(i).get(
 					TAG_PERMITEXPIRATION);
+			
+			Log.d("What PermitData says", permitList.get(i).get(TAG_PERMITNAME));
+			Log.d("What PermitData says", permitList.get(i).get(
+					TAG_PERMITEXPIRATION));
 
 			TextView lblPermitName = (TextView) findViewById(R.id.permit_name_label);
 			TextView lblPermitExpiration = (TextView) findViewById(R.id.permit_expiration_label);
