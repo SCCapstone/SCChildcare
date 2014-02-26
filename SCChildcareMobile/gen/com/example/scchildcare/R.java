@@ -409,8 +409,8 @@ containing a value of this type.
         public static final int search=0x7f020044;
     }
     public static final class id {
-        public static final int action_search=0x7f050044;
-        public static final int action_settings=0x7f050045;
+        public static final int action_search=0x7f05004a;
+        public static final int action_settings=0x7f05004b;
         public static final int address=0x7f050023;
         public static final int address_label=0x7f050033;
         public static final int authButton=0x7f05000a;
@@ -461,6 +461,12 @@ containing a value of this type.
         public static final int ownerName=0x7f050028;
         public static final int ownerNameLabel=0x7f050036;
         public static final int owner_label=0x7f050037;
+        public static final int permitTable=0x7f050045;
+        public static final int permitTableRow=0x7f050047;
+        public static final int permit_expiration_label=0x7f050049;
+        public static final int permit_name_label=0x7f050048;
+        public static final int permit_title_row=0x7f050046;
+        public static final int permits_Table_label=0x7f050044;
         public static final int phone=0x7f05002a;
         public static final int phone_label=0x7f050038;
         public static final int picker_subtitle=0x7f05001c;

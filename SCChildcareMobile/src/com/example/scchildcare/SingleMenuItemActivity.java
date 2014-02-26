@@ -11,9 +11,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.widget.ListAdapter;
 import android.widget.SimpleAdapter;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -41,29 +44,25 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
 
-
-
-	//JSON node keys for Permits
+	// JSON node keys for Permits
 	private static final String TAG_PERMITS = "permits";
 	private static final String TAG_PERMITNAME = "permitName";
 	private static final String TAG_PERMITEXPIRATION = "permitExpiration";
 	JSONArray permits = null;
 	ArrayList<HashMap<String, String>> permitList = new ArrayList<HashMap<String, String>>();
 
-
-	//JSON node keys for Complaints
+	// JSON node keys for Complaints
 	private static final String TAG_COMPLAINTS = "complaints";
 	private static final String TAG_COMPLAINTRESOLVED = "complaintResolved";
 	private static final String TAG_COMPLAINTNAME = "complaintName";
 	JSONArray complaints = null;
 	ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
 
-	//HTTP Stuff 
+	// HTTP Stuff
 	private static final String permitSearchURL = "http://54.201.44.59:3000/providerpermits.json?utf8=%E2%9C%93&search=";
 	private static final String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
 	private static String permitFullSearchURL = null;
 	private static String complaintFullSearchURL = null;
-
 
 	GoogleMap mMap;
 
@@ -109,7 +108,7 @@ public class SingleMenuItemActivity extends Activity {
 		// TextView lblZipcode = (TextView) findViewById(R.id.zipcode_label);
 		TextView lblPhone = (TextView) findViewById(R.id.phone_label);
 		TextView lblCapacity = (TextView) findViewById(R.id.capacity_label);
-		TextView lblhours = (TextView) findViewById(R.id.hours_label);		
+		TextView lblhours = (TextView) findViewById(R.id.hours_label);
 		TextView lblSpecialist = (TextView) findViewById(R.id.specialist_label);
 		TextView lblSpecialistPhone = (TextView) findViewById(R.id.specialistPhone_label);
 		TextView lblQuality = (TextView) findViewById(R.id.qualityLevel_label);
@@ -130,8 +129,7 @@ public class SingleMenuItemActivity extends Activity {
 		lblSpecialistPhone.setText(specialistPhone);
 		lblQuality.setText(qualityLevel);
 
-
-		/**DISPLAY MAP **/
+		/** DISPLAY MAP **/
 		double dbl_latitude = Double.parseDouble(latitude);
 		double dbl_longitude = Double.parseDouble(longitude);
 
@@ -141,23 +139,23 @@ public class SingleMenuItemActivity extends Activity {
 				.getMap();
 		mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 
-		mMap.addMarker(new MarkerOptions()
-		.position(new LatLng(dbl_latitude, dbl_longitude))
-		.title(providerName));
+		mMap.addMarker(new MarkerOptions().position(
+				new LatLng(dbl_latitude, dbl_longitude)).title(providerName));
 
-		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PROVIDER_LOCATION, 14));
+		mMap.moveCamera(CameraUpdateFactory
+				.newLatLngZoom(PROVIDER_LOCATION, 14));
 
+		/** DISPLAY PERMIT DATA **/
 
-		/**DISPLAY PERMIT DATA **/
-		
-		//Parse Data
+		// Parse Data
 		permitFullSearchURL = permitSearchURL + providerName;
 
 		JSONParser jPermitParser = new JSONParser();
 		String permitActualSearch = permitFullSearchURL.replace(" ", "+");
 		Log.d("TESTING FOR PROPER SEARCH", permitActualSearch);
-		
-		JSONObject permitjson = jPermitParser.getJSONFromUrl(permitActualSearch);
+
+		JSONObject permitjson = jPermitParser
+				.getJSONFromUrl(permitActualSearch);
 
 		System.out.println("PERMIT HTTP SUCCESSFUL");
 		try {
@@ -183,22 +181,20 @@ public class SingleMenuItemActivity extends Activity {
 				for (int i = 0; i < permits.length(); i++) {
 					JSONObject permit = permits.getJSONObject(i);
 
-
 					// store the json items in variables
 
 					String permitName = permit.getString(TAG_PERMITNAME);
-					String permitExpiration = permit.getString(TAG_PERMITEXPIRATION);
+					String permitExpiration = permit
+							.getString(TAG_PERMITEXPIRATION);
 
 					HashMap<String, String> map = new HashMap<String, String>();
-
 
 					map.put(TAG_PERMITNAME, permitName);
 					map.put(TAG_PERMITEXPIRATION, permitExpiration);
 
-
 					// add Hashlist to ArrayList
 					System.out
-					.println("Adding Tags to Map, adding map to providerList");
+							.println("Adding Tags to Map, adding map to providerList");
 					permitList.add(map);
 
 				}
@@ -207,27 +203,45 @@ public class SingleMenuItemActivity extends Activity {
 			e.printStackTrace();
 		}
 
-		
-//		//Display parsed Permit data-DO THIS********************
-//		ListAdapter permitAdapter = new SimpleAdapter(this, permitList,
-//				R.layout.list_item, new String[] { TAG_PERMITNAME, TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
-//						R.id.ownerName, R.id.address, R.id.city, R.id.state,
-//						R.id.zipCode, R.id.phone, R.id.latitude,
-//						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
-//						R.id.qualityLevel });
-		
-		
-		//******setListAdapter(permitAdapter);
+		// Display parsed Permit data-DO THIS********************
 
+		TextView permitsTableLabel = (TextView) findViewById(R.id.permits_Table_label);
+		permitsTableLabel.setText("Permits: ");
+		
+		TableLayout permitTable = (TableLayout) findViewById(R.id.permitTable);
 
-		/**DISPLAY COMPLAINT DATA **/
+		TableRow permitRow;
+		for (int i = 0; i < permitList.size(); i++) {
+			LayoutInflater inflater = LayoutInflater
+					.from(SingleMenuItemActivity.this);
+			permitRow = (TableRow) inflater.inflate(R.id.permitTableRow,
+					permitTable, false);
+
+			String permitNameData = permitList.get(i).get(TAG_PERMITNAME);
+			String permitExpirationData = permitList.get(i).get(
+					TAG_PERMITEXPIRATION);
+
+			TextView lblPermitName = (TextView) findViewById(R.id.permit_name_label);
+			TextView lblPermitExpiration = (TextView) findViewById(R.id.permit_expiration_label);
+
+			lblPermitName.setText(permitNameData);
+			lblPermitExpiration.setText(permitExpirationData);
+
+			permitTable.addView(permitRow);
+
+		}
+		
+		
+
+		/** DISPLAY COMPLAINT DATA **/
 
 		complaintFullSearchURL = complaintSearchURL + providerName;
 
 		JSONParser jComplaintParser = new JSONParser();
 		String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
-		JSONObject complaintjson = jComplaintParser.getJSONFromUrl(complaintActualSearch);
-		
+		JSONObject complaintjson = jComplaintParser
+				.getJSONFromUrl(complaintActualSearch);
+
 		System.out.println("COMPLAINT HTTP SUCCESSFUL");
 		try {
 			// get the array of providers
@@ -251,22 +265,20 @@ public class SingleMenuItemActivity extends Activity {
 				for (int i = 0; i < complaints.length(); i++) {
 					JSONObject permit = complaints.getJSONObject(i);
 
-
 					// store the json items in variables
 
 					String complaintName = permit.getString(TAG_COMPLAINTNAME);
-					String complaintResolved = permit.getString(TAG_COMPLAINTRESOLVED);
+					String complaintResolved = permit
+							.getString(TAG_COMPLAINTRESOLVED);
 
 					HashMap<String, String> map = new HashMap<String, String>();
-
 
 					map.put(TAG_COMPLAINTNAME, complaintName);
 					map.put(TAG_COMPLAINTRESOLVED, complaintResolved);
 
-
 					// add Hashlist to ArrayList
 					System.out
-					.println("Adding Tags to Map, adding map to providerList");
+							.println("Adding Tags to Map, adding map to providerList");
 					permitList.add(map);
 
 				}
@@ -274,23 +286,21 @@ public class SingleMenuItemActivity extends Activity {
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
-		
-//		//Display parsed Complaint data-DO THIS********************
-//		
-//		ListAdapter complaintAdapter = new SimpleAdapter(this, complaintList,
-//				R.layout.list_item, new String[] { TAG_PERMITNAME, TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
-//						R.id.ownerName, R.id.address, R.id.city, R.id.state,
-//						R.id.zipCode, R.id.phone, R.id.latitude,
-//						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
-//						R.id.qualityLevel });
-//		
-		
-		//******setListAdapter(complaintAdapter);
-		
 
+		// //Display parsed Complaint data-DO THIS********************
+		//
+		// ListAdapter complaintAdapter = new SimpleAdapter(this, complaintList,
+		// R.layout.list_item, new String[] { TAG_PERMITNAME,
+		// TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
+		// R.id.ownerName, R.id.address, R.id.city, R.id.state,
+		// R.id.zipCode, R.id.phone, R.id.latitude,
+		// R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist,
+		// R.id.specialistPhone,
+		// R.id.qualityLevel });
+		//
+
+		// ******setListAdapter(complaintAdapter);
 
 	}
-
-	
 
 }
