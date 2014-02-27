@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -121,32 +120,12 @@
                 android:id="@+id/hours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/openTime"
+                android:text="@string/hours"
                 android:textSize="20sp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/hours_label"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:textSize="20sp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal" >
-
-            <TextView
-                android:id="@+id/closeLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/closeTime"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/closeTime_label"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp" />
@@ -217,7 +196,7 @@
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="419dp" />
-        
+
         <TextView
             android:id="@+id/permits_Table_label"
             android:layout_width="fill_parent"
@@ -238,9 +217,22 @@
                 android:id="@+id/permit_title_row"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#83F52C"
+                android:background="#0069a3"
                 android:visibility="visible" >
 
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="Permit Name"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="Expiration"
+                    android:textColor="#FFFFFF" />
             </TableRow>
 
             <TableRow
@@ -248,34 +240,67 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="visible" >
-
-                <TextView
-                    android:id="@+id/permit_name_label"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dip"
-                    android:paddingTop="25dip"
-                    android:textColor="#000000"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
-                <TextView
-                    android:id="@+id/permit_expiration_label"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="10dip"
-                    android:paddingTop="25dip"
-                    android:textColor="#000000"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:visibility="visible" />
-
             </TableRow>
         </TableLayout>
-        
-        
+
+        <TextView
+            android:id="@+id/complaints_Table_label"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dip"
+            android:paddingTop="25dip"
+            android:textColor="#000000"
+            android:textSize="25sp"
+            android:textStyle="bold" />
+
+        <TableLayout
+            android:id="@+id/complaintTable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TableRow
+                android:id="@+id/complaint_title_row"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#0069a3"
+                android:visibility="visible" >
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="Complaint Name"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:text="Resolved Status"
+                    android:textColor="#FFFFFF" />
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:id="@+id/comment_section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <Button
+                android:id="@+id/add_comment_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right|center_vertical|center_horizontal"
+                android:text="Add Comment" />
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>
-

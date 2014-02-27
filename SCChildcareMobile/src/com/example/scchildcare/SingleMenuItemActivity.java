@@ -14,8 +14,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.widget.ListAdapter;
-import android.widget.SimpleAdapter;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -46,14 +44,18 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_QUALITY = "qualityLevel";
 
 	// JSON node keys for Permits
-	private static final String TAG_PERMITS = "permits";
-	private static final String TAG_PERMITNAME = "permitName";
-	private static final String TAG_PERMITEXPIRATION = "permitExpiration";
+	private static final String TAG_PERMITS = "providerpermits";
+	//private static final String TAG_PERMITID = "id";
+	//private static final String TAG_PROVIDERID = "provider_id";
+	//private static final String TAG_PROVIDER_NAME = "provider_name";
+	private static final String TAG_PERMITNAME = "permit_name";
+	private static final String TAG_PERMITEXPIRATION = "expiration";
 	JSONArray permits = null;
 	ArrayList<HashMap<String, String>> permitList = new ArrayList<HashMap<String, String>>();
 
 	// JSON node keys for Complaints
 	private static final String TAG_COMPLAINTS = "complaints";
+	
 	private static final String TAG_COMPLAINTRESOLVED = "complaintResolved";
 	private static final String TAG_COMPLAINTNAME = "complaintName";
 	JSONArray complaints = null;
@@ -217,10 +219,10 @@ public class SingleMenuItemActivity extends Activity {
 		TableRow permitRow;
 		for (int i = 0; i < permitList.size(); i++) {
 			System.out.println("Building Table");
-			LayoutInflater inflater = LayoutInflater
-					.from(SingleMenuItemActivity.this);
-			permitRow = (TableRow) inflater.inflate(R.id.permitTableRow,
-					permitTable, false);
+			//LayoutInflater inflater = LayoutInflater
+				//	.from(SingleMenuItemActivity.this);
+			//permitRow = (TableRow) inflater.inflate(R.id.permitTableRow,
+				//	permitTable, false);
 
 			String permitNameData = permitList.get(i).get(TAG_PERMITNAME);
 			String permitExpirationData = permitList.get(i).get(
@@ -230,13 +232,13 @@ public class SingleMenuItemActivity extends Activity {
 			Log.d("What PermitData says", permitList.get(i).get(
 					TAG_PERMITEXPIRATION));
 
-			TextView lblPermitName = (TextView) findViewById(R.id.permit_name_label);
-			TextView lblPermitExpiration = (TextView) findViewById(R.id.permit_expiration_label);
+			//TextView lblPermitName = (TextView) findViewById(R.id.permit_name_label);
+			//TextView lblPermitExpiration = (TextView) findViewById(R.id.permit_expiration_label);
 
-			lblPermitName.setText(permitNameData);
-			lblPermitExpiration.setText(permitExpirationData);
+			//lblPermitName.setText(permitNameData);
+			//lblPermitExpiration.setText(permitExpirationData);
 
-			permitTable.addView(permitRow);
+			//permitTable.addView(permitRow);
 
 		}
 		
@@ -298,6 +300,9 @@ public class SingleMenuItemActivity extends Activity {
 
 		// //Display parsed Complaint data-DO THIS********************
 		//
+		
+		TextView complaintsTableLabel = (TextView) findViewById(R.id.complaints_Table_label);
+		complaintsTableLabel.setText("Complaints: ");
 		// ListAdapter complaintAdapter = new SimpleAdapter(this, complaintList,
 		// R.layout.list_item, new String[] { TAG_PERMITNAME,
 		// TAG_PERMITEXPIRATION }, new int[] { R.id.name, R.id.licenseInfo,
