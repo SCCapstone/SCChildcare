@@ -28,6 +28,6 @@ proguard/*
 *.iws
 .idea/*
 
+# Store files
 
-#DS_Store
-
+.DS_Store
