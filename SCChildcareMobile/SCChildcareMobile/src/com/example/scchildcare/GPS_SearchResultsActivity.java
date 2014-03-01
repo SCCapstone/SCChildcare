@@ -95,6 +95,8 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		String param_longitude = coordinates.getString("EXTRA_LONGITUDE");
 		String param_latitude = coordinates.getString("EXTRA_LATITUDE");
 		System.out.println(param_latitude + ", " +param_longitude);
+		
+		
 		fullGPS_URL = gpsURL_1+ param_longitude + gpsURL_2 + param_latitude;
 
 		System.out.println("Beginning JSON Parse");

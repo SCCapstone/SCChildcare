@@ -14,9 +14,12 @@ package com.example.scchildcare;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -126,7 +129,7 @@ public class MainActivity extends FragmentActivity implements
 		mLocationClient = new LocationClient(this, this, this);
 		button1 = (ImageButton) findViewById(R.id.button1);
 
-		editText = (EditText)findViewById(R.id.edit_message);
+		//editText = (EditText)findViewById(R.id.edit_message);
 		
 		if (savedInstanceState == null) {
 			// Add the fragment on initial activity setup
@@ -180,11 +183,13 @@ public class MainActivity extends FragmentActivity implements
 
 	protected void onDestroy() {
 		super.onDestroy();
+		editText.setText(null);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		editText.setText(null);
 	}
 
 	@Override
@@ -232,7 +237,7 @@ public class MainActivity extends FragmentActivity implements
 	public void getLocation(View v) {
 
 		// If Google Play Services is available
-		if (servicesConnected()) {
+		if (servicesConnected() && isNetworkAvailable()) {
 
 			// Get the current location
 			mCurrentLocation = mLocationClient.getLastLocation();
@@ -293,14 +298,15 @@ public class MainActivity extends FragmentActivity implements
 		return true;
 	}
 
-	public void sendMessage(View view) {
-		makeToast("Searching, Please wait...");
+	public void sendMessage(View view)
+	{
+		if(isNetworkAvailable()){
+		makeToast("Searching, Please {wait...");	
 		Intent intent = new Intent(this, SearchResultsActivity.class);
-	//	 editText = (EditText)findViewById(R.id.edit_message);
+	    editText = (EditText)findViewById(R.id.edit_message);
 		
-     String message = editText.getText().toString().replace(" ", "%20");
+        String message = editText.getText().toString().replace(" ", "%20");
 
-		//String message = mainFragment.locate2(view);
 		intent.putExtra(EXTRA_MESSAGE, message);
 		/**
 		 * If there is no Connection to the server, this will error out.
@@ -308,9 +314,9 @@ public class MainActivity extends FragmentActivity implements
 		 * Possibly a try/catch on the getJSONFromURL method in
 		 * SearchResultsActivity?
 		 */
-
 		startActivity(intent);
-
+	}
+			
 	}
 
 	public void makeToast(String message) {
@@ -325,6 +331,13 @@ public class MainActivity extends FragmentActivity implements
 	}
 	*/
 	
+	private boolean isNetworkAvailable() 
+	{
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnected() && activeNetworkInfo.isConnectedOrConnecting();
+	}
 	
 	
 	

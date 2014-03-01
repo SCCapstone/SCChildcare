@@ -22,6 +22,7 @@ public class MainFragment extends Fragment {
 	private static final String TAG = "MainFragment";
 	public static String message = null;
 	EditText editText;
+	MainActivity mainactivity;
 	private Session.StatusCallback callback = new Session.StatusCallback() {
 		@Override
 		public void call(Session session, SessionState state,
@@ -34,7 +35,7 @@ public class MainFragment extends Fragment {
 		String message = editText.getText().toString().replace(" ", "%20");
 		return message;
 	}
-
+/*
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -44,10 +45,12 @@ public class MainFragment extends Fragment {
 		 LoginButton authButton = (LoginButton)
 		 view.findViewById(R.id.authButton);
 		 authButton.setFragment(this);
+		// view.getActivity().findViewById(R.id.edit_message);
+		// mainactivity.sendMessage(view);
 	//	System.out.println("Hey I'm in onCreateView");
 		return view;
 	}
-
+*/
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
