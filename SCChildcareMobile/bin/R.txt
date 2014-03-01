@@ -136,8 +136,8 @@ int drawable ic_scchildcare_logo 0x7f020041
 int drawable ic_scchildcare_logo_small 0x7f020042
 int drawable icon 0x7f020043
 int drawable search 0x7f020044
-int id action_search 0x7f05004b
-int id action_settings 0x7f05004c
+int id action_search 0x7f05004d
+int id action_settings 0x7f05004e
 int id add_comment_button 0x7f050009
 int id address 0x7f050023
 int id address_label 0x7f050033
@@ -168,10 +168,10 @@ int id com_facebook_usersettingsfragment_login_button 0x7f050021
 int id com_facebook_usersettingsfragment_logo_image 0x7f05001f
 int id com_facebook_usersettingsfragment_profile_name 0x7f050020
 int id comma 0x7f050025
-int id comment_section 0x7f05004a
-int id complaintTable 0x7f050047
-int id complaint_title_row 0x7f050048
-int id complaints_Table_label 0x7f050046
+int id comment_section 0x7f05004c
+int id complaintTable 0x7f050049
+int id complaint_title_row 0x7f05004a
+int id complaints_Table_label 0x7f050048
 int id edit_message 0x7f050008
 int id hours 0x7f05002e
 int id hours_label 0x7f05003b
@@ -192,6 +192,8 @@ int id ownerNameLabel 0x7f050036
 int id owner_label 0x7f050037
 int id permitTable 0x7f050043
 int id permitTableRow 0x7f050045
+int id permit_expiration_label 0x7f050047
+int id permit_name_label 0x7f050046
 int id permit_title_row 0x7f050044
 int id permits_Table_label 0x7f050042
 int id phone 0x7f05002a
@@ -210,7 +212,7 @@ int id specialistPhoneLabel 0x7f05003e
 int id specialistPhone_label 0x7f05003f
 int id specialist_label 0x7f05003d
 int id state 0x7f050026
-int id tableRow1 0x7f050049
+int id tableRow1 0x7f05004b
 int id terrain 0x7f050003
 int id zipCode 0x7f050029
 int integer google_play_services_version 0x7f070000

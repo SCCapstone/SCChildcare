@@ -409,8 +409,8 @@ containing a value of this type.
         public static final int search=0x7f020044;
     }
     public static final class id {
-        public static final int action_search=0x7f05004b;
-        public static final int action_settings=0x7f05004c;
+        public static final int action_search=0x7f05004d;
+        public static final int action_settings=0x7f05004e;
         public static final int add_comment_button=0x7f050009;
         public static final int address=0x7f050023;
         public static final int address_label=0x7f050033;
@@ -441,10 +441,10 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f05001f;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f050020;
         public static final int comma=0x7f050025;
-        public static final int comment_section=0x7f05004a;
-        public static final int complaintTable=0x7f050047;
-        public static final int complaint_title_row=0x7f050048;
-        public static final int complaints_Table_label=0x7f050046;
+        public static final int comment_section=0x7f05004c;
+        public static final int complaintTable=0x7f050049;
+        public static final int complaint_title_row=0x7f05004a;
+        public static final int complaints_Table_label=0x7f050048;
         public static final int edit_message=0x7f050008;
         public static final int hours=0x7f05002e;
         public static final int hours_label=0x7f05003b;
@@ -465,6 +465,8 @@ containing a value of this type.
         public static final int owner_label=0x7f050037;
         public static final int permitTable=0x7f050043;
         public static final int permitTableRow=0x7f050045;
+        public static final int permit_expiration_label=0x7f050047;
+        public static final int permit_name_label=0x7f050046;
         public static final int permit_title_row=0x7f050044;
         public static final int permits_Table_label=0x7f050042;
         public static final int phone=0x7f05002a;
@@ -483,7 +485,7 @@ containing a value of this type.
         public static final int specialistPhone_label=0x7f05003f;
         public static final int specialist_label=0x7f05003d;
         public static final int state=0x7f050026;
-        public static final int tableRow1=0x7f050049;
+        public static final int tableRow1=0x7f05004b;
         public static final int terrain=0x7f050003;
         public static final int zipCode=0x7f050029;
     }
