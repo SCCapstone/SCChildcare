@@ -1,5 +1,9 @@
 package com.example.scchildcare;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,11 +13,15 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -90,188 +98,191 @@ public class SearchResultsActivity extends ListActivity {
 
 		// Get the message from the intent
 		Intent intent = getIntent();
-		String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-		// System.out.println(message);
-		fullSearchURL = searchURL + message;
+		if(isURLReachable(this) == true)
+		{
 
-		System.out.println("Beginning JSON Parse");
-		JSONParser jParser = new JSONParser();
+			String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+			// System.out.println(message);
+			fullSearchURL = searchURL + message;
 
-		System.out.println("Getting JSON with HTTP");
-		JSONObject json = jParser.getJSONFromUrl(fullSearchURL);
-		// System.out.println(json);
+			System.out.println("Beginning JSON Parse");
+			JSONParser jParser = new JSONParser();
 
-		System.out.println("HTTP SUCCESSFUL");
-		try {
-			// get the array of providers
-			System.out.println("CREATING THE PROVIDERS JSON ARRAY");
+			System.out.println("Getting JSON with HTTP");
+			JSONObject json = jParser.getJSONFromUrl(fullSearchURL);
+			// System.out.println(json);
 
-			providers = json.getJSONArray(TAG_PROVIDERS);
+			System.out.println("HTTP SUCCESSFUL");
+			try {
+				// get the array of providers
+				System.out.println("CREATING THE PROVIDERS JSON ARRAY");
 
-			System.out.println("Beginning For Loop to go through array");
+				providers = json.getJSONArray(TAG_PROVIDERS);
 
-			if (providers.length() == 0) {
-				System.out.println("No Return on Search");
-				// String sorry =
-				// "We are sorry, your search did not return anything";
-				// TextView textView = new TextView(this);
-				// textView.setTextSize(40);
-				// textView.setText(sorry);
-				Intent sorryIntent = new Intent(this,
-						SorryMessageActivity.class);
-				// intent.putExtra(SORRY_MESSAGE, sorry);
-				startActivity(sorryIntent);
-			} else {
-				for (int i = 0; i < providers.length(); i++) {
-					JSONObject p = providers.getJSONObject(i);
+				System.out.println("Beginning For Loop to go through array");
 
-					// store the json items in variables
-					String id = p.getString(TAG_ID);
-					String providerName = p.getString(TAG_PROVIDERNAME);
-					String licenseInfo = p.getString(TAG_LICENSEINFO);
-					String ownerName = p.getString(TAG_OWNERNAME);
-					String address = p.getString(TAG_ADDRESS);
-					String city = p.getString(TAG_CITY);
-					String state = p.getString(TAG_STATE);
-					String zipCode = p.getString(TAG_ZIPCODE);
-					String phoneNumber = p.getString(TAG_PHONENUMBER);
-					String longitude = p.getString(TAG_LONGITUDE);
-					String latitude = p.getString(TAG_LATITUDE);
-					String capacity = p.getString(TAG_CAPACITY);
-					String hours = p.getString(TAG_HOURS);
-					String specialist = p.getString(TAG_SPECIALIST);
-					String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
-					String qualityLevel = p.getString(TAG_QUALITY);
+				if (providers.length() == 0) {
+					System.out.println("No Return on Search");
+					// String sorry =
+					// "We are sorry, your search did not return anything";
+					// TextView textView = new TextView(this);
+					// textView.setTextSize(40);
+					// textView.setText(sorry);
+					Intent sorryIntent = new Intent(this,
+							SorryMessageActivity.class);
+					// intent.putExtra(SORRY_MESSAGE, sorry);
+					startActivity(sorryIntent);
+				} else {
+					for (int i = 0; i < providers.length(); i++) {
+						JSONObject p = providers.getJSONObject(i);
 
-					HashMap<String, String> map = new HashMap<String, String>();
+						// store the json items in variables
+						String id = p.getString(TAG_ID);
+						String providerName = p.getString(TAG_PROVIDERNAME);
+						String licenseInfo = p.getString(TAG_LICENSEINFO);
+						String ownerName = p.getString(TAG_OWNERNAME);
+						String address = p.getString(TAG_ADDRESS);
+						String city = p.getString(TAG_CITY);
+						String state = p.getString(TAG_STATE);
+						String zipCode = p.getString(TAG_ZIPCODE);
+						String phoneNumber = p.getString(TAG_PHONENUMBER);
+						String longitude = p.getString(TAG_LONGITUDE);
+						String latitude = p.getString(TAG_LATITUDE);
+						String capacity = p.getString(TAG_CAPACITY);
+						String hours = p.getString(TAG_HOURS);
+						String specialist = p.getString(TAG_SPECIALIST);
+						String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
+						String qualityLevel = p.getString(TAG_QUALITY);
 
-					map.put(TAG_ID, id);
-					map.put(TAG_PROVIDERNAME, providerName);
-					map.put(TAG_LICENSEINFO, licenseInfo);
-					map.put(TAG_OWNERNAME, ownerName);
-					map.put(TAG_ADDRESS, address);
-					map.put(TAG_CITY, city);
-					map.put(TAG_STATE, state);
-					map.put(TAG_ZIPCODE, zipCode);
-					map.put(TAG_PHONENUMBER, phoneNumber);
-					map.put(TAG_LONGITUDE, longitude);
-					map.put(TAG_LATITUDE, latitude);
-					map.put(TAG_CAPACITY, capacity);
-					map.put(TAG_HOURS, hours);
-					map.put(TAG_SPECIALIST, specialist);
-					map.put(TAG_SPECIALISTPHONE, specialistPhone);
-					map.put(TAG_QUALITY, qualityLevel);
+						HashMap<String, String> map = new HashMap<String, String>();
 
-					// add Hashlist to ArrayList
-					System.out
-							.println("Adding Tags to Map, adding map to providerList");
-					providerList.add(map);
+						map.put(TAG_ID, id);
+						map.put(TAG_PROVIDERNAME, providerName);
+						map.put(TAG_LICENSEINFO, licenseInfo);
+						map.put(TAG_OWNERNAME, ownerName);
+						map.put(TAG_ADDRESS, address);
+						map.put(TAG_CITY, city);
+						map.put(TAG_STATE, state);
+						map.put(TAG_ZIPCODE, zipCode);
+						map.put(TAG_PHONENUMBER, phoneNumber);
+						map.put(TAG_LONGITUDE, longitude);
+						map.put(TAG_LATITUDE, latitude);
+						map.put(TAG_CAPACITY, capacity);
+						map.put(TAG_HOURS, hours);
+						map.put(TAG_SPECIALIST, specialist);
+						map.put(TAG_SPECIALISTPHONE, specialistPhone);
+						map.put(TAG_QUALITY, qualityLevel);
 
-					double dbl_latitude = Double.parseDouble(latitude);
-					double dbl_longitude = Double.parseDouble(longitude);
+						// add Hashlist to ArrayList
+						System.out
+						.println("Adding Tags to Map, adding map to providerList");
+						providerList.add(map);
 
-					mMap = ((MapFragment) getFragmentManager()
-							.findFragmentById(R.id.map)).getMap();
+						double dbl_latitude = Double.parseDouble(latitude);
+						double dbl_longitude = Double.parseDouble(longitude);
 
-					mMap.addMarker(new MarkerOptions().position(
-							new LatLng(dbl_latitude, dbl_longitude)).title(
-							providerName));
+						mMap = ((MapFragment) getFragmentManager()
+								.findFragmentById(R.id.map)).getMap();
 
+						mMap.addMarker(new MarkerOptions().position(
+								new LatLng(dbl_latitude, dbl_longitude)).title(
+										providerName));
+
+					}
+					mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+							SOUTH_CAROLINA, 7));
 				}
-				mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-						SOUTH_CAROLINA, 7));
+			} catch (JSONException e) {
+				e.printStackTrace();
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
+
+			// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
+			ListAdapter adapter = new SimpleAdapter(this, providerList,
+					R.layout.list_item, new String[] { TAG_PROVIDERNAME,
+					TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
+					TAG_STATE, TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE,
+					TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST, TAG_SPECIALISTPHONE,
+					TAG_QUALITY }, new int[] { R.id.name, R.id.licenseInfo,
+					R.id.ownerName, R.id.address, R.id.city, R.id.state,
+					R.id.zipCode, R.id.phone, R.id.latitude,
+					R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
+					R.id.qualityLevel });
+
+			// Updating parsed JSON data into ListView
+			// ListAdapter adapter = new SimpleAdapter(this, providerList,
+			// R.layout.list_item, new String[] { TAG_PROVIDERNAME,
+			// TAG_ADDRESS, TAG_CITY, TAG_STATE, TAG_ZIPCODE },
+			// new int[] { R.id.name, R.id.address, R.id.city, R.id.state,
+			// R.id.zipCode });
+
+			setListAdapter(adapter);
+
+			ListView lv = getListView();
+
+			lv.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// getting values from selected ListItem
+					String providerName = ((TextView) view.findViewById(R.id.name))
+							.getText().toString();
+					String licenseInfo = ((TextView) view
+							.findViewById(R.id.licenseInfo)).getText().toString();
+					String ownerName = ((TextView) view
+							.findViewById(R.id.ownerName)).getText().toString();
+					String address = ((TextView) view.findViewById(R.id.address))
+							.getText().toString();
+					String city = ((TextView) view.findViewById(R.id.city))
+							.getText().toString();
+					String state = ((TextView) view.findViewById(R.id.state))
+							.getText().toString();
+					String zipCode = ((TextView) view.findViewById(R.id.zipCode))
+							.getText().toString();
+					String phoneNumber = ((TextView) view.findViewById(R.id.phone))
+							.getText().toString();
+					String latitude = ((TextView) view.findViewById(R.id.latitude))
+							.getText().toString();
+					String longitude = ((TextView) view
+							.findViewById(R.id.longitude)).getText().toString();
+					String capacity = ((TextView) view.findViewById(R.id.capacity))
+							.getText().toString();
+					String hours = ((TextView) view.findViewById(R.id.hours))
+							.getText().toString();
+
+					String specialist = ((TextView) view
+							.findViewById(R.id.specialist)).getText().toString();
+					String specialistPhone = ((TextView) view
+							.findViewById(R.id.specialistPhone)).getText()
+							.toString();
+					String qualityLevel = ((TextView) view
+							.findViewById(R.id.qualityLevel)).getText().toString();
+
+					// Starting new intent
+					Intent in = new Intent(getApplicationContext(),
+							SingleMenuItemActivity.class);
+					in.putExtra(TAG_PROVIDERNAME, providerName);
+					in.putExtra(TAG_LICENSEINFO, licenseInfo);
+					in.putExtra(TAG_OWNERNAME, ownerName);
+					in.putExtra(TAG_ADDRESS, address);
+					in.putExtra(TAG_CITY, city);
+					in.putExtra(TAG_STATE, state);
+					in.putExtra(TAG_ZIPCODE, zipCode);
+					in.putExtra(TAG_PHONENUMBER, phoneNumber);
+					in.putExtra(TAG_LATITUDE, latitude);
+					in.putExtra(TAG_LONGITUDE, longitude);
+					in.putExtra(TAG_CAPACITY, capacity);
+					in.putExtra(TAG_HOURS, hours);
+					in.putExtra(TAG_SPECIALIST, specialist);
+					in.putExtra(TAG_SPECIALISTPHONE, specialistPhone);
+					in.putExtra(TAG_QUALITY, qualityLevel);
+					startActivity(in);
+				}
+			});
+
 		}
-
-		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
-		ListAdapter adapter = new SimpleAdapter(this, providerList,
-				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
-						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
-						TAG_STATE, TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE,
-						TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST, TAG_SPECIALISTPHONE,
-						TAG_QUALITY }, new int[] { R.id.name, R.id.licenseInfo,
-						R.id.ownerName, R.id.address, R.id.city, R.id.state,
-						R.id.zipCode, R.id.phone, R.id.latitude,
-						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
-						R.id.qualityLevel });
-
-		// Updating parsed JSON data into ListView
-		// ListAdapter adapter = new SimpleAdapter(this, providerList,
-		// R.layout.list_item, new String[] { TAG_PROVIDERNAME,
-		// TAG_ADDRESS, TAG_CITY, TAG_STATE, TAG_ZIPCODE },
-		// new int[] { R.id.name, R.id.address, R.id.city, R.id.state,
-		// R.id.zipCode });
-
-		setListAdapter(adapter);
-
-		ListView lv = getListView();
-
-		lv.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// getting values from selected ListItem
-				String providerName = ((TextView) view.findViewById(R.id.name))
-						.getText().toString();
-				String licenseInfo = ((TextView) view
-						.findViewById(R.id.licenseInfo)).getText().toString();
-				String ownerName = ((TextView) view
-						.findViewById(R.id.ownerName)).getText().toString();
-				String address = ((TextView) view.findViewById(R.id.address))
-						.getText().toString();
-				String city = ((TextView) view.findViewById(R.id.city))
-						.getText().toString();
-				String state = ((TextView) view.findViewById(R.id.state))
-						.getText().toString();
-				String zipCode = ((TextView) view.findViewById(R.id.zipCode))
-						.getText().toString();
-				String phoneNumber = ((TextView) view.findViewById(R.id.phone))
-						.getText().toString();
-				String latitude = ((TextView) view.findViewById(R.id.latitude))
-						.getText().toString();
-				String longitude = ((TextView) view
-						.findViewById(R.id.longitude)).getText().toString();
-				String capacity = ((TextView) view.findViewById(R.id.capacity))
-						.getText().toString();
-				String hours = ((TextView) view.findViewById(R.id.hours))
-						.getText().toString();
-				
-				String specialist = ((TextView) view
-						.findViewById(R.id.specialist)).getText().toString();
-				String specialistPhone = ((TextView) view
-						.findViewById(R.id.specialistPhone)).getText()
-						.toString();
-				String qualityLevel = ((TextView) view
-						.findViewById(R.id.qualityLevel)).getText().toString();
-
-				// Starting new intent
-				Intent in = new Intent(getApplicationContext(),
-						SingleMenuItemActivity.class);
-				in.putExtra(TAG_PROVIDERNAME, providerName);
-				in.putExtra(TAG_LICENSEINFO, licenseInfo);
-				in.putExtra(TAG_OWNERNAME, ownerName);
-				in.putExtra(TAG_ADDRESS, address);
-				in.putExtra(TAG_CITY, city);
-				in.putExtra(TAG_STATE, state);
-				in.putExtra(TAG_ZIPCODE, zipCode);
-				in.putExtra(TAG_PHONENUMBER, phoneNumber);
-				in.putExtra(TAG_LATITUDE, latitude);
-				in.putExtra(TAG_LONGITUDE, longitude);
-				in.putExtra(TAG_CAPACITY, capacity);
-				in.putExtra(TAG_HOURS, hours);
-				in.putExtra(TAG_SPECIALIST, specialist);
-				in.putExtra(TAG_SPECIALISTPHONE, specialistPhone);
-				in.putExtra(TAG_QUALITY, qualityLevel);
-				startActivity(in);
-			}
-		});
-
 	}
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -281,5 +292,27 @@ public class SearchResultsActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	public boolean isURLReachable(Context context) {
+		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		if (netInfo != null && netInfo.isConnected()) {
+			try {
+				URL url = new URL("http://54.201.44.59:3000");   // Change to "http://google.com" for www  test.
+				HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+				urlc.setConnectTimeout(10 * 1000);          // 10 s.
+				urlc.connect();
+				if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
+					Log.wtf("Connection", "Success !");
+					return true;
+				} else {
+					return false;
+				}
+			} catch (MalformedURLException e1) {
+				return false;
+			} catch (IOException e) {
+				return false;
+			}
+		}
+		return false;
+	}
 }
