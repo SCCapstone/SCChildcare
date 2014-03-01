@@ -12,6 +12,8 @@
 package com.example.scchildcare;
 
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -32,6 +34,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -183,13 +186,11 @@ public class MainActivity extends FragmentActivity implements
 
 	protected void onDestroy() {
 		super.onDestroy();
-		editText.setText(null);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
-		editText.setText(null);
 	}
 
 	@Override
@@ -267,6 +268,9 @@ public class MainActivity extends FragmentActivity implements
 			startActivity(gpsSearch);
 
 		}
+		else{
+			makeToast("Internet connection not established");
+		}
 	}
 
 	public static class ErrorDialogFragment extends DialogFragment {
@@ -316,6 +320,9 @@ public class MainActivity extends FragmentActivity implements
 		 */
 		startActivity(intent);
 	}
+		else{
+			makeToast("Internet connection not established");	
+		}
 			
 	}
 
@@ -339,7 +346,7 @@ public class MainActivity extends FragmentActivity implements
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected() && activeNetworkInfo.isConnectedOrConnecting();
 	}
 	
-	
+
 	
 	
 }
