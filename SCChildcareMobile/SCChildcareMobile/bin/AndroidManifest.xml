@@ -18,7 +18,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <!--
      The following two permissions are not required to use
-     Google Maps Android API v2, but are recommended.
+     Google Maps Android API v2, but are recommended.
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -66,7 +66,7 @@
         <!-- Single List Item View -->
         <!--
      BUG REPORT: When the parent activity up arrow is used, this will attempt to fill the list view with an empty array, sending it to 
-	the sorry page immediately, need to figure out how to fix this
+	the sorry page immediately, need to figure out how to fix this
         -->
         <activity
             android:name="com.example.scchildcare.SingleMenuItemActivity"

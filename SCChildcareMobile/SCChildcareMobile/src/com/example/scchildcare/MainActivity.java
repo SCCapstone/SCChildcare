@@ -12,11 +12,19 @@
 package com.example.scchildcare;
 
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -35,13 +43,13 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 
 public class MainActivity extends FragmentActivity implements
-		GooglePlayServicesClient.ConnectionCallbacks,
-		GooglePlayServicesClient.OnConnectionFailedListener {
+GooglePlayServicesClient.ConnectionCallbacks,
+GooglePlayServicesClient.OnConnectionFailedListener {
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	public final static String EXTRA_LONGITUDE = null;
 	public final static String EXTRA_LATITUDE = null;
 
-	
+
 	EditText editText;
 	// Label instructing input for EditText
 	TextView geocodeLabel;
@@ -126,7 +134,7 @@ public class MainActivity extends FragmentActivity implements
 		// geocodeLabel = (TextView) findViewById(R.id.geocodeLabel);
 		// geocodeLabel.setText(getString(R.string.geocode_label));
 		// LongLat = (TextView) findViewById(R.id.lat_lng);
-		
+
 		mLocationClient = new LocationClient(this, this, this);
 		// LongLat1 = (TextView) findViewById(R.id.lat_lng1);
 		button1 = (ImageButton) findViewById(R.id.button1);
@@ -135,7 +143,7 @@ public class MainActivity extends FragmentActivity implements
 			// Add the fragment on initial activity setup
 			mainFragment = new MainFragment();
 			getSupportFragmentManager().beginTransaction()
-					.add(android.R.id.content, mainFragment).commit();
+			.add(android.R.id.content, mainFragment).commit();
 		} else {
 			// Or set the fragment from restored state info
 			mainFragment = (MainFragment) getSupportFragmentManager()
@@ -320,5 +328,11 @@ public class MainActivity extends FragmentActivity implements
 
 	public void makeToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+	}
+	private boolean isNetworkAvailable() {
+		ConnectivityManager connectivityManager 
+		= (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
 }
