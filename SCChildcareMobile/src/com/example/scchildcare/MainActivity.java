@@ -129,7 +129,7 @@ public class MainActivity extends FragmentActivity implements
 		
 		mLocationClient = new LocationClient(this, this, this);
 		// LongLat1 = (TextView) findViewById(R.id.lat_lng1);
-		button1 = (ImageButton) findViewById(R.id.button1);
+		button1 = (ImageButton) findViewById(R.id.add_comment_button);
 
 		if (savedInstanceState == null) {
 			// Add the fragment on initial activity setup
@@ -303,7 +303,7 @@ public class MainActivity extends FragmentActivity implements
 		makeToast("Searching, Please wait...");
 		Intent intent = new Intent(this, SearchResultsActivity.class);
 		EditText editText = (EditText) findViewById(R.id.edit_message);
-		String message = editText.getText().toString().replace(" ", "%20");
+		String message = editText.getText().toString().replace(" ", "+");
 
 		//String message = mainFragment.locate2(view);
 		intent.putExtra(EXTRA_MESSAGE, message);
