@@ -6,49 +6,7 @@
 
     <!-- Name Label -->
 
-    <TextView
-        android:id="@+id/name_label"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="10dip"
-        android:paddingTop="25dip"
-        android:textColor="#000000"
-        android:textSize="25sp"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/address_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#21628d"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/city_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#21628d"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
-
-        <TextView
-            android:id="@+id/license_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-    </LinearLayout>
+   
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -207,6 +165,6 @@
         android:id="@+id/map"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
-        android:layout_height="419dp" />
+        android:layout_height="match_parent" />
 
 </LinearLayout>
