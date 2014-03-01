@@ -9,8 +9,8 @@
 *.class
 
 # generated files
-.bin/*
-.gen/*
+SCChildcareMobile/bin/*
+SCChildcareMobile/gen/*
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -27,3 +27,7 @@ proguard/*
 *.ipr
 *.iws
 .idea/*
+
+
+#DS_Store
+
