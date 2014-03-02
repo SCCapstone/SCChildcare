@@ -35,7 +35,8 @@
         <!-- Main Page View -->
         <activity
             android:name="com.example.scchildcare.MainActivity"
-            android:theme="@style/MyTheme" >
+            android:theme="@style/MyTheme" 
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -47,7 +48,8 @@
         <activity
             android:name="com.example.scchildcare.SearchResultsActivity"
             android:parentActivityName="com.example.scchildcare.MainActivity"
-            android:theme="@style/MyTheme" >
+            android:theme="@style/MyTheme"
+            android:screenOrientation="portrait" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.scchildcare.MainActivity" />
@@ -57,7 +59,8 @@
         <activity
             android:name="com.example.scchildcare.GPS_SearchResultsActivity"
             android:parentActivityName="com.example.scchildcare.MainActivity"
-            android:theme="@style/MyTheme" >
+            android:theme="@style/MyTheme" 
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.scchildcare.MainActivity" />
@@ -72,7 +75,8 @@
             android:name="com.example.scchildcare.SingleMenuItemActivity"
             android:label="Single Menu Item"
             android:parentActivityName="com.example.scchildcare.SearchResultsActivity"
-            android:theme="@style/MyTheme" >
+            android:theme="@style/MyTheme" 
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.scchildcare.SearchResultsActivity" />
@@ -83,7 +87,8 @@
             android:name="com.example.scchildcare.SorryMessageActivity"
             android:label="Oops!"
             android:parentActivityName="com.example.scchildcare.MainActivity"
-            android:theme="@style/MyTheme" >
+            android:theme="@style/MyTheme" 
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.scchildcare.MainActivity" />
@@ -94,7 +99,8 @@
             android:name="com.example.scchildcare.ConnectionErrorActivity"
             android:label="Oops!"
             android:parentActivityName="com.example.scchildcare.MainActivity"
-            android:theme="@style/MyTheme" >
+            android:theme="@style/MyTheme" 
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.scchildcare.MainActivity" />

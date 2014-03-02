@@ -35,18 +35,22 @@
             android:id="@+id/button1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/GPSDesc"
             android:gravity="center"
             android:onClick="getLocation"
+            android:paddingRight="7dp"
             android:src="@drawable/gps"
             android:text="@string/button_locate" />
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/searchDesc"
             android:gravity="center"
             android:onClick="sendMessage"
+            android:paddingLeft="7dp"
             android:src="@drawable/search"
             android:text="@string/button_search" />
 

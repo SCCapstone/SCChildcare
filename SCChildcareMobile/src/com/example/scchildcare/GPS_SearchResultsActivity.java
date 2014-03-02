@@ -1,5 +1,9 @@
 package com.example.scchildcare;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,11 +13,15 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,8 +68,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_QUALITY = "qualityLevel";
 
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
-	
-	
+
 	GoogleMap mMap;
 
 	// providers JSONArray
@@ -91,11 +98,11 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		// Get the message from the intent
 		Intent intent = getIntent();
 		Bundle coordinates = intent.getExtras();
-		
+
 		String param_longitude = coordinates.getString("EXTRA_LONGITUDE");
 		String param_latitude = coordinates.getString("EXTRA_LATITUDE");
-		System.out.println(param_latitude + ", " +param_longitude);
-		fullGPS_URL = gpsURL_1+ param_longitude + gpsURL_2 + param_latitude;
+		System.out.println(param_latitude + ", " + param_longitude);
+		fullGPS_URL = gpsURL_1 + param_longitude + gpsURL_2 + param_latitude;
 
 		System.out.println("Beginning JSON Parse");
 		JSONParser jParser = new JSONParser();
@@ -169,25 +176,27 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
 					providerList.add(map);
-					
-					
+
 					double dbl_latitude = Double.parseDouble(latitude);
 					double dbl_longitude = Double.parseDouble(longitude);
-					
+
 					double your_latitude = Double.parseDouble(param_latitude);
 					double your_longitude = Double.parseDouble(param_longitude);
-					
-					LatLng YOUR_LOCATION = new LatLng(your_latitude, your_longitude);
-					
-					mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
+
+					LatLng YOUR_LOCATION = new LatLng(your_latitude,
+							your_longitude);
+
+					mMap = ((MapFragment) getFragmentManager()
+							.findFragmentById(R.id.map)).getMap();
 					mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 					mMap.setMyLocationEnabled(true);
 
-						mMap.addMarker(new MarkerOptions()
-							.position(new LatLng(dbl_latitude, dbl_longitude))
-							.title("Hello world"));
-						
-						mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(YOUR_LOCATION, 12));
+					mMap.addMarker(new MarkerOptions().position(
+							new LatLng(dbl_latitude, dbl_longitude)).title(
+							"Hello world"));
+
+					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+							YOUR_LOCATION, 12));
 
 				}
 			}
@@ -196,24 +205,24 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		}
 
 		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
-		 ListAdapter adapter = new SimpleAdapter(this,providerList,
-		 R.layout.list_item,
-		 new String[]{TAG_PROVIDERNAME, TAG_LICENSEINFO, TAG_OWNERNAME,
-		 TAG_ADDRESS, TAG_CITY, TAG_STATE,
-		 TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE, TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST,
-		 TAG_SPECIALISTPHONE, TAG_QUALITY}, new int[]
-		 {R.id.name, R.id.licenseInfo, R.id.ownerName, R.id.address,
-		 R.id.city, R.id.state, R.id.zipCode,
-		 R.id.phone, R.id.latitude, R.id.longitude, R.id.capacity, R.id.hours,
-		 R.id.specialist, R.id.specialistPhone,
-		 R.id.qualityLevel});
+		ListAdapter adapter = new SimpleAdapter(this, providerList,
+				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
+						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
+						TAG_STATE, TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE,
+						TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST,
+						TAG_SPECIALISTPHONE, TAG_QUALITY }, new int[] {
+						R.id.name, R.id.licenseInfo, R.id.ownerName,
+						R.id.address, R.id.city, R.id.state, R.id.zipCode,
+						R.id.phone, R.id.latitude, R.id.longitude,
+						R.id.capacity, R.id.hours, R.id.specialist,
+						R.id.specialistPhone, R.id.qualityLevel });
 
 		// Updating parsed JSON data into ListView
-//		ListAdapter adapter = new SimpleAdapter(this, providerList,
-//				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
-//						TAG_ADDRESS, TAG_CITY, TAG_STATE, TAG_ZIPCODE },
-//				new int[] { R.id.name, R.id.address, R.id.city, R.id.state,
-//						R.id.zipCode });
+		// ListAdapter adapter = new SimpleAdapter(this, providerList,
+		// R.layout.list_item, new String[] { TAG_PROVIDERNAME,
+		// TAG_ADDRESS, TAG_CITY, TAG_STATE, TAG_ZIPCODE },
+		// new int[] { R.id.name, R.id.address, R.id.city, R.id.state,
+		// R.id.zipCode });
 
 		setListAdapter(adapter);
 
@@ -225,21 +234,37 @@ public class GPS_SearchResultsActivity extends ListActivity {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// getting values from selected ListItem
-				String providerName = ((TextView) view.findViewById(R.id.name)).getText().toString();
-				String licenseInfo = ((TextView) view.findViewById(R.id.licenseInfo)).getText().toString();
-				String ownerName = ((TextView) view.findViewById(R.id.ownerName)).getText().toString();
-				String address = ((TextView) view.findViewById(R.id.address)).getText().toString();
-				String latitude = ((TextView) view.findViewById(R.id.latitude)).getText().toString();
-				String longitude = ((TextView) view.findViewById(R.id.longitude)).getText().toString();
-				String city = ((TextView) view.findViewById(R.id.city)).getText().toString();			
-			    String state = ((TextView) view.findViewById(R.id.state)).getText().toString();
-				String zipCode = ((TextView) view.findViewById(R.id.zipCode)).getText().toString();
-				String phoneNumber = ((TextView) view.findViewById(R.id.phone)).getText().toString();
-				String capacity = ((TextView) view.findViewById(R.id.capacity)).getText().toString();
-				String hours = ((TextView) view.findViewById(R.id.hours)).getText().toString();
-				String specialist = ((TextView) view.findViewById(R.id.specialist)).getText().toString();
-				String specialistPhone = ((TextView) view.findViewById(R.id.specialistPhone)).getText().toString();
-				String qualityLevel = ((TextView) view.findViewById(R.id.qualityLevel)).getText().toString();
+				String providerName = ((TextView) view.findViewById(R.id.name))
+						.getText().toString();
+				String licenseInfo = ((TextView) view
+						.findViewById(R.id.licenseInfo)).getText().toString();
+				String ownerName = ((TextView) view
+						.findViewById(R.id.ownerName)).getText().toString();
+				String address = ((TextView) view.findViewById(R.id.address))
+						.getText().toString();
+				String latitude = ((TextView) view.findViewById(R.id.latitude))
+						.getText().toString();
+				String longitude = ((TextView) view
+						.findViewById(R.id.longitude)).getText().toString();
+				String city = ((TextView) view.findViewById(R.id.city))
+						.getText().toString();
+				String state = ((TextView) view.findViewById(R.id.state))
+						.getText().toString();
+				String zipCode = ((TextView) view.findViewById(R.id.zipCode))
+						.getText().toString();
+				String phoneNumber = ((TextView) view.findViewById(R.id.phone))
+						.getText().toString();
+				String capacity = ((TextView) view.findViewById(R.id.capacity))
+						.getText().toString();
+				String hours = ((TextView) view.findViewById(R.id.hours))
+						.getText().toString();
+				String specialist = ((TextView) view
+						.findViewById(R.id.specialist)).getText().toString();
+				String specialistPhone = ((TextView) view
+						.findViewById(R.id.specialistPhone)).getText()
+						.toString();
+				String qualityLevel = ((TextView) view
+						.findViewById(R.id.qualityLevel)).getText().toString();
 
 				// Starting new intent
 				Intent in = new Intent(getApplicationContext(),
@@ -274,5 +299,33 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+//	public boolean isURLReachable(Context context) {
+//		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+//		if (netInfo != null && netInfo.isConnected()) {
+//			try {
+//				URL url = new URL("http://54.201.44.59:3000"); // Change to
+//																// "http://google.com"
+//																// for www test.
+//				HttpURLConnection urlc = (HttpURLConnection) url
+//						.openConnection();
+//				urlc.setConnectTimeout(10 * 1000); // 10 s.
+//				urlc.connect();
+//				if (urlc.getResponseCode() == 200) { // 200 = "OK" code (http
+//														// connection is fine).
+//					Log.wtf("Connection", "Success !");
+//					return true;
+//				} else {
+//					return false;
+//				}
+//			} catch (MalformedURLException e1) {
+//				return false;
+//			} catch (IOException e) {
+//				return false;
+//			}
+//		}
+//		return false;
+//	}
 
 }

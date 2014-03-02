@@ -1,6 +1,10 @@
 
 package com.example.scchildcare;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -10,11 +14,15 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,8 +37,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
-//import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+//import com.google.android.gms.maps.model.LatLngBounds;
 
 //import com.example.myfirstapp.trackdata.TrackData;
 
@@ -282,6 +290,30 @@ public class SearchResultsActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+//	public boolean isURLReachable(Context context) {
+//		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+//		if (netInfo != null && netInfo.isConnected()) {
+//			try {
+//				URL url = new URL("http://54.201.44.59:3000");   // Change to "http://google.com" for www  test.
+//				HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+//				urlc.setConnectTimeout(10 * 1000);          // 10 s.
+//				urlc.connect();
+//				if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
+//					Log.wtf("Connection", "Success !");
+//					return true;
+//				} else {
+//					return false;
+//				}
+//			} catch (MalformedURLException e1) {
+//				return false;
+//			} catch (IOException e) {
+//				return false;
+//			}
+//		}
+//		return false;
+//	}
 
 
 }
