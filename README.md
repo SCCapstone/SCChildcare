@@ -13,6 +13,20 @@ view official ratings, and even communicate to other users via a forum/comment s
 
 * Fast and fully functioning childcare database
 * Google Maps support
-* Facebook authentication
+* Google+ authentication
 
+
+##Release 0.1.0
+  - Implemented Permit and DSS Complaint data per provider. 
+  - Fixed some layout bugs
+  - Changed some images (Search buttons on the home page)
+  - Fixed some other bugs
+  - Added a button for comments, which does nothing at the moment
+  
+
+##Known Bugs
+  -Currently, the app will give an error page when selecting a provider with no permit data, this is an added page, by hitting back you can get to the correct page.
+  -If the server is down, but the device has connectivity, the app will crash
+  -Some pages have incorrect parents, and the main search page is not storing the search data, giving an error
+  
 
