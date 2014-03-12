@@ -2,7 +2,7 @@
 
 *[http://www.scchildcare.org](http://www.scchildcare.org)
 
-Download the Open Beta now: [Download](https://www.dropbox.com/s/0mhjicr4jz32uet/SCChildcareMobile.apk)
+Download the Open Beta now: [Download](https://www.dropbox.com/s/dowx6j8nv8ddqys/SCChildcareMobile.apk)
 
 ### DESCRIPTION
 
@@ -25,6 +25,10 @@ view official ratings, and even communicate to other users via a forum/comment s
 
 
 ##Update History
+
+###0.1.0c
+  - Removed Permit table
+  - Added disclaimer and tag placeholder to home page
 
 ### 0.1.0b
   - Changed the color of the two search buttons to black from green
