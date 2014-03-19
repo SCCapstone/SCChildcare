@@ -10,13 +10,15 @@
  * 
  */
 package com.example.scchildcare;
-
-
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.IntentSender.SendIntentException;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -34,13 +36,14 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 
+
 public class MainActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,
-		GooglePlayServicesClient.OnConnectionFailedListener {
+		GooglePlayServicesClient.OnConnectionFailedListener{
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	public final static String EXTRA_LONGITUDE = null;
 	public final static String EXTRA_LATITUDE = null;
-
+	
 	
 	EditText editText;
 	// Label instructing input for EditText
@@ -78,6 +81,7 @@ public class MainActivity extends FragmentActivity implements
 			}
 
 		}
+		
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
@@ -113,10 +117,10 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onConnected(Bundle dataBundle) {
+	public void onConnected(Bundle dataBundle)
+	{
 		// Display the connection status
-		Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
-
+	Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -129,8 +133,8 @@ public class MainActivity extends FragmentActivity implements
 		
 		mLocationClient = new LocationClient(this, this, this);
 		// LongLat1 = (TextView) findViewById(R.id.lat_lng1);
-		button1 = (ImageButton) findViewById(R.id.add_comment_button);
-
+		button1 = (ImageButton) findViewById(R.id.button_1);
+		
 		if (savedInstanceState == null) {
 			// Add the fragment on initial activity setup
 			mainFragment = new MainFragment();
@@ -181,6 +185,8 @@ public class MainActivity extends FragmentActivity implements
 			 */
 			showErrorDialog(connectionResult.getErrorCode());
 		}
+
+		
 	}
 
 	protected void onDestroy() {
@@ -236,9 +242,8 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	public void getLocation(View v) {
-
 		// If Google Play Services is available
-		if (servicesConnected()) {
+		if (servicesConnected() && isNetworkAvailable()) {
 
 			// Get the current location
 			mCurrentLocation = mLocationClient.getLastLocation();
@@ -251,8 +256,12 @@ public class MainActivity extends FragmentActivity implements
 			System.out.println(longlat);
 			// LongLat1.setText(longlat);
 
-			String param_latitude = Double.toString(latitude);
-			String param_longitude = Double.toString(longitude);
+			//String param_latitude = Double.toString(latitude);
+			//String param_longitude = Double.toString(longitude);
+			
+			String param_latitude = Double.toString(33.996305);
+			String param_longitude = Double.toString(-81.027157);
+			
 
 			System.out.println(param_latitude + ", " + param_longitude);
 
@@ -267,6 +276,9 @@ public class MainActivity extends FragmentActivity implements
 			gpsSearch.putExtras(coordinates);
 			startActivity(gpsSearch);
 
+		}
+		else{
+			makeToast("Internet connection not established");
 		}
 	}
 
@@ -300,12 +312,13 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	public void sendMessage(View view) {
-		makeToast("Searching, Please wait...");
+		if(isNetworkAvailable()){
+		makeToast("Searching, Please {wait...");	
 		Intent intent = new Intent(this, SearchResultsActivity.class);
-		EditText editText = (EditText) findViewById(R.id.edit_message);
-		String message = editText.getText().toString().replace(" ", "+");
+	    editText = (EditText)findViewById(R.id.edit_message);
+		
+        String message = editText.getText().toString().replace(" ", "%20");
 
-		//String message = mainFragment.locate2(view);
 		intent.putExtra(EXTRA_MESSAGE, message);
 		/**
 		 * If there is no Connection to the server, this will error out.
@@ -313,12 +326,29 @@ public class MainActivity extends FragmentActivity implements
 		 * Possibly a try/catch on the getJSONFromURL method in
 		 * SearchResultsActivity?
 		 */
-
 		startActivity(intent);
+	}
+		else{
+			makeToast("Internet connection not established");	
+		}
+			
 
 	}
 
 	public void makeToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
+	
+	
+	private boolean isNetworkAvailable() 
+	{
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnected() && activeNetworkInfo.isConnectedOrConnecting();
+	}
+	
+		
+
+	
 }

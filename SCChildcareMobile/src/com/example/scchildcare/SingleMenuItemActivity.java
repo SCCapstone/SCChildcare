@@ -177,10 +177,15 @@ public class SingleMenuItemActivity extends Activity {
 				// TextView textView = new TextView(this);
 				// textView.setTextSize(40);
 				// textView.setText(sorry);
-				Intent sorryIntent = new Intent(this,
-						SorryMessageActivity.class);
+				
+//Why is this here?
+				
+			//	Intent sorryIntent = new Intent(this,
+			//			SorryMessageActivity.class);
 				// intent.putExtra(SORRY_MESSAGE, sorry);
-				startActivity(sorryIntent);
+			//	startActivity(sorryIntent);
+				
+				
 			} else {
 				for (int i = 0; i < permits.length(); i++) {
 					JSONObject permit = permits.getJSONObject(i);
@@ -269,10 +274,17 @@ public class SingleMenuItemActivity extends Activity {
 				// TextView textView = new TextView(this);
 				// textView.setTextSize(40);
 				// textView.setText(sorry);
-				Intent sorryIntent = new Intent(this,
-						SorryMessageActivity.class);
+				
+
+				
+//Why is this here?				
+			//	Intent sorryIntent = new Intent(this,
+				//		SorryMessageActivity.class);
 				// intent.putExtra(SORRY_MESSAGE, sorry);
-				startActivity(sorryIntent);
+			//	startActivity(sorryIntent);
+				
+				
+				
 			} else {
 				for (int i = 0; i < complaints.length(); i++) {
 					JSONObject permit = complaints.getJSONObject(i);

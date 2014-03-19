@@ -34,7 +34,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 //import com.example.myfirstapp.trackdata.TrackData;
 
 public class GPS_SearchResultsActivity extends ListActivity {
-	private static final String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
+   private static final String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
 	private static final String gpsURL_2 = "&lat=";
 	// private static byte[] buff = new byte[1024];
 	// private static String result = null;
@@ -101,11 +101,14 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		JSONParser jParser = new JSONParser();
 
 		System.out.println("Getting JSON with HTTP");
-		JSONObject json = jParser.getJSONFromUrl(fullGPS_URL);
+		
 		// System.out.println(json);
 
 		System.out.println("HTTP SUCCESSFUL");
 		try {
+			
+			JSONObject json = jParser.getJSONFromUrl(fullGPS_URL);	
+			
 			// get the array of providers
 			System.out.println("CREATING THE PROVIDERS JSON ARRAY");
 
@@ -120,10 +123,13 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				// TextView textView = new TextView(this);
 				// textView.setTextSize(40);
 				// textView.setText(sorry);
+				
 				Intent sorryIntent = new Intent(this,
-						SorryMessageActivity.class);
+					SorryMessageActivity.class);
 				// intent.putExtra(SORRY_MESSAGE, sorry);
 				startActivity(sorryIntent);
+				
+				
 			} else {
 				for (int i = 0; i < providers.length(); i++) {
 					JSONObject p = providers.getJSONObject(i);
