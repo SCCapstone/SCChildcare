@@ -170,7 +170,27 @@ public class SingleMenuItemActivity extends Activity {
 
 			System.out.println("Beginning For Loop to go through array");
 
+<<<<<<< HEAD
 			
+=======
+			if (permits.length() == 0) {
+				System.out.println("No Return on Search");
+				// String sorry =
+				// "We are sorry, your search did not return anything";
+				// TextView textView = new TextView(this);
+				// textView.setTextSize(40);
+				// textView.setText(sorry);
+				
+//Why is this here?
+				
+			//	Intent sorryIntent = new Intent(this,
+			//			SorryMessageActivity.class);
+				// intent.putExtra(SORRY_MESSAGE, sorry);
+			//	startActivity(sorryIntent);
+				
+				
+			} else {
+>>>>>>> origin/Jilbert
 				for (int i = 0; i < permits.length(); i++) {
 					JSONObject permit = permits.getJSONObject(i);
 
@@ -251,7 +271,29 @@ public class SingleMenuItemActivity extends Activity {
 			complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
 			System.out.println("Beginning For Loop to go through array");
 
+<<<<<<< HEAD
 			
+=======
+			if (complaints.length() == 0) {
+				System.out.println("No Return on Search");
+				// String sorry =
+				// "We are sorry, your search did not return anything";
+				// TextView textView = new TextView(this);
+				// textView.setTextSize(40);
+				// textView.setText(sorry);
+				
+
+				
+//Why is this here?				
+			//	Intent sorryIntent = new Intent(this,
+				//		SorryMessageActivity.class);
+				// intent.putExtra(SORRY_MESSAGE, sorry);
+			//	startActivity(sorryIntent);
+				
+				
+				
+			} else {
+>>>>>>> origin/Jilbert
 				for (int i = 0; i < complaints.length(); i++) {
 					JSONObject permit = complaints.getJSONObject(i);
 

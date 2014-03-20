@@ -107,11 +107,13 @@ public class SearchResultsActivity extends ListActivity {
 		JSONParser jParser = new JSONParser();
 
 		System.out.println("Getting JSON with HTTP");
-		JSONObject json = jParser.getJSONFromUrl(fullSearchURL);
+		
 		// System.out.println(json);
 
 		System.out.println("HTTP SUCCESSFUL");
 		try {
+			
+			JSONObject json = jParser.getJSONFromUrl(fullSearchURL);
 			// get the array of providers
 			System.out.println("CREATING THE PROVIDERS JSON ARRAY");
 
@@ -126,10 +128,13 @@ public class SearchResultsActivity extends ListActivity {
 				// TextView textView = new TextView(this);
 				// textView.setTextSize(40);
 				// textView.setText(sorry);
+				
 				Intent sorryIntent = new Intent(this,
 						SorryMessageActivity.class);
 				// intent.putExtra(SORRY_MESSAGE, sorry);
 				startActivity(sorryIntent);
+				
+				
 			} else {
 				for (int i = 0; i < providers.length(); i++) {
 					JSONObject p = providers.getJSONObject(i);
