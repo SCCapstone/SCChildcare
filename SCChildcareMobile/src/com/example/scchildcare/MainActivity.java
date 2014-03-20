@@ -10,15 +10,19 @@
  * 
  */
 package com.example.scchildcare;
+<<<<<<< HEAD
 
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
+=======
+>>>>>>> origin/Jilbert
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.IntentSender.SendIntentException;
 import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -40,13 +44,14 @@ import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 
+
 public class MainActivity extends FragmentActivity implements
 		GooglePlayServicesClient.ConnectionCallbacks,
-		GooglePlayServicesClient.OnConnectionFailedListener {
+		GooglePlayServicesClient.OnConnectionFailedListener{
 	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 	public final static String EXTRA_LONGITUDE = null;
 	public final static String EXTRA_LATITUDE = null;
-
+	
 	
 	EditText editText;
 	// Label instructing input for EditText
@@ -84,6 +89,7 @@ public class MainActivity extends FragmentActivity implements
 			}
 
 		}
+		
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
@@ -119,10 +125,10 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	@Override
-	public void onConnected(Bundle dataBundle) {
+	public void onConnected(Bundle dataBundle)
+	{
 		// Display the connection status
-		Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
-
+	Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 	}
 
 	@Override
@@ -130,9 +136,14 @@ public class MainActivity extends FragmentActivity implements
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		mLocationClient = new LocationClient(this, this, this);
+<<<<<<< HEAD
 		button1 = (ImageButton) findViewById(R.id.button1);
 
 		//editText = (EditText)findViewById(R.id.edit_message);
+=======
+		// LongLat1 = (TextView) findViewById(R.id.lat_lng1);
+		button1 = (ImageButton) findViewById(R.id.button_1);
+>>>>>>> origin/Jilbert
 		
 		if (savedInstanceState == null) {
 			// Add the fragment on initial activity setup
@@ -182,6 +193,8 @@ public class MainActivity extends FragmentActivity implements
 			 */
 			showErrorDialog(connectionResult.getErrorCode());
 		}
+
+		
 	}
 
 	protected void onDestroy() {
@@ -236,7 +249,6 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	public void getLocation(View v) {
-
 		// If Google Play Services is available
 		if (servicesConnected() && isNetworkAvailable()) {
 
@@ -251,8 +263,12 @@ public class MainActivity extends FragmentActivity implements
 			System.out.println(longlat);
 			// LongLat1.setText(longlat);
 
-			String param_latitude = Double.toString(latitude);
-			String param_longitude = Double.toString(longitude);
+			//String param_latitude = Double.toString(latitude);
+			//String param_longitude = Double.toString(longitude);
+			
+			String param_latitude = Double.toString(33.996305);
+			String param_longitude = Double.toString(-81.027157);
+			
 
 			System.out.println(param_latitude + ", " + param_longitude);
 
@@ -302,8 +318,12 @@ public class MainActivity extends FragmentActivity implements
 		return true;
 	}
 
+<<<<<<< HEAD
 	public void sendMessage(View view)
 	{
+=======
+	public void sendMessage(View view) {
+>>>>>>> origin/Jilbert
 		if(isNetworkAvailable()){
 		makeToast("Searching, Please {wait...");	
 		Intent intent = new Intent(this, SearchResultsActivity.class);
@@ -324,6 +344,10 @@ public class MainActivity extends FragmentActivity implements
 			makeToast("Internet connection not established");	
 		}
 			
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Jilbert
 	}
 
 	public void makeToast(String message) {
@@ -331,6 +355,7 @@ public class MainActivity extends FragmentActivity implements
 	}
 	
 	
+<<<<<<< HEAD
 	/*
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -338,6 +363,8 @@ public class MainActivity extends FragmentActivity implements
 	}
 	*/
 	
+=======
+>>>>>>> origin/Jilbert
 	private boolean isNetworkAvailable() 
 	{
 	    ConnectivityManager connectivityManager 
@@ -346,7 +373,13 @@ public class MainActivity extends FragmentActivity implements
 	    return activeNetworkInfo != null && activeNetworkInfo.isConnected() && activeNetworkInfo.isConnectedOrConnecting();
 	}
 	
+<<<<<<< HEAD
 
 	
 	
+=======
+		
+
+	
+>>>>>>> origin/Jilbert
 }
