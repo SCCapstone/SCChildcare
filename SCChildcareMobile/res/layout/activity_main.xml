@@ -14,33 +14,34 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:layout_width="fill_parent"
-            android:layout_height="74dp"
-            android:contentDescription="@string/desc"
+            android:layout_width="0dp"
+            android:layout_height="78dp"
+            android:layout_weight="0.67"
             android:src="@drawable/ic_scchildcare_logo" />
     </LinearLayout>
 
     <EditText
         android:id="@+id/edit_message"
-        android:layout_width="fill_parent"
-        android:layout_height="98dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
         android:hint="@string/edit_message" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="146dp"
+        android:layout_width="wrap_content"
+        android:layout_height="157dp"
         android:gravity="center"
         android:orientation="vertical" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.93"
+            android:layout_weight="0.33"
             android:gravity="center"
             android:orientation="horizontal" >
 
             <ImageButton
-                android:id="@+id/button1"
+                android:id="@+id/add_comment_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
