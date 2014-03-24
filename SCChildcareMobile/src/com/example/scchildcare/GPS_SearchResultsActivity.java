@@ -129,6 +129,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				// textView.setText(sorry);
 				Intent sorryIntent = new Intent(this,
 						SorryMessageActivity.class);
+				this.finish();
 				// intent.putExtra(SORRY_MESSAGE, sorry);
 				startActivity(sorryIntent);
 			} else {
