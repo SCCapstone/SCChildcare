@@ -49,7 +49,7 @@
                 android:contentDescription="@string/GPSDesc"
                 android:gravity="center"
                 android:onClick="getLocation"
-                android:src="@drawable/gps"
+                android:src="@drawable/gpstarget"
                 android:text="@string/button_locate" />
 
             <ImageButton
@@ -59,7 +59,7 @@
                 android:contentDescription="@string/searchDesc"
                 android:gravity="center"
                 android:onClick="sendMessage"
-                android:src="@drawable/search"
+                android:src="@drawable/search_icon"
                 android:text="@string/button_search" />
         </LinearLayout>
 
