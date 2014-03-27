@@ -1,4 +1,7 @@
+
+
 package com.example.scchildcare;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,8 +31,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
-//import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
+//import com.google.android.gms.maps.model.LatLngBounds;
 
 //import com.example.myfirstapp.trackdata.TrackData;
 
@@ -186,7 +189,7 @@ public class SearchResultsActivity extends ListActivity {
 			e.printStackTrace();
 		}
 
-		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
+		
 		ListAdapter adapter = new SimpleAdapter(this, providerList,
 				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
@@ -281,5 +284,30 @@ public class SearchResultsActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+	
+//	public boolean isURLReachable(Context context) {
+//		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+//		NetworkInfo netInfo = cm.getActiveNetworkInfo();
+//		if (netInfo != null && netInfo.isConnected()) {
+//			try {
+//				URL url = new URL("http://54.201.44.59:3000");   // Change to "http://google.com" for www  test.
+//				HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+//				urlc.setConnectTimeout(10 * 1000);          // 10 s.
+//				urlc.connect();
+//				if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
+//					Log.wtf("Connection", "Success !");
+//					return true;
+//				} else {
+//					return false;
+//				}
+//			} catch (MalformedURLException e1) {
+//				return false;
+//			} catch (IOException e) {
+//				return false;
+//			}
+//		}
+//		return false;
+//	}
+
 
 }

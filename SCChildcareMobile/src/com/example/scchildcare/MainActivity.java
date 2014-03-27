@@ -12,11 +12,16 @@
 package com.example.scchildcare;
 
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.location.Location;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
@@ -29,6 +34,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.GoogleAuthUtil;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -123,14 +129,11 @@ public class MainActivity extends FragmentActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		// geocodeLabel = (TextView) findViewById(R.id.geocodeLabel);
-		// geocodeLabel.setText(getString(R.string.geocode_label));
-		// LongLat = (TextView) findViewById(R.id.lat_lng);
-		
 		mLocationClient = new LocationClient(this, this, this);
-		// LongLat1 = (TextView) findViewById(R.id.lat_lng1);
 		button1 = (ImageButton) findViewById(R.id.button1);
 
+		//editText = (EditText)findViewById(R.id.edit_message);
+		
 		if (savedInstanceState == null) {
 			// Add the fragment on initial activity setup
 			mainFragment = new MainFragment();
@@ -141,10 +144,8 @@ public class MainActivity extends FragmentActivity implements
 			mainFragment = (MainFragment) getSupportFragmentManager()
 					.findFragmentById(android.R.id.content);
 		}
-
-		// // gets the activity's default ActionBar
-		// ActionBar actionBar = getActionBar();
-		// actionBar.show();
+		
+		
 	}
 
 	@Override
@@ -193,11 +194,10 @@ public class MainActivity extends FragmentActivity implements
 	}
 
 	@Override
-	protected void onResume() {
-		// addressText.getText().toString();
-		// addressText = (EditText) findViewById(R.id.addressText);
-		System.out.println("I've resumed");
+	protected void onResume()
+	{
 		super.onResume();
+		
 	}
 
 	@Override
@@ -238,7 +238,7 @@ public class MainActivity extends FragmentActivity implements
 	public void getLocation(View v) {
 
 		// If Google Play Services is available
-		if (servicesConnected()) {
+		if (servicesConnected() && isNetworkAvailable()) {
 
 			// Get the current location
 			mCurrentLocation = mLocationClient.getLastLocation();
@@ -267,6 +267,9 @@ public class MainActivity extends FragmentActivity implements
 			gpsSearch.putExtras(coordinates);
 			startActivity(gpsSearch);
 
+		}
+		else{
+			makeToast("Internet connection not established");
 		}
 	}
 
@@ -299,13 +302,15 @@ public class MainActivity extends FragmentActivity implements
 		return true;
 	}
 
-	public void sendMessage(View view) {
-		makeToast("Searching, Please wait...");
+	public void sendMessage(View view)
+	{
+		if(isNetworkAvailable()){
+		makeToast("Searching, Please {wait...");	
 		Intent intent = new Intent(this, SearchResultsActivity.class);
-		EditText editText = (EditText) findViewById(R.id.edit_message);
-		String message = editText.getText().toString().replace(" ", "%20");
+	    editText = (EditText)findViewById(R.id.edit_message);
+		
+        String message = editText.getText().toString().replace(" ", "%20");
 
-		//String message = mainFragment.locate2(view);
 		intent.putExtra(EXTRA_MESSAGE, message);
 		/**
 		 * If there is no Connection to the server, this will error out.
@@ -313,12 +318,36 @@ public class MainActivity extends FragmentActivity implements
 		 * Possibly a try/catch on the getJSONFromURL method in
 		 * SearchResultsActivity?
 		 */
-
 		startActivity(intent);
-
+	}
+		else{
+			makeToast("Internet connection not established");	
+		}
+			
 	}
 
 	public void makeToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
+	
+	
+	/*
+	public void onSaveInstanceState(Bundle outState) {
+		super.onSaveInstanceState(outState);
+	
+	}
+	*/
+	
+	private boolean isNetworkAvailable() 
+	{
+	    ConnectivityManager connectivityManager 
+	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+	    return activeNetworkInfo != null && activeNetworkInfo.isConnected() && activeNetworkInfo.isConnectedOrConnecting();
+	}
+	
+
+	
+	
 }
+
