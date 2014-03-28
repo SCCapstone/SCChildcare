@@ -12,10 +12,19 @@
 package com.example.scchildcare;
 
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.accounts.AccountManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +33,10 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.StrictMode;
+import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -41,6 +53,11 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends FragmentActivity implements
 GooglePlayServicesClient.ConnectionCallbacks,
@@ -48,8 +65,9 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 public final static String EXTRA_LONGITUDE = null;
 public final static String EXTRA_LATITUDE = null;
+////////////////////////////////////////////////////////////////////
 
-
+/////////////////////////////////////////////////////////////////////
 EditText editText;
 // Label instructing input for EditText
 TextView geocodeLabel;
@@ -258,7 +276,7 @@ System.out.println(longlat);
 
 String param_latitude = Double.toString(latitude);
 String param_longitude = Double.toString(longitude);
-
+/*
 System.out.println(param_latitude + ", " + param_longitude);
 
 makeToast("Searching, Please wait...");
@@ -271,6 +289,9 @@ coordinates.putString("EXTRA_LONGITUDE", param_longitude);
 System.out.println(coordinates);
 gpsSearch.putExtras(coordinates);
 startActivity(gpsSearch);
+*/
+GetGPSResults gpsResults = new GetGPSResults(this);
+gpsResults.execute(param_latitude, param_longitude);
 
 }
 else{
@@ -342,13 +363,6 @@ public void makeToast(String message) {
 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 }
 
-
-/*
-public void onSaveInstanceState(Bundle outState) {
-super.onSaveInstanceState(outState);
-}
-*/
-
 private boolean isNetworkAvailable()
 {
 ConnectivityManager connectivityManager
@@ -378,8 +392,75 @@ private void showGPSDisabledAlertToUser(){
     AlertDialog alert = alertDialogBuilder.create();
     alert.show();
 }
+////////////////////////////////////////////////////////////////////////////
+class GetGPSResults extends AsyncTask<String, String, JSONArray>
+{
+	
+	private static final String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
+	private static final String gpsURL_2 = "&lat=";
+	private String fullGPS_URL = null;
+	private static final String TAG_PROVIDERS = "providers";
+	private static final String TAG_LIST_OF_PROVIDERS = "pList";
+	// JSON node names
+	JSONArray providers = null;
+
+	  Context aContext;
+    private GetGPSResults(Context context) 
+    {
+        aContext = context;
+    }
+	@Override
+	protected void onPreExecute()
+	{
+	
+		   super.onPreExecute();
+	}
+	
+	protected void onPostExecute(JSONArray result)
+	{	
+	 Intent GPSSearch = new Intent(aContext, GPS_SearchResultsActivity.class);
+	 GPSSearch.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
+	 startActivity(GPSSearch);
+	}
+	
+	 
+	protected JSONArray doInBackground(String... args) 
+	{
+			// Simple quick fix for http exception, FIX LATER WITH ASYNCTASK*******
+		ThreadPolicy tp = ThreadPolicy.LAX;
+		StrictMode.setThreadPolicy(tp); 
+		String param_longitude = args[0];
+		String param_latitude = args[1];
+		if(args[0] != null && args[1] != null)
+		{
+			fullGPS_URL = gpsURL_1 + param_longitude + gpsURL_2 + param_latitude;
+			System.out.println("Beginning JSON Parse");
+			JSONParser jParser = new JSONParser();
+
+			System.out.println("Getting JSON with HTTP");
+			JSONObject json = jParser.getJSONFromUrl(fullGPS_URL);
+			// System.out.println(json);
+
+			System.out.println("HTTP SUCCESSFUL");
+			//////////////////////////////////
+			try {
+				// get the array of providers
+				System.out.println("CREATING THE PROVIDERS JSON ARRAY");
+				providers = json.getJSONArray(TAG_PROVIDERS);
 
 
+			} catch (JSONException e)
+			{
+				e.printStackTrace();		
+			/////////////////////////////////////
+		}
+	}
+		return providers;
+	
+}
+}
+
+/////////////////////////////////////////////////////////////////////////////
 }
 
 

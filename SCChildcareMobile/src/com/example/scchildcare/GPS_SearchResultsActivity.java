@@ -13,10 +13,12 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
@@ -66,7 +68,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
-
+	private static final String TAG_LIST_OF_PROVIDERS = "pList";
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 
 	GoogleMap mMap;
@@ -91,46 +93,19 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		// Hashmap for ListView
 		ArrayList<HashMap<String, String>> providerList = new ArrayList<HashMap<String, String>>();
 
-		// Simple quick fix for http exception, FIX LATER WITH ASYNCTASK*******
-		ThreadPolicy tp = ThreadPolicy.LAX;
-		StrictMode.setThreadPolicy(tp);
-
-		// Get the message from the intent
-		Intent intent = getIntent();
-		Bundle coordinates = intent.getExtras();
-
-		String param_longitude = coordinates.getString("EXTRA_LONGITUDE");
-		String param_latitude = coordinates.getString("EXTRA_LATITUDE");
-		System.out.println(param_latitude + ", " + param_longitude);
-		fullGPS_URL = gpsURL_1 + param_longitude + gpsURL_2 + param_latitude;
-
-		System.out.println("Beginning JSON Parse");
-		JSONParser jParser = new JSONParser();
-
-		System.out.println("Getting JSON with HTTP");
-		JSONObject json = jParser.getJSONFromUrl(fullGPS_URL);
-		// System.out.println(json);
-
-		System.out.println("HTTP SUCCESSFUL");
 		try {
-			// get the array of providers
-			System.out.println("CREATING THE PROVIDERS JSON ARRAY");
 
-			providers = json.getJSONArray(TAG_PROVIDERS);
-
-			System.out.println("Beginning For Loop to go through array");
-
+/////////////////////////////////////////////////////////////////////			
+			Intent intent = getIntent();
+			Bundle getProviders = intent.getExtras();
+		   providers = (JSONArray) getProviders.getSerializable(TAG_LIST_OF_PROVIDERS);
+/////////////////////////////////////////////////////////////////////////
 			if (providers.length() == 0) {
 				System.out.println("No Return on Search");
-				// String sorry =
-				// "We are sorry, your search did not return anything";
-				// TextView textView = new TextView(this);
-				// textView.setTextSize(40);
-				// textView.setText(sorry);
+
 				Intent sorryIntent = new Intent(this,
 						SorryMessageActivity.class);
 				this.finish();
-				// intent.putExtra(SORRY_MESSAGE, sorry);
 				startActivity(sorryIntent);
 			} else {
 				for (int i = 0; i < providers.length(); i++) {
@@ -181,11 +156,11 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					double dbl_latitude = Double.parseDouble(latitude);
 					double dbl_longitude = Double.parseDouble(longitude);
 
-					double your_latitude = Double.parseDouble(param_latitude);
-					double your_longitude = Double.parseDouble(param_longitude);
+					//double your_latitude = Double.parseDouble(param_latitude);
+				//	double your_longitude = Double.parseDouble(param_longitude);
 
-					LatLng YOUR_LOCATION = new LatLng(your_latitude,
-							your_longitude);
+				//	LatLng YOUR_LOCATION = new LatLng(your_latitude,
+				//			your_longitude);
 
 					mMap = ((MapFragment) getFragmentManager()
 							.findFragmentById(R.id.map)).getMap();
@@ -196,8 +171,8 @@ public class GPS_SearchResultsActivity extends ListActivity {
 							new LatLng(dbl_latitude, dbl_longitude)).title(
 							"Hello world"));
 
-					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-							YOUR_LOCATION, 12));
+				//	mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+				//			YOUR_LOCATION, 12));
 
 				}
 			}
@@ -290,6 +265,15 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		});
 
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
