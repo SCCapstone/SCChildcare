@@ -92,15 +92,16 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 		// Hashmap for ListView
 		ArrayList<HashMap<String, String>> providerList = new ArrayList<HashMap<String, String>>();
-
-		try {
-
+		ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
+		
 /////////////////////////////////////////////////////////////////////			
 			Intent intent = getIntent();
 			Bundle getProviders = intent.getExtras();
-		   providers = (JSONArray) getProviders.getSerializable(TAG_LIST_OF_PROVIDERS);
+	        containingMaps = (ArrayList<HashMap<String, String>>) getProviders.getSerializable(TAG_LIST_OF_PROVIDERS);
+	    	String param_longitude = getProviders.getString("EXTRA_LONGITUDE");
+	    	String param_latitude = getProviders.getString("EXTRA_LATITUDE");
 /////////////////////////////////////////////////////////////////////////
-			if (providers.length() == 0) {
+			if (containingMaps.size() == 0) {
 				System.out.println("No Return on Search");
 
 				Intent sorryIntent = new Intent(this,
@@ -108,47 +109,15 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				this.finish();
 				startActivity(sorryIntent);
 			} else {
-				for (int i = 0; i < providers.length(); i++) {
-					JSONObject p = providers.getJSONObject(i);
-
-					// store the json items in variables
-					String id = p.getString(TAG_ID);
-					String providerName = p.getString(TAG_PROVIDERNAME);
-					String licenseInfo = p.getString(TAG_LICENSEINFO);
-					String ownerName = p.getString(TAG_OWNERNAME);
-					String address = p.getString(TAG_ADDRESS);
-					String city = p.getString(TAG_CITY);
-					String state = p.getString(TAG_STATE);
-					String zipCode = p.getString(TAG_ZIPCODE);
-					String phoneNumber = p.getString(TAG_PHONENUMBER);
-					String longitude = p.getString(TAG_LONGITUDE);
-					String latitude = p.getString(TAG_LATITUDE);
-					String capacity = p.getString(TAG_CAPACITY);
-					String hours = p.getString(TAG_HOURS);
-					String specialist = p.getString(TAG_SPECIALIST);
-					String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
-					String qualityLevel = p.getString(TAG_QUALITY);
-
+				for (int i = 0; i < containingMaps.size(); i++) {
+				//	JSONObject p = providers.getJSONObject(i);
 					HashMap<String, String> map = new HashMap<String, String>();
-
-					map.put(TAG_ID, id);
-					map.put(TAG_PROVIDERNAME, providerName);
-					map.put(TAG_LICENSEINFO, licenseInfo);
-					map.put(TAG_OWNERNAME, ownerName);
-					map.put(TAG_ADDRESS, address);
-					map.put(TAG_CITY, city);
-					map.put(TAG_STATE, state);
-					map.put(TAG_ZIPCODE, zipCode);
-					map.put(TAG_PHONENUMBER, phoneNumber);
-					map.put(TAG_LONGITUDE, longitude);
-					map.put(TAG_LATITUDE, latitude);
-					map.put(TAG_CAPACITY, capacity);
-					map.put(TAG_HOURS, hours);
-					map.put(TAG_SPECIALIST, specialist);
-					map.put(TAG_SPECIALISTPHONE, specialistPhone);
-					map.put(TAG_QUALITY, qualityLevel);
-
-					// add Hashlist to ArrayList
+					map = containingMaps.get(i);
+					// store the json items in variables
+					
+					String longitude = map.get(TAG_LONGITUDE);
+					String latitude =  map.get(TAG_LATITUDE);
+			
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
 					providerList.add(map);
@@ -156,11 +125,13 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					double dbl_latitude = Double.parseDouble(latitude);
 					double dbl_longitude = Double.parseDouble(longitude);
 
-					//double your_latitude = Double.parseDouble(param_latitude);
-				//	double your_longitude = Double.parseDouble(param_longitude);
+					double your_latitude = Double.parseDouble(param_latitude);
+				    double your_longitude = Double.parseDouble(param_longitude);
+					//double your_latitude = 33.996305;
+					//double your_longitude = -81.027157;
 
-				//	LatLng YOUR_LOCATION = new LatLng(your_latitude,
-				//			your_longitude);
+					LatLng YOUR_LOCATION = new LatLng(your_latitude,
+							your_longitude);
 
 					mMap = ((MapFragment) getFragmentManager()
 							.findFragmentById(R.id.map)).getMap();
@@ -171,14 +142,12 @@ public class GPS_SearchResultsActivity extends ListActivity {
 							new LatLng(dbl_latitude, dbl_longitude)).title(
 							"Hello world"));
 
-				//	mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-				//			YOUR_LOCATION, 12));
+					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+							YOUR_LOCATION, 12));
 
 				}
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		
 
 		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
 		ListAdapter adapter = new SimpleAdapter(this, providerList,
@@ -192,13 +161,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 						R.id.phone, R.id.latitude, R.id.longitude,
 						R.id.capacity, R.id.hours, R.id.specialist,
 						R.id.specialistPhone, R.id.qualityLevel });
-
-		// Updating parsed JSON data into ListView
-		// ListAdapter adapter = new SimpleAdapter(this, providerList,
-		// R.layout.list_item, new String[] { TAG_PROVIDERNAME,
-		// TAG_ADDRESS, TAG_CITY, TAG_STATE, TAG_ZIPCODE },
-		// new int[] { R.id.name, R.id.address, R.id.city, R.id.state,
-		// R.id.zipCode });
 
 		setListAdapter(adapter);
 

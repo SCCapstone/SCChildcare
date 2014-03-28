@@ -13,6 +13,7 @@ package com.example.scchildcare;
 
 
 import java.io.Serializable;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -150,7 +151,7 @@ protected void onCreate(Bundle savedInstanceState) {
 super.onCreate(savedInstanceState);
 setContentView(R.layout.activity_main);
 mLocationClient = new LocationClient(this, this, this);
-button1 = (ImageButton) findViewById(R.id.button1);
+
 
 //editText = (EditText)findViewById(R.id.edit_message);
 
@@ -166,9 +167,62 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 
 
 }
-
  locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+///////////////////////////////////////////
+ button1 = (ImageButton) findViewById(R.id.button1);
+ button1.setOnClickListener(new View.OnClickListener(){
 
+	@Override
+	public void onClick(View v)
+	{
+		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+			// If Google Play Services is available
+			if (servicesConnected() && isNetworkAvailable()) {
+
+			// Get the current location
+			mCurrentLocation = mLocationClient.getLastLocation();
+
+			// Display the current location in the UI
+			double latitude = mCurrentLocation.getLatitude();
+			double longitude = mCurrentLocation.getLongitude();
+			String longlat = "latitude " + Double.toString(latitude) + " "
+			+ "longitude " + Double.toString(longitude);
+			System.out.println(longlat);
+			// LongLat1.setText(longlat);
+
+			//String param_latitude = Double.toString(latitude);
+			///String param_longitude = Double.toString(longitude);
+			////////////////////////////////////////////
+			String param_latitude = Double.toString(33.996305);
+			String param_longitude = Double.toString(-81.027157);
+			
+			///////////////////////////////////////////
+			GetGPSResults gpsResults = new GetGPSResults();
+			gpsResults.execute(param_latitude, param_longitude);
+
+			}
+			else{
+			makeToast("Internet connection not established");
+			}
+			}
+			else{
+				if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) != true){
+				    showGPSDisabledAlertToUser();
+				}
+
+			}
+		
+	}
+	 
+ });
+
+////////////////////////////////////////// 
+ 
+ 
+ 
+ 
+ 
+ 
 }
 
 @Override
@@ -258,53 +312,7 @@ errorFragment.show(getSupportFragmentManager(), APPTAG);
 
 }
 
-public void getLocation(View v) {
-if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-// If Google Play Services is available
-if (servicesConnected() && isNetworkAvailable()) {
 
-// Get the current location
-mCurrentLocation = mLocationClient.getLastLocation();
-
-// Display the current location in the UI
-double latitude = mCurrentLocation.getLatitude();
-double longitude = mCurrentLocation.getLongitude();
-String longlat = "latitude " + Double.toString(latitude) + " "
-+ "longitude " + Double.toString(longitude);
-System.out.println(longlat);
-// LongLat1.setText(longlat);
-
-String param_latitude = Double.toString(latitude);
-String param_longitude = Double.toString(longitude);
-/*
-System.out.println(param_latitude + ", " + param_longitude);
-
-makeToast("Searching, Please wait...");
-Intent gpsSearch = new Intent(this, GPS_SearchResultsActivity.class);
-System.out.println("GPS_SearchResultsActivity created");
-Bundle coordinates = new Bundle();
-coordinates.putString("EXTRA_LATITUDE", param_latitude);
-coordinates.putString("EXTRA_LONGITUDE", param_longitude);
-
-System.out.println(coordinates);
-gpsSearch.putExtras(coordinates);
-startActivity(gpsSearch);
-*/
-GetGPSResults gpsResults = new GetGPSResults(this);
-gpsResults.execute(param_latitude, param_longitude);
-
-}
-else{
-makeToast("Internet connection not established");
-}
-}
-else{
-	if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) != true){
-	    showGPSDisabledAlertToUser();
-	}
-
-}
-}
 
 public static class ErrorDialogFragment extends DialogFragment {
 // Global field to contain the error dialog
@@ -393,22 +401,25 @@ private void showGPSDisabledAlertToUser(){
     alert.show();
 }
 ////////////////////////////////////////////////////////////////////////////
-class GetGPSResults extends AsyncTask<String, String, JSONArray>
+class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, String>>>
 {
 	
-	private static final String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
-	private static final String gpsURL_2 = "&lat=";
-	private String fullGPS_URL = null;
-	private static final String TAG_PROVIDERS = "providers";
-	private static final String TAG_LIST_OF_PROVIDERS = "pList";
-	// JSON node names
-	JSONArray providers = null;
+	
 
-	  Context aContext;
-    private GetGPSResults(Context context) 
-    {
-        aContext = context;
-    }
+   String TAG_PROVIDERS = "providers";
+   String TAG_LIST_OF_PROVIDERS = "pList";
+   JSONParser jParser = new JSONParser();
+   String latit;
+   String longit;
+   ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
+	// JSON node names
+
+
+	//  Context aContext;
+  //  private GetGPSResults(Context context) 
+    //{
+      //  aContext = context;
+    //}
 	@Override
 	protected void onPreExecute()
 	{
@@ -416,47 +427,110 @@ class GetGPSResults extends AsyncTask<String, String, JSONArray>
 		   super.onPreExecute();
 	}
 	
-	protected void onPostExecute(JSONArray result)
+	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
 	{	
-	 Intent GPSSearch = new Intent(aContext, GPS_SearchResultsActivity.class);
+	 Intent GPSSearch = new Intent(getApplicationContext(), GPS_SearchResultsActivity.class);
 	 GPSSearch.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
+	 Bundle coordinates = new Bundle();
+	 coordinates.putString("EXTRA_LATITUDE", latit);
+	 coordinates.putString("EXTRA_LONGITUDE", longit);
+	 GPSSearch.putExtras(coordinates);
 	 startActivity(GPSSearch);
 	}
 	
 	 
-	protected JSONArray doInBackground(String... args) 
+	protected ArrayList<HashMap<String, String>> doInBackground(String... args) 
 	{
-			// Simple quick fix for http exception, FIX LATER WITH ASYNCTASK*******
-		ThreadPolicy tp = ThreadPolicy.LAX;
-		StrictMode.setThreadPolicy(tp); 
+		 String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
+		 String gpsURL_2 = "&lat=";
+		 String TAG_PROVIDERS = "providers";
+		 String TAG_ID = "id";
+		 String TAG_PROVIDERNAME = "providerName";
+		 String TAG_LICENSEINFO = "licenseInfo";
+		 String TAG_OWNERNAME = "ownerName";
+		 String TAG_ADDRESS = "address";
+		 String TAG_CITY = "city";
+		 String TAG_STATE = "state";
+		 String TAG_ZIPCODE = "zipCode";
+		 String TAG_PHONENUMBER = "phoneNumber";
+		 String TAG_LONGITUDE = "longitude";
+		 String TAG_LATITUDE = "latitude";
+		 String TAG_CAPACITY = "capacity";
+		 String TAG_HOURS = "hours";
+		 String TAG_SPECIALIST = "specialist";
+		 String TAG_SPECIALISTPHONE = "specialistPhone";
+		 String TAG_QUALITY = "qualityLevel";
+		// String TAG_LIST_OF_PROVIDERS = "pList";
+		 JSONArray providers = null;
+		 String fullGPS_URL = null;
 		String param_longitude = args[0];
 		String param_latitude = args[1];
-		if(args[0] != null && args[1] != null)
-		{
-			fullGPS_URL = gpsURL_1 + param_longitude + gpsURL_2 + param_latitude;
-			System.out.println("Beginning JSON Parse");
-			JSONParser jParser = new JSONParser();
-
-			System.out.println("Getting JSON with HTTP");
+		longit = args[0];
+		latit = args[1];
+		System.out.println(param_longitude + " " + param_latitude + " in do background");
+	       fullGPS_URL = gpsURL_1 + param_longitude + gpsURL_2 + param_latitude;
+				//System.out.println("Beginning JSON Parse");
+ 				
+	       if(!param_longitude.isEmpty() && !param_latitude.isEmpty())
+			{
+				//System.out.println("Getting JSON with HTTP");
 			JSONObject json = jParser.getJSONFromUrl(fullGPS_URL);
-			// System.out.println(json);
-
-			System.out.println("HTTP SUCCESSFUL");
-			//////////////////////////////////
-			try {
-				// get the array of providers
-				System.out.println("CREATING THE PROVIDERS JSON ARRAY");
+			try 
+			{
 				providers = json.getJSONArray(TAG_PROVIDERS);
+				if (providers.length() > 0) 
+				{
+					for (int i = 0; i < providers.length(); i++) 
+					{
+						JSONObject p = providers.getJSONObject(i);
+						String id = p.getString(TAG_ID);
+						String providerName = p.getString(TAG_PROVIDERNAME);
+						String licenseInfo = p.getString(TAG_LICENSEINFO);
+						String ownerName = p.getString(TAG_OWNERNAME);
+						String address = p.getString(TAG_ADDRESS);
+						String city = p.getString(TAG_CITY);
+						String state = p.getString(TAG_STATE);
+						String zipCode = p.getString(TAG_ZIPCODE);
+						String phoneNumber = p.getString(TAG_PHONENUMBER);
+						String longitude = p.getString(TAG_LONGITUDE);
+						String latitude = p.getString(TAG_LATITUDE);
+						String capacity = p.getString(TAG_CAPACITY);
+						String hours = p.getString(TAG_HOURS);
+						String specialist = p.getString(TAG_SPECIALIST);
+						String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
+						String qualityLevel = p.getString(TAG_QUALITY);
 
-
+						HashMap<String, String> map = new HashMap<String, String>();
+						
+						map.put(TAG_ID, id);
+						map.put(TAG_PROVIDERNAME, providerName);
+						map.put(TAG_LICENSEINFO, licenseInfo);
+						map.put(TAG_OWNERNAME, ownerName);
+						map.put(TAG_ADDRESS, address);
+						map.put(TAG_CITY, city);
+						map.put(TAG_STATE, state);
+						map.put(TAG_ZIPCODE, zipCode);
+						map.put(TAG_PHONENUMBER, phoneNumber);
+						map.put(TAG_LONGITUDE, longitude);
+						map.put(TAG_LATITUDE, latitude);
+						map.put(TAG_CAPACITY, capacity);
+						map.put(TAG_HOURS, hours);
+						map.put(TAG_SPECIALIST, specialist);
+						map.put(TAG_SPECIALISTPHONE, specialistPhone);
+						map.put(TAG_QUALITY, qualityLevel);
+						
+						containingMaps.add(map);
+					
+					}
+				}	
 			} catch (JSONException e)
 			{
 				e.printStackTrace();		
-			/////////////////////////////////////
 		}
-	}
-		return providers;
-	
+	         
+			}
+		
+			return containingMaps;
 }
 }
 
