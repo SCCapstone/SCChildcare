@@ -102,6 +102,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 		String param_longitude = coordinates.getString("EXTRA_LONGITUDE");
 		String param_latitude = coordinates.getString("EXTRA_LATITUDE");
+
 		if (isURLReachable(this) == true)
 		{
 			System.out.println(param_latitude + ", " +param_longitude);
@@ -205,6 +206,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				e.printStackTrace();
 			}
 
+
 			// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
 			ListAdapter adapter = new SimpleAdapter(this,providerList,
 					R.layout.list_item,
@@ -274,6 +276,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 			});
 		}
 
+
 	}
 
 	@Override
@@ -285,6 +288,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
 	public boolean isURLReachable(Context context) {
 		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -308,4 +312,5 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		}
 		return false;
 	}
+
 }
