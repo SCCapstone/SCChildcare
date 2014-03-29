@@ -1,5 +1,7 @@
 
+
 package com.example.scchildcare;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +33,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 //import com.google.android.gms.maps.model.LatLngBounds;
+
 
 //import com.example.myfirstapp.trackdata.TrackData;
 
