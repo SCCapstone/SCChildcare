@@ -100,6 +100,8 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	        containingMaps = (ArrayList<HashMap<String, String>>) getProviders.getSerializable(TAG_LIST_OF_PROVIDERS);
 	    	String param_longitude = getProviders.getString("EXTRA_LONGITUDE");
 	    	String param_latitude = getProviders.getString("EXTRA_LATITUDE");
+	    	
+	    	System.out.println(param_longitude + " " + param_latitude + " GPS SEARCH RESULTS");
 /////////////////////////////////////////////////////////////////////////
 			if (containingMaps.size() == 0) {
 				System.out.println("No Return on Search");
