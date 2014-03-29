@@ -49,6 +49,7 @@ import android.view.View;
 //import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,7 +70,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 public final static String EXTRA_LONGITUDE = null;
 public final static String EXTRA_LATITUDE = null;
-JSONParser jParser = new JSONParser();
+//JSONParser jParser = new JSONParser();
 ////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
@@ -78,6 +79,7 @@ EditText editText;
 TextView geocodeLabel;
 // EditText textbox1; //new hidden textbox
 ImageButton button1;
+ImageButton button2;
 // Text box for entering address
 EditText addressText;
 // android:onClick="getLocation"android:onClick="getLocation"private
@@ -174,6 +176,8 @@ mainFragment = (MainFragment) getSupportFragmentManager()
  locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 ///////////////////////////////////////////
  button1 = (ImageButton) findViewById(R.id.button1);
+ button2 = (ImageButton) findViewById(R.id.button_2);
+
  button1.setOnClickListener(new View.OnClickListener(){
 
 	@Override
@@ -192,7 +196,6 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 			String longlat = "latitude " + Double.toString(latitude) + " "
 			+ "longitude " + Double.toString(longitude);
 			System.out.println(longlat);
-			// LongLat1.setText(longlat);
 
 			//String param_latitude = Double.toString(latitude);
 			///String param_longitude = Double.toString(longitude);
@@ -219,13 +222,28 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 	}
 	 
  });
+ button2.setOnClickListener(new View.OnClickListener(){
 
-////////////////////////////////////////// 
- 
- 
- 
- 
- 
+	@Override
+	public void onClick(View v) 
+	{
+	
+		if(isNetworkAvailable()){
+			makeToast("Searching, Please {wait...");	
+		//	Intent intent = new Intent(this, SearchResultsActivity.class);
+			editText = (EditText)findViewById(R.id.edit_message);
+            String message = editText.getText().toString().replace(" ", "%20");
+
+			//intent.putExtra(EXTRA_MESSAGE, message);
+		//	startActivity(intent);
+            GetSearchResults searchResults = new GetSearchResults();
+            searchResults.execute(message);
+			}
+			else{
+			makeToast("Internet connection not established");	
+			}	
+	}
+ });
  
 }
 
@@ -347,30 +365,6 @@ getMenuInflater().inflate(R.menu.main, menu);
 return true;
 }
 
-public void sendMessage(View view)
-{
-if(isNetworkAvailable()){
-makeToast("Searching, Please {wait...");	
-Intent intent = new Intent(this, SearchResultsActivity.class);
-editText = (EditText)findViewById(R.id.edit_message);
-
-        String message = editText.getText().toString().replace(" ", "%20");
-
-intent.putExtra(EXTRA_MESSAGE, message);
-/**
-* If there is no Connection to the server, this will error out.
-*
-* Possibly a try/catch on the getJSONFromURL method in
-* SearchResultsActivity?
-*/
-startActivity(intent);
-}
-else{
-makeToast("Internet connection not established");	
-}
-
-}
-
 public void makeToast(String message) {
 Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 }
@@ -407,13 +401,33 @@ private void showGPSDisabledAlertToUser(){
 ////////////////////////////////////////////////////////////////////////////
 class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, String>>>
 {
-   String TAG_PROVIDERS = "providers";
-   String TAG_LIST_OF_PROVIDERS = "pList";
-   //JSONParser jParser = new JSONParser();
-   String latit;
-   String longit;
-   ProgressDialog mProgressDialog;
-   ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
+	 String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
+	 String gpsURL_2 = "&lat=";
+	 String TAG_PROVIDERS = "providers";
+	 String TAG_ID = "id";
+	 String TAG_PROVIDERNAME = "providerName";
+	 String TAG_LICENSEINFO = "licenseInfo";
+	 String TAG_OWNERNAME = "ownerName";
+	 String TAG_ADDRESS = "address";
+	 String TAG_CITY = "city";
+	 String TAG_STATE = "state";
+	 String TAG_ZIPCODE = "zipCode";
+	 String TAG_PHONENUMBER = "phoneNumber";
+	 String TAG_LONGITUDE = "longitude";
+	 String TAG_LATITUDE = "latitude";
+	 String TAG_CAPACITY = "capacity";
+	 String TAG_HOURS = "hours";
+	 String TAG_SPECIALIST = "specialist";
+	 String TAG_SPECIALISTPHONE = "specialistPhone";
+	 String TAG_QUALITY = "qualityLevel";
+     String TAG_LIST_OF_PROVIDERS = "pList";
+     JSONParser jParser = new JSONParser();
+     String latit;
+     String longit;
+	 JSONArray providers = null;
+	 String fullGPS_URL = null;
+ //  private ProgressBar progressBar;
+   ArrayList<HashMap<String, String>> storeData = new ArrayList<HashMap<String, String>>();
 	// JSON node names
 
 	 Context aContext;
@@ -424,10 +438,8 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	@Override
 	protected void onPreExecute()
 	{
-	
-		   super.onPreExecute();
-		  // mProgressDialog.setMessage("Searching...");
-		 //  mProgressDialog.show();
+		  super.onPreExecute();
+	//      progressBar.setVisibility(View.VISIBLE);
 	}
 	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
 	{	
@@ -437,39 +449,19 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	 coordinates.putString("EXTRA_LATITUDE", latit);
 	 coordinates.putString("EXTRA_LONGITUDE", longit);
 	 GPSSearch.putExtras(coordinates);
-	// mProgressDialog.dismiss();
+   //  progressBar.setVisibility(View.INVISIBLE);
 	 startActivity(GPSSearch);
 	}
 	protected ArrayList<HashMap<String, String>> doInBackground(String... args) 
 	{
-		 String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
-		 String gpsURL_2 = "&lat=";
-		 String TAG_PROVIDERS = "providers";
-		 String TAG_ID = "id";
-		 String TAG_PROVIDERNAME = "providerName";
-		 String TAG_LICENSEINFO = "licenseInfo";
-		 String TAG_OWNERNAME = "ownerName";
-		 String TAG_ADDRESS = "address";
-		 String TAG_CITY = "city";
-		 String TAG_STATE = "state";
-		 String TAG_ZIPCODE = "zipCode";
-		 String TAG_PHONENUMBER = "phoneNumber";
-		 String TAG_LONGITUDE = "longitude";
-		 String TAG_LATITUDE = "latitude";
-		 String TAG_CAPACITY = "capacity";
-		 String TAG_HOURS = "hours";
-		 String TAG_SPECIALIST = "specialist";
-		 String TAG_SPECIALISTPHONE = "specialistPhone";
-		 String TAG_QUALITY = "qualityLevel";
-		// String TAG_LIST_OF_PROVIDERS = "pList";
-		 JSONArray providers = null;
-		 String fullGPS_URL = null;
+	
 		String param_longitude = args[0];
 		String param_latitude = args[1];
 		longit = args[0];
 		latit = args[1];
 		System.out.println(param_longitude + " " + param_latitude + " in do background");
 	       fullGPS_URL = gpsURL_1 + param_longitude + gpsURL_2 + param_latitude;
+	        
 				//System.out.println("Beginning JSON Parse");
 	       if(isURLReachable(aContext) == true)
 			{
@@ -530,7 +522,7 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 						map.put(TAG_SPECIALISTPHONE, specialistPhone);
 						map.put(TAG_QUALITY, qualityLevel);
 						
-						containingMaps.add(map);
+						storeData.add(map);
 					
 					}
 				}	
@@ -540,7 +532,7 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 		}  
 			}
 	}
-			return containingMaps;
+			return storeData;
 }
 	 public boolean isURLReachable(Context context) {
 	    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -569,12 +561,49 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 
 class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<String, String>>>{
 
+     String searchURL = "http://54.201.44.59:3000/providers.json?utf8=%E2%9C%93&search=";
+	// private static byte[] buff = new byte[1024];
+	// private static String result = null;
+	 String fullSearchURL = null;
+	 String aMessage = "";
+	// JSON node names
+	 String TAG_PROVIDERS = "providers";
+	 String TAG_ID = "id";
+	 String TAG_PROVIDERNAME = "providerName";
+	 String TAG_LICENSEINFO = "licenseInfo";
+	 String TAG_OWNERNAME = "ownerName";
+	 String TAG_ADDRESS = "address";
+	 String TAG_CITY = "city";
+	 String TAG_STATE = "state";
+	 String TAG_ZIPCODE = "zipCode";
+	 String TAG_PHONENUMBER = "phoneNumber";
+	 String TAG_LONGITUDE = "longitude";
+	 String TAG_LATITUDE = "latitude";
+	 String TAG_CAPACITY = "capacity";
+	 String TAG_HOURS = "hours";
+	 String TAG_SPECIALIST = "specialist";
+	 String TAG_SPECIALISTPHONE = "specialistPhone";
+	 String TAG_QUALITY = "qualityLevel";
+	 String message;
+	 ArrayList<HashMap<String, String>> storeData = new ArrayList<HashMap<String, String>>();
+	
+	
+	 protected void onPreExecute()
+		{
+			  super.onPreExecute();
+		//      progressBar.setVisibility(View.VISIBLE);
+		}
+	
 	@Override
-	protected ArrayList<HashMap<String, String>> doInBackground(
-			String... params) {
-		// TODO Auto-generated method stub
+	protected ArrayList<HashMap<String, String>> doInBackground(String... params) {
+		
+	   aMessage = params[0];
+	   fullSearchURL = searchURL + message;
+		
 		return null;
 	}
+	
+	
 	
 }
 
