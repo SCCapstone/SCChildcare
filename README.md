@@ -2,6 +2,7 @@
 
 *[http://www.scchildcare.org](http://www.scchildcare.org)
 
+Download the Open Beta now: [Download](https://www.dropbox.com/s/dowx6j8nv8ddqys/SCChildcareMobile.apk)
 
 ### DESCRIPTION
 
@@ -19,10 +20,15 @@ view official ratings, and even communicate to other users via a forum/comment s
 ##Known Bugs
   - If the server is down, but the device has connectivity, the app will crash
   - Some pages have incorrect parents, and the main search page is not storing the search data, giving an error
+  - On the Single Provider page, there is a issue with the amount of data being processed at once, causing the screen to cut off the bottom of the page. There is data, the app just skips displaying it. We are looking into a better way of performing tasks. 
   
 
 
 ##Update History
+
+###0.1.0c
+  - Removed Permit table
+  - Added disclaimer and tag placeholder to home page
 
 ### 0.1.0b
   - Changed the color of the two search buttons to black from green
