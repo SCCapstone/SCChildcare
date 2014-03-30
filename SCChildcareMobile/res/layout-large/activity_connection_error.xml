@@ -10,7 +10,7 @@
 <TextView
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:textSize="18sp"
+    android:textSize="35sp"
     android:textStyle="bold"
     android:paddingTop="10dip"
     android:paddingBottom="10dip"
