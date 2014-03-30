@@ -48,7 +48,6 @@
             android:contentDescription="@string/GPSDesc"
             android:gravity="center"
             android:onClick="getLocation"
-            android:paddingRight="7dp"
             android:src="@drawable/gpstarget"
             android:text="@string/button_locate" />
 
@@ -59,7 +58,7 @@
             android:contentDescription="@string/searchDesc"
             android:gravity="center"
             android:onClick="sendMessage"
-            android:paddingLeft="7dp"
+            android:paddingLeft="1dp"
             android:src="@drawable/search_icon"
             android:text="@string/button_search" />
 
@@ -82,5 +81,6 @@
             android:textColor="#ff0000"
             android:textStyle="italic" />
     </LinearLayout>
+
 
 </LinearLayout>

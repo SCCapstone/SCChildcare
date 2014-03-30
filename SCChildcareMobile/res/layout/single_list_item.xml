@@ -195,7 +195,13 @@
             android:id="@+id/map"
             android:name="com.google.android.gms.maps.MapFragment"
             android:layout_width="match_parent"
-            android:layout_height="334dp" />
+
+            android:layout_height="419dp" />
+
+
+
+        </TableLayout>
+
 
         <TextView
             android:id="@+id/complaints_Table_label"
@@ -223,14 +229,14 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:text="Complaint Name"
+                    android:text="@string/complaint"
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:text="Resolved Status"
+                    android:text="@string/resolve"
                     android:textColor="#FFFFFF" />
             </TableRow>
 
@@ -253,7 +259,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="right|center_vertical|center_horizontal"
-                android:text="Add Comment" />
+                android:text="@string/comment" />
         </LinearLayout>
     </LinearLayout>
 
