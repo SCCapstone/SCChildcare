@@ -81,6 +81,7 @@ public class SearchResultsActivity extends ListActivity {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -90,7 +91,6 @@ public class SearchResultsActivity extends ListActivity {
 
 		// Hashmap for ListView
 
-		ArrayList<HashMap<String, String>> providerList = new ArrayList<HashMap<String, String>>();
 		ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
 		
          //////////////////////////////////////////////////////////////////////////////////////////			
@@ -132,7 +132,6 @@ public class SearchResultsActivity extends ListActivity {
 					// add Hashlist to ArrayList
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
-					providerList.add(map);
 
 					double dbl_latitude = Double.parseDouble(latitude);
 					double dbl_longitude = Double.parseDouble(longitude);

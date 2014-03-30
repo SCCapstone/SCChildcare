@@ -87,7 +87,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		setContentView(R.layout.activity_search_results);
 
 		// Hashmap for ListView
-		ArrayList<HashMap<String, String>> providerList = new ArrayList<HashMap<String, String>>();
 		ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
 		
 /////////////////////////////////////////////////////////////////////			
@@ -97,7 +96,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	    	String param_longitude = getProviders.getString("EXTRA_LONGITUDE");
 	    	String param_latitude = getProviders.getString("EXTRA_LATITUDE");
 	    	
-	    	System.out.println(param_longitude + " " + param_latitude + " GPS SEARCH RESULTS");
+	    	System.out.println(param_longitude + "  this is longitude " + param_latitude + " this is latitude");
 /////////////////////////////////////////////////////////////////////////
 	    	
 	    	
@@ -127,7 +126,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
-					providerList.add(map);
 
 					double dbl_latitude = Double.parseDouble(latitude);
 					double dbl_longitude = Double.parseDouble(longitude);
@@ -140,19 +138,23 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					LatLng YOUR_LOCATION = new LatLng(your_latitude,
 							your_longitude);
 
-					mMap = ((MapFragment) getFragmentManager()
+							mMap = ((MapFragment) getFragmentManager()
 							.findFragmentById(R.id.map)).getMap();
-					mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-					mMap.setMyLocationEnabled(true);
+						
+							mMap.setMyLocationEnabled(true);
 
-					mMap.addMarker(new MarkerOptions().position(
+							mMap.addMarker(new MarkerOptions().position(
 							new LatLng(dbl_latitude, dbl_longitude)).title(
-							"Hello world"));
+							providerName));
 
-					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+							mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 							YOUR_LOCATION, 12));
 
 				}
+				mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+				
+				
+				
 			}
 		
 

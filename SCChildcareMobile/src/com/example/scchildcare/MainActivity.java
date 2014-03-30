@@ -457,8 +457,8 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	
 		String param_longitude = args[1];
 		String param_latitude = args[0];
-		longit = args[0];
-		latit = args[1];
+		longit = args[1];
+		latit = args[0];
 		System.out.println(param_longitude + " " + param_latitude + " in do background");
 	       fullGPS_URL = gpsURL_1 + param_longitude + gpsURL_2 + param_latitude;
 	        
