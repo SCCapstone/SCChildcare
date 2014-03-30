@@ -66,6 +66,7 @@ public class SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
+	private static final String TAG_LIST_OF_PROVIDERS = "pList";
 	String message;
 
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
@@ -92,98 +93,33 @@ public class SearchResultsActivity extends ListActivity {
 		setContentView(R.layout.activity_search_results);
 
 		// Hashmap for ListView
+
 		ArrayList<HashMap<String, String>> providerList = new ArrayList<HashMap<String, String>>();
-
-		// Simple quick fix for http exception, FIX LATER WITH ASYNCTASK*******
-		ThreadPolicy tp = ThreadPolicy.LAX;
-		StrictMode.setThreadPolicy(tp);
-
-		// Get the message from the intent
+		ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
+		
+         //////////////////////////////////////////////////////////////////////////////////////////			
 		Intent intent = getIntent();
+		Bundle getProviders = intent.getExtras();
+	    containingMaps = (ArrayList<HashMap<String, String>>) getProviders.getSerializable(TAG_LIST_OF_PROVIDERS);
 		//////////////////////////////////////////////////////////////////////
-		if(savedInstanceState != null)
-		{
-		message = savedInstanceState.getString(MainActivity.EXTRA_MESSAGE);	
-		}
-		else
-		{
-		 message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-		}
-		
-		
-		//////////////////////////////////////////////////////////////
-		// System.out.println(message);
-		fullSearchURL = searchURL + message;
 
-		System.out.println("Beginning JSON Parse");
-		JSONParser jParser = new JSONParser();
 
-		System.out.println("Getting JSON with HTTP");
-		JSONObject json = jParser.getJSONFromUrl(fullSearchURL);
-		// System.out.println(json);
-
-		System.out.println("HTTP SUCCESSFUL");
-		try {
-			// get the array of providers
-			System.out.println("CREATING THE PROVIDERS JSON ARRAY");
-
-			providers = json.getJSONArray(TAG_PROVIDERS);
-
-			System.out.println("Beginning For Loop to go through array");
-
-			if (providers.length() == 0) {
+			if (containingMaps.size() == 0) {
 				System.out.println("No Return on Search");
-				// String sorry =
-				// "We are sorry, your search did not return anything";
-				// TextView textView = new TextView(this);
-				// textView.setTextSize(40);
-				// textView.setText(sorry);
 				Intent sorryIntent = new Intent(this,
 						SorryMessageActivity.class);
 				this.finish();
-				// intent.putExtra(SORRY_MESSAGE, sorry);
 				startActivity(sorryIntent);
 			} else {
-				for (int i = 0; i < providers.length(); i++) {
-					JSONObject p = providers.getJSONObject(i);
-
-					// store the json items in variables
-					String id = p.getString(TAG_ID);
-					String providerName = p.getString(TAG_PROVIDERNAME);
-					String licenseInfo = p.getString(TAG_LICENSEINFO);
-					String ownerName = p.getString(TAG_OWNERNAME);
-					String address = p.getString(TAG_ADDRESS);
-					String city = p.getString(TAG_CITY);
-					String state = p.getString(TAG_STATE);
-					String zipCode = p.getString(TAG_ZIPCODE);
-					String phoneNumber = p.getString(TAG_PHONENUMBER);
-					String longitude = p.getString(TAG_LONGITUDE);
-					String latitude = p.getString(TAG_LATITUDE);
-					String capacity = p.getString(TAG_CAPACITY);
-					String hours = p.getString(TAG_HOURS);
-					String specialist = p.getString(TAG_SPECIALIST);
-					String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
-					String qualityLevel = p.getString(TAG_QUALITY);
-
+				for (int i = 0; i < containingMaps.size(); i++) {
+			
 					HashMap<String, String> map = new HashMap<String, String>();
-
-					map.put(TAG_ID, id);
-					map.put(TAG_PROVIDERNAME, providerName);
-					map.put(TAG_LICENSEINFO, licenseInfo);
-					map.put(TAG_OWNERNAME, ownerName);
-					map.put(TAG_ADDRESS, address);
-					map.put(TAG_CITY, city);
-					map.put(TAG_STATE, state);
-					map.put(TAG_ZIPCODE, zipCode);
-					map.put(TAG_PHONENUMBER, phoneNumber);
-					map.put(TAG_LONGITUDE, longitude);
-					map.put(TAG_LATITUDE, latitude);
-					map.put(TAG_CAPACITY, capacity);
-					map.put(TAG_HOURS, hours);
-					map.put(TAG_SPECIALIST, specialist);
-					map.put(TAG_SPECIALISTPHONE, specialistPhone);
-					map.put(TAG_QUALITY, qualityLevel);
-
+					map = containingMaps.get(i);
+					
+					String longitude = map.get(TAG_LONGITUDE);
+					String latitude =  map.get(TAG_LATITUDE);
+					String providerName = map.get(TAG_PROVIDERNAME);
+					
 					// add Hashlist to ArrayList
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
@@ -204,12 +140,8 @@ public class SearchResultsActivity extends ListActivity {
 				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 						SOUTH_CAROLINA, 7));
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		
-		ListAdapter adapter = new SimpleAdapter(this, providerList,
+	
+		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
 				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
 						TAG_STATE, TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE,
@@ -304,29 +236,6 @@ public class SearchResultsActivity extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-//	public boolean isURLReachable(Context context) {
-//		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-//		if (netInfo != null && netInfo.isConnected()) {
-//			try {
-//				URL url = new URL("http://54.201.44.59:3000");   // Change to "http://google.com" for www  test.
-//				HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-//				urlc.setConnectTimeout(10 * 1000);          // 10 s.
-//				urlc.connect();
-//				if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
-//					Log.wtf("Connection", "Success !");
-//					return true;
-//				} else {
-//					return false;
-//				}
-//			} catch (MalformedURLException e1) {
-//				return false;
-//			} catch (IOException e) {
-//				return false;
-//			}
-//		}
-//		return false;
-//	}
 
 	public void onSaveInstanceState(Bundle savedInstanceState) {
 	    savedInstanceState.putString(MainActivity.EXTRA_MESSAGE, message);

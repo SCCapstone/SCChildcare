@@ -197,11 +197,11 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 			+ "longitude " + Double.toString(longitude);
 			System.out.println(longlat);
 
-			//String param_latitude = Double.toString(latitude);
-			///String param_longitude = Double.toString(longitude);
+			String param_latitude = Double.toString(latitude);
+			String param_longitude = Double.toString(longitude);
 			////////////////////////////////////////////
-			String param_latitude = Double.toString(33.984209);
-			String param_longitude = Double.toString(-81.075269);
+			//String param_latitude = Double.toString(33.984209);
+			//String param_longitude = Double.toString(-81.075269);
 			
 			///////////////////////////////////////////
 			GetGPSResults gpsResults = new GetGPSResults(v.getContext());
@@ -236,7 +236,7 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 
 			//intent.putExtra(EXTRA_MESSAGE, message);
 		//	startActivity(intent);
-            GetSearchResults searchResults = new GetSearchResults();
+            GetSearchResults searchResults = new GetSearchResults(v.getContext());
             searchResults.execute(message);
 			}
 			else{
@@ -455,8 +455,8 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	protected ArrayList<HashMap<String, String>> doInBackground(String... args) 
 	{
 	
-		String param_longitude = args[0];
-		String param_latitude = args[1];
+		String param_longitude = args[1];
+		String param_latitude = args[0];
 		longit = args[0];
 		latit = args[1];
 		System.out.println(param_longitude + " " + param_latitude + " in do background");
@@ -479,6 +479,7 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 			try 
 			{
 				providers = json.getJSONArray(TAG_PROVIDERS);
+	//			System.out.println(json.toString());
 				System.out.println(" providers length " + providers.length());
 				if (providers.length() > 0) 
 				{
@@ -584,9 +585,17 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 	 String TAG_SPECIALIST = "specialist";
 	 String TAG_SPECIALISTPHONE = "specialistPhone";
 	 String TAG_QUALITY = "qualityLevel";
-	 String message;
+     //  String message;
 	 ArrayList<HashMap<String, String>> storeData = new ArrayList<HashMap<String, String>>();
-	
+	 JSONParser jParser = new JSONParser();
+	 JSONArray providers = null;
+	 String TAG_LIST_OF_PROVIDERS = "pList";
+	 Context aContext;
+	 
+	   private GetSearchResults(Context context) 
+	    {
+	       aContext = context;
+	    }
 	
 	 protected void onPreExecute()
 		{
@@ -594,22 +603,115 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 		//      progressBar.setVisibility(View.VISIBLE);
 		}
 	
+	 protected void onPostExecute(ArrayList<HashMap<String, String>> result)
+		{	
+		 Intent SearchResults = new Intent(getApplicationContext(), SearchResultsActivity.class);
+		 SearchResults.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
+		 startActivity(SearchResults);
+		}
+	 
 	@Override
 	protected ArrayList<HashMap<String, String>> doInBackground(String... params) {
 		
 	   aMessage = params[0];
-	   fullSearchURL = searchURL + message;
-		
-		return null;
+	   
+	   System.out.println( " A messsga " + aMessage);
+	   fullSearchURL = searchURL + aMessage;
+	   if(isURLReachable(aContext))
+	   {
+	   if(!aMessage.isEmpty())
+	   {
+	   System.out.println(aMessage);	   
+	  JSONObject json = jParser.getJSONFromUrl(fullSearchURL); 
+	 // System.out.println(json.toString());
+	  try {
+			// get the array of providers
+			System.out.println("CREATING THE PROVIDERS JSON ARRAY");
+
+			providers = json.getJSONArray(TAG_PROVIDERS);
+
+			System.out.println("Beginning For Loop to go through array");
+             System.out.println(" provider.length " + providers.length());
+             
+			if (providers.length() > 0) {
+				System.out.println("No Return on Search");
+	
+				for (int i = 0; i < providers.length(); i++) {
+					JSONObject p = providers.getJSONObject(i);
+
+					// store the json items in variables
+					String id = p.getString(TAG_ID);
+					String providerName = p.getString(TAG_PROVIDERNAME);
+					String licenseInfo = p.getString(TAG_LICENSEINFO);
+					String ownerName = p.getString(TAG_OWNERNAME);
+					String address = p.getString(TAG_ADDRESS);
+					String city = p.getString(TAG_CITY);
+					String state = p.getString(TAG_STATE);
+					String zipCode = p.getString(TAG_ZIPCODE);
+					String phoneNumber = p.getString(TAG_PHONENUMBER);
+					String longitude = p.getString(TAG_LONGITUDE);
+					String latitude = p.getString(TAG_LATITUDE);
+					String capacity = p.getString(TAG_CAPACITY);
+					String hours = p.getString(TAG_HOURS);
+					String specialist = p.getString(TAG_SPECIALIST);
+					String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
+					String qualityLevel = p.getString(TAG_QUALITY);
+
+					HashMap<String, String> map = new HashMap<String, String>();
+
+					map.put(TAG_ID, id);
+					map.put(TAG_PROVIDERNAME, providerName);
+					map.put(TAG_LICENSEINFO, licenseInfo);
+					map.put(TAG_OWNERNAME, ownerName);
+					map.put(TAG_ADDRESS, address);
+					map.put(TAG_CITY, city);
+					map.put(TAG_STATE, state);
+					map.put(TAG_ZIPCODE, zipCode);
+					map.put(TAG_PHONENUMBER, phoneNumber);
+					map.put(TAG_LONGITUDE, longitude);
+					map.put(TAG_LATITUDE, latitude);
+					map.put(TAG_CAPACITY, capacity);
+					map.put(TAG_HOURS, hours);
+					map.put(TAG_SPECIALIST, specialist);
+					map.put(TAG_SPECIALISTPHONE, specialistPhone);
+					map.put(TAG_QUALITY, qualityLevel);
+					
+					storeData.add(map);
+			}
+			}
+		} catch (JSONException e) {
+			e.printStackTrace();
+		}  
+		   	   
+	   }
+	   }
+		return storeData;
 	}
 	
-	
-	
+	 public boolean isURLReachable(Context context) {
+		    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		    if (netInfo != null && netInfo.isConnected()) {
+		        try {
+		            URL url = new URL("http://54.201.44.59");   // Change to "http://google.com" for www  test.
+		            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+		            urlc.setConnectTimeout(10 * 1000);          // 10 s.
+		            urlc.connect();
+		            if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
+		                Log.wtf("Connection", "Success !");
+		                return true;
+		            } else {
+		                return false;
+		            }
+		        } catch (MalformedURLException e1) {
+		            return false;
+		        } catch (IOException e) {
+		            return false;
+		        }
+		    }
+		    return false;
+		}
 }
-
-
-
-
 
 
 

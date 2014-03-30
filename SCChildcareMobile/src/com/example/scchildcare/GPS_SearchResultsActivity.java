@@ -119,7 +119,10 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					
 					String longitude = map.get(TAG_LONGITUDE);
 					String latitude =  map.get(TAG_LATITUDE);
-			
+					String providerName = map.get(TAG_PROVIDERNAME);
+			        
+					
+					
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
 					providerList.add(map);
@@ -142,7 +145,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 					mMap.addMarker(new MarkerOptions().position(
 							new LatLng(dbl_latitude, dbl_longitude)).title(
-							"Hello world"));
+							providerName));
 
 					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 							YOUR_LOCATION, 12));
@@ -152,7 +155,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		
 
 		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
-		ListAdapter adapter = new SimpleAdapter(this, providerList,
+		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
 				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
 						TAG_STATE, TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE,
@@ -232,12 +235,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	
 
 	
-	
-	
-	
-	
-	
-	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -249,32 +246,5 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-//	public boolean isURLReachable(Context context) {
-//		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-//		if (netInfo != null && netInfo.isConnected()) {
-//			try {
-//				URL url = new URL("http://54.201.44.59:3000"); // Change to
-//																// "http://google.com"
-//																// for www test.
-//				HttpURLConnection urlc = (HttpURLConnection) url
-//						.openConnection();
-//				urlc.setConnectTimeout(10 * 1000); // 10 s.
-//				urlc.connect();
-//				if (urlc.getResponseCode() == 200) { // 200 = "OK" code (http
-//														// connection is fine).
-//					Log.wtf("Connection", "Success !");
-//					return true;
-//				} else {
-//					return false;
-//				}
-//			} catch (MalformedURLException e1) {
-//				return false;
-//			} catch (IOException e) {
-//				return false;
-//			}
-//		}
-//		return false;
-//	}
 
 }
