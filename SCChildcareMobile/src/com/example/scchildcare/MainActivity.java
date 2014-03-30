@@ -207,6 +207,8 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 			//String param_longitude = Double.toString(-81.075269);
 			
 			///////////////////////////////////////////
+		
+			//////////////////////////////////////////
 			GetGPSResults gpsResults = new GetGPSResults(v.getContext());
 			gpsResults.execute(param_latitude, param_longitude);
 
@@ -231,24 +233,27 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 	public void onClick(View v) 
 	{
 	
-		if(isNetworkAvailable()){
-			makeToast("Searching, Please {wait...");	
+		if(isNetworkAvailable()){	
 		//	Intent intent = new Intent(this, SearchResultsActivity.class);
 			editText = (EditText)findViewById(R.id.edit_message);
+			String message2 = editText.getText().toString();
             String message = editText.getText().toString().replace(" ", "%20");
-
+            if(!message2.isEmpty())
+            {
 			//intent.putExtra(EXTRA_MESSAGE, message);
 		//	startActivity(intent);
             GetSearchResults searchResults = new GetSearchResults(v.getContext());
             searchResults.execute(message);
+            }
+            else
+            {
+            MessageToUser();	     	
+            }
 			}
 			else{
-			//makeToast("Internet connection not established");	
 				
 		   showConnectionAlertToUser();	
-				
-				
-				
+							
 			}	
 	}
  });
@@ -277,6 +282,20 @@ private void showConnectionAlertToUser(){
     alert.show();
 }
 ///////////////////////
+private void MessageToUser(){
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    alertDialogBuilder.setMessage("Must enter a child care provider name, address, city, or zip code")
+    .setCancelable(false)
+    .setPositiveButton("OK",
+            new DialogInterface.OnClickListener(){
+        public void onClick(DialogInterface dialog, int id){
+        	dialog.cancel();
+        }
+    });
+    AlertDialog alert = alertDialogBuilder.create();
+    alert.show();
+}
+///////////////////////////////////////////////////////////
 @Override
 public void onDisconnected() {
 // Display the connection status
@@ -473,6 +492,7 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	}
 	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
 	{	
+	
 	 Intent GPSSearch = new Intent(aContext.getApplicationContext(), GPS_SearchResultsActivity.class);
 	 GPSSearch.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
 	 Bundle coordinates = new Bundle();
@@ -635,10 +655,13 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 		}
 	
 	 protected void onPostExecute(ArrayList<HashMap<String, String>> result)
-		{	
+		{
+		 
 		 Intent SearchResults = new Intent(getApplicationContext(), SearchResultsActivity.class);
 		 SearchResults.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
 		 startActivity(SearchResults);
+		 
+		
 		}
 	 
 	@Override
@@ -743,9 +766,9 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 		    return false;
 		}
 }
+/////////////////////////////////////////////////////////////////////////
 
-
-
+/////////////////////////////////////////////////////////////////////
 }
 
 
