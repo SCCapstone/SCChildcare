@@ -10,8 +10,8 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.util.Log;
-
 import android.view.Menu;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -118,6 +118,7 @@ public class SingleMenuItemActivity extends Activity {
 		// lblState.setText(state);
 		// lblZipcode.setText(zipCode);
 		lblPhone.setText(phoneNumber);
+		Linkify.addLinks(lblPhone, Linkify.PHONE_NUMBERS);
 		lblCapacity.setText(capacity);
 		lblhours.setText(hours);
 		lblSpecialist.setText(specialist);

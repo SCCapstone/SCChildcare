@@ -14,7 +14,7 @@ import android.widget.TextView;
  */
 public class SorryMessageTest extends ActivityInstrumentationTestCase2<SorryMessageActivity> {
 	private SorryMessageActivity smessageactivity; 
-	private TextView tview; 
+	private TextView textview; 
 	/**
 	 * @param name
 	 */
@@ -28,8 +28,11 @@ public class SorryMessageTest extends ActivityInstrumentationTestCase2<SorryMess
 	protected void setUp() throws Exception {
 		super.setUp();
 		smessageactivity = getActivity();
-		tview = (TextView) smessageactivity.findViewById(com.example.scchildcare.R.id.sorry_label);
+		textview = (TextView) smessageactivity.findViewById(com.example.scchildcare.R.id.sorry_label);
 	}
-	
+	public void testPreconditions() {
+		assertNotNull("smessageactivity is null", smessageactivity);
+		assertNotNull("textview is null", textview); 
+	}
 
 }
