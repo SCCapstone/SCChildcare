@@ -271,6 +271,6 @@ public class SearchResultsActivity extends ListActivity {
 	    super.onSaveInstanceState(savedInstanceState);
 	}
 	
->>>>>>> eb588818b8a940a8d682f3ec3d3a282cda3f3fd4
+
 
 }

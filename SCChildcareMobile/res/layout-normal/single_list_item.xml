@@ -225,15 +225,25 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:text="@string/complaint"
+                    android:text="@string/complaintType"
+                    android:textColor="#FFFFFF" />
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/complaintIssueDate"
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
+                    android:layout_gravity="right"
                     android:layout_weight="1"
+                    android:paddingLeft="20dp"
                     android:text="@string/resolve"
                     android:textColor="#FFFFFF" />
+
             </TableRow>
 
             <TableRow

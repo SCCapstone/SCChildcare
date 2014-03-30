@@ -48,7 +48,8 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_COMPLAINTS = "providercomplaints";
 
 	
-	private static final String TAG_COMPLAINTTITLE = "complaint_title";
+	private static final String TAG_COMPLAINTTYPE = "complaint_type";
+	private static final String TAG_COMPLAINTDATE = "issueDate";
 	private static final String TAG_COMPLAINTRESOLVED = "resolved";
 	
 	JSONArray complaints = null;
@@ -162,17 +163,19 @@ public class SingleMenuItemActivity extends Activity {
 
 			
 				for (int i = 0; i < complaints.length(); i++) {
-					JSONObject permit = complaints.getJSONObject(i);
+					JSONObject complaint = complaints.getJSONObject(i);
 
 					// store the json items in variables
 
-					String complaintName = permit.getString(TAG_COMPLAINTTITLE);
-					String complaintResolved = permit
+					String complaintType = complaint.getString(TAG_COMPLAINTTYPE);
+					String issueDate = complaint.getString(TAG_COMPLAINTDATE);
+					String complaintResolved = complaint
 							.getString(TAG_COMPLAINTRESOLVED);
 
 					HashMap<String, String> cmap = new HashMap<String, String>();
 
-					cmap.put(TAG_COMPLAINTTITLE, complaintName);
+					cmap.put(TAG_COMPLAINTTYPE, complaintType);
+					cmap.put(TAG_COMPLAINTDATE, issueDate);
 					cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
 
 					// add Hashlist to ArrayList
@@ -201,25 +204,32 @@ public class SingleMenuItemActivity extends Activity {
 			TableRow complaintRow = new TableRow(SingleMenuItemActivity.this);
 			System.out.println("Building Table");
 
-			String complaintNameData = complaintList.get(j).get(
-					TAG_COMPLAINTTITLE);
+			String complaintTypeData = complaintList.get(j).get(
+					TAG_COMPLAINTTYPE);
+			String complaintIssueDate = complaintList.get(j).get(
+					TAG_COMPLAINTDATE);
 			String complaintResolvedData = complaintList.get(j).get(
 					TAG_COMPLAINTRESOLVED);
 
 			Log.d("What ComplaintData says",
-					complaintList.get(j).get(TAG_COMPLAINTTITLE));
+					complaintList.get(j).get(TAG_COMPLAINTTYPE));
 			Log.d("What ComplaintData says",
 					complaintList.get(j).get(TAG_COMPLAINTRESOLVED));
 
-			TextView lblComplaintName = new TextView(this);
+			TextView lblComplaintType = new TextView(this);
+			TextView lblComplaintDate = new TextView(this);
 			TextView lblComplaintResolved = new TextView(this);
 
-			lblComplaintName.setText(complaintNameData);
-			lblComplaintName.setPadding(20, 20, 20, 20);
+			lblComplaintType.setText(complaintTypeData);
+			lblComplaintType.setPadding(20, 20, 20, 20);
+			lblComplaintDate.setText(complaintIssueDate);
+			lblComplaintDate.setPadding(20, 20, 20, 20);
 			lblComplaintResolved.setText(complaintResolvedData);
 			lblComplaintResolved.setPadding(20, 20, 20, 20);
 
-			complaintRow.addView(lblComplaintName);
+			complaintRow.addView(lblComplaintType);
+			
+			complaintRow.addView(lblComplaintDate);
 
 			complaintRow.addView(lblComplaintResolved);
 
