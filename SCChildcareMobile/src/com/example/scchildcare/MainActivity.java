@@ -156,30 +156,23 @@ Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 
 @Override
 protected void onCreate(Bundle savedInstanceState) {
+	System.out.println("Open instance");
 super.onCreate(savedInstanceState);
+System.out.println("set layout");
 setContentView(R.layout.activity_main);
+System.out.println("new locationclient");
 mLocationClient = new LocationClient(this, this, this);
-
+System.out.println("getsystemservice");
 
 //editText = (EditText)findViewById(R.id.edit_message);
 
-if (savedInstanceState == null) {
-// Add the fragment on initial activity setup
-mainFragment = new MainFragment();
-getSupportFragmentManager().beginTransaction()
-.add(android.R.id.content, mainFragment).commit();
-} else {
-// Or set the fragment from restored state info
-mainFragment = (MainFragment) getSupportFragmentManager()
-.findFragmentById(android.R.id.content);
-
-
-}
  locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+ System.out.println("button1");
 ///////////////////////////////////////////
  button1 = (ImageButton) findViewById(R.id.button1);
+ System.out.println("button2");
  button2 = (ImageButton) findViewById(R.id.button_2);
-
+ System.out.println("button1onclick");
  button1.setOnClickListener(new View.OnClickListener(){
 
 	@Override
@@ -229,6 +222,7 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 	}
 	 
  });
+ System.out.println("button2onclick");
  button2.setOnClickListener(new View.OnClickListener(){
 
 	@Override
@@ -266,7 +260,7 @@ private void showConnectionAlertToUser(){
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
     alertDialogBuilder.setMessage("This app requires an internet connection. Would you like to enable it?")
     .setCancelable(false)
-    .setPositiveButton("Goto Settings Page To Enable Internet Connection",
+    .setPositiveButton("Go to Settings Page To Enable Internet Connection",
             new DialogInterface.OnClickListener(){
         public void onClick(DialogInterface dialog, int id){
             Intent wirelessIntent = new Intent(
@@ -432,7 +426,7 @@ private void showGPSDisabledAlertToUser(){
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
     alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?")
     .setCancelable(false)
-    .setPositiveButton("Goto Settings Page To Enable GPS",
+    .setPositiveButton("Go to Settings Page To Enable GPS",
             new DialogInterface.OnClickListener(){
         public void onClick(DialogInterface dialog, int id){
             Intent callGPSSettingIntent = new Intent(
