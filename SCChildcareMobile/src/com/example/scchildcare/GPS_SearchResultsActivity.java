@@ -78,6 +78,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +99,12 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	    	
 	    	System.out.println(param_longitude + " " + param_latitude + " GPS SEARCH RESULTS");
 /////////////////////////////////////////////////////////////////////////
+	    	
+	    	
+	    	ThreadPolicy tp = ThreadPolicy.LAX;
+	    	StrictMode.setThreadPolicy(tp);
+	    	
+	    	
 			if (containingMaps.size() == 0) {
 				System.out.println("No Return on Search");
 
@@ -127,8 +134,8 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 					double your_latitude = Double.parseDouble(param_latitude);
 				    double your_longitude = Double.parseDouble(param_longitude);
-					//double your_latitude = 33.996305;
-					//double your_longitude = -81.027157;
+				    
+				    System.out.println(your_latitude + " " + your_longitude);
 
 					LatLng YOUR_LOCATION = new LatLng(your_latitude,
 							your_longitude);
@@ -140,7 +147,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 					mMap.addMarker(new MarkerOptions().position(
 							new LatLng(dbl_latitude, dbl_longitude)).title(
-							providerName));
+							"Hello world"));
 
 					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 							YOUR_LOCATION, 12));

@@ -443,7 +443,7 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	}
 	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
 	{	
-	 Intent GPSSearch = new Intent(getApplicationContext(), GPS_SearchResultsActivity.class);
+	 Intent GPSSearch = new Intent(aContext.getApplicationContext(), GPS_SearchResultsActivity.class);
 	 GPSSearch.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
 	 Bundle coordinates = new Bundle();
 	 coordinates.putString("EXTRA_LATITUDE", latit);

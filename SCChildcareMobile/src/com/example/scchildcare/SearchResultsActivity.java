@@ -100,6 +100,9 @@ public class SearchResultsActivity extends ListActivity {
 		//////////////////////////////////////////////////////////////////////
 
 
+		ThreadPolicy tp = ThreadPolicy.LAX;
+		StrictMode.setThreadPolicy(tp);	    
+	    
 			if (containingMaps.size() == 0) {
 				System.out.println("No Return on Search");
 				Intent sorryIntent = new Intent(this,
@@ -116,6 +119,16 @@ public class SearchResultsActivity extends ListActivity {
 					String latitude =  map.get(TAG_LATITUDE);
 					String providerName = map.get(TAG_PROVIDERNAME);
 					
+					//////////////////////////////////////////////////////////////////////////////////
+					/*
+					System.out.println(map.get(TAG_ID) + " 1  " + map.get(TAG_PROVIDERNAME) + " 2 " + 	map.get(TAG_LICENSEINFO)
+							+ " 3 " + map.get(TAG_OWNERNAME) + "  4 " + map.get(TAG_ADDRESS) + " 5 " + 	map.get(TAG_CITY)
+							+ "  6 " + map.get(TAG_STATE) + " 7 " +map.get(TAG_ZIPCODE) + "  8 "+ map.get(TAG_PHONENUMBER) + "  9 "
+							+ map.get(TAG_PHONENUMBER) + " 10  " + map.get(TAG_LONGITUDE)+  " 11 " + map.get(TAG_LATITUDE)
+							+ "  12 " + map.get(TAG_CAPACITY) + " 13 " + map.get(TAG_CAPACITY) + "  14 "+ map.get(TAG_HOURS) 
+							+ " 15  "+	map.get(TAG_SPECIALIST) + " 16 "+ map.get(TAG_SPECIALISTPHONE) + " 17 " + map.get(TAG_QUALITY) + " 18 ");
+					*/		
+					/////////////////////////////////////////////////////////////////////
 					// add Hashlist to ArrayList
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
@@ -137,6 +150,7 @@ public class SearchResultsActivity extends ListActivity {
 						SOUTH_CAROLINA, 7));
 			}
 	
+			
 		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
 				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
