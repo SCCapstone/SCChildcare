@@ -1,6 +1,6 @@
 /**
  * 
- * Version 0.0.7
+ * Version 0.1.2b
  * 
  * 
  * 
@@ -86,7 +86,7 @@ public class MainActivity extends FragmentActivity implements
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
-
+	//Attempt to connect to Google Play Service
 	private boolean servicesConnected() {
 		// Check that Google Play services is available
 		int resultCode = GooglePlayServicesUtil
@@ -117,7 +117,7 @@ public class MainActivity extends FragmentActivity implements
 		}
 
 	}
-
+	//Display message concerning connection status
 	@Override
 	public void onConnected(Bundle dataBundle) {
 		// Display the connection status
@@ -147,7 +147,7 @@ public class MainActivity extends FragmentActivity implements
 		
 		
 	}
-
+	//When disconnected, a pop up will be displayed
 	@Override
 	public void onDisconnected() {
 		// Display the connection status
@@ -213,7 +213,7 @@ public class MainActivity extends FragmentActivity implements
 		mLocationClient.disconnect();
 		super.onStop();
 	}
-
+	//Display the error dialog
 	private void showErrorDialog(int errorCode) {
 
 		// Get the error dialog from Google Play services
@@ -234,7 +234,7 @@ public class MainActivity extends FragmentActivity implements
 		}
 
 	}
-
+	//Get user's current location and display in Google Maps 
 	public void getLocation(View v) {
 
 		// If Google Play Services is available
@@ -294,14 +294,14 @@ public class MainActivity extends FragmentActivity implements
 			return mDialog;
 		}
 	}
-
+	//If available, add options to the action bar
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
-
+	
 	public void sendMessage(View view)
 	{
 		if(isNetworkAvailable()){
@@ -325,7 +325,7 @@ public class MainActivity extends FragmentActivity implements
 		}
 			
 	}
-
+	//shows a message in a pop up 
 	public void makeToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
@@ -337,7 +337,7 @@ public class MainActivity extends FragmentActivity implements
 	
 	}
 	*/
-	
+	//Check to see if the network is connected
 	private boolean isNetworkAvailable() 
 	{
 	    ConnectivityManager connectivityManager 
