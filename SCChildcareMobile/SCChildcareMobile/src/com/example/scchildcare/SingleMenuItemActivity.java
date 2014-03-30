@@ -2,8 +2,13 @@ package com.example.scchildcare;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.util.Linkify;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -30,6 +35,7 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
+	ImageButton phonecalls;
 
 	GoogleMap mMap;
 
@@ -64,7 +70,8 @@ public class SingleMenuItemActivity extends Activity {
 		String specialist = in.getStringExtra(TAG_SPECIALIST);
 		String specialistPhone = in.getStringExtra(TAG_SPECIALISTPHONE);
 		String qualityLevel = in.getStringExtra(TAG_QUALITY);
-
+		final String PhoneNumber = phoneNumber;
+		
 		// Displaying all values on the screen
 		TextView lblName = (TextView) findViewById(R.id.name_label);
 		TextView lblLicense = (TextView) findViewById(R.id.license_label);
@@ -88,6 +95,7 @@ public class SingleMenuItemActivity extends Activity {
 		// lblState.setText(state);
 		// lblZipcode.setText(zipCode);
 		lblPhone.setText(phoneNumber);
+		Linkify.addLinks(lblPhone, Linkify.PHONE_NUMBERS);
 		lblCapacity.setText(capacity);
 		lblhours.setText(hours);
 		lblSpecialist.setText(specialist);
@@ -108,8 +116,20 @@ public class SingleMenuItemActivity extends Activity {
 				.title(providerName));
 		
 		mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(PROVIDER_LOCATION, 14));
+		/*
+		phonecalls = (ImageButton) findViewById(R.id.phonecall);
 		
-		
+		phonecalls.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent makeaphonecall = new Intent(Intent.ACTION_CALL);
+				System.out.println(PhoneNumber);
+				makeaphonecall.setData(Uri.parse("tel:"+ PhoneNumber));
+				startActivity(makeaphonecall);
+			}
+		});
+		*/
 
 	}
 

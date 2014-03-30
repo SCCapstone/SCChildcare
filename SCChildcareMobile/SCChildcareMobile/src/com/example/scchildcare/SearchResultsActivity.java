@@ -57,6 +57,7 @@ public class SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
+	String message;
 
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 
@@ -66,7 +67,11 @@ public class SearchResultsActivity extends ListActivity {
 
 	// providers JSONArray
 	JSONArray providers = null;
-
+	public void OnSavedInstanceState(Bundle savedInstanceState)
+	{
+		savedInstanceState.putString(MainActivity.EXTRA_MESSAGE, message);
+		super.onSaveInstanceState(savedInstanceState);
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -90,7 +95,15 @@ public class SearchResultsActivity extends ListActivity {
 
 		// Get the message from the intent
 		Intent intent = getIntent();
-		String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		if(savedInstanceState != null)
+		{
+			message=savedInstanceState.getString(MainActivity.EXTRA_MESSAGE);
+		}
+		else
+		{
+			message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
+		}
+		
 		// System.out.println(message);
 		fullSearchURL = searchURL + message;
 

@@ -5,7 +5,6 @@
     android:orientation="vertical" >
 
     <!-- Name Label -->
-
     <TextView
         android:id="@+id/name_label"
         android:layout_width="fill_parent"
@@ -74,6 +73,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
+<!--
+        <ImageButton
+            android:id="@+id/phonecall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/PhoneCall" />
+        -->
 
         <TextView
             android:id="@+id/phone_label"
@@ -201,6 +207,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:textSize="20sp" />
+        
     </LinearLayout>
 
     <fragment
