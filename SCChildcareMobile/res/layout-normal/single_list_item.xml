@@ -197,63 +197,7 @@
             android:layout_width="match_parent"
             android:layout_height="419dp" />
 
-        <TextView
-            android:id="@+id/permits_Table_label"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dip"
-            android:paddingTop="25dip"
-            android:textColor="#000000"
-            android:textSize="25sp"
-            android:textStyle="bold" />
-
-        <TableLayout
-            android:id="@+id/permitTable"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible" >
-
-            <TableRow
-                android:id="@+id/permit_title_row"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="#0069a3"
-                android:visibility="visible" >
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:text="@string/permit"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:text="@string/expiration"
-                    android:textColor="#FFFFFF" />
-            </TableRow>
-
-            <TableRow
-                android:id="@+id/permitTableRow"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:visibility="visible" >
-
-                <TextView
-                    android:id="@+id/permit_name_label"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
-
-                <TextView
-                    android:id="@+id/permit_expiration_label"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1" />
-            </TableRow>
-        </TableLayout>
+        
 
         <TextView
             android:id="@+id/complaints_Table_label"

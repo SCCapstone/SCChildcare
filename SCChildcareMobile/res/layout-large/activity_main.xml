@@ -42,7 +42,7 @@
             android:orientation="horizontal" >
 
             <ImageButton
-                android:id="@+id/add_comment_button"
+                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -59,16 +59,27 @@
                 android:contentDescription="@string/searchDesc"
                 android:gravity="center"
                 android:onClick="sendMessage"
+                android:paddingLeft="7dp"
                 android:src="@drawable/search_icon"
                 android:text="@string/button_search" />
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <com.facebook.widget.LoginButton
-            android:id="@+id/authButton"
+        <TextView
+            android:id="@+id/disclaimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:gravity="center" />
+            android:gravity="center_horizontal"
+            android:paddingTop="60dp"
+            android:text="@string/disclaimer"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ff0000"
+            android:textStyle="italic" />
+
     </LinearLayout>
 
 </LinearLayout>

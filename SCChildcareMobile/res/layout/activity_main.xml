@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:orientation="vertical" 
-    >
+    android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -25,9 +24,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/tagLine"
-            android:textAppearance="?android:attr/textAppearanceSmall" 
-            android:textStyle="italic|bold"/>
-
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textStyle="italic|bold" />
     </LinearLayout>
 
     <EditText
@@ -83,8 +81,6 @@
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ff0000"
             android:textStyle="italic" />
-
     </LinearLayout>
-
 
 </LinearLayout>
