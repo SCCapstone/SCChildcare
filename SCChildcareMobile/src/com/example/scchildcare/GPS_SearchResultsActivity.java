@@ -9,7 +9,14 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
+
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
@@ -34,11 +41,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 //import com.example.myfirstapp.trackdata.TrackData;
 
 public class GPS_SearchResultsActivity extends ListActivity {
-	private static final String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
-	private static final String gpsURL_2 = "&lat=";
-	// private static byte[] buff = new byte[1024];
-	// private static String result = null;
-	private static String fullGPS_URL = null;
 
 	// JSON node names
 	private static final String TAG_PROVIDERS = "providers";
@@ -58,7 +60,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
-
+	private static final String TAG_LIST_OF_PROVIDERS = "pList";
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 
 	GoogleMap mMap;
@@ -73,6 +75,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -81,123 +84,79 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		setContentView(R.layout.activity_search_results);
 
 		// Hashmap for ListView
-		ArrayList<HashMap<String, String>> providerList = new ArrayList<HashMap<String, String>>();
-
-		// Simple quick fix for http exception, FIX LATER WITH ASYNCTASK*******
-		ThreadPolicy tp = ThreadPolicy.LAX;
-		StrictMode.setThreadPolicy(tp);
-
-		// Get the message from the intent
-		Intent intent = getIntent();
-		Bundle coordinates = intent.getExtras();
-
-		String param_longitude = coordinates.getString("EXTRA_LONGITUDE");
-		String param_latitude = coordinates.getString("EXTRA_LATITUDE");
-		System.out.println(param_latitude + ", " + param_longitude);
-		fullGPS_URL = gpsURL_1 + param_longitude + gpsURL_2 + param_latitude;
-
-		System.out.println("Beginning JSON Parse");
-		JSONParser jParser = new JSONParser();
-
-		System.out.println("Getting JSON with HTTP");
-		JSONObject json = jParser.getJSONFromUrl(fullGPS_URL);
-		// System.out.println(json);
-
-		System.out.println("HTTP SUCCESSFUL");
-		try {
-			// get the array of providers
-			System.out.println("CREATING THE PROVIDERS JSON ARRAY");
-
-			providers = json.getJSONArray(TAG_PROVIDERS);
-
-			System.out.println("Beginning For Loop to go through array");
-
-			if (providers.length() == 0) {
+		ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
+		
+/////////////////////////////////////////////////////////////////////			
+			Intent intent = getIntent();
+			Bundle getProviders = intent.getExtras();
+	        containingMaps = (ArrayList<HashMap<String, String>>) getProviders.getSerializable(TAG_LIST_OF_PROVIDERS);
+	    	String param_longitude = getProviders.getString("EXTRA_LONGITUDE");
+	    	String param_latitude = getProviders.getString("EXTRA_LATITUDE");
+	    	
+	    	System.out.println(param_longitude + "  this is longitude " + param_latitude + " this is latitude");
+/////////////////////////////////////////////////////////////////////////
+	    	
+	    	
+	    	ThreadPolicy tp = ThreadPolicy.LAX;
+	    	StrictMode.setThreadPolicy(tp);
+	    	
+	    	
+			if (containingMaps.size() == 0) {
 				System.out.println("No Return on Search");
-				// String sorry =
-				// "We are sorry, your search did not return anything";
-				// TextView textView = new TextView(this);
-				// textView.setTextSize(40);
-				// textView.setText(sorry);
+
 				Intent sorryIntent = new Intent(this,
 						SorryMessageActivity.class);
-				// intent.putExtra(SORRY_MESSAGE, sorry);
+				this.finish();
 				startActivity(sorryIntent);
 			} else {
-				for (int i = 0; i < providers.length(); i++) {
-					JSONObject p = providers.getJSONObject(i);
-
-					// store the json items in variables
-					String id = p.getString(TAG_ID);
-					String providerName = p.getString(TAG_PROVIDERNAME);
-					String licenseInfo = p.getString(TAG_LICENSEINFO);
-					String ownerName = p.getString(TAG_OWNERNAME);
-					String address = p.getString(TAG_ADDRESS);
-					String city = p.getString(TAG_CITY);
-					String state = p.getString(TAG_STATE);
-					String zipCode = p.getString(TAG_ZIPCODE);
-					String phoneNumber = p.getString(TAG_PHONENUMBER);
-					String longitude = p.getString(TAG_LONGITUDE);
-					String latitude = p.getString(TAG_LATITUDE);
-					String capacity = p.getString(TAG_CAPACITY);
-					String hours = p.getString(TAG_HOURS);
-					String specialist = p.getString(TAG_SPECIALIST);
-					String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
-					String qualityLevel = p.getString(TAG_QUALITY);
-
+				for (int i = 0; i < containingMaps.size(); i++) {
+				//	JSONObject p = providers.getJSONObject(i);
 					HashMap<String, String> map = new HashMap<String, String>();
-
-					map.put(TAG_ID, id);
-					map.put(TAG_PROVIDERNAME, providerName);
-					map.put(TAG_LICENSEINFO, licenseInfo);
-					map.put(TAG_OWNERNAME, ownerName);
-					map.put(TAG_ADDRESS, address);
-					map.put(TAG_CITY, city);
-					map.put(TAG_STATE, state);
-					map.put(TAG_ZIPCODE, zipCode);
-					map.put(TAG_PHONENUMBER, phoneNumber);
-					map.put(TAG_LONGITUDE, longitude);
-					map.put(TAG_LATITUDE, latitude);
-					map.put(TAG_CAPACITY, capacity);
-					map.put(TAG_HOURS, hours);
-					map.put(TAG_SPECIALIST, specialist);
-					map.put(TAG_SPECIALISTPHONE, specialistPhone);
-					map.put(TAG_QUALITY, qualityLevel);
-
-					// add Hashlist to ArrayList
+					map = containingMaps.get(i);
+					// store the json items in variables
+					
+					String longitude = map.get(TAG_LONGITUDE);
+					String latitude =  map.get(TAG_LATITUDE);
+					String providerName = map.get(TAG_PROVIDERNAME);
+			        
+					
+					
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
-					providerList.add(map);
 
 					double dbl_latitude = Double.parseDouble(latitude);
 					double dbl_longitude = Double.parseDouble(longitude);
 
 					double your_latitude = Double.parseDouble(param_latitude);
-					double your_longitude = Double.parseDouble(param_longitude);
+				    double your_longitude = Double.parseDouble(param_longitude);
+				    
+				    System.out.println(your_latitude + " " + your_longitude);
 
 					LatLng YOUR_LOCATION = new LatLng(your_latitude,
 							your_longitude);
 
-					mMap = ((MapFragment) getFragmentManager()
+							mMap = ((MapFragment) getFragmentManager()
 							.findFragmentById(R.id.map)).getMap();
-					mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-					mMap.setMyLocationEnabled(true);
+						
+							mMap.setMyLocationEnabled(true);
 
-					mMap.addMarker(new MarkerOptions().position(
+							mMap.addMarker(new MarkerOptions().position(
 							new LatLng(dbl_latitude, dbl_longitude)).title(
-							"Hello world"));
+							providerName));
 
-					mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+							mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 							YOUR_LOCATION, 12));
 
 				}
+				mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+				
+				
+				
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		
 
 		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
-		ListAdapter adapter = new SimpleAdapter(this, providerList,
+		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
 				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
 						TAG_STATE, TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE,
@@ -208,13 +167,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 						R.id.phone, R.id.latitude, R.id.longitude,
 						R.id.capacity, R.id.hours, R.id.specialist,
 						R.id.specialistPhone, R.id.qualityLevel });
-
-		// Updating parsed JSON data into ListView
-		// ListAdapter adapter = new SimpleAdapter(this, providerList,
-		// R.layout.list_item, new String[] { TAG_PROVIDERNAME,
-		// TAG_ADDRESS, TAG_CITY, TAG_STATE, TAG_ZIPCODE },
-		// new int[] { R.id.name, R.id.address, R.id.city, R.id.state,
-		// R.id.zipCode });
 
 		setListAdapter(adapter);
 
@@ -281,6 +233,9 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		});
 
 	}
+	
+
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -292,32 +247,5 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 
-//	public boolean isURLReachable(Context context) {
-//		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-//		if (netInfo != null && netInfo.isConnected()) {
-//			try {
-//				URL url = new URL("http://54.201.44.59:3000"); // Change to
-//																// "http://google.com"
-//																// for www test.
-//				HttpURLConnection urlc = (HttpURLConnection) url
-//						.openConnection();
-//				urlc.setConnectTimeout(10 * 1000); // 10 s.
-//				urlc.connect();
-//				if (urlc.getResponseCode() == 200) { // 200 = "OK" code (http
-//														// connection is fine).
-//					Log.wtf("Connection", "Success !");
-//					return true;
-//				} else {
-//					return false;
-//				}
-//			} catch (MalformedURLException e1) {
-//				return false;
-//			} catch (IOException e) {
-//				return false;
-//			}
-//		}
-//		return false;
-//	}
 
 }

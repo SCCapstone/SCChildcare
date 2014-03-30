@@ -47,16 +47,16 @@ public JSONObject getJSONFromUrl(String url) {
         HttpEntity httpEntity = httpResponse.getEntity();
        
         is = httpEntity.getContent();          
-       // System.out.println("Input Stream: " + is);
+        System.out.println("Input Stream: " + is);
 
     } catch (UnsupportedEncodingException e) {
-    	//System.out.println("UnsupportedEncodingException");
+    	System.out.println("UnsupportedEncodingException");
     	Intent errorIntent = new Intent(this, ConnectionErrorActivity.class);
     	startActivity(errorIntent);
     	System.out.println("Sent to error page");
         e.printStackTrace();
     } catch (ClientProtocolException e) {
-    	//System.out.println("ClientProtocolException");
+    	System.out.println("ClientProtocolException");
     	Intent errorIntent = new Intent(this, ConnectionErrorActivity.class);
     	startActivity(errorIntent);
     	System.out.println("Sent to error page");
