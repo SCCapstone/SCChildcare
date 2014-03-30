@@ -1,0 +1,34 @@
+# view AndroidManifest.xml #generated:101
+-keep class com.example.scchildcare.ConnectionErrorActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:60
+-keep class com.example.scchildcare.GPS_SearchResultsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:37
+-keep class com.example.scchildcare.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:49
+-keep class com.example.scchildcare.SearchResultsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:77
+-keep class com.example.scchildcare.SingleMenuItemActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:89
+-keep class com.example.scchildcare.SorryMessageActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:119
+-keep class com.facebook.LoginActivity { <init>(...); }
+
+# view res/layout/com_facebook_usersettingsfragment.xml #generated:48
+-keep class com.facebook.widget.LoginButton { <init>(...); }
+
+# view res/layout/activity_search_results.xml #generated:8
+# view res/layout/single_list_item.xml #generated:194
+-keep class com.google.android.gms.maps.MapFragment { <init>(...); }
+
+# onClick res/layout/activity_main.xml #generated:34
+-keepclassmembers class * { *** getLocation(...); }
+
+# onClick res/layout/activity_main.xml #generated:46
+-keepclassmembers class * { *** sendMessage(...); }
+
