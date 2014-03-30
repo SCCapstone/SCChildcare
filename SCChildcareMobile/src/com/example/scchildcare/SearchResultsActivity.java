@@ -32,11 +32,14 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 //import com.google.android.gms.maps.model.LatLngBounds;
 
@@ -70,6 +73,10 @@ public class SearchResultsActivity extends ListActivity {
 	private static final LatLng SOUTH_CAROLINA = new LatLng(34.0096138,	-81.0392966); 		 		
 
 	GoogleMap mMap;
+	
+	/////////////////////
+	Marker marker_1;
+	////////////////////
 
 	// providers JSONArray
 	JSONArray providers = null;
@@ -120,14 +127,14 @@ public class SearchResultsActivity extends ListActivity {
 					String providerName = map.get(TAG_PROVIDERNAME);
 					
 					//////////////////////////////////////////////////////////////////////////////////
-					/*
+					
 					System.out.println(map.get(TAG_ID) + " 1  " + map.get(TAG_PROVIDERNAME) + " 2 " + 	map.get(TAG_LICENSEINFO)
 							+ " 3 " + map.get(TAG_OWNERNAME) + "  4 " + map.get(TAG_ADDRESS) + " 5 " + 	map.get(TAG_CITY)
 							+ "  6 " + map.get(TAG_STATE) + " 7 " +map.get(TAG_ZIPCODE) + "  8 "+ map.get(TAG_PHONENUMBER) + "  9 "
 							+ map.get(TAG_PHONENUMBER) + " 10  " + map.get(TAG_LONGITUDE)+  " 11 " + map.get(TAG_LATITUDE)
 							+ "  12 " + map.get(TAG_CAPACITY) + " 13 " + map.get(TAG_CAPACITY) + "  14 "+ map.get(TAG_HOURS) 
 							+ " 15  "+	map.get(TAG_SPECIALIST) + " 16 "+ map.get(TAG_SPECIALISTPHONE) + " 17 " + map.get(TAG_QUALITY) + " 18 ");
-					*/		
+						
 					/////////////////////////////////////////////////////////////////////
 					// add Hashlist to ArrayList
 					System.out
@@ -139,10 +146,11 @@ public class SearchResultsActivity extends ListActivity {
 					mMap = ((MapFragment) getFragmentManager()
 							.findFragmentById(R.id.map)).getMap();
 
-					mMap.addMarker(new MarkerOptions().position(
-							new LatLng(dbl_latitude, dbl_longitude)).title(
-							providerName));
 
+                       mMap.addMarker(new MarkerOptions().position(
+                        new LatLng(dbl_latitude, dbl_longitude)).title(
+                        providerName));
+                       
 				}
 				mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(

@@ -183,9 +183,12 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 	@Override
 	public void onClick(View v)
 	{
-		if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+		
 			// If Google Play Services is available
 			if (servicesConnected() && isNetworkAvailable()) {
+				
+				if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
+				
 
 			// Get the current location
 			mCurrentLocation = mLocationClient.getLastLocation();
@@ -209,14 +212,14 @@ mainFragment = (MainFragment) getSupportFragmentManager()
 
 			}
 			else{
-			makeToast("Internet connection not established");
+			//makeToast("Internet connection not established");
+			 if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) != true){
+				    showGPSDisabledAlertToUser();
+				}		
 			}
 			}
 			else{
-				if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER) != true){
-				    showGPSDisabledAlertToUser();
-				}
-
+				 showConnectionAlertToUser();
 			}
 		
 	}
@@ -240,13 +243,40 @@ mainFragment = (MainFragment) getSupportFragmentManager()
             searchResults.execute(message);
 			}
 			else{
-			makeToast("Internet connection not established");	
+			//makeToast("Internet connection not established");	
+				
+		   showConnectionAlertToUser();	
+				
+				
+				
 			}	
 	}
  });
  
 }
-
+////////////////////////////////////////
+private void showConnectionAlertToUser(){
+    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+    alertDialogBuilder.setMessage("This app requires an internet connection. Would you like to enable it?")
+    .setCancelable(false)
+    .setPositiveButton("Goto Settings Page To Enable Internet Connection",
+            new DialogInterface.OnClickListener(){
+        public void onClick(DialogInterface dialog, int id){
+            Intent wirelessIntent = new Intent(
+                    android.provider.Settings.ACTION_WIFI_SETTINGS);
+            startActivity(wirelessIntent);
+        }
+    });
+    alertDialogBuilder.setNegativeButton("Cancel",
+            new DialogInterface.OnClickListener(){
+        public void onClick(DialogInterface dialog, int id){
+            dialog.cancel();
+        }
+    });
+    AlertDialog alert = alertDialogBuilder.create();
+    alert.show();
+}
+///////////////////////
 @Override
 public void onDisconnected() {
 // Display the connection status
@@ -455,10 +485,11 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	protected ArrayList<HashMap<String, String>> doInBackground(String... args) 
 	{
 	
-		String param_longitude = args[1];
+		
 		String param_latitude = args[0];
-		longit = args[1];
+		String param_longitude = args[1];
 		latit = args[0];
+		longit = args[1];
 		System.out.println(param_longitude + " " + param_latitude + " in do background");
 	       fullGPS_URL = gpsURL_1 + param_longitude + gpsURL_2 + param_latitude;
 	        
