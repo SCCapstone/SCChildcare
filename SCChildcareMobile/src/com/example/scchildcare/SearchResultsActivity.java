@@ -1,5 +1,6 @@
 
 
+
 package com.example.scchildcare;
 
 
@@ -16,15 +17,19 @@ import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
 import android.app.ListActivity;
+
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
+
 import android.util.Log;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +39,7 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -265,5 +271,6 @@ public class SearchResultsActivity extends ListActivity {
 	    super.onSaveInstanceState(savedInstanceState);
 	}
 	
+>>>>>>> eb588818b8a940a8d682f3ec3d3a282cda3f3fd4
 
 }
