@@ -14,11 +14,12 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:contentDescription="@null"
             android:layout_width="0dp"
-            android:layout_height="78dp"
+            android:layout_height="120dp"
             android:layout_weight="0.67"
+            android:contentDescription="@null"
             android:src="@drawable/ic_scchildcare_logo" />
+
     </LinearLayout>
 
     <EditText
