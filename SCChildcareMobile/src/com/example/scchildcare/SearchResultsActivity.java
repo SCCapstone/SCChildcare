@@ -43,10 +43,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 //import com.example.myfirstapp.trackdata.TrackData;
 
 public class SearchResultsActivity extends ListActivity {
-	private static final String searchURL = "http://54.201.44.59:3000/providers.json?utf8=%E2%9C%93&search=";
-	// private static byte[] buff = new byte[1024];
-	// private static String result = null;
-	private static String fullSearchURL = null;
 
 	// JSON node names
 	private static final String TAG_PROVIDERS = "providers";

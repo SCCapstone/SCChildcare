@@ -44,11 +44,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 //import com.example.myfirstapp.trackdata.TrackData;
 
 public class GPS_SearchResultsActivity extends ListActivity {
-	private static final String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
-	private static final String gpsURL_2 = "&lat=";
-	// private static byte[] buff = new byte[1024];
-	// private static String result = null;
-	private static String fullGPS_URL = null;
 
 	// JSON node names
 	private static final String TAG_PROVIDERS = "providers";
