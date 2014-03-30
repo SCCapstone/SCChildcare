@@ -42,15 +42,7 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
 
-	// JSON node keys for Permits
-	private static final String TAG_PERMITS = "providerpermits";
-	// private static final String TAG_PERMITID = "id";
-	// private static final String TAG_PROVIDERID = "provider_id";
-	// private static final String TAG_PROVIDER_NAME = "provider_name";
-	private static final String TAG_PERMITNAME = "permit_name";
-	private static final String TAG_PERMITEXPIRATION = "expiration";
-	JSONArray permits = null;
-	ArrayList<HashMap<String, String>> permitList = new ArrayList<HashMap<String, String>>();
+	
 
 	// JSON node keys for Complaints
 	private static final String TAG_COMPLAINTS = "providercomplaints";
@@ -63,9 +55,8 @@ public class SingleMenuItemActivity extends Activity {
 	ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
 
 	// HTTP Stuff
-	private static final String permitSearchURL = "http://54.201.44.59:3000/providerpermits.json?utf8=%E2%9C%93&search=";
 	private static final String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
-	private static String permitFullSearchURL = null;
+
 	private static String complaintFullSearchURL = null;
 
 	GoogleMap mMap;
@@ -149,90 +140,7 @@ public class SingleMenuItemActivity extends Activity {
 		mMap.moveCamera(CameraUpdateFactory
 				.newLatLngZoom(PROVIDER_LOCATION, 14));
 
-		/** DISPLAY PERMIT DATA **/
-
-		// Parse Data
-		permitFullSearchURL = permitSearchURL + providerName;
-
-		JSONParser jPermitParser = new JSONParser();
-		String permitActualSearch = permitFullSearchURL.replace(" ", "+");
-		Log.d("TESTING FOR PROPER SEARCH", permitActualSearch);
-
-		JSONObject permitjson = jPermitParser
-				.getJSONFromUrl(permitActualSearch);
-
-		System.out.println("PERMIT HTTP SUCCESSFUL");
-		try {
-			// get the array of providers
-			System.out.println("CREATING THE PERMITS JSON ARRAY");
-
-			permits = permitjson.getJSONArray(TAG_PERMITS);
-
-			System.out.println("Beginning For Loop to go through array");
-
-			
-				for (int i = 0; i < permits.length(); i++) {
-					JSONObject permit = permits.getJSONObject(i);
-
-					// store the json items in variables
-
-					String permitName = permit.getString(TAG_PERMITNAME);
-					String permitExpiration = permit
-							.getString(TAG_PERMITEXPIRATION);
-
-					HashMap<String, String> pmap = new HashMap<String, String>();
-
-					pmap.put(TAG_PERMITNAME, permitName);
-					pmap.put(TAG_PERMITEXPIRATION, permitExpiration);
-
-					// add Hashlist to ArrayList
-					System.out
-							.println("Adding Tags to Map, adding map to providerList");
-					permitList.add(pmap);
-
-				}
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
-
-		// Display parsed Permit data-DO THIS********************
-
-		TextView permitsTableLabel = (TextView) findViewById(R.id.permits_Table_label);
-		permitsTableLabel.setText("Permits: ");
-
-		TableLayout permitTable = (TableLayout) findViewById(R.id.permitTable);
-		permitTable.setStretchAllColumns(true);
-
-		System.out.println("Building Table");
-
-		for (int i = 0; i < permitList.size(); i++) {
-			TableRow permitRow = new TableRow(SingleMenuItemActivity.this);
-			System.out.println("Building Table");
-
-			String permitNameData = permitList.get(i).get(TAG_PERMITNAME);
-			String permitExpirationData = permitList.get(i).get(
-					TAG_PERMITEXPIRATION);
-
-			Log.d("What PermitData says", permitList.get(i).get(TAG_PERMITNAME));
-			Log.d("What PermitData says",
-					permitList.get(i).get(TAG_PERMITEXPIRATION));
-
-			TextView lblPermitName = new TextView(this);
-			TextView lblPermitExpiration = new TextView(this);
-
-			lblPermitName.setText(permitNameData);
-			lblPermitName.setPadding(20, 20, 20, 20);
-			lblPermitExpiration.setText(permitExpirationData);
-			lblPermitExpiration.setPadding(20, 20, 20, 20);
-
-			permitRow.addView(lblPermitName);
-
-			permitRow.addView(lblPermitExpiration);
-
-			permitTable.addView(permitRow);
-
-		}
+		
 
 		/** DISPLAY COMPLAINT DATA **/
 
@@ -269,7 +177,7 @@ public class SingleMenuItemActivity extends Activity {
 					// add Hashlist to ArrayList
 					System.out
 							.println("Adding Tags to Map, adding map to providerList");
-					permitList.add(cmap);
+					complaintList.add(cmap);
 
 				}
 			
@@ -318,6 +226,9 @@ public class SingleMenuItemActivity extends Activity {
 
 		}
 
+		
+		
+		
 	}
 
 }

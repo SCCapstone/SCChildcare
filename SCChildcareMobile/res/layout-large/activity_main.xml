@@ -14,12 +14,17 @@
 
         <ImageView
             android:id="@+id/imageView1"
-            android:contentDescription="@null"
             android:layout_width="0dp"
-            android:layout_height="78dp"
+            android:layout_height="120dp"
             android:layout_weight="0.67"
+            android:contentDescription="@null"
             android:src="@drawable/ic_scchildcare_logo" />
+        
+        
+
     </LinearLayout>
+
+
 
     <EditText
         android:id="@+id/edit_message"
@@ -42,33 +47,43 @@
             android:orientation="horizontal" >
 
             <ImageButton
-                android:id="@+id/add_comment_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:id="@+id/button1"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
+                android:background="@drawable/gpstarget"
                 android:contentDescription="@string/GPSDesc"
                 android:gravity="center"
+                android:paddingRight="10dp"
                 android:onClick="getLocation"
-                android:src="@drawable/gpstarget"
                 android:text="@string/button_locate" />
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@android:color/transparent"
+                android:layout_width="74dp"
+                android:layout_height="74dp"
                 android:contentDescription="@string/searchDesc"
                 android:gravity="center"
                 android:onClick="sendMessage"
-                android:src="@drawable/search_icon"
+                android:paddingLeft="10dp"
+                android:background="@drawable/search_icon"
                 android:text="@string/button_search" />
         </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <com.facebook.widget.LoginButton
-            android:id="@+id/authButton"
+        <TextView
+            android:id="@+id/disclaimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:gravity="center" />
+            android:gravity="center_horizontal"
+            android:paddingTop="60dp"
+            android:text="@string/disclaimer"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ff0000"
+            android:textStyle="italic" />
+
     </LinearLayout>
 
 </LinearLayout>

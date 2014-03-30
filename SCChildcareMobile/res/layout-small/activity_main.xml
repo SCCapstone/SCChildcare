@@ -18,7 +18,8 @@
             android:layout_width="0dp"
             android:layout_height="78dp"
             android:layout_weight="0.67"
-            android:src="@drawable/ic_scchildcare_logo" />
+            
+            android:background="@drawable/ic_scchildcare_logo" />
     </LinearLayout>
 
     <EditText
@@ -35,14 +36,13 @@
         android:orientation="vertical" >
 
         <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="horizontal" >
 
             <ImageButton
-                android:id="@+id/add_comment_button"
+                android:id="@+id/button1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
@@ -63,12 +63,16 @@
                 android:text="@string/button_search" />
         </LinearLayout>
 
-        <com.facebook.widget.LoginButton
-            android:id="@+id/authButton"
+        <TextView
+            android:id="@+id/disclaimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
-            android:gravity="center" />
+            android:gravity="center_horizontal"
+            android:paddingTop="60dp"
+            android:text="@string/disclaimer"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="#ff0000"
+            android:textStyle="italic" />
     </LinearLayout>
 
 </LinearLayout>

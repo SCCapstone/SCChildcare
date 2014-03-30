@@ -1,4 +1,3 @@
-
 # built application files
 *.apk
 *.ap_
@@ -32,3 +31,5 @@ proguard/*
 # Store files
 
 .DS_Store
+
+
