@@ -60,8 +60,8 @@
 
             <ImageButton
                 android:id="@+id/button_2"
-                android:layout_width="85dp"
-                android:layout_height="87dp"
+                android:layout_width="87dp"
+                android:layout_height="95dp"
                 android:background="@drawable/search_icon"
                 android:contentDescription="@string/searchDesc"
                 android:gravity="center"
