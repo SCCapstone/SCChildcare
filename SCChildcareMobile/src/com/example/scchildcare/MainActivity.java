@@ -658,7 +658,6 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 		 SearchResults.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
 		 startActivity(SearchResults);
 		 
-		
 		}
 	 
 	@Override

@@ -5,6 +5,7 @@ package com.example.scchildcare;
 
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -253,7 +254,7 @@ public class SearchResultsActivity extends ListActivity {
 				map.put(TAG_QUALITY, qualityLevel);
 				
 				SingleItemResults singleItem = new SingleItemResults(lv.getContext(), map);
-				singleItem.execute();
+				singleItem.execute(providerName);
 				
 				//tartActivity(in);
 			}
@@ -279,19 +280,20 @@ public class SearchResultsActivity extends ListActivity {
 	    super.onSaveInstanceState(savedInstanceState);
 	}
 	
-	   class SingleItemResults extends AsyncTask<String, String, String>
+	   class SingleItemResults extends AsyncTask<String, String, ArrayList<HashMap<String, String>>>
 		{
 
 		  String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
 		  String complaintFullSearchURL = null;
 		  JSONParser jComplaintParser = new JSONParser();
-		  String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
+		 
 		  JSONArray complaints = null;
 		  ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
 		  private static final String TAG_COMPLAINTTYPE = "complaint_type";
 		  private static final String TAG_COMPLAINTDATE = "issueDate";
 		  private static final String TAG_COMPLAINTRESOLVED = "resolved";
 		  private static final String TAG_COMPLAINTS = "providercomplaints";
+		  private static final String TAG_CENTER_DATA = "dataforcenter";
 		  
 		   
 	    	Context aContext;
@@ -302,10 +304,21 @@ public class SearchResultsActivity extends ListActivity {
 	    		theMap = aMap;
 	    	}
 	    	
+	    	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
+	    	{	
+	    	Intent anIntent = new Intent(aContext.getApplicationContext(), SingleMenuItemActivity.class);
+	    	anIntent.putExtra(TAG_COMPLAINTS, (Serializable)result);
+	    	anIntent.putExtra(TAG_CENTER_DATA, (Serializable)theMap);
+	    	startActivity(anIntent);
+	    	}
 	    	
 			@Override
-			protected String doInBackground(String... params) 
+			protected ArrayList<HashMap<String, String>> doInBackground(String... params) 
 			{
+				String providerName = params[0];
+				complaintFullSearchURL = complaintSearchURL + providerName;
+				String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
+				
 				if(isURLReachable(aContext))
 				{
 				
@@ -349,7 +362,7 @@ public class SearchResultsActivity extends ListActivity {
 				        }
 					
 				}
-				return null;
+				return complaintList;
 			}
 			 public boolean isURLReachable(Context context) {
 				    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);

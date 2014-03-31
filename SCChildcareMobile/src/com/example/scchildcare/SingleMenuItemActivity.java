@@ -50,12 +50,8 @@ public class SingleMenuItemActivity extends Activity {
     private static final String TAG_SPECIALISTPHONE = "specialistPhone";
     private static final String TAG_QUALITY = "qualityLevel";
 
-    
-
     // JSON node keys for Complaints
     private static final String TAG_COMPLAINTS = "providercomplaints";
-
-    
     private static final String TAG_COMPLAINTTYPE = "complaint_type";
     private static final String TAG_COMPLAINTDATE = "issueDate";
     private static final String TAG_COMPLAINTRESOLVED = "resolved";
