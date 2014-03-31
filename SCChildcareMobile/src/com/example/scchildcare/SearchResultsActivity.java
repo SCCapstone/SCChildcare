@@ -29,6 +29,7 @@ import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.os.SystemClock;
 import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
 
@@ -82,7 +83,7 @@ public class SearchResultsActivity extends ListActivity {
 	private static final String TAG_QUALITY = "qualityLevel";
 	private static final String TAG_LIST_OF_PROVIDERS = "pList";
 	String message;
-
+	private long mLastClickTime = 0;
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
 	private static final LatLng SOUTH_CAROLINA = new LatLng(34.0096138,	-81.0392966); 		 		
@@ -210,12 +211,18 @@ public class SearchResultsActivity extends ListActivity {
 		setListAdapter(adapter);
 
 		final ListView lv = getListView();
-
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				
+				  
+				 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+			            return;
+			        }
+			        mLastClickTime = SystemClock.elapsedRealtime();	
+			        
 				// getting values from selected ListItem
 				String providerName = ((TextView) view.findViewById(R.id.name))
 						.getText().toString();

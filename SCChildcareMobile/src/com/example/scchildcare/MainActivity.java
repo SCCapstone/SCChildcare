@@ -44,6 +44,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
+import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -73,6 +74,7 @@ GooglePlayServicesClient.OnConnectionFailedListener {
 public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 public final static String EXTRA_LONGITUDE = null;
 public final static String EXTRA_LATITUDE = null;
+private long mLastClickTime = 0;
 //JSONParser jParser = new JSONParser();
 ////////////////////////////////////////////////////////////////////
 
@@ -174,11 +176,19 @@ System.out.println("getsystemservice");
  System.out.println("button2");
  button2 = (ImageButton) findViewById(R.id.button_2);
  System.out.println("button1onclick");
+ 
  button1.setOnClickListener(new View.OnClickListener(){
 
 	@Override
 	public void onClick(View v)
 	{
+		
+		 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+	            return;
+	        }
+	        mLastClickTime = SystemClock.elapsedRealtime();	
+///////////////////////	
+		
 		
 			// If Google Play Services is available
 			if (servicesConnected() && isNetworkAvailable()) {
@@ -230,6 +240,15 @@ System.out.println("getsystemservice");
 	public void onClick(View v) 
 	{
 	
+		
+		//////////////////////////	
+		 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+	            return;
+	        }
+	        mLastClickTime = SystemClock.elapsedRealtime();	
+///////////////////////	
+		
+		
 		if(isNetworkAvailable()){	
 		//	Intent intent = new Intent(this, SearchResultsActivity.class);
 			editText = (EditText)findViewById(R.id.edit_message);
@@ -251,7 +270,8 @@ System.out.println("getsystemservice");
 				
 		   showConnectionAlertToUser();	
 							
-			}	
+			}
+	
 	}
  });
  
@@ -475,6 +495,8 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
  //  private ProgressBar progressBar;
    ArrayList<HashMap<String, String>> storeData = new ArrayList<HashMap<String, String>>();
 	// JSON node names
+   
+ //  ProgressBar pBar;
 
 	 Context aContext;
    private GetGPSResults(Context context) 
@@ -485,7 +507,7 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	protected void onPreExecute()
 	{
 		  super.onPreExecute();
-	//      progressBar.setVisibility(View.VISIBLE);
+	   //  pBar.setVisibility(View.VISIBLE);
 	}
 	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
 	{	
@@ -496,7 +518,7 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	 coordinates.putString("EXTRA_LATITUDE", latit);
 	 coordinates.putString("EXTRA_LONGITUDE", longit);
 	 GPSSearch.putExtras(coordinates);
-   //  progressBar.setVisibility(View.INVISIBLE);
+    // pBar.setVisibility(View.INVISIBLE);
 	 startActivity(GPSSearch);
 	}
 	protected ArrayList<HashMap<String, String>> doInBackground(String... args) 

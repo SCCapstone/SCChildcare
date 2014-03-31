@@ -34,17 +34,17 @@
 # view xlarge/res/layout-xlarge/single_list_item.xml #generated:194
 -keep class com.google.android.gms.maps.MapFragment { <init>(...); }
 
-# onClick large/res/layout-large/activity_main.xml #generated:49
+# onClick large/res/layout-large/activity_main.xml #generated:54
 # onClick normal/res/layout-normal/activity_main.xml #generated:34
 # onClick res/layout/activity_main.xml #generated:43
 # onClick small/res/layout-small/activity_main.xml #generated:44
 # onClick xlarge/res/layout-xlarge/activity_main.xml #generated:49
 -keepclassmembers class * { *** getLocation(...); }
 
-# onClick large/res/layout-large/activity_main.xml #generated:60
+# onClick large/res/layout-large/activity_main.xml #generated:65
 # onClick normal/res/layout-normal/activity_main.xml #generated:46
 # onClick res/layout/activity_main.xml #generated:54
 # onClick small/res/layout-small/activity_main.xml #generated:55
-# onClick xlarge/res/layout-xlarge/activity_main.xml #generated:59
+# onClick xlarge/res/layout-xlarge/activity_main.xml #generated:60
 -keepclassmembers class * { *** sendMessage(...); }
 

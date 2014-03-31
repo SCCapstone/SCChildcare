@@ -26,6 +26,7 @@ import android.os.AsyncTask;
 
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.os.SystemClock;
 import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
@@ -74,7 +75,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_LIST_OF_PROVIDERS = "pList";
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
-
+	private long mLastClickTime = 0;
 	String theMarker = "";
 
 	GoogleMap mMap;
@@ -196,12 +197,18 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		setListAdapter(adapter);
 
 		final ListView lv = getListView();
-
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				
+				
+				 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+			            return;
+			        }
+			        mLastClickTime = SystemClock.elapsedRealtime();	
+				
 				// getting values from selected ListItem
 				String providerName = ((TextView) view.findViewById(R.id.name))
 						.getText().toString();
@@ -426,7 +433,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 			    return false;
 			}
 	}
-
 
 
 }
