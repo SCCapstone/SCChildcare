@@ -1,5 +1,9 @@
 package com.example.scchildcare;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,11 +12,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
 import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -42,18 +53,14 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
 
-	
-
 	// JSON node keys for Complaints
 	private static final String TAG_COMPLAINTS = "providercomplaints";
-
-	
 	private static final String TAG_COMPLAINTTYPE = "complaint_type";
 	private static final String TAG_COMPLAINTDATE = "issueDate";
 	private static final String TAG_COMPLAINTRESOLVED = "resolved";
-	
-	JSONArray complaints = null;
-	ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
+	private static final String TAG_CENTER_DATA = "dataforcenter";
+
+	// JSONArray complaints = null;
 
 	// HTTP Stuff
 	private static final String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
@@ -69,6 +76,7 @@ public class SingleMenuItemActivity extends Activity {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -76,24 +84,34 @@ public class SingleMenuItemActivity extends Activity {
 
 		// getting intent data
 		Intent in = getIntent();
+		Bundle getProviderData = in.getExtras();
+		ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
+		complaintList = (ArrayList<HashMap<String, String>>) getProviderData
+				.getSerializable(TAG_COMPLAINTS);
+		HashMap<String, String> map = new HashMap<String, String>();
+		map = (HashMap<String, String>) getProviderData
+				.getSerializable(TAG_CENTER_DATA);
 
+		// ////////////////////////////////////////////
 		// Get JSON values from previous intent
-		String providerName = in.getStringExtra(TAG_PROVIDERNAME);
-		String licenseInfo = in.getStringExtra(TAG_LICENSEINFO);
-		String ownerName = in.getStringExtra(TAG_OWNERNAME);
-		String address = in.getStringExtra(TAG_ADDRESS);
-		String city = in.getStringExtra(TAG_CITY);
-		String state = in.getStringExtra(TAG_STATE);
-		String zipCode = in.getStringExtra(TAG_ZIPCODE);
-		String phoneNumber = in.getStringExtra(TAG_PHONENUMBER);
-		String latitude = in.getStringExtra(TAG_LATITUDE);
-		String longitude = in.getStringExtra(TAG_LONGITUDE);
-		String capacity = in.getStringExtra(TAG_CAPACITY);
-		String hours = in.getStringExtra(TAG_HOURS);
-		String specialist = in.getStringExtra(TAG_SPECIALIST);
-		String specialistPhone = in.getStringExtra(TAG_SPECIALISTPHONE);
-		String qualityLevel = in.getStringExtra(TAG_QUALITY);
+		String providerName = map.get(TAG_PROVIDERNAME);
+		String licenseInfo = map.get(TAG_LICENSEINFO);
+		String ownerName = map.get(TAG_OWNERNAME);
+		String address = map.get(TAG_ADDRESS);
+		String city = map.get(TAG_CITY);
+		String state = map.get(TAG_STATE);
+		String zipCode = map.get(TAG_ZIPCODE);
+		String phoneNumber = map.get(TAG_PHONENUMBER);
+		String latitude = map.get(TAG_LATITUDE);
+		String longitude = map.get(TAG_LONGITUDE);
+		String capacity = map.get(TAG_CAPACITY);
+		String hours = map.get(TAG_HOURS);
+		String specialist = map.get(TAG_SPECIALIST);
+		String specialistPhone = map.get(TAG_SPECIALISTPHONE);
+		String qualityLevel = map.get(TAG_QUALITY).replace("null",
+				"Not Participating");
 
+		// ///////////////////////////////////////////////////////////////////////////////////////////////
 		// Displaying all values on the screen
 		TextView lblName = (TextView) findViewById(R.id.name_label);
 		TextView lblLicense = (TextView) findViewById(R.id.license_label);
@@ -142,52 +160,45 @@ public class SingleMenuItemActivity extends Activity {
 		mMap.moveCamera(CameraUpdateFactory
 				.newLatLngZoom(PROVIDER_LOCATION, 14));
 
-		
-
 		/** DISPLAY COMPLAINT DATA **/
-
-		complaintFullSearchURL = complaintSearchURL + providerName;
-
-		JSONParser jComplaintParser = new JSONParser();
-		String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
-		JSONObject complaintjson = jComplaintParser
-				.getJSONFromUrl(complaintActualSearch);
-
-		System.out.println("COMPLAINT HTTP SUCCESSFUL");
-		try {
-			// get the array of providers
-			System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
-
-			complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
-			System.out.println("Beginning For Loop to go through array");
-
-			
-				for (int i = 0; i < complaints.length(); i++) {
-					JSONObject complaint = complaints.getJSONObject(i);
-
-					// store the json items in variables
-
-					String complaintType = complaint.getString(TAG_COMPLAINTTYPE);
-					String issueDate = complaint.getString(TAG_COMPLAINTDATE);
-					String complaintResolved = complaint
-							.getString(TAG_COMPLAINTRESOLVED);
-
-					HashMap<String, String> cmap = new HashMap<String, String>();
-
-					cmap.put(TAG_COMPLAINTTYPE, complaintType);
-					cmap.put(TAG_COMPLAINTDATE, issueDate);
-					cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
-
-					// add Hashlist to ArrayList
-					System.out
-							.println("Adding Tags to Map, adding map to providerList");
-					complaintList.add(cmap);
-
-				}
-			
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}
+		/*
+		 * complaintFullSearchURL = complaintSearchURL + providerName;
+		 * 
+		 * JSONParser jComplaintParser = new JSONParser(); String
+		 * complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
+		 * JSONObject complaintjson = jComplaintParser
+		 * .getJSONFromUrl(complaintActualSearch);
+		 * 
+		 * System.out.println("COMPLAINT HTTP SUCCESSFUL");
+		 * 
+		 * // get the array of providers
+		 * System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
+		 * 
+		 * complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
+		 * System.out.println("Beginning For Loop to go through array");
+		 */
+		/*
+		 * for (int i = 0; i < complaintList.size(); i++) { // JSONObject
+		 * complaint = complaints.getJSONObject(i);
+		 * 
+		 * // store the json items in variables
+		 * 
+		 * String complaintType = complaint.getString(TAG_COMPLAINTTYPE); String
+		 * issueDate = complaint.getString(TAG_COMPLAINTDATE); String
+		 * complaintResolved = complaint .getString(TAG_COMPLAINTRESOLVED);
+		 * 
+		 * HashMap<String, String> cmap = new HashMap<String, String>();
+		 * 
+		 * cmap.put(TAG_COMPLAINTTYPE, complaintType);
+		 * cmap.put(TAG_COMPLAINTDATE, issueDate);
+		 * cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
+		 * 
+		 * // add Hashlist to ArrayList System.out
+		 * .println("Adding Tags to Map, adding map to providerList");
+		 * complaintList.add(cmap);
+		 * 
+		 * }
+		 */
 
 		// //Display parsed Complaint data-DO THIS********************
 		//
@@ -228,7 +239,7 @@ public class SingleMenuItemActivity extends Activity {
 			lblComplaintResolved.setPadding(20, 20, 20, 20);
 
 			complaintRow.addView(lblComplaintType);
-			
+
 			complaintRow.addView(lblComplaintDate);
 
 			complaintRow.addView(lblComplaintResolved);
@@ -237,10 +248,30 @@ public class SingleMenuItemActivity extends Activity {
 
 		}
 
-		
-		
-		
+		// Comment System Stuff
+		/***********************************************************************
+  *        
+  */
+		Button addComment = (Button) findViewById(R.id.add_comment_button);
+
+		addComment.setOnClickListener(new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+
+				EditText aliasText = (EditText) findViewById(R.id.aliasText);
+				EditText commentText = (EditText) findViewById(R.id.commentText);
+
+				String alias = aliasText.getText().toString();
+				String comment = commentText.getText().toString();
+
+				String alias_spaces = alias.replace(" ", "%20");
+				String comment_spaces = comment.replace(" ", "%20");
+
+			}
+
+		});
 	}
 
 }
-
