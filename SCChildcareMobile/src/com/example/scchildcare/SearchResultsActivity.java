@@ -118,10 +118,10 @@ public class SearchResultsActivity extends ListActivity {
 	    containingMaps = (ArrayList<HashMap<String, String>>) getProviders.getSerializable(TAG_LIST_OF_PROVIDERS);
 		//////////////////////////////////////////////////////////////////////
 
-
+/*
 		ThreadPolicy tp = ThreadPolicy.LAX;
 		StrictMode.setThreadPolicy(tp);	    
-	    
+	    */
 			if (containingMaps.size() == 0) {
 				System.out.println("No Return on Search");
 				Intent sorryIntent = new Intent(this,
@@ -311,6 +311,12 @@ public class SearchResultsActivity extends ListActivity {
 	    	anIntent.putExtra(TAG_CENTER_DATA, (Serializable)theMap);
 	    	startActivity(anIntent);
 	    	}
+	    	
+	    	 protected void onPreExecute()
+	 		{
+	 			  super.onPreExecute();
+	 		//      progressBar.setVisibility(View.VISIBLE);
+	 		}
 	    	
 			@Override
 			protected ArrayList<HashMap<String, String>> doInBackground(String... params) 
