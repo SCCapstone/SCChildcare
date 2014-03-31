@@ -15,19 +15,14 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ListActivity;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.os.SystemClock;
-import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -40,11 +35,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.example.scchildcare.SearchResultsActivity.SingleItemResults;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -55,7 +49,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class GPS_SearchResultsActivity extends ListActivity {
 
 	// JSON node names
-	private static final String TAG_PROVIDERS = "providers";
+	//private static final String TAG_PROVIDERS = "providers";
 	private static final String TAG_ID = "id";
 	private static final String TAG_PROVIDERNAME = "providerName";
 	private static final String TAG_LICENSEINFO = "licenseInfo";
@@ -364,7 +358,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		@Override
 		protected ArrayList<HashMap<String, String>> doInBackground(String... params) 
 		{
-			String providerName = params[0];
+			//String providerName = params[0];
 			String providerID = params[0];
 			complaintFullSearchURL = complaintSearchURL + providerID;
 			String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");

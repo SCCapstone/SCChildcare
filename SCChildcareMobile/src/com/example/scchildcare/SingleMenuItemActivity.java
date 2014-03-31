@@ -1,22 +1,22 @@
 package com.example.scchildcare;
 
-import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
@@ -34,9 +34,11 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+
 public class SingleMenuItemActivity extends Activity {
 
 	// JSON node keys for providers
+	private static final String TAG_PROVIDERID ="id";
 	private static final String TAG_PROVIDERNAME = "providerName";
 	private static final String TAG_LICENSEINFO = "licenseInfo";
 	private static final String TAG_OWNERNAME = "ownerName";
@@ -52,6 +54,8 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
+	
+	
 
 	// JSON node keys for Complaints
 	private static final String TAG_COMPLAINTS = "providercomplaints";
@@ -59,13 +63,33 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_COMPLAINTDATE = "issueDate";
 	private static final String TAG_COMPLAINTRESOLVED = "resolved";
 	private static final String TAG_CENTER_DATA = "dataforcenter";
+	
+	
+	//JSON nodes for Comments
+	private static final String TAG_ALIAS = "user";
+	private static final String TAG_BODY = "body";
+	private static final String TAG_PROVIDER_COMMENT_ID = "provider_id";
+	String provider_comment_ID;
+	HttpResponse response;
+	
+	
+	
+	
 
 	// JSONArray complaints = null;
 
 	// HTTP Stuff
-	private static final String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
-
-	private static String complaintFullSearchURL = null;
+	//private static final String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
+	private static final String commentAddURL1 = "http://54.201.44.59:3000/provider/";
+	private static final String commentAddURL2 = "/comments/new";
+	private static final String commentGetURL1 = "http://54.201.44.59:3000/providers/";
+	private static final String commentGetURL2 = "/comments.json";
+	private static final String TAG_COMMENTS = "comments";
+	
+	JSONParser jParser = new JSONParser();
+	JSONArray comments = null;
+			
+	//private static String complaintFullSearchURL = null;
 
 	GoogleMap mMap;
 
@@ -94,6 +118,7 @@ public class SingleMenuItemActivity extends Activity {
 
 		// ////////////////////////////////////////////
 		// Get JSON values from previous intent
+		final String providerID = map.get(TAG_PROVIDERID);
 		String providerName = map.get(TAG_PROVIDERNAME);
 		String licenseInfo = map.get(TAG_LICENSEINFO);
 		String ownerName = map.get(TAG_OWNERNAME);
@@ -110,6 +135,10 @@ public class SingleMenuItemActivity extends Activity {
 		String specialistPhone = map.get(TAG_SPECIALISTPHONE);
 		String qualityLevel = map.get(TAG_QUALITY).replace("null",
 				"Not Participating");
+		
+		provider_comment_ID = providerID;
+		
+		//Log.d("PROVIDER ID: ", providerID);
 
 		// ///////////////////////////////////////////////////////////////////////////////////////////////
 		// Displaying all values on the screen
@@ -245,6 +274,89 @@ public class SingleMenuItemActivity extends Activity {
 			complaintRow.addView(lblComplaintResolved);
 
 			complaintTable.addView(complaintRow);
+			
+			//System.out.println(providerID);
+			
+			
+			
+			//COMMENTS
+			
+			ArrayList<HashMap<String, String>> commentList = new ArrayList<HashMap<String, String>>();
+			
+			HttpClient getClient = new DefaultHttpClient();
+	        HttpConnectionParams.setConnectionTimeout(getClient.getParams(), 10000); //Timeout Limit
+			
+			String getURL = commentGetURL1 + provider_comment_ID + commentGetURL2;
+			
+			JSONObject json = jParser.getJSONFromUrl(getURL);
+			
+			try{
+				comments = json.getJSONArray(TAG_COMMENTS);
+				
+				for (int i = 0; i < comments.length(); i++) {
+					System.out.println("Comment 1");
+                    JSONObject complaint = comments.getJSONObject(i);
+
+                    // store the json items in variables
+
+                    String alias = complaint.getString(TAG_ALIAS);
+                    String body = complaint.getString(TAG_BODY);
+                    
+
+                    HashMap<String, String> commentMap = new HashMap<String, String>();
+
+                    commentMap.put(TAG_ALIAS, alias);
+                    commentMap.put(TAG_BODY, body);
+
+                    // add Hashlist to ArrayList
+                    System.out.println("Adding Tags to Map, adding map to commentList");
+                    commentList.add(commentMap);
+
+                }
+				
+				
+				
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
+			
+			System.out.println("BREAK TEST");
+			TableLayout commentTable = (TableLayout) findViewById(R.id.commentTable);
+			System.out.println("BREAK TEST");
+			complaintTable.setStretchAllColumns(true);
+			
+			System.out.println("Building Comment Table");
+			
+//			for (int k = 0; k < commentList.size(); k++) {
+//				TableRow commentRow = new TableRow(SingleMenuItemActivity.this);
+//				System.out.println("Building Table");
+//
+//				String commentAlias = commentList.get(k).get(TAG_ALIAS);
+//				String commentBody = commentList.get(k).get(TAG_BODY);
+//
+//				
+//
+//				TextView lblCommentAlias = new TextView(this);
+//				TextView lblCommentBody = new TextView(this);
+//				;
+//
+//				lblCommentAlias.setText(commentAlias);
+//				lblCommentAlias.setPadding(10, 10, 10, 10);
+//				lblCommentBody.setText(commentBody);
+//				lblCommentBody.setPadding(10, 10, 10, 10);
+//				
+//
+//				commentRow.addView(lblCommentAlias);
+//
+//				commentRow.addView(lblCommentBody);
+//
+//				commentTable.addView(commentRow);
+//			
+//			
+//			}
+			
+			
+			
 
 		}
 
@@ -266,8 +378,49 @@ public class SingleMenuItemActivity extends Activity {
 				String alias = aliasText.getText().toString();
 				String comment = commentText.getText().toString();
 
-				String alias_spaces = alias.replace(" ", "%20");
-				String comment_spaces = comment.replace(" ", "%20");
+				
+				
+				//String alias_spaces = alias.replace(" ", "%20");
+				//String comment_spaces = comment.replace(" ", "%20");
+				
+				//HashMap<String, String> commentMap = new HashMap<String, String>();
+				
+				//commentMap.put(TAG_PROVIDERID, providerID);
+				//commentMap.put(TAG_ALIAS, alias);
+				//commentMap.put(TAG_BODY, comment);
+				
+				//Gson commentJSON = new Gson();
+				//commentJSON.toJson(commentMap);
+				
+				HttpClient postClient = new DefaultHttpClient();
+		        HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000); //Timeout Limit
+			    
+		        
+		        String postURL = commentAddURL1 + provider_comment_ID + commentAddURL2;
+				
+				JSONObject commentJSON = new JSONObject();
+				try{
+					HttpPost post = new HttpPost(postURL);
+				commentJSON.put(TAG_PROVIDER_COMMENT_ID, provider_comment_ID);
+				commentJSON.put(TAG_ALIAS, alias);
+				commentJSON.put(TAG_BODY, comment);
+				
+				StringEntity se = new StringEntity("JSON: " + commentJSON.toString());
+				se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+				
+				
+				post.setEntity(se);
+				response = postClient.execute(post);
+				
+				
+				}catch(Exception e){
+		            e.printStackTrace();
+		            // createDialog("Error", "Cannot Estabilish Connection");
+		         }
+				
+				
+				//System.out.println(commentJSON);
+				
 
 			}
 
