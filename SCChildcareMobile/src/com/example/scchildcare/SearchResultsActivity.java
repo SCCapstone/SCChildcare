@@ -17,9 +17,11 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -48,6 +50,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -81,13 +84,13 @@ public class SearchResultsActivity extends ListActivity {
 	String message;
 
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
-
+	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
 	private static final LatLng SOUTH_CAROLINA = new LatLng(34.0096138,	-81.0392966); 		 		
 
 	GoogleMap mMap;
 	
 	/////////////////////
-	Marker marker_1;
+	String theMarker = "";
 	////////////////////
 
 	// providers JSONArray
@@ -110,9 +113,8 @@ public class SearchResultsActivity extends ListActivity {
 
 		// Hashmap for ListView
 
-		ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
 		
-         //////////////////////////////////////////////////////////////////////////////////////////			
+       /////////////////////////////////////////////////////////////////////////////////////////			
 		Intent intent = getIntent();
 		Bundle getProviders = intent.getExtras();
 	    containingMaps = (ArrayList<HashMap<String, String>>) getProviders.getSerializable(TAG_LIST_OF_PROVIDERS);
@@ -162,6 +164,23 @@ public class SearchResultsActivity extends ListActivity {
                        mMap.addMarker(new MarkerOptions().position(
                         new LatLng(dbl_latitude, dbl_longitude)).title(
                         providerName));
+                     /////////////////////////////////////////////////////  
+                       mMap.setOnMarkerClickListener(new OnMarkerClickListener()
+                       {
+
+                           @Override
+                           public boolean onMarkerClick(Marker aMarker) 
+                           {
+                             theMarker = (aMarker.getTitle());
+                             aMarker.showInfoWindow();
+                             goToCenter(theMarker, getApplicationContext());
+                               return true;
+                           }
+                           
+                           
+                       });
+                   ////////////////////////////////////    
+                       
                        
 				}
 				mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
@@ -272,6 +291,47 @@ public class SearchResultsActivity extends ListActivity {
 		return super.onOptionsItemSelected(item);
 
 	}
+	
+	private void goToCenter(final String aString, Context context){
+		final Context aContext = context;
+		
+	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+	    alertDialogBuilder.setMessage("Would you like more information about " + aString + " ?")
+	    .setCancelable(false)
+	    .setPositiveButton("Go to child care provider page",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id)
+	        {
+	   //////////////////////////////////////////////////////////////////
+	        	int i = 0;
+	        	while(i < containingMaps.size()) {
+	    			
+					HashMap<String, String> map = new HashMap<String, String>();
+					map = containingMaps.get(i);
+					String providerName = map.get(TAG_PROVIDERNAME);
+					if(providerName.equals(aString))
+					{
+					SingleItemResults singleItem = new SingleItemResults(aContext, map);
+					singleItem.execute(providerName);
+					break;	
+					}
+	        	i++;
+	        	}
+	        	
+	        	
+	   ///////////////////////////////////////////////////////////////////     	
+	        }
+	    });
+	    alertDialogBuilder.setNegativeButton("Cancel",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id){
+	            dialog.cancel();
+	        }
+	    });
+	    AlertDialog alert = alertDialogBuilder.create();
+	    alert.show();
+	}
+	
 	
 
 	public void onSaveInstanceState(Bundle savedInstanceState) {

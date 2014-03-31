@@ -13,10 +13,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -41,7 +43,9 @@ import com.example.scchildcare.SearchResultsActivity.SingleItemResults;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 //import com.google.android.gms.maps.model.LatLngBounds;
 
@@ -69,7 +73,9 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_QUALITY = "qualityLevel";
 	private static final String TAG_LIST_OF_PROVIDERS = "pList";
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
+	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
 
+	String theMarker = "";
 
 	GoogleMap mMap;
 
@@ -93,7 +99,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 		// Hashmap for ListView
 
-		ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
+	
 		
 /////////////////////////////////////////////////////////////////////			
 			Intent intent = getIntent();
@@ -155,6 +161,21 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 							mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 							YOUR_LOCATION, 12));
+							
+							  mMap.setOnMarkerClickListener(new OnMarkerClickListener()
+		                       {
+
+		                           @Override
+		                           public boolean onMarkerClick(Marker aMarker) 
+		                           {
+		                             theMarker = (aMarker.getTitle());
+		                             aMarker.showInfoWindow();
+		                             goToCenter(theMarker, getApplicationContext());
+		                               return true;
+		                           }
+		                           
+		                           
+		                       });
 
 				}
 			}
@@ -240,7 +261,45 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 	}
 	
-
+	private void goToCenter(final String aString, Context context){
+		final Context aContext = context;
+		
+	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+	    alertDialogBuilder.setMessage("Would you like more information about " + aString + " ?")
+	    .setCancelable(false)
+	    .setPositiveButton("Go to child care provider page",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id)
+	        {
+	   //////////////////////////////////////////////////////////////////
+	        	int i = 0;
+	        	while(i < containingMaps.size()) {
+	    			
+					HashMap<String, String> map = new HashMap<String, String>();
+					map = containingMaps.get(i);
+					String providerName = map.get(TAG_PROVIDERNAME);
+					if(providerName.equals(aString))
+					{
+					SingleItemResults singleItem = new SingleItemResults(aContext, map);
+					singleItem.execute(providerName);
+					break;	
+					}
+	        	i++;
+	        	}
+	        	
+	        	
+	   ///////////////////////////////////////////////////////////////////     	
+	        }
+	    });
+	    alertDialogBuilder.setNegativeButton("Cancel",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id){
+	            dialog.cancel();
+	        }
+	    });
+	    AlertDialog alert = alertDialogBuilder.create();
+	    alert.show();
+	}
 	
 
 	@Override
