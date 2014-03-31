@@ -2,7 +2,7 @@
 
 *[http://www.scchildcare.org](http://www.scchildcare.org)
 
-Download the Open Beta now: [Download](https://www.dropbox.com/s/dowx6j8nv8ddqys/SCChildcareMobile.apk)
+Download the Open Beta now: [Download]()
 
 ### DESCRIPTION
 
@@ -18,7 +18,7 @@ view official ratings, and even communicate to other users via a forum/comment s
 
 
 ##Known Bugs
-  - On the Single Provider page, there is a issue with the amount of data being processed at once, causing the screen to cut off the bottom of the page. There is data, the app just skips displaying it. We are looking into a better way of performing tasks.
+
   
 
 
