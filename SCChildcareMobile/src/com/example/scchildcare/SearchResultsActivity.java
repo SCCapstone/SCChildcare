@@ -284,6 +284,15 @@ public class SearchResultsActivity extends ListActivity {
 
 		  String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
 		  String complaintFullSearchURL = null;
+		  JSONParser jComplaintParser = new JSONParser();
+		  String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
+		  JSONArray complaints = null;
+		  ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
+		  private static final String TAG_COMPLAINTTYPE = "complaint_type";
+		  private static final String TAG_COMPLAINTDATE = "issueDate";
+		  private static final String TAG_COMPLAINTRESOLVED = "resolved";
+		  private static final String TAG_COMPLAINTS = "providercomplaints";
+		  
 		   
 	    	Context aContext;
 	    	HashMap<String, String> theMap;
@@ -300,22 +309,44 @@ public class SearchResultsActivity extends ListActivity {
 				if(isURLReachable(aContext))
 				{
 				
+					 JSONObject complaintjson = jComplaintParser
+				                .getJSONFromUrl(complaintActualSearch);	
 					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
-					
+					 System.out.println("COMPLAINT HTTP SUCCESSFUL");
+				        try {
+				            // get the array of providers
+				            System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
+
+				            complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
+				            System.out.println("Beginning For Loop to go through array");
+
+				            
+				                for (int i = 0; i < complaints.length(); i++) {
+				                    JSONObject complaint = complaints.getJSONObject(i);
+
+				                    // store the json items in variables
+
+				                    String complaintType = complaint.getString(TAG_COMPLAINTTYPE);
+				                    String issueDate = complaint.getString(TAG_COMPLAINTDATE);
+				                    String complaintResolved = complaint
+				                            .getString(TAG_COMPLAINTRESOLVED);
+
+				                    HashMap<String, String> cmap = new HashMap<String, String>();
+
+				                    cmap.put(TAG_COMPLAINTTYPE, complaintType);
+				                    cmap.put(TAG_COMPLAINTDATE, issueDate);
+				                    cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
+
+				                    // add Hashlist to ArrayList
+				                    System.out
+				                            .println("Adding Tags to Map, adding map to providerList");
+				                    complaintList.add(cmap);
+
+				                }
+				            
+				        } catch (JSONException e) {
+				            e.printStackTrace();
+				        }
 					
 				}
 				return null;
