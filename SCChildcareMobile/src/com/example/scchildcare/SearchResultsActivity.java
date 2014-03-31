@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.StrictMode.ThreadPolicy;
@@ -188,7 +189,7 @@ public class SearchResultsActivity extends ListActivity {
 
 		setListAdapter(adapter);
 
-		ListView lv = getListView();
+		final ListView lv = getListView();
 
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
@@ -230,24 +231,31 @@ public class SearchResultsActivity extends ListActivity {
 						.findViewById(R.id.qualityLevel)).getText().toString();
 
 				// Starting new intent
-				Intent in = new Intent(getApplicationContext(),
-						SingleMenuItemActivity.class);
-				in.putExtra(TAG_PROVIDERNAME, providerName);
-				in.putExtra(TAG_LICENSEINFO, licenseInfo);
-				in.putExtra(TAG_OWNERNAME, ownerName);
-				in.putExtra(TAG_ADDRESS, address);
-				in.putExtra(TAG_CITY, city);
-				in.putExtra(TAG_STATE, state);
-				in.putExtra(TAG_ZIPCODE, zipCode);
-				in.putExtra(TAG_PHONENUMBER, phoneNumber);
-				in.putExtra(TAG_LATITUDE, latitude);
-				in.putExtra(TAG_LONGITUDE, longitude);
-				in.putExtra(TAG_CAPACITY, capacity);
-				in.putExtra(TAG_HOURS, hours);
-				in.putExtra(TAG_SPECIALIST, specialist);
-				in.putExtra(TAG_SPECIALISTPHONE, specialistPhone);
-				in.putExtra(TAG_QUALITY, qualityLevel);
-				startActivity(in);
+			//	Intent in = new Intent(getApplicationContext(),
+				//		SingleMenuItemActivity.class);
+				
+				HashMap<String, String> map = new HashMap<String, String>();
+				
+				map.put(TAG_PROVIDERNAME, providerName);
+				map.put(TAG_LICENSEINFO, licenseInfo);
+				map.put(TAG_OWNERNAME, ownerName);
+				map.put(TAG_ADDRESS, address);
+				map.put(TAG_CITY, city);
+				map.put(TAG_STATE, state);
+				map.put(TAG_ZIPCODE, zipCode);
+				map.put(TAG_PHONENUMBER, phoneNumber);
+				map.put(TAG_LATITUDE, latitude);
+				map.put(TAG_LONGITUDE, longitude);
+				map.put(TAG_CAPACITY, capacity);
+				map.put(TAG_HOURS, hours);
+				map.put(TAG_SPECIALIST, specialist);
+				map.put(TAG_SPECIALISTPHONE, specialistPhone);
+				map.put(TAG_QUALITY, qualityLevel);
+				
+				SingleItemResults singleItem = new SingleItemResults(lv.getContext(), map);
+				singleItem.execute();
+				
+				//tartActivity(in);
 			}
 		});
 
@@ -271,6 +279,71 @@ public class SearchResultsActivity extends ListActivity {
 	    super.onSaveInstanceState(savedInstanceState);
 	}
 	
->>>>>>> eb588818b8a940a8d682f3ec3d3a282cda3f3fd4
+	   class SingleItemResults extends AsyncTask<String, String, String>
+		{
+
+		  String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
+		  String complaintFullSearchURL = null;
+		   
+	    	Context aContext;
+	    	HashMap<String, String> theMap;
+	    	SingleItemResults(Context context, HashMap<String, String> aMap)
+	    	{
+	    		aContext = context;
+	    		theMap = aMap;
+	    	}
+	    	
+	    	
+			@Override
+			protected String doInBackground(String... params) 
+			{
+				if(isURLReachable(aContext))
+				{
+				
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				}
+				return null;
+			}
+			 public boolean isURLReachable(Context context) {
+				    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+				    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+				    if (netInfo != null && netInfo.isConnected()) {
+				        try {
+				            URL url = new URL("http://54.201.44.59");   // Change to "http://google.com" for www  test.
+				            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+				            urlc.setConnectTimeout(10 * 1000);          // 10 s.
+				            urlc.connect();
+				            if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
+				                Log.wtf("Connection", "Success !");
+				                return true;
+				            } else {
+				                return false;
+				            }
+				        } catch (MalformedURLException e1) {
+				            return false;
+				        } catch (IOException e) {
+				            return false;
+				        }
+				    }
+				    return false;
+				}
+		}
+	
 
 }

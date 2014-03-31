@@ -20,7 +20,6 @@
 -keep class com.facebook.LoginActivity { <init>(...); }
 
 # view res/layout/com_facebook_usersettingsfragment.xml #generated:48
-# view xlarge/res/layout-xlarge/activity_main.xml #generated:71
 -keep class com.facebook.widget.LoginButton { <init>(...); }
 
 # view large/res/layout-large/activity_search_results.xml #generated:8
@@ -36,14 +35,14 @@
 -keep class com.google.android.gms.maps.MapFragment { <init>(...); }
 
 # onClick large/res/layout-large/activity_main.xml #generated:49
-# onClick normal/res/layout-normal/activity_main.xml #generated:44
+# onClick normal/res/layout-normal/activity_main.xml #generated:34
 # onClick res/layout/activity_main.xml #generated:43
 # onClick small/res/layout-small/activity_main.xml #generated:44
 # onClick xlarge/res/layout-xlarge/activity_main.xml #generated:49
 -keepclassmembers class * { *** getLocation(...); }
 
 # onClick large/res/layout-large/activity_main.xml #generated:60
-# onClick normal/res/layout-normal/activity_main.xml #generated:55
+# onClick normal/res/layout-normal/activity_main.xml #generated:46
 # onClick res/layout/activity_main.xml #generated:54
 # onClick small/res/layout-small/activity_main.xml #generated:55
 # onClick xlarge/res/layout-xlarge/activity_main.xml #generated:59
