@@ -2,7 +2,7 @@
 
 *[http://www.scchildcare.org](http://www.scchildcare.org)
 
-Download the Open Beta now: [Download](https://www.dropbox.com/s/0mhjicr4jz32uet/SCChildcareMobile.apk)
+[Download](https://www.dropbox.com/s/0mhjicr4jz32uet/SCChildcareMobile.apk) the Open Beta now: 
 
 ### DESCRIPTION
 
