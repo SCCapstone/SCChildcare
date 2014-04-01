@@ -85,6 +85,9 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String commentGetURL1 = "http://54.201.44.59:3000/providers/";
 	private static final String commentGetURL2 = "/comments.json";
 	private static final String TAG_COMMENTS = "comments";
+	HashMap<String, String> commentMap = new HashMap<String, String>();
+	ArrayList<HashMap<String, String>> commentList = new ArrayList<HashMap<String, String>>();
+	
 	
 	JSONParser jParser = new JSONParser();
 	JSONArray comments = null;
@@ -279,81 +282,83 @@ public class SingleMenuItemActivity extends Activity {
 			
 			
 			
-			//COMMENTS
-			
-			ArrayList<HashMap<String, String>> commentList = new ArrayList<HashMap<String, String>>();
-			
-			HttpClient getClient = new DefaultHttpClient();
-	        HttpConnectionParams.setConnectionTimeout(getClient.getParams(), 10000); //Timeout Limit
-			
-			String getURL = commentGetURL1 + provider_comment_ID + commentGetURL2;
-			
-			JSONObject json = jParser.getJSONFromUrl(getURL);
-			
-			try{
-				comments = json.getJSONArray(TAG_COMMENTS);
-				
-				for (int i = 0; i < comments.length(); i++) {
-					System.out.println("Comment 1");
-                    JSONObject complaint = comments.getJSONObject(i);
-
-                    // store the json items in variables
-
-                    String alias = complaint.getString(TAG_ALIAS);
-                    String body = complaint.getString(TAG_BODY);
-                    
-
-                    HashMap<String, String> commentMap = new HashMap<String, String>();
-
-                    commentMap.put(TAG_ALIAS, alias);
-                    commentMap.put(TAG_BODY, body);
-
-                    // add Hashlist to ArrayList
-                    System.out.println("Adding Tags to Map, adding map to commentList");
-                    commentList.add(commentMap);
-
-                }
-				
-				
-				
-			} catch (JSONException e) {
-				e.printStackTrace();
-			}
-			
+//			//COMMENTS SECTION STUFF
+//			
+//			ArrayList<HashMap<String, String>> commentList = new ArrayList<HashMap<String, String>>();
+//			
+//			HttpClient getClient = new DefaultHttpClient();
+//	        HttpConnectionParams.setConnectionTimeout(getClient.getParams(), 10000); //Timeout Limit
+//			
+//			String getURL = commentGetURL1 + provider_comment_ID + commentGetURL2;
+//			
+//			JSONObject json = jParser.getJSONFromUrl(getURL);
+//			
+//			try{
+//				comments = json.getJSONArray(TAG_COMMENTS);
+//				
+//				for (int i = 0; i < comments.length(); i++) {
+//					System.out.println("Comment 1");
+//                    JSONObject complaint = comments.getJSONObject(i);
+//
+//                    // store the json items in variables
+//
+//                    String alias = complaint.getString(TAG_ALIAS);
+//                    String body = complaint.getString(TAG_BODY);
+//                    
+//
+//                    HashMap<String, String> commentMap = new HashMap<String, String>();
+//
+//                    commentMap.put(TAG_ALIAS, alias);
+//                    commentMap.put(TAG_BODY, body);
+//
+//                    // add Hashlist to ArrayList
+//                    System.out.println("Adding Tags to Map, adding map to commentList");
+//                    commentList.add(commentMap);
+//
+//                }
+//				
+//				
+//				
+//			} catch (JSONException e) {
+//				e.printStackTrace();
+//			}
+//			
 			System.out.println("BREAK TEST");
 			TableLayout commentTable = (TableLayout) findViewById(R.id.commentTable);
 			System.out.println("BREAK TEST");
 			complaintTable.setStretchAllColumns(true);
-			
+//			
 			System.out.println("Building Comment Table");
 			
-//			for (int k = 0; k < commentList.size(); k++) {
-//				TableRow commentRow = new TableRow(SingleMenuItemActivity.this);
-//				System.out.println("Building Table");
-//
-//				String commentAlias = commentList.get(k).get(TAG_ALIAS);
-//				String commentBody = commentList.get(k).get(TAG_BODY);
-//
-//				
-//
-//				TextView lblCommentAlias = new TextView(this);
-//				TextView lblCommentBody = new TextView(this);
-//				;
-//
-//				lblCommentAlias.setText(commentAlias);
-//				lblCommentAlias.setPadding(10, 10, 10, 10);
-//				lblCommentBody.setText(commentBody);
-//				lblCommentBody.setPadding(10, 10, 10, 10);
-//				
-//
-//				commentRow.addView(lblCommentAlias);
-//
-//				commentRow.addView(lblCommentBody);
-//
-//				commentTable.addView(commentRow);
-//			
-//			
-//			}
+			
+			
+			for (int k = 0; k < commentList.size(); k++) {
+				TableRow commentRow = new TableRow(SingleMenuItemActivity.this);
+				System.out.println("Building Table");
+
+				String commentAlias = commentList.get(k).get(TAG_ALIAS);
+				String commentBody = commentList.get(k).get(TAG_BODY);
+
+				
+
+				TextView lblCommentAlias = new TextView(this);
+				TextView lblCommentBody = new TextView(this);
+				;
+
+				lblCommentAlias.setText(commentAlias);
+				lblCommentAlias.setPadding(10, 10, 10, 10);
+				lblCommentBody.setText(commentBody);
+				lblCommentBody.setPadding(10, 10, 10, 10);
+				
+
+				commentRow.addView(lblCommentAlias);
+
+				commentRow.addView(lblCommentBody);
+
+				commentTable.addView(commentRow);
+			
+			
+			}
 			
 			
 			
@@ -386,40 +391,41 @@ public class SingleMenuItemActivity extends Activity {
 				//HashMap<String, String> commentMap = new HashMap<String, String>();
 				
 				//commentMap.put(TAG_PROVIDERID, providerID);
-				//commentMap.put(TAG_ALIAS, alias);
-				//commentMap.put(TAG_BODY, comment);
+				commentMap.put(TAG_ALIAS, alias);
+				commentMap.put(TAG_BODY, comment);
+				commentList.add(commentMap);
 				
 				//Gson commentJSON = new Gson();
 				//commentJSON.toJson(commentMap);
 				
-				HttpClient postClient = new DefaultHttpClient();
-		        HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000); //Timeout Limit
-			    
-		        
-		        String postURL = commentAddURL1 + provider_comment_ID + commentAddURL2;
+//				HttpClient postClient = new DefaultHttpClient();
+//		        HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000); //Timeout Limit
+//			    
+//		        
+//		        String postURL = commentAddURL1 + provider_comment_ID + commentAddURL2;
+//				
+//				JSONObject commentJSON = new JSONObject();
+//				try{
+//					HttpPost post = new HttpPost(postURL);
+//				commentJSON.put(TAG_PROVIDER_COMMENT_ID, provider_comment_ID);
+//				commentJSON.put(TAG_ALIAS, alias);
+//				commentJSON.put(TAG_BODY, comment);
+//				
+//				//StringEntity se = new StringEntity("JSON: " + commentJSON.toString());
+//				//se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+//				post.setHeader("Content-Type", "application/json");
+//				
+//				//post.setEntity(se);
+//				response = postClient.execute(post);
+//				
+//				
+//				}catch(Exception e){
+//		            e.printStackTrace();
+//		            // createDialog("Error", "Cannot Estabilish Connection");
+//		         }
+//				
 				
-				JSONObject commentJSON = new JSONObject();
-				try{
-					HttpPost post = new HttpPost(postURL);
-				commentJSON.put(TAG_PROVIDER_COMMENT_ID, provider_comment_ID);
-				commentJSON.put(TAG_ALIAS, alias);
-				commentJSON.put(TAG_BODY, comment);
-				
-				StringEntity se = new StringEntity("JSON: " + commentJSON.toString());
-				se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-				
-				
-				post.setEntity(se);
-				response = postClient.execute(post);
-				
-				
-				}catch(Exception e){
-		            e.printStackTrace();
-		            // createDialog("Error", "Cannot Estabilish Connection");
-		         }
-				
-				
-				//System.out.println(commentJSON);
+//				System.out.println(commentJSON);
 				
 
 			}

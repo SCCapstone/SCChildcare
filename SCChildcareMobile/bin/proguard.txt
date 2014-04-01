@@ -1,0 +1,50 @@
+# view AndroidManifest.xml #generated:113
+-keep class com.example.scchildcare.ConnectionErrorActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:66
+-keep class com.example.scchildcare.GPS_SearchResultsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:37
+-keep class com.example.scchildcare.MainActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:53
+-keep class com.example.scchildcare.SearchResultsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:85
+-keep class com.example.scchildcare.SingleMenuItemActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:99
+-keep class com.example.scchildcare.SorryMessageActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:133
+-keep class com.facebook.LoginActivity { <init>(...); }
+
+# view res/layout/com_facebook_usersettingsfragment.xml #generated:48
+-keep class com.facebook.widget.LoginButton { <init>(...); }
+
+# view large\res/layout-large/activity_search_results.xml #generated:8
+# view large\res/layout-large/single_list_item.xml #generated:206
+# view normal\res/layout-normal/activity_search_results.xml #generated:8
+# view normal\res/layout-normal/single_list_item.xml #generated:206
+# view res/layout/activity_search_results.xml #generated:8
+# view res/layout/single_list_item.xml #generated:206
+# view small\res/layout-small/activity_search_results.xml #generated:8
+# view small\res/layout-small/single_list_item.xml #generated:207
+# view xlarge\res/layout-xlarge/activity_search_results.xml #generated:8
+# view xlarge\res/layout-xlarge/single_list_item.xml #generated:205
+-keep class com.google.android.gms.maps.MapFragment { <init>(...); }
+
+# onClick large\res/layout-large/activity_main.xml #generated:51
+# onClick normal\res/layout-normal/activity_main.xml #generated:34
+# onClick res/layout/activity_main.xml #generated:43
+# onClick small\res/layout-small/activity_main.xml #generated:44
+# onClick xlarge\res/layout-xlarge/activity_main.xml #generated:49
+-keepclassmembers class * { *** getLocation(...); }
+
+# onClick large\res/layout-large/activity_main.xml #generated:63
+# onClick normal\res/layout-normal/activity_main.xml #generated:46
+# onClick res/layout/activity_main.xml #generated:54
+# onClick small\res/layout-small/activity_main.xml #generated:55
+# onClick xlarge\res/layout-xlarge/activity_main.xml #generated:59
+-keepclassmembers class * { *** sendMessage(...); }
+
