@@ -75,6 +75,7 @@ public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
 public final static String EXTRA_LONGITUDE = null;
 public final static String EXTRA_LATITUDE = null;
 private long mLastClickTime = 0;
+boolean check;
 //JSONParser jParser = new JSONParser();
 ////////////////////////////////////////////////////////////////////
 
@@ -96,6 +97,7 @@ private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
 private MainFragment mainFragment;
 LocationManager locationManager;
 public static final String APPTAG = "Location Updates";
+boolean done = false;
 
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -157,6 +159,11 @@ Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 
 }
 
+void getResult(Boolean abool){
+	check = abool;
+}
+
+
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	System.out.println("Open instance");
@@ -212,12 +219,11 @@ System.out.println("getsystemservice");
 			//String param_latitude = Double.toString(33.984209);
 			//String param_longitude = Double.toString(-81.075269);
 			
-			///////////////////////////////////////////
-		
+			///////////////////////////////////////////	
 			//////////////////////////////////////////
 			GetGPSResults gpsResults = new GetGPSResults(v.getContext());
 			gpsResults.execute(param_latitude, param_longitude);
-
+					
 			}
 			else{
 			//makeToast("Internet connection not established");
@@ -492,6 +498,7 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
      String longit;
 	 JSONArray providers = null;
 	 String fullGPS_URL = null;
+	 boolean isConnected = false;
  //  private ProgressBar progressBar;
    ArrayList<HashMap<String, String>> storeData = new ArrayList<HashMap<String, String>>();
 	// JSON node names
@@ -511,7 +518,8 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	}
 	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
 	{	
-	
+		
+	 if(isConnected == true){	
 	 Intent GPSSearch = new Intent(aContext.getApplicationContext(), GPS_SearchResultsActivity.class);
 	 GPSSearch.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
 	 Bundle coordinates = new Bundle();
@@ -520,11 +528,22 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 	 GPSSearch.putExtras(coordinates);
     // pBar.setVisibility(View.INVISIBLE);
 	 startActivity(GPSSearch);
+	 }
+	 else{
+		 Intent noConnect = new Intent(aContext.getApplicationContext(), ConnectionErrorActivity.class);
+		 startActivity(noConnect);
+	 }
 	}
 	protected ArrayList<HashMap<String, String>> doInBackground(String... args) 
 	{
-	
-		
+	/*
+		if(isURLReachable(aContext) == false){
+			check = false;
+		}
+		else{
+			check = true;
+		}
+		*/	
 		String param_latitude = args[0];
 		String param_longitude = args[1];
 		latit = args[0];
@@ -535,6 +554,7 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 				//System.out.println("Beginning JSON Parse");
 	       if(isURLReachable(aContext) == true)
 			{
+	    	 isConnected = true;
 	    	 System.out.println( " server is running ");   
 				
 	       if(!param_longitude.isEmpty() && !param_latitude.isEmpty())
@@ -603,6 +623,9 @@ class GetGPSResults extends AsyncTask<String, String, ArrayList<HashMap<String, 
 		}  
 			}
 	}
+	       else{
+	    	   isConnected = false;
+	       }
 			return storeData;
 }
 	 public boolean isURLReachable(Context context) {
@@ -785,8 +808,55 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 		}
 }
 /////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+class checkConnection extends AsyncTask<String, String, Boolean>
+{
 
-/////////////////////////////////////////////////////////////////////
+	Context aContext;
+	 private checkConnection(Context context) 
+    {
+       aContext = context;
+    }
+	
+	protected Boolean doInBackground(String... params) {
+		
+		return isURLReachable(aContext);
+	}
+	
+
+	 protected void onPostExecute(Boolean result)
+		{
+		 getResult(result);
+		}
+	
+	 public boolean isURLReachable(Context context) {
+		    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		    NetworkInfo netInfo = cm.getActiveNetworkInfo();
+		    if (netInfo != null && netInfo.isConnected()) {
+		        try {
+		            URL url = new URL("http://54.201.44.59");   // Change to "http://google.com" for www  test.
+		            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
+		            urlc.setConnectTimeout(10 * 1000);          // 10 s.
+		            urlc.connect();
+		            if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
+		                Log.wtf("Connection", "Success !");
+		                return true;
+		            } else {
+		                return false;
+		            }
+		        } catch (MalformedURLException e1) {
+		            return false;
+		        } catch (IOException e) {
+		            return false;
+		        }
+		    }
+		    return false;
+		}
+	
+	
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 }
 
 
