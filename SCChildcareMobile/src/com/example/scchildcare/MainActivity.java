@@ -684,6 +684,7 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 	 JSONArray providers = null;
 	 String TAG_LIST_OF_PROVIDERS = "pList";
 	 Context aContext;
+	 boolean isConnected = false;
 	 
 	   private GetSearchResults(Context context) 
 	    {
@@ -698,10 +699,16 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 	
 	 protected void onPostExecute(ArrayList<HashMap<String, String>> result)
 		{
-		 
+		 if(isConnected == true){
 		 Intent SearchResults = new Intent(getApplicationContext(), SearchResultsActivity.class);
 		 SearchResults.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
 		 startActivity(SearchResults);
+		 }
+		 else
+		 {
+			 Intent noConnect = new Intent(aContext.getApplicationContext(), ConnectionErrorActivity.class);
+			 startActivity(noConnect); 
+		 }
 		 
 		}
 	 
@@ -714,6 +721,7 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 	   fullSearchURL = searchURL + aMessage;
 	   if(isURLReachable(aContext))
 	   {
+		   isConnected = true;
 	   if(!aMessage.isEmpty())
 	   {
 	   System.out.println(aMessage);	   
@@ -780,6 +788,9 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 		   	   
 	   }
 	   }
+	   else{
+		   isConnected = false;
+	   }
 		return storeData;
 	}
 	
@@ -807,55 +818,6 @@ class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<Strin
 		    return false;
 		}
 }
-/////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-class checkConnection extends AsyncTask<String, String, Boolean>
-{
-
-	Context aContext;
-	 private checkConnection(Context context) 
-    {
-       aContext = context;
-    }
-	
-	protected Boolean doInBackground(String... params) {
-		
-		return isURLReachable(aContext);
-	}
-	
-
-	 protected void onPostExecute(Boolean result)
-		{
-		 getResult(result);
-		}
-	
-	 public boolean isURLReachable(Context context) {
-		    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		    if (netInfo != null && netInfo.isConnected()) {
-		        try {
-		            URL url = new URL("http://54.201.44.59");   // Change to "http://google.com" for www  test.
-		            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-		            urlc.setConnectTimeout(10 * 1000);          // 10 s.
-		            urlc.connect();
-		            if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
-		                Log.wtf("Connection", "Success !");
-		                return true;
-		            } else {
-		                return false;
-		            }
-		        } catch (MalformedURLException e1) {
-		            return false;
-		        } catch (IOException e) {
-		            return false;
-		        }
-		    }
-		    return false;
-		}
-	
-	
-}
-//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
 

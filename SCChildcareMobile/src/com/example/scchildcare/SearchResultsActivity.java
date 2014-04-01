@@ -353,6 +353,7 @@ public class SearchResultsActivity extends ListActivity {
 		  String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
 		  String complaintFullSearchURL = null;
 		  JSONParser jComplaintParser = new JSONParser();
+		  boolean isConnected = false;
 		 
 		  JSONArray complaints = null;
 		  ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
@@ -373,10 +374,17 @@ public class SearchResultsActivity extends ListActivity {
 	    	
 	    	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
 	    	{	
+	    	if(isConnected == true){	
 	    	Intent anIntent = new Intent(aContext.getApplicationContext(), SingleMenuItemActivity.class);
 	    	anIntent.putExtra(TAG_COMPLAINTS, (Serializable)result);
 	    	anIntent.putExtra(TAG_CENTER_DATA, (Serializable)theMap);
 	    	startActivity(anIntent);
+	    	}
+	    	else
+			 {
+				 Intent noConnect = new Intent(aContext.getApplicationContext(), ConnectionErrorActivity.class);
+				 startActivity(noConnect); 
+			 }
 	    	}
 	    	
 	    	 protected void onPreExecute()
@@ -394,7 +402,7 @@ public class SearchResultsActivity extends ListActivity {
 				
 				if(isURLReachable(aContext))
 				{
-				
+				   isConnected = true;
 					 JSONObject complaintjson = jComplaintParser
 				                .getJSONFromUrl(complaintActualSearch);	
 					
@@ -434,6 +442,9 @@ public class SearchResultsActivity extends ListActivity {
 				            e.printStackTrace();
 				        }
 					
+				}
+				else{
+					isConnected = false;
 				}
 				return complaintList;
 			}

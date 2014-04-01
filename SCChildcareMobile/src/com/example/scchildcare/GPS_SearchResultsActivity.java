@@ -333,6 +333,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	  private static final String TAG_COMPLAINTRESOLVED = "resolved";
 	  private static final String TAG_COMPLAINTS = "providercomplaints";
 	  private static final String TAG_CENTER_DATA = "dataforcenter";
+	  boolean isConnected = false;
 	  
 	   
     	Context aContext;
@@ -345,10 +346,17 @@ public class GPS_SearchResultsActivity extends ListActivity {
     	
     	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
     	{	
+    	if(isConnected == true){	
     	Intent anIntent = new Intent(aContext.getApplicationContext(), SingleMenuItemActivity.class);
     	anIntent.putExtra(TAG_COMPLAINTS, (Serializable)result);
     	anIntent.putExtra(TAG_CENTER_DATA, (Serializable)theMap);
     	startActivity(anIntent);
+    	}
+    	else
+		 {
+			 Intent noConnect = new Intent(aContext.getApplicationContext(), ConnectionErrorActivity.class);
+			 startActivity(noConnect); 
+		 }
     	}
     	
     	 protected void onPreExecute()
@@ -366,7 +374,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 			
 			if(isURLReachable(aContext))
 			{
-			
+			     isConnected = true;
 				 JSONObject complaintjson = jComplaintParser
 			                .getJSONFromUrl(complaintActualSearch);	
 				
@@ -406,6 +414,9 @@ public class GPS_SearchResultsActivity extends ListActivity {
 			            e.printStackTrace();
 			        }
 				
+			}
+			else{
+				isConnected = false;
 			}
 			return complaintList;
 		}
