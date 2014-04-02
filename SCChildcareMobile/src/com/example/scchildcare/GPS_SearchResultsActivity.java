@@ -96,12 +96,10 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		// Set the text view as the activity layout
-		setContentView(R.layout.activity_search_results);
+		setContentView(R.layout.p_bar);
 
 		// Hashmap for ListView
-
 	
-		
 /////////////////////////////////////////////////////////////////////			
 			Intent intent = getIntent();
 			Bundle getProviders = intent.getExtras();

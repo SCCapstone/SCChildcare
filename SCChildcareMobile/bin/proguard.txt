@@ -1,8 +1,11 @@
-# view AndroidManifest.xml #generated:113
+# view AndroidManifest.xml #generated:126
 -keep class com.example.scchildcare.ConnectionErrorActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:66
 -keep class com.example.scchildcare.GPS_SearchResultsActivity { <init>(...); }
+
+# view AndroidManifest.xml #generated:79
+-keep class com.example.scchildcare.GPS_Search_AsyncTask { <init>(...); }
 
 # view AndroidManifest.xml #generated:37
 -keep class com.example.scchildcare.MainActivity { <init>(...); }
@@ -10,13 +13,13 @@
 # view AndroidManifest.xml #generated:53
 -keep class com.example.scchildcare.SearchResultsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:85
+# view AndroidManifest.xml #generated:98
 -keep class com.example.scchildcare.SingleMenuItemActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:99
+# view AndroidManifest.xml #generated:112
 -keep class com.example.scchildcare.SorryMessageActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:133
+# view AndroidManifest.xml #generated:146
 -keep class com.facebook.LoginActivity { <init>(...); }
 
 # view res/layout/com_facebook_usersettingsfragment.xml #generated:48
