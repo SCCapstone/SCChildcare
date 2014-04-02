@@ -1,4 +1,4 @@
-# view AndroidManifest.xml #generated:126
+# view AndroidManifest.xml #generated:139
 -keep class com.example.scchildcare.ConnectionErrorActivity { <init>(...); }
 
 # view AndroidManifest.xml #generated:66
@@ -13,13 +13,16 @@
 # view AndroidManifest.xml #generated:53
 -keep class com.example.scchildcare.SearchResultsActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:98
+# view AndroidManifest.xml #generated:92
+-keep class com.example.scchildcare.Search_AsyncTask { <init>(...); }
+
+# view AndroidManifest.xml #generated:111
 -keep class com.example.scchildcare.SingleMenuItemActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:112
+# view AndroidManifest.xml #generated:125
 -keep class com.example.scchildcare.SorryMessageActivity { <init>(...); }
 
-# view AndroidManifest.xml #generated:146
+# view AndroidManifest.xml #generated:159
 -keep class com.facebook.LoginActivity { <init>(...); }
 
 # view res/layout/com_facebook_usersettingsfragment.xml #generated:48

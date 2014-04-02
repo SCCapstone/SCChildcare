@@ -94,7 +94,6 @@ private LocationClient mLocationClient;
 Location mCurrentLocation;
 //private TextView LongLat1;
 private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-private MainFragment mainFragment;
 LocationManager locationManager;
 public static final String APPTAG = "Location Updates";
 boolean done = false;
@@ -155,7 +154,7 @@ return false;
 @Override
 public void onConnected(Bundle dataBundle) {
 // Display the connection status
-Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+//Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 
 }
 
@@ -173,8 +172,6 @@ setContentView(R.layout.activity_main);
 System.out.println("new locationclient");
 mLocationClient = new LocationClient(this, this, this);
 System.out.println("getsystemservice");
-
-//editText = (EditText)findViewById(R.id.edit_message);
 
  locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
  System.out.println("button1");
@@ -215,11 +212,7 @@ System.out.println("getsystemservice");
 
 			String param_latitude = Double.toString(latitude);
 			String param_longitude = Double.toString(longitude);
-			////////////////////////////////////////////
-			//String param_latitude = Double.toString(33.984209);
-			//String param_longitude = Double.toString(-81.075269);
-			
-			///////////////////////////////////////////	
+
 			//////////////////////////////////////////
 			Intent GPSSearch = new Intent(getApplicationContext(), GPS_Search_AsyncTask.class);
 			Bundle coordinates = new Bundle();
@@ -228,13 +221,6 @@ System.out.println("getsystemservice");
 			 GPSSearch.putExtras(coordinates);
 			 startActivity(GPSSearch);
 			
-			/*
-			GetGPSResults gpsResults = new GetGPSResults(v.getContext());
-			gpsResults.execute(param_latitude, param_longitude);
-			
-			Intent gpsIntent = new Intent(getApplicationContext(), GPS_Search_AsyncTask.class);
-			startActivity(gpsIntent);
-				*/	
 			}
 			else{
 			//makeToast("Internet connection not established");
@@ -275,8 +261,10 @@ System.out.println("getsystemservice");
             {
 			//intent.putExtra(EXTRA_MESSAGE, message);
 		//	startActivity(intent);
-            GetSearchResults searchResults = new GetSearchResults(v.getContext());
-            searchResults.execute(message);
+            Intent intent = new Intent(getApplicationContext(), Search_AsyncTask.class);
+            intent.putExtra(EXTRA_MESSAGE, message);
+    		startActivity(intent);
+           
             }
             else
             {
@@ -333,8 +321,8 @@ private void MessageToUser(){
 @Override
 public void onDisconnected() {
 // Display the connection status
-Toast.makeText(this, "Disconnected. Please re-connect.",
-Toast.LENGTH_SHORT).show();
+//Toast.makeText(this, "Disconnected. Please re-connect.",
+//Toast.LENGTH_SHORT).show();
 }
 
 @Override
@@ -482,175 +470,6 @@ private void showGPSDisabledAlertToUser(){
     alert.show();
 }
 
-
-
-
-
-class GetSearchResults extends AsyncTask<String, String, ArrayList<HashMap<String, String>>>{
-
-     String searchURL = "http://54.201.44.59:3000/providers.json?utf8=%E2%9C%93&search=";
-	// private static byte[] buff = new byte[1024];
-	// private static String result = null;
-	 String fullSearchURL = null;
-	 String aMessage = "";
-	// JSON node names
-	 String TAG_PROVIDERS = "providers";
-	 String TAG_ID = "id";
-	 String TAG_PROVIDERNAME = "providerName";
-	 String TAG_LICENSEINFO = "licenseInfo";
-	 String TAG_OWNERNAME = "ownerName";
-	 String TAG_ADDRESS = "address";
-	 String TAG_CITY = "city";
-	 String TAG_STATE = "state";
-	 String TAG_ZIPCODE = "zipCode";
-	 String TAG_PHONENUMBER = "phoneNumber";
-	 String TAG_LONGITUDE = "longitude";
-	 String TAG_LATITUDE = "latitude";
-	 String TAG_CAPACITY = "capacity";
-	 String TAG_HOURS = "hours";
-	 String TAG_SPECIALIST = "specialist";
-	 String TAG_SPECIALISTPHONE = "specialistPhone";
-	 String TAG_QUALITY = "qualityLevel";
-     //  String message;
-	 ArrayList<HashMap<String, String>> storeData = new ArrayList<HashMap<String, String>>();
-	 JSONParser jParser = new JSONParser();
-	 JSONArray providers = null;
-	 String TAG_LIST_OF_PROVIDERS = "pList";
-	 Context aContext;
-	 boolean isConnected = false;
-	 
-	   private GetSearchResults(Context context) 
-	    {
-	       aContext = context;
-	    }
-	
-	 protected void onPreExecute()
-		{
-			  super.onPreExecute();
-		//      progressBar.setVisibility(View.VISIBLE);
-		}
-	
-	 protected void onPostExecute(ArrayList<HashMap<String, String>> result)
-		{
-		 if(isConnected == true){
-		 Intent SearchResults = new Intent(getApplicationContext(), SearchResultsActivity.class);
-		 SearchResults.putExtra(TAG_LIST_OF_PROVIDERS, (Serializable)result);
-		 startActivity(SearchResults);
-		 }
-		 else
-		 {
-			 Intent noConnect = new Intent(aContext.getApplicationContext(), ConnectionErrorActivity.class);
-			 startActivity(noConnect); 
-		 }
-		 
-		}
-	 
-	@Override
-	protected ArrayList<HashMap<String, String>> doInBackground(String... params) {
-		
-	   aMessage = params[0];
-	   
-	   System.out.println( " A messsga " + aMessage);
-	   fullSearchURL = searchURL + aMessage;
-	   if(isURLReachable(aContext))
-	   {
-		   isConnected = true;
-	   if(!aMessage.isEmpty())
-	   {
-	   System.out.println(aMessage);	   
-	  JSONObject json = jParser.getJSONFromUrl(fullSearchURL); 
-	 // System.out.println(json.toString());
-	  try {
-			// get the array of providers
-			System.out.println("CREATING THE PROVIDERS JSON ARRAY");
-
-			providers = json.getJSONArray(TAG_PROVIDERS);
-
-			System.out.println("Beginning For Loop to go through array");
-             System.out.println(" provider.length " + providers.length());
-             
-			if (providers.length() > 0) {
-				System.out.println("No Return on Search");
-	
-				for (int i = 0; i < providers.length(); i++) {
-					JSONObject p = providers.getJSONObject(i);
-
-					// store the json items in variables
-					String id = p.getString(TAG_ID);
-					String providerName = p.getString(TAG_PROVIDERNAME);
-					String licenseInfo = p.getString(TAG_LICENSEINFO);
-					String ownerName = p.getString(TAG_OWNERNAME);
-					String address = p.getString(TAG_ADDRESS);
-					String city = p.getString(TAG_CITY);
-					String state = p.getString(TAG_STATE);
-					String zipCode = p.getString(TAG_ZIPCODE);
-					String phoneNumber = p.getString(TAG_PHONENUMBER);
-					String longitude = p.getString(TAG_LONGITUDE);
-					String latitude = p.getString(TAG_LATITUDE);
-					String capacity = p.getString(TAG_CAPACITY);
-					String hours = p.getString(TAG_HOURS);
-					String specialist = p.getString(TAG_SPECIALIST);
-					String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
-					String qualityLevel = p.getString(TAG_QUALITY);
-
-					HashMap<String, String> map = new HashMap<String, String>();
-
-					map.put(TAG_ID, id);
-					map.put(TAG_PROVIDERNAME, providerName);
-					map.put(TAG_LICENSEINFO, licenseInfo);
-					map.put(TAG_OWNERNAME, ownerName);
-					map.put(TAG_ADDRESS, address);
-					map.put(TAG_CITY, city);
-					map.put(TAG_STATE, state);
-					map.put(TAG_ZIPCODE, zipCode);
-					map.put(TAG_PHONENUMBER, phoneNumber);
-					map.put(TAG_LONGITUDE, longitude);
-					map.put(TAG_LATITUDE, latitude);
-					map.put(TAG_CAPACITY, capacity);
-					map.put(TAG_HOURS, hours);
-					map.put(TAG_SPECIALIST, specialist);
-					map.put(TAG_SPECIALISTPHONE, specialistPhone);
-					map.put(TAG_QUALITY, qualityLevel);
-					
-					storeData.add(map);
-			}
-			}
-		} catch (JSONException e) {
-			e.printStackTrace();
-		}  
-		   	   
-	   }
-	   }
-	   else{
-		   isConnected = false;
-	   }
-		return storeData;
-	}
-	
-	 public boolean isURLReachable(Context context) {
-		    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-		    if (netInfo != null && netInfo.isConnected()) {
-		        try {
-		            URL url = new URL("http://54.201.44.59");   // Change to "http://google.com" for www  test.
-		            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-		            urlc.setConnectTimeout(10 * 1000);          // 10 s.
-		            urlc.connect();
-		            if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
-		                Log.wtf("Connection", "Success !");
-		                return true;
-		            } else {
-		                return false;
-		            }
-		        } catch (MalformedURLException e1) {
-		            return false;
-		        } catch (IOException e) {
-		            return false;
-		        }
-		    }
-		    return false;
-		}
-}
 
 }
 

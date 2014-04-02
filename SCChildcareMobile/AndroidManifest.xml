@@ -72,12 +72,25 @@
 
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.scchildcare.GPS_Search_AsyncTask" />
+                android:value="com.example.scchildcare.MainActivity" />
         </activity>
         
           <!-- GPS Search AsyncTask -->
         <activity
             android:name="com.example.scchildcare.GPS_Search_AsyncTask"
+            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:theme="@style/NoActionBar"
+
+            android:screenOrientation="portrait" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.scchildcare.MainActivity" />
+        </activity>
+        
+          <!-- Text Search AsyncTask -->
+        <activity
+            android:name="com.example.scchildcare.Search_AsyncTask"
             android:parentActivityName="com.example.scchildcare.MainActivity"
             android:theme="@style/NoActionBar"
 
