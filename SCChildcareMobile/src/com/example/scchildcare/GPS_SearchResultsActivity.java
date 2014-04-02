@@ -74,6 +74,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_QUALITY = "qualityLevel";
 	private static final String TAG_LIST_OF_PROVIDERS = "pList";
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
+	private static final String TAG_CENTER_DATA = "dataforcenter";
 	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
 	private long mLastClickTime = 0;
 	String theMarker = "";
@@ -169,7 +170,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		                           {
 		                             theMarker = (aMarker.getTitle());
 		                             aMarker.showInfoWindow();
-		                             goToCenter(theMarker, getApplicationContext());
+		                             goToCenter(theMarker);
 		                               return true;
 		                           }
 		                           
@@ -259,15 +260,21 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				map.put(TAG_SPECIALISTPHONE, specialistPhone);
 				map.put(TAG_QUALITY, qualityLevel);
 				
+				
+				/*
 				SingleItemResults singleItem = new SingleItemResults(lv.getContext(), map);
-				singleItem.execute(providerName);
+				singleItem.execute(providerName);*/
+				
+				Intent anIntent = new Intent(lv.getContext(), Single_AsyncTask.class);
+				anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
+				anIntent.putExtra("THE_PROVIDER", providerName);
+				startActivity(anIntent);
 			}
 		});
 
 	}
 	
-	private void goToCenter(final String aString, Context context){
-		final Context aContext = context;
+	private void goToCenter(final String aString){
 		
 	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 	    alertDialogBuilder.setMessage("Would you like more information about " + aString + " ?")
@@ -285,8 +292,10 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					String providerName = map.get(TAG_PROVIDERNAME);
 					if(providerName.equals(aString))
 					{
-					SingleItemResults singleItem = new SingleItemResults(aContext, map);
-					singleItem.execute(providerName);
+						Intent anIntent = new Intent(getApplicationContext(), Single_AsyncTask.class);
+						anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
+						anIntent.putExtra("THE_PROVIDER", providerName);
+						startActivity(anIntent);
 					break;	
 					}
 	        	i++;
@@ -317,131 +326,4 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		return super.onOptionsItemSelected(item);
 	}
 	
-	class SingleItemResults extends AsyncTask<String, String, ArrayList<HashMap<String, String>>>
-	{
-
-	  String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
-	  String complaintFullSearchURL = null;
-	  JSONParser jComplaintParser = new JSONParser();
-	 
-	  JSONArray complaints = null;
-	  ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
-	  private static final String TAG_COMPLAINTTYPE = "complaint_type";
-	  private static final String TAG_COMPLAINTDATE = "issueDate";
-	  private static final String TAG_COMPLAINTRESOLVED = "resolved";
-	  private static final String TAG_COMPLAINTS = "providercomplaints";
-	  private static final String TAG_CENTER_DATA = "dataforcenter";
-	  boolean isConnected = false;
-	  
-	   
-    	Context aContext;
-    	HashMap<String, String> theMap;
-    	SingleItemResults(Context context, HashMap<String, String> aMap)
-    	{
-    		aContext = context;
-    		theMap = aMap;
-    	}
-    	
-    	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
-    	{	
-    	if(isConnected == true){	
-    	Intent anIntent = new Intent(aContext.getApplicationContext(), SingleMenuItemActivity.class);
-    	anIntent.putExtra(TAG_COMPLAINTS, (Serializable)result);
-    	anIntent.putExtra(TAG_CENTER_DATA, (Serializable)theMap);
-    	startActivity(anIntent);
-    	}
-    	else
-		 {
-			 Intent noConnect = new Intent(aContext.getApplicationContext(), ConnectionErrorActivity.class);
-			 startActivity(noConnect); 
-		 }
-    	}
-    	
-    	 protected void onPreExecute()
- 		{
- 			  super.onPreExecute();
- 		//      progressBar.setVisibility(View.VISIBLE);
- 		}
-    	
-		@Override
-		protected ArrayList<HashMap<String, String>> doInBackground(String... params) 
-		{
-			String providerName = params[0];
-			complaintFullSearchURL = complaintSearchURL + providerName;
-			String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
-			
-			if(isURLReachable(aContext))
-			{
-			     isConnected = true;
-				 JSONObject complaintjson = jComplaintParser
-			                .getJSONFromUrl(complaintActualSearch);	
-				
-				 System.out.println("COMPLAINT HTTP SUCCESSFUL");
-			        try {
-			            // get the array of providers
-			            System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
-
-			            complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
-			            System.out.println("Beginning For Loop to go through array");
-
-			            
-			                for (int i = 0; i < complaints.length(); i++) {
-			                    JSONObject complaint = complaints.getJSONObject(i);
-
-			                    // store the json items in variables
-
-			                    String complaintType = complaint.getString(TAG_COMPLAINTTYPE);
-			                    String issueDate = complaint.getString(TAG_COMPLAINTDATE);
-			                    String complaintResolved = complaint
-			                            .getString(TAG_COMPLAINTRESOLVED);
-
-			                    HashMap<String, String> cmap = new HashMap<String, String>();
-
-			                    cmap.put(TAG_COMPLAINTTYPE, complaintType);
-			                    cmap.put(TAG_COMPLAINTDATE, issueDate);
-			                    cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
-
-			                    // add Hashlist to ArrayList
-			                    System.out
-			                            .println("Adding Tags to Map, adding map to providerList");
-			                    complaintList.add(cmap);
-
-			                }
-			            
-			        } catch (JSONException e) {
-			            e.printStackTrace();
-			        }
-				
-			}
-			else{
-				isConnected = false;
-			}
-			return complaintList;
-		}
-		 public boolean isURLReachable(Context context) {
-			    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-			    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-			    if (netInfo != null && netInfo.isConnected()) {
-			        try {
-			            URL url = new URL("http://54.201.44.59");   // Change to "http://google.com" for www  test.
-			            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-			            urlc.setConnectTimeout(10 * 1000);          // 10 s.
-			            urlc.connect();
-			            if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
-			                Log.wtf("Connection", "Success !");
-			                return true;
-			            } else {
-			                return false;
-			            }
-			        } catch (MalformedURLException e1) {
-			            return false;
-			        } catch (IOException e) {
-			            return false;
-			        }
-			    }
-			    return false;
-			}
-	}
-
-
 }

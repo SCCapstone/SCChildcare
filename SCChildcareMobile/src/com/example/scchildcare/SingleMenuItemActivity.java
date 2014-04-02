@@ -87,7 +87,7 @@ public class SingleMenuItemActivity extends Activity {
         complaintList = (ArrayList<HashMap<String, String>>) getProviderData.getSerializable(TAG_COMPLAINTS);
         HashMap<String, String> map = new HashMap<String, String>();
         map = (HashMap<String, String>)getProviderData.getSerializable(TAG_CENTER_DATA);
-        
+               
 //////////////////////////////////////////////
         // Get JSON values from previous intent
         String providerName = map.get(TAG_PROVIDERNAME);

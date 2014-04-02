@@ -82,6 +82,7 @@ public class SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
 	private static final String TAG_LIST_OF_PROVIDERS = "pList";
+	private static final String TAG_CENTER_DATA = "dataforcenter";
 	String message;
 	private long mLastClickTime = 0;
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
@@ -142,14 +143,14 @@ public class SearchResultsActivity extends ListActivity {
 					String providerName = map.get(TAG_PROVIDERNAME);
 					
 					//////////////////////////////////////////////////////////////////////////////////
-					
+					/*
 					System.out.println(map.get(TAG_ID) + " 1  " + map.get(TAG_PROVIDERNAME) + " 2 " + 	map.get(TAG_LICENSEINFO)
 							+ " 3 " + map.get(TAG_OWNERNAME) + "  4 " + map.get(TAG_ADDRESS) + " 5 " + 	map.get(TAG_CITY)
 							+ "  6 " + map.get(TAG_STATE) + " 7 " +map.get(TAG_ZIPCODE) + "  8 "+ map.get(TAG_PHONENUMBER) + "  9 "
 							+ map.get(TAG_PHONENUMBER) + " 10  " + map.get(TAG_LONGITUDE)+  " 11 " + map.get(TAG_LATITUDE)
 							+ "  12 " + map.get(TAG_CAPACITY) + " 13 " + map.get(TAG_CAPACITY) + "  14 "+ map.get(TAG_HOURS) 
 							+ " 15  "+	map.get(TAG_SPECIALIST) + " 16 "+ map.get(TAG_SPECIALISTPHONE) + " 17 " + map.get(TAG_QUALITY) + " 18 ");
-						
+					*/	
 					/////////////////////////////////////////////////////////////////////
 					// add Hashlist to ArrayList
 					System.out
@@ -279,10 +280,10 @@ public class SearchResultsActivity extends ListActivity {
 				map.put(TAG_SPECIALISTPHONE, specialistPhone);
 				map.put(TAG_QUALITY, qualityLevel);
 				
-				SingleItemResults singleItem = new SingleItemResults(lv.getContext(), map);
-				singleItem.execute(providerName);
-				
-				//tartActivity(in);
+				Intent anIntent = new Intent(lv.getContext(), Single_AsyncTask.class);
+				anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
+				anIntent.putExtra("THE_PROVIDER", providerName);
+				startActivity(anIntent);
 			}
 		});
 
@@ -318,8 +319,10 @@ public class SearchResultsActivity extends ListActivity {
 					String providerName = map.get(TAG_PROVIDERNAME);
 					if(providerName.equals(aString))
 					{
-					SingleItemResults singleItem = new SingleItemResults(aContext, map);
-					singleItem.execute(providerName);
+					Intent anIntent = new Intent(getApplicationContext(), Single_AsyncTask.class);
+					anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
+					anIntent.putExtra("THE_PROVIDER", providerName);
+					startActivity(anIntent);
 					break;	
 					}
 	        	i++;
