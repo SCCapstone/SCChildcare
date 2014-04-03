@@ -257,7 +257,7 @@ System.out.println("getsystemservice");
 			editText = (EditText)findViewById(R.id.edit_message);
 			String message2 = editText.getText().toString();
             String message = editText.getText().toString().replace(" ", "%20");
-            if(!message2.isEmpty())
+            if(message2.length()> 2)
             {
 			//intent.putExtra(EXTRA_MESSAGE, message);
 		//	startActivity(intent);
@@ -306,7 +306,7 @@ private void showConnectionAlertToUser(){
 ///////////////////////
 private void MessageToUser(){
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    alertDialogBuilder.setMessage("Must enter a child care provider name, address, or city")
+    alertDialogBuilder.setMessage("Search requires a minimum of 3 characters. Enter a child care provider name, address, or city")
     .setCancelable(false)
     .setPositiveButton("OK",
             new DialogInterface.OnClickListener(){
