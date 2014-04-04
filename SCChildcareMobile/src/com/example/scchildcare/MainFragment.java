@@ -26,7 +26,7 @@ public class MainFragment extends Fragment {
 			onSessionStateChange(session, state, exception);
 		}
 	};
-
+	//gets information for editText and returns
 	public String locate2(View view) {
 		String message = editText.getText().toString();
 		return message;
@@ -53,7 +53,7 @@ public class MainFragment extends Fragment {
 		System.out.println("I've reached fragment onCreate");
 
 	}
-
+	//update user session state
 	private void onSessionStateChange(Session session, SessionState state,
 			Exception exception) {
 		if (state.isOpened()) {
