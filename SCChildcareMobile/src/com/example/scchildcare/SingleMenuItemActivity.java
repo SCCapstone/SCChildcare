@@ -4,24 +4,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHeader;
-import org.apache.http.params.HttpConnectionParams;
-import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -264,11 +257,16 @@ public class SingleMenuItemActivity extends Activity {
 			TextView lblComplaintResolved = new TextView(this);
 
 			lblComplaintType.setText(complaintTypeData);
-			lblComplaintType.setPadding(20, 20, 20, 20);
+			lblComplaintType.setPadding(20, 20, 50, 20);
+			lblComplaintType.setLayoutParams(new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1));
 			lblComplaintDate.setText(complaintIssueDate);
-			lblComplaintDate.setPadding(20, 20, 20, 20);
+			lblComplaintDate.setPadding(80, 20, 50, 20);
 			lblComplaintResolved.setText(complaintResolvedData);
-			lblComplaintResolved.setPadding(20, 20, 20, 20);
+			lblComplaintResolved.setPadding(80, 20, 20, 20);
+			
+			
+			complaintRow.setGravity(Gravity.CENTER);
+			complaintRow.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 
 			complaintRow.addView(lblComplaintType);
 
