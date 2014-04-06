@@ -137,8 +137,8 @@ int drawable ic_scchildcare_logo 0x7f020042
 int drawable ic_scchildcare_logo_small 0x7f020043
 int drawable search 0x7f020044
 int drawable search_icon 0x7f020045
-int id action_search 0x7f050057
-int id action_settings 0x7f050058
+int id action_search 0x7f050058
+int id action_settings 0x7f050059
 int id add_comment_button 0x7f050050
 int id address 0x7f050025
 int id address_label 0x7f050038
@@ -197,12 +197,12 @@ int id normal 0x7f050001
 int id ownerName 0x7f05002a
 int id ownerNameLabel 0x7f05003b
 int id owner_label 0x7f05003c
-int id permitTable 0x7f050052
-int id permitTableRow 0x7f050054
-int id permit_expiration_label 0x7f050056
-int id permit_name_label 0x7f050055
-int id permit_title_row 0x7f050053
-int id permits_Table_label 0x7f050051
+int id permitTable 0x7f050053
+int id permitTableRow 0x7f050055
+int id permit_expiration_label 0x7f050057
+int id permit_name_label 0x7f050056
+int id permit_title_row 0x7f050054
+int id permits_Table_label 0x7f050052
 int id phone 0x7f05002c
 int id phone_label 0x7f05003d
 int id picker_subtitle 0x7f05001e
@@ -212,6 +212,7 @@ int id qualityLevel 0x7f050033
 int id qualityLevel_label 0x7f050046
 int id relativelayoutid 0x7f050034
 int id satellite 0x7f050002
+int id sign_in_button 0x7f050051
 int id small 0x7f050005
 int id sorry_label 0x7f05000e
 int id specialist 0x7f050031

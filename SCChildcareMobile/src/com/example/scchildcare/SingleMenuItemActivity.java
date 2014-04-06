@@ -75,7 +75,7 @@ public class SingleMenuItemActivity extends Activity {
     }
 
     @SuppressWarnings("unchecked")
-	@Override
+@Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.single_list_item);
@@ -91,20 +91,20 @@ public class SingleMenuItemActivity extends Activity {
 //////////////////////////////////////////////
         // Get JSON values from previous intent
         String providerName = map.get(TAG_PROVIDERNAME);
-        String licenseInfo =  map.get(TAG_LICENSEINFO);
-        String ownerName =    map.get(TAG_OWNERNAME);
-        String address =      map.get(TAG_ADDRESS);
-        String city =         map.get(TAG_CITY);
-        String state =        map.get(TAG_STATE);
-        String zipCode =      map.get(TAG_ZIPCODE);
-        String phoneNumber =  map.get(TAG_PHONENUMBER);
-        String latitude =     map.get(TAG_LATITUDE);
-        String longitude =    map.get(TAG_LONGITUDE);
-        String capacity =     map.get(TAG_CAPACITY);
-        String hours =        map.get(TAG_HOURS);
-        String specialist =   map.get(TAG_SPECIALIST);
+        String licenseInfo = map.get(TAG_LICENSEINFO);
+        String ownerName = map.get(TAG_OWNERNAME);
+        String address = map.get(TAG_ADDRESS);
+        String city = map.get(TAG_CITY);
+        String state = map.get(TAG_STATE);
+        String zipCode = map.get(TAG_ZIPCODE);
+        String phoneNumber = map.get(TAG_PHONENUMBER);
+        String latitude = map.get(TAG_LATITUDE);
+        String longitude = map.get(TAG_LONGITUDE);
+        String capacity = map.get(TAG_CAPACITY);
+        String hours = map.get(TAG_HOURS);
+        String specialist = map.get(TAG_SPECIALIST);
         String specialistPhone = map.get(TAG_SPECIALISTPHONE);
-        String qualityLevel =  map.get(TAG_QUALITY);
+        String qualityLevel = map.get(TAG_QUALITY);
 /////////////////////////////////////////////////////////////////////////////////////////////////
         // Displaying all values on the screen
         TextView lblName = (TextView) findViewById(R.id.name_label);
@@ -158,45 +158,43 @@ public class SingleMenuItemActivity extends Activity {
 
         /** DISPLAY COMPLAINT DATA **/
        /*
-        complaintFullSearchURL = complaintSearchURL + providerName;
+complaintFullSearchURL = complaintSearchURL + providerName;
 
-        JSONParser jComplaintParser = new JSONParser();
-        String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
-        JSONObject complaintjson = jComplaintParser
-                .getJSONFromUrl(complaintActualSearch);
-        
-        System.out.println("COMPLAINT HTTP SUCCESSFUL");
-        
-            // get the array of providers
-            System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
+JSONParser jComplaintParser = new JSONParser();
+String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
+JSONObject complaintjson = jComplaintParser
+.getJSONFromUrl(complaintActualSearch);
+System.out.println("COMPLAINT HTTP SUCCESSFUL");
+// get the array of providers
+System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
 
-            complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
-            System.out.println("Beginning For Loop to go through array");
-                */
+complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
+System.out.println("Beginning For Loop to go through array");
+*/
             /*
-                for (int i = 0; i < complaintList.size(); i++) {
-                   // JSONObject complaint = complaints.getJSONObject(i);
+for (int i = 0; i < complaintList.size(); i++) {
+// JSONObject complaint = complaints.getJSONObject(i);
 
-                    // store the json items in variables
+// store the json items in variables
 
-                    String complaintType = complaint.getString(TAG_COMPLAINTTYPE);
-                    String issueDate = complaint.getString(TAG_COMPLAINTDATE);
-                    String complaintResolved = complaint
-                            .getString(TAG_COMPLAINTRESOLVED);
+String complaintType = complaint.getString(TAG_COMPLAINTTYPE);
+String issueDate = complaint.getString(TAG_COMPLAINTDATE);
+String complaintResolved = complaint
+.getString(TAG_COMPLAINTRESOLVED);
 
-                    HashMap<String, String> cmap = new HashMap<String, String>();
+HashMap<String, String> cmap = new HashMap<String, String>();
 
-                    cmap.put(TAG_COMPLAINTTYPE, complaintType);
-                    cmap.put(TAG_COMPLAINTDATE, issueDate);
-                    cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
+cmap.put(TAG_COMPLAINTTYPE, complaintType);
+cmap.put(TAG_COMPLAINTDATE, issueDate);
+cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
 
-                    // add Hashlist to ArrayList
-                    System.out
-                            .println("Adding Tags to Map, adding map to providerList");
-                    complaintList.add(cmap);
+// add Hashlist to ArrayList
+System.out
+.println("Adding Tags to Map, adding map to providerList");
+complaintList.add(cmap);
 
-                }
-            */
+}
+*/
        
 
         // //Display parsed Complaint data-DO THIS********************

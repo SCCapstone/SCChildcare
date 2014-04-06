@@ -410,8 +410,8 @@ containing a value of this type.
         public static final int search_icon=0x7f020045;
     }
     public static final class id {
-        public static final int action_search=0x7f050057;
-        public static final int action_settings=0x7f050058;
+        public static final int action_search=0x7f050058;
+        public static final int action_settings=0x7f050059;
         public static final int add_comment_button=0x7f050050;
         public static final int address=0x7f050025;
         public static final int address_label=0x7f050038;
@@ -470,12 +470,12 @@ containing a value of this type.
         public static final int ownerName=0x7f05002a;
         public static final int ownerNameLabel=0x7f05003b;
         public static final int owner_label=0x7f05003c;
-        public static final int permitTable=0x7f050052;
-        public static final int permitTableRow=0x7f050054;
-        public static final int permit_expiration_label=0x7f050056;
-        public static final int permit_name_label=0x7f050055;
-        public static final int permit_title_row=0x7f050053;
-        public static final int permits_Table_label=0x7f050051;
+        public static final int permitTable=0x7f050053;
+        public static final int permitTableRow=0x7f050055;
+        public static final int permit_expiration_label=0x7f050057;
+        public static final int permit_name_label=0x7f050056;
+        public static final int permit_title_row=0x7f050054;
+        public static final int permits_Table_label=0x7f050052;
         public static final int phone=0x7f05002c;
         public static final int phone_label=0x7f05003d;
         public static final int picker_subtitle=0x7f05001e;
@@ -485,6 +485,7 @@ containing a value of this type.
         public static final int qualityLevel_label=0x7f050046;
         public static final int relativelayoutid=0x7f050034;
         public static final int satellite=0x7f050002;
+        public static final int sign_in_button=0x7f050051;
         public static final int small=0x7f050005;
         public static final int sorry_label=0x7f05000e;
         public static final int specialist=0x7f050031;
