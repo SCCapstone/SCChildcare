@@ -1,6 +1,3 @@
-
-
-
 package com.example.scchildcare;
 
 
@@ -161,11 +158,22 @@ public class SearchResultsActivity extends ListActivity {
                         new LatLng(dbl_latitude, dbl_longitude)).title(
                         providerName));
                        
+                       
 				}
 				mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 						SOUTH_CAROLINA, 7));
 			}
+			HashMap hMarkers = new HashMap<Marker,String>();
+			
+			mMap.setOnMarkerClickListener(
+					new OnMarkerClickListener() {
+					@Override
+					public boolean onMarkerClick (Marker marker)
+					{
+						System.out.println("markers");
+						return true;
+					}});
 	
 			
 		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
@@ -271,6 +279,5 @@ public class SearchResultsActivity extends ListActivity {
 	    super.onSaveInstanceState(savedInstanceState);
 	}
 	
->>>>>>> eb588818b8a940a8d682f3ec3d3a282cda3f3fd4
 
 }

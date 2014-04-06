@@ -248,7 +248,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
-
+			<Button
+			    android:id="@+id/maps_button"
+			    android:text="@string/Directions"
+			    />
             <Button
                 android:id="@+id/add_comment_button"
                 android:layout_width="wrap_content"

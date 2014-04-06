@@ -287,7 +287,7 @@ private void showConnectionAlertToUser(){
 ///////////////////////
 private void MessageToUser(){
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    alertDialogBuilder.setMessage("Must enter a child care provider name, address, city, or zip code")
+    alertDialogBuilder.setMessage("Must enter a child care provider name, address or city")
     .setCancelable(false)
     .setPositiveButton("OK",
             new DialogInterface.OnClickListener(){
