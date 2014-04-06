@@ -74,11 +74,51 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.scchildcare.MainActivity" />
         </activity>
+        
+          <!-- GPS Search AsyncTask -->
+        <activity
+            android:name="com.example.scchildcare.GPS_Search_AsyncTask"
+            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:theme="@style/NoActionBar"
+
+            android:screenOrientation="portrait" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.scchildcare.MainActivity" />
+        </activity>
+        
+          <!-- Text Search AsyncTask -->
+        <activity
+            android:name="com.example.scchildcare.Search_AsyncTask"
+            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:theme="@style/NoActionBar"
+
+            android:screenOrientation="portrait" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.scchildcare.MainActivity" />
+        </activity>
+        
+            <!-- Single Provider AsyncTask -->
+        <activity
+            android:name="com.example.scchildcare.Single_AsyncTask"
+            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:theme="@style/NoActionBar"
+
+            android:screenOrientation="portrait" >
+
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.scchildcare.MainActivity" />
+        </activity>
+        
 
         <!-- Single List Item View -->
         <!--
      BUG REPORT: When the parent activity up arrow is used, this will attempt to fill the list view with an empty array, sending it to 
-	the sorry page immediately, need to figure out how to fix this
+	the sorry page immediately, need to figure out how to fix this
         -->
         <activity
             android:name="com.example.scchildcare.SingleMenuItemActivity"

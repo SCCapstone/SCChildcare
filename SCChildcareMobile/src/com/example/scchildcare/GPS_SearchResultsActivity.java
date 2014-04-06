@@ -1,5 +1,10 @@
 package com.example.scchildcare;
 
+import java.io.IOException;
+import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,10 +13,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -19,8 +26,10 @@ import android.os.AsyncTask;
 
 import android.os.Bundle;
 import android.os.StrictMode;
+import android.os.SystemClock;
 import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,10 +40,13 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
+import com.example.scchildcare.SearchResultsActivity.SingleItemResults;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 //import com.google.android.gms.maps.model.LatLngBounds;
 
@@ -62,7 +74,10 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_QUALITY = "qualityLevel";
 	private static final String TAG_LIST_OF_PROVIDERS = "pList";
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
-
+	private static final String TAG_CENTER_DATA = "dataforcenter";
+	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
+	private long mLastClickTime = 0;
+	String theMarker = "";
 
 	GoogleMap mMap;
 
@@ -85,9 +100,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		setContentView(R.layout.activity_search_results);
 
 		// Hashmap for ListView
-
-		ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
-		
+	
 /////////////////////////////////////////////////////////////////////			
 			Intent intent = getIntent();
 			Bundle getProviders = intent.getExtras();
@@ -98,10 +111,10 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	    	System.out.println(param_longitude + "  this is longitude " + param_latitude + " this is latitude");
 /////////////////////////////////////////////////////////////////////////
 	    	
-	    	
+	    	/*
 	    	ThreadPolicy tp = ThreadPolicy.LAX;
 	    	StrictMode.setThreadPolicy(tp);
-	    	
+	    	*/
 	    	
 			if (containingMaps.size() == 0) {
 				System.out.println("No Return on Search");
@@ -148,113 +161,24 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 							mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 							YOUR_LOCATION, 12));
+							
+							  mMap.setOnMarkerClickListener(new OnMarkerClickListener()
+		                       {
 
-		if (isURLReachable(this) == true)
-		{
-			System.out.println(param_latitude + ", " +param_longitude);
-			fullGPS_URL = gpsURL_1+ param_longitude + gpsURL_2 + param_latitude;
+		                           @Override
+		                           public boolean onMarkerClick(Marker aMarker) 
+		                           {
+		                             theMarker = (aMarker.getTitle());
+		                             aMarker.showInfoWindow();
+		                             goToCenter(theMarker);
+		                               return true;
+		                           }
+		                           
+		                           
+		                       });
 
-			System.out.println("Beginning JSON Parse");
-			JSONParser jParser = new JSONParser();
-
-			System.out.println("Getting JSON with HTTP");
-			JSONObject json = jParser.getJSONFromUrl(fullGPS_URL);
-			// System.out.println(json);
-
-			System.out.println("HTTP SUCCESSFUL");
-			try {
-				// get the array of providers
-				System.out.println("CREATING THE PROVIDERS JSON ARRAY");
-
-				providers = json.getJSONArray(TAG_PROVIDERS);
-
-				System.out.println("Beginning For Loop to go through array");
-
-				if (providers.length() == 0) {
-					System.out.println("No Return on Search");
-					// String sorry =
-					// "We are sorry, your search did not return anything";
-					// TextView textView = new TextView(this);
-					// textView.setTextSize(40);
-					// textView.setText(sorry);
-					Intent sorryIntent = new Intent(this,
-							SorryMessageActivity.class);
-					// intent.putExtra(SORRY_MESSAGE, sorry);
-					startActivity(sorryIntent);
-				} else {
-					for (int i = 0; i < providers.length(); i++) {
-						JSONObject p = providers.getJSONObject(i);
-
-						// store the json items in variables
-						String id = p.getString(TAG_ID);
-						String providerName = p.getString(TAG_PROVIDERNAME);
-						String licenseInfo = p.getString(TAG_LICENSEINFO);
-						String ownerName = p.getString(TAG_OWNERNAME);
-						String address = p.getString(TAG_ADDRESS);
-						String city = p.getString(TAG_CITY);
-						String state = p.getString(TAG_STATE);
-						String zipCode = p.getString(TAG_ZIPCODE);
-						String phoneNumber = p.getString(TAG_PHONENUMBER);
-						String longitude = p.getString(TAG_LONGITUDE);
-						String latitude = p.getString(TAG_LATITUDE);
-						String capacity = p.getString(TAG_CAPACITY);
-						String hours = p.getString(TAG_HOURS);
-						String specialist = p.getString(TAG_SPECIALIST);
-						String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
-						String qualityLevel = p.getString(TAG_QUALITY);
-
-						HashMap<String, String> map = new HashMap<String, String>();
-
-						map.put(TAG_ID, id);
-						map.put(TAG_PROVIDERNAME, providerName);
-						map.put(TAG_LICENSEINFO, licenseInfo);
-						map.put(TAG_OWNERNAME, ownerName);
-						map.put(TAG_ADDRESS, address);
-						map.put(TAG_CITY, city);
-						map.put(TAG_STATE, state);
-						map.put(TAG_ZIPCODE, zipCode);
-						map.put(TAG_PHONENUMBER, phoneNumber);
-						map.put(TAG_LONGITUDE, longitude);
-						map.put(TAG_LATITUDE, latitude);
-						map.put(TAG_CAPACITY, capacity);
-						map.put(TAG_HOURS, hours);
-						map.put(TAG_SPECIALIST, specialist);
-						map.put(TAG_SPECIALISTPHONE, specialistPhone);
-						map.put(TAG_QUALITY, qualityLevel);
-
-						// add Hashlist to ArrayList
-						System.out
-						.println("Adding Tags to Map, adding map to providerList");
-						providerList.add(map);
-
-
-						double dbl_latitude = Double.parseDouble(latitude);
-						double dbl_longitude = Double.parseDouble(longitude);
-
-						double your_latitude = Double.parseDouble(param_latitude);
-						double your_longitude = Double.parseDouble(param_longitude);
-
-						LatLng YOUR_LOCATION = new LatLng(your_latitude, your_longitude);
-
-						mMap = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap();
-						mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-						mMap.setMyLocationEnabled(true);
-
-						mMap.addMarker(new MarkerOptions()
-						.position(new LatLng(dbl_latitude, dbl_longitude))
-						.title("Hello world"));
-
-						mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(YOUR_LOCATION, 12));
-
-					}
 				}
-
-				mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-				
-				
-				
 			}
-		
 
 		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
 		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
@@ -271,13 +195,19 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 		setListAdapter(adapter);
 
-		ListView lv = getListView();
-
+		final ListView lv = getListView();
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				
+				
+				 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+			            return;
+			        }
+			        mLastClickTime = SystemClock.elapsedRealtime();	
+				
 				// getting values from selected ListItem
 				String providerName = ((TextView) view.findViewById(R.id.name))
 						.getText().toString();
@@ -312,30 +242,78 @@ public class GPS_SearchResultsActivity extends ListActivity {
 						.findViewById(R.id.qualityLevel)).getText().toString();
 
 				// Starting new intent
-				Intent in = new Intent(getApplicationContext(),
-						SingleMenuItemActivity.class);
-				in.putExtra(TAG_PROVIDERNAME, providerName);
-				in.putExtra(TAG_LICENSEINFO, licenseInfo);
-				in.putExtra(TAG_OWNERNAME, ownerName);
-				in.putExtra(TAG_ADDRESS, address);
-				in.putExtra(TAG_CITY, city);
-				in.putExtra(TAG_STATE, state);
-				in.putExtra(TAG_ZIPCODE, zipCode);
-				in.putExtra(TAG_PHONENUMBER, phoneNumber);
-				in.putExtra(TAG_LATITUDE, latitude);
-				in.putExtra(TAG_LONGITUDE, longitude);
-				in.putExtra(TAG_CAPACITY, capacity);
-				in.putExtra(TAG_HOURS, hours);
-				in.putExtra(TAG_SPECIALIST, specialist);
-				in.putExtra(TAG_SPECIALISTPHONE, specialistPhone);
-				in.putExtra(TAG_QUALITY, qualityLevel);
-				startActivity(in);
+                HashMap<String, String> map = new HashMap<String, String>();
+				
+				map.put(TAG_PROVIDERNAME, providerName);
+				map.put(TAG_LICENSEINFO, licenseInfo);
+				map.put(TAG_OWNERNAME, ownerName);
+				map.put(TAG_ADDRESS, address);
+				map.put(TAG_CITY, city);
+				map.put(TAG_STATE, state);
+				map.put(TAG_ZIPCODE, zipCode);
+				map.put(TAG_PHONENUMBER, phoneNumber);
+				map.put(TAG_LATITUDE, latitude);
+				map.put(TAG_LONGITUDE, longitude);
+				map.put(TAG_CAPACITY, capacity);
+				map.put(TAG_HOURS, hours);
+				map.put(TAG_SPECIALIST, specialist);
+				map.put(TAG_SPECIALISTPHONE, specialistPhone);
+				map.put(TAG_QUALITY, qualityLevel);
+				
+				
+				/*
+				SingleItemResults singleItem = new SingleItemResults(lv.getContext(), map);
+				singleItem.execute(providerName);*/
+				
+				Intent anIntent = new Intent(lv.getContext(), Single_AsyncTask.class);
+				anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
+				anIntent.putExtra("THE_PROVIDER", providerName);
+				startActivity(anIntent);
 			}
 		});
 
 	}
 	
-
+	private void goToCenter(final String aString){
+		
+	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+	    alertDialogBuilder.setMessage("Would you like more information about " + aString + " ?")
+	    .setCancelable(false)
+	    .setPositiveButton("Go to child care provider page",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id)
+	        {
+	   //////////////////////////////////////////////////////////////////
+	        	int i = 0;
+	        	while(i < containingMaps.size()) {
+	    			
+					HashMap<String, String> map = new HashMap<String, String>();
+					map = containingMaps.get(i);
+					String providerName = map.get(TAG_PROVIDERNAME);
+					if(providerName.equals(aString))
+					{
+						Intent anIntent = new Intent(getApplicationContext(), Single_AsyncTask.class);
+						anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
+						anIntent.putExtra("THE_PROVIDER", providerName);
+						startActivity(anIntent);
+					break;	
+					}
+	        	i++;
+	        	}
+	        	
+	        	
+	   ///////////////////////////////////////////////////////////////////     	
+	        }
+	    });
+	    alertDialogBuilder.setNegativeButton("Cancel",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id){
+	            dialog.cancel();
+	        }
+	    });
+	    AlertDialog alert = alertDialogBuilder.create();
+	    alert.show();
+	}
 	
 
 	@Override
@@ -347,7 +325,5 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
-
-
+	
 }
