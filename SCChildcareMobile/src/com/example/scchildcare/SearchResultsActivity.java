@@ -1,8 +1,4 @@
-
-
-
 package com.example.scchildcare;
-
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -19,7 +15,6 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ListActivity;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,13 +23,9 @@ import android.net.NetworkInfo;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.os.SystemClock;
-import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
-
 import android.util.Log;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,8 +35,6 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
-import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -58,13 +47,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 //import com.google.android.gms.maps.model.LatLngBounds;
 
-
 //import com.example.myfirstapp.trackdata.TrackData;
 
 public class SearchResultsActivity extends ListActivity {
 
 	// JSON node names
-	private static final String TAG_PROVIDERS = "providers";
+	//private static final String TAG_PROVIDERS = "providers";
 	private static final String TAG_ID = "id";
 	private static final String TAG_PROVIDERNAME = "providerName";
 	private static final String TAG_LICENSEINFO = "licenseInfo";
@@ -87,13 +75,16 @@ public class SearchResultsActivity extends ListActivity {
 	private long mLastClickTime = 0;
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
-	private static final LatLng SOUTH_CAROLINA = new LatLng(34.0096138,	-81.0392966); 		 		
+
+	private static final LatLng SOUTH_CAROLINA = new LatLng(34.0096138,
+			-81.0392966);
 
 	GoogleMap mMap;
-	
-	/////////////////////
+
+	// ///////////////////
 	String theMarker = "";
-	////////////////////
+	// //////////////////
+
 
 	// providers JSONArray
 	JSONArray providers = null;
@@ -115,7 +106,7 @@ public class SearchResultsActivity extends ListActivity {
 
 		// Hashmap for ListView
 
-		
+	
        /////////////////////////////////////////////////////////////////////////////////////////			
 		Intent intent = getIntent();
 		Bundle getProviders = intent.getExtras();
@@ -188,19 +179,24 @@ public class SearchResultsActivity extends ListActivity {
 				mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
 				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
 						SOUTH_CAROLINA, 7));
+
 			}
-	
-			
+			mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+			mMap.moveCamera(CameraUpdateFactory
+					.newLatLngZoom(SOUTH_CAROLINA, 7));
+		}
+
 		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
-				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
+				R.layout.list_item, new String[] { TAG_ID, TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
 						TAG_STATE, TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE,
-						TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST, TAG_SPECIALISTPHONE,
-						TAG_QUALITY }, new int[] { R.id.name, R.id.licenseInfo,
-						R.id.ownerName, R.id.address, R.id.city, R.id.state,
-						R.id.zipCode, R.id.phone, R.id.latitude,
-						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
-						R.id.qualityLevel });
+						TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST,
+						TAG_SPECIALISTPHONE, TAG_QUALITY }, new int[] {
+						R.id.id, R.id.name, R.id.licenseInfo, R.id.ownerName,
+						R.id.address, R.id.city, R.id.state, R.id.zipCode,
+						R.id.phone, R.id.latitude, R.id.longitude,
+						R.id.capacity, R.id.hours, R.id.specialist,
+						R.id.specialistPhone, R.id.qualityLevel });
 
 		// Updating parsed JSON data into ListView
 		// ListAdapter adapter = new SimpleAdapter(this, providerList,
@@ -217,14 +213,16 @@ public class SearchResultsActivity extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				
-				  
-				 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-			            return;
-			        }
-			        mLastClickTime = SystemClock.elapsedRealtime();	
-			        
+
+
+				if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+					return;
+				}
+				mLastClickTime = SystemClock.elapsedRealtime();
+
 				// getting values from selected ListItem
+				String providerID = ((TextView) view.findViewById(R.id.id))
+						.getText().toString();
 				String providerName = ((TextView) view.findViewById(R.id.name))
 						.getText().toString();
 				String licenseInfo = ((TextView) view
@@ -249,7 +247,7 @@ public class SearchResultsActivity extends ListActivity {
 						.getText().toString();
 				String hours = ((TextView) view.findViewById(R.id.hours))
 						.getText().toString();
-				
+
 				String specialist = ((TextView) view
 						.findViewById(R.id.specialist)).getText().toString();
 				String specialistPhone = ((TextView) view
@@ -259,11 +257,13 @@ public class SearchResultsActivity extends ListActivity {
 						.findViewById(R.id.qualityLevel)).getText().toString();
 
 				// Starting new intent
-			//	Intent in = new Intent(getApplicationContext(),
-				//		SingleMenuItemActivity.class);
-				
+
+				// Intent in = new Intent(getApplicationContext(),
+				// SingleMenuItemActivity.class);
+
 				HashMap<String, String> map = new HashMap<String, String>();
-				
+
+				map.put(TAG_ID, providerID);
 				map.put(TAG_PROVIDERNAME, providerName);
 				map.put(TAG_LICENSEINFO, licenseInfo);
 				map.put(TAG_OWNERNAME, ownerName);
@@ -284,6 +284,7 @@ public class SearchResultsActivity extends ListActivity {
 				anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
 				anIntent.putExtra("THE_PROVIDER", providerName);
 				startActivity(anIntent);
+
 			}
 		});
 
@@ -345,136 +346,10 @@ public class SearchResultsActivity extends ListActivity {
 	
 
 	public void onSaveInstanceState(Bundle savedInstanceState) {
-	    savedInstanceState.putString(MainActivity.EXTRA_MESSAGE, message);
-	    // Always call the superclass so it can save the view hierarchy state
-	    super.onSaveInstanceState(savedInstanceState);
+		savedInstanceState.putString(MainActivity.EXTRA_MESSAGE, message);
+		// Always call the superclass so it can save the view hierarchy state
+		super.onSaveInstanceState(savedInstanceState);
 	}
-	
-	   class SingleItemResults extends AsyncTask<String, String, ArrayList<HashMap<String, String>>>
-		{
 
-		  String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
-		  String complaintFullSearchURL = null;
-		  JSONParser jComplaintParser = new JSONParser();
-		  boolean isConnected = false;
-		 
-		  JSONArray complaints = null;
-		  ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
-		  private static final String TAG_COMPLAINTTYPE = "complaint_type";
-		  private static final String TAG_COMPLAINTDATE = "issueDate";
-		  private static final String TAG_COMPLAINTRESOLVED = "resolved";
-		  private static final String TAG_COMPLAINTS = "providercomplaints";
-		  private static final String TAG_CENTER_DATA = "dataforcenter";
-		  
-		   
-	    	Context aContext;
-	    	HashMap<String, String> theMap;
-	    	SingleItemResults(Context context, HashMap<String, String> aMap)
-	    	{
-	    		aContext = context;
-	    		theMap = aMap;
-	    	}
-	    	
-	    	protected void onPostExecute(ArrayList<HashMap<String, String>> result)
-	    	{	
-	    	if(isConnected == true){	
-	    	Intent anIntent = new Intent(aContext.getApplicationContext(), SingleMenuItemActivity.class);
-	    	anIntent.putExtra(TAG_COMPLAINTS, (Serializable)result);
-	    	anIntent.putExtra(TAG_CENTER_DATA, (Serializable)theMap);
-	    	startActivity(anIntent);
-	    	}
-	    	else
-			 {
-				 Intent noConnect = new Intent(aContext.getApplicationContext(), ConnectionErrorActivity.class);
-				 startActivity(noConnect); 
-			 }
-	    	}
-	    	
-	    	 protected void onPreExecute()
-	 		{
-	 			  super.onPreExecute();
-	 		//      progressBar.setVisibility(View.VISIBLE);
-	 		}
-	    	
-			@Override
-			protected ArrayList<HashMap<String, String>> doInBackground(String... params) 
-			{
-				String providerName = params[0];
-				complaintFullSearchURL = complaintSearchURL + providerName;
-				String complaintActualSearch = complaintFullSearchURL.replace(" ", "+");
-				
-				if(isURLReachable(aContext))
-				{
-				   isConnected = true;
-					 JSONObject complaintjson = jComplaintParser
-				                .getJSONFromUrl(complaintActualSearch);	
-					
-					 System.out.println("COMPLAINT HTTP SUCCESSFUL");
-				        try {
-				            // get the array of providers
-				            System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
-
-				            complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
-				            System.out.println("Beginning For Loop to go through array");
-
-				            
-				                for (int i = 0; i < complaints.length(); i++) {
-				                    JSONObject complaint = complaints.getJSONObject(i);
-
-				                    // store the json items in variables
-
-				                    String complaintType = complaint.getString(TAG_COMPLAINTTYPE);
-				                    String issueDate = complaint.getString(TAG_COMPLAINTDATE);
-				                    String complaintResolved = complaint
-				                            .getString(TAG_COMPLAINTRESOLVED);
-
-				                    HashMap<String, String> cmap = new HashMap<String, String>();
-
-				                    cmap.put(TAG_COMPLAINTTYPE, complaintType);
-				                    cmap.put(TAG_COMPLAINTDATE, issueDate);
-				                    cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
-
-				                    // add Hashlist to ArrayList
-				                    System.out
-				                            .println("Adding Tags to Map, adding map to providerList");
-				                    complaintList.add(cmap);
-
-				                }
-				            
-				        } catch (JSONException e) {
-				            e.printStackTrace();
-				        }
-					
-				}
-				else{
-					isConnected = false;
-				}
-				return complaintList;
-			}
-			 public boolean isURLReachable(Context context) {
-				    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-				    NetworkInfo netInfo = cm.getActiveNetworkInfo();
-				    if (netInfo != null && netInfo.isConnected()) {
-				        try {
-				            URL url = new URL("http://54.201.44.59");   // Change to "http://google.com" for www  test.
-				            HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-				            urlc.setConnectTimeout(10 * 1000);          // 10 s.
-				            urlc.connect();
-				            if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
-				                Log.wtf("Connection", "Success !");
-				                return true;
-				            } else {
-				                return false;
-				            }
-				        } catch (MalformedURLException e1) {
-				            return false;
-				        } catch (IOException e) {
-				            return false;
-				        }
-				    }
-				    return false;
-				}
-		}
-	
 
 }

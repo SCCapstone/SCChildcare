@@ -15,15 +15,12 @@ import org.json.JSONObject;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ListActivity;
-
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
-
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.os.SystemClock;
@@ -43,6 +40,7 @@ import android.widget.TextView;
 import com.example.scchildcare.SearchResultsActivity.SingleItemResults;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.LatLng;
@@ -55,7 +53,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class GPS_SearchResultsActivity extends ListActivity {
 
 	// JSON node names
-	private static final String TAG_PROVIDERS = "providers";
+	//private static final String TAG_PROVIDERS = "providers";
 	private static final String TAG_ID = "id";
 	private static final String TAG_PROVIDERNAME = "providerName";
 	private static final String TAG_LICENSEINFO = "licenseInfo";
@@ -75,6 +73,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_LIST_OF_PROVIDERS = "pList";
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 	private static final String TAG_CENTER_DATA = "dataforcenter";
+
 	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
 	private long mLastClickTime = 0;
 	String theMarker = "";
@@ -100,7 +99,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		setContentView(R.layout.activity_search_results);
 
 		// Hashmap for ListView
-	
+
 /////////////////////////////////////////////////////////////////////			
 			Intent intent = getIntent();
 			Bundle getProviders = intent.getExtras();
@@ -170,7 +169,9 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		                           {
 		                             theMarker = (aMarker.getTitle());
 		                             aMarker.showInfoWindow();
+
 		                             goToCenter(theMarker);
+
 		                               return true;
 		                           }
 		                           
@@ -182,12 +183,12 @@ public class GPS_SearchResultsActivity extends ListActivity {
 
 		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
 		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
-				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
+				R.layout.list_item, new String[] { TAG_ID, TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
 						TAG_STATE, TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE,
 						TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST,
 						TAG_SPECIALISTPHONE, TAG_QUALITY }, new int[] {
-						R.id.name, R.id.licenseInfo, R.id.ownerName,
+						R.id.id, R.id.name, R.id.licenseInfo, R.id.ownerName,
 						R.id.address, R.id.city, R.id.state, R.id.zipCode,
 						R.id.phone, R.id.latitude, R.id.longitude,
 						R.id.capacity, R.id.hours, R.id.specialist,
@@ -209,6 +210,8 @@ public class GPS_SearchResultsActivity extends ListActivity {
 			        mLastClickTime = SystemClock.elapsedRealtime();	
 				
 				// getting values from selected ListItem
+				String providerID = ((TextView) view.findViewById(R.id.id))
+						.getText().toString();
 				String providerName = ((TextView) view.findViewById(R.id.name))
 						.getText().toString();
 				String licenseInfo = ((TextView) view
@@ -244,6 +247,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				// Starting new intent
                 HashMap<String, String> map = new HashMap<String, String>();
 				
+				map.put(TAG_ID, providerID);
 				map.put(TAG_PROVIDERNAME, providerName);
 				map.put(TAG_LICENSEINFO, licenseInfo);
 				map.put(TAG_OWNERNAME, ownerName);
@@ -260,7 +264,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				map.put(TAG_SPECIALISTPHONE, specialistPhone);
 				map.put(TAG_QUALITY, qualityLevel);
 				
-				
 				/*
 				SingleItemResults singleItem = new SingleItemResults(lv.getContext(), map);
 				singleItem.execute(providerName);*/
@@ -269,12 +272,14 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
 				anIntent.putExtra("THE_PROVIDER", providerName);
 				startActivity(anIntent);
+
 			}
 		});
 
 	}
 	
 	private void goToCenter(final String aString){
+
 		
 	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 	    alertDialogBuilder.setMessage("Would you like more information about " + aString + " ?")
@@ -296,6 +301,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 						anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
 						anIntent.putExtra("THE_PROVIDER", providerName);
 						startActivity(anIntent);
+
 					break;	
 					}
 	        	i++;

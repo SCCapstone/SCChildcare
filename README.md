@@ -1,8 +1,8 @@
-#SCChildcare Mobile v0.1.3
+#SCChildcare Mobile v0.1.4
 
 *[http://www.scchildcare.org](http://www.scchildcare.org)
 
-Download the Open Beta now: [Download](https://www.dropbox.com/s/dowx6j8nv8ddqys/SCChildcareMobile.apk)
+[Download](https://www.dropbox.com/s/0mhjicr4jz32uet/SCChildcareMobile.apk) the Open Beta now: 
 
 ### DESCRIPTION
 
@@ -18,11 +18,16 @@ view official ratings, and even communicate to other users via a forum/comment s
 
 
 ##Known Bugs
-  - On the Single Provider page, there is a issue with the amount of data being processed at once, causing the screen to cut off the bottom of the page. There is data, the app just skips displaying it. We are looking into a better way of performing tasks.
+  - Our comment system is currently down due to networking issues. A hotfix is planned for later this week to fix these. 
+  - Some layouts need to be adjusted for different size devices
   
 
 
 ##Update History
+
+###0.1.4
+  - Changed the main search buttons to blue
+  - Comment system has been added, but is experiencing network issues
 
 ###0.1.3
   - Switched over to AsyncTask for our processing. 

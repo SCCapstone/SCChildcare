@@ -12,6 +12,10 @@
 bin/*
 gen/*
 
+google-play-services_lib/bin/*
+facebook/bin/*
+SCChildcareMobile/bin/*
+
 # Local configuration file (sdk path, etc)
 local.properties
 

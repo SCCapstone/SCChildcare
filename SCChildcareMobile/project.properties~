@@ -13,17 +13,17 @@ proguard.config=${sdk.dir}/tools/proguard/proguard-android.txt:proguard-project.
 # Project target.
 target=android-19
 
+
 <<<<<<< HEAD
-android.library.reference.1=../SCChildcare/facebook
-android.library.reference.2=../SCChildcare/google-play-services_lib
+android.library.reference.1=../facebook
 =======
-
-android.library.reference.1=../google-play-services_lib/google-play-services_lib
-android.library.reference.2=../facebook
-
->>>>>>> 5762d01894b253e7f90f20fa351c9d8691fd1df3
+android.library.reference.1=..\\facebook
+>>>>>>> 7f18d2c942e379b7d6ca20e72548548416495b83
+android.library.reference.2=../google-play-services_lib
 
 
 
 
 
+
+android.library.reference.3=../google-play-services_lib

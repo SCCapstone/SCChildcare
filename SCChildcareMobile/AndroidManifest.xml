@@ -118,7 +118,8 @@
         <!-- Single List Item View -->
         <!--
      BUG REPORT: When the parent activity up arrow is used, this will attempt to fill the list view with an empty array, sending it to 
-	the sorry page immediately, need to figure out how to fix this
+	the sorry page immediately, need to figure out how to fix this
+
         -->
         <activity
             android:name="com.example.scchildcare.SingleMenuItemActivity"
@@ -181,7 +182,7 @@
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyDuY2P0cDWD0aymCnw1Uztlih4PNTva3Gs" 
+            android:value="AIzaSyCxnmw9isphosD7CCAgoviQuC0YqYyKgpM" 
             />
     </application>
 
