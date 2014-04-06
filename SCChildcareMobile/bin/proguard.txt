@@ -19,6 +19,9 @@
 # view AndroidManifest.xml #generated:133
 -keep class com.facebook.LoginActivity { <init>(...); }
 
+# view res/layout/com_facebook_usersettingsfragment.xml #generated:48
+-keep class com.facebook.widget.LoginButton { <init>(...); }
+
 # view large\res/layout-large/activity_search_results.xml #generated:8
 # view large\res/layout-large/single_list_item.xml #generated:206
 # view normal\res/layout-normal/activity_search_results.xml #generated:8
