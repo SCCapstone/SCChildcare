@@ -44,16 +44,22 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
+	private String destinationAddress = null;
+	private String startingAddress = null;
+	private String uriString = "http://maps.google.com/maps?saddr=start_lat,start_lon&daddr=end_lat,end_lot";
+	private String uriString2 = "http://maps.google.com/maps?saddr={start_address}&daddr={destination_address}";
+	private String uri = "http://maps.google.com/maps?saddr={"+startingAddress+"}&daddr={"+destinationAddress+"}";
 
-	
+
+
 
 	// JSON node keys for Complaints
 	private static final String TAG_COMPLAINTS = "providercomplaints";
 
-	
+
 	private static final String TAG_COMPLAINTTITLE = "complaint_title";
 	private static final String TAG_COMPLAINTRESOLVED = "resolved";
-	
+
 	JSONArray complaints = null;
 	ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
 
@@ -75,13 +81,8 @@ public class SingleMenuItemActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_list_item);
+
 		Button getDirections = (Button) findViewById(R.id.maps_button);
-		getDirections.setOnClickListener(new View.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse("http://maps.google.com/maps?saddr=start_lat,start_lon&daddr=end_lat,end_lot"));
-				startActivity(intent);
-			}
-		});
 
 		// getting intent data
 		Intent in = getIntent();
@@ -128,7 +129,7 @@ public class SingleMenuItemActivity extends Activity {
 		// lblState.setText(state);
 		// lblZipcode.setText(zipCode);
 		lblPhone.setText(phoneNumber);
-		Linkify.addLinks(lblPhone, Linkify.PHONE_NUMBERS);
+		Linkify.addLinks(lblPhone, Linkify.PHONE_NUMBERS); //set phonenumber to clickable
 		lblCapacity.setText(capacity);
 		lblhours.setText(hours);
 		lblSpecialist.setText(specialist);
@@ -151,8 +152,6 @@ public class SingleMenuItemActivity extends Activity {
 		mMap.moveCamera(CameraUpdateFactory
 				.newLatLngZoom(PROVIDER_LOCATION, 14));
 
-		
-
 		/** DISPLAY COMPLAINT DATA **/
 
 		complaintFullSearchURL = complaintSearchURL + providerName;
@@ -170,34 +169,42 @@ public class SingleMenuItemActivity extends Activity {
 			complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
 			System.out.println("Beginning For Loop to go through array");
 
-			
-				for (int i = 0; i < complaints.length(); i++) {
-					JSONObject permit = complaints.getJSONObject(i);
 
-					// store the json items in variables
+			for (int i = 0; i < complaints.length(); i++) {
+				JSONObject permit = complaints.getJSONObject(i);
 
-					String complaintName = permit.getString(TAG_COMPLAINTTITLE);
-					String complaintResolved = permit
-							.getString(TAG_COMPLAINTRESOLVED);
+				// store the json items in variables
 
-					HashMap<String, String> cmap = new HashMap<String, String>();
+				String complaintName = permit.getString(TAG_COMPLAINTTITLE);
+				String complaintResolved = permit
+						.getString(TAG_COMPLAINTRESOLVED);
 
-					cmap.put(TAG_COMPLAINTTITLE, complaintName);
-					cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
+				HashMap<String, String> cmap = new HashMap<String, String>();
 
-					// add Hashlist to ArrayList
-					System.out
-							.println("Adding Tags to Map, adding map to providerList");
-					complaintList.add(cmap);
+				cmap.put(TAG_COMPLAINTTITLE, complaintName);
+				cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
 
-				}
-			
+				// add Hashlist to ArrayList
+				System.out
+				.println("Adding Tags to Map, adding map to providerList");
+				complaintList.add(cmap);
+
+			}
+
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
 
 		// //Display parsed Complaint data-DO THIS********************
 		//
+		destinationAddress = address;
+		startingAddress = null;
+		getDirections.setOnClickListener(new View.OnClickListener() {
+			public void onClick(View v) {
+				Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
+				startActivity(intent);
+			}
+		});
 
 		TextView complaintsTableLabel = (TextView) findViewById(R.id.complaints_Table_label);
 		complaintsTableLabel.setText("Complaints: ");
@@ -236,11 +243,6 @@ public class SingleMenuItemActivity extends Activity {
 			complaintTable.addView(complaintRow);
 
 		}
-
-		
-		
-		
 	}
-
 }
 
