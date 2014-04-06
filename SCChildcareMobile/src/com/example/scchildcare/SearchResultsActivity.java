@@ -1,8 +1,10 @@
-
-
 package com.example.scchildcare;
 
-
+import java.io.IOException;
+import java.io.Serializable;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -11,12 +13,18 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
-import android.os.StrictMode.ThreadPolicy;
+import android.os.SystemClock;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -29,21 +37,20 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 //import com.google.android.gms.maps.model.LatLngBounds;
 
 //import com.example.myfirstapp.trackdata.TrackData;
 
 public class SearchResultsActivity extends ListActivity {
-	private static final String searchURL = "http://54.201.44.59:3000/providers.json?utf8=%E2%9C%93&search=";
-	// private static byte[] buff = new byte[1024];
-	// private static String result = null;
-	private static String fullSearchURL = null;
 
 	// JSON node names
-	private static final String TAG_PROVIDERS = "providers";
+	//private static final String TAG_PROVIDERS = "providers";
 	private static final String TAG_ID = "id";
 	private static final String TAG_PROVIDERNAME = "providerName";
 	private static final String TAG_LICENSEINFO = "licenseInfo";
@@ -60,12 +67,19 @@ public class SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
-
+	private static final String TAG_LIST_OF_PROVIDERS = "pList";
+	String message;
+	private long mLastClickTime = 0;
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
-
-	private static final LatLng SOUTH_CAROLINA = new LatLng(34.0096138,	-81.0392966); 		 		
+	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
+	private static final LatLng SOUTH_CAROLINA = new LatLng(34.0096138,
+			-81.0392966);
 
 	GoogleMap mMap;
+
+	// ///////////////////
+	String theMarker = "";
+	// //////////////////
 
 	// providers JSONArray
 	JSONArray providers = null;
@@ -77,6 +91,7 @@ public class SearchResultsActivity extends ListActivity {
 		return true;
 	}
 
+	@SuppressWarnings("unchecked")
 	@SuppressLint("NewApi")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -85,121 +100,96 @@ public class SearchResultsActivity extends ListActivity {
 		setContentView(R.layout.activity_search_results);
 
 		// Hashmap for ListView
-		ArrayList<HashMap<String, String>> providerList = new ArrayList<HashMap<String, String>>();
 
-		// Simple quick fix for http exception, FIX LATER WITH ASYNCTASK*******
-		ThreadPolicy tp = ThreadPolicy.LAX;
-		StrictMode.setThreadPolicy(tp);
-
-		// Get the message from the intent
+		// ///////////////////////////////////////////////////////////////////////////////////////
 		Intent intent = getIntent();
-		String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-		// System.out.println(message);
-		fullSearchURL = searchURL + message;
+		Bundle getProviders = intent.getExtras();
+		containingMaps = (ArrayList<HashMap<String, String>>) getProviders
+				.getSerializable(TAG_LIST_OF_PROVIDERS);
+		// ////////////////////////////////////////////////////////////////////
 
-		System.out.println("Beginning JSON Parse");
-		JSONParser jParser = new JSONParser();
+		/*
+		 * ThreadPolicy tp = ThreadPolicy.LAX; StrictMode.setThreadPolicy(tp);
+		 */
+		if (containingMaps.size() == 0) {
+			System.out.println("No Return on Search");
+			Intent sorryIntent = new Intent(this, SorryMessageActivity.class);
+			this.finish();
+			startActivity(sorryIntent);
+		} else {
+			for (int i = 0; i < containingMaps.size(); i++) {
 
-		System.out.println("Getting JSON with HTTP");
-		JSONObject json = jParser.getJSONFromUrl(fullSearchURL);
-		// System.out.println(json);
+				HashMap<String, String> map = new HashMap<String, String>();
+				map = containingMaps.get(i);
 
-		System.out.println("HTTP SUCCESSFUL");
-		try {
-			// get the array of providers
-			System.out.println("CREATING THE PROVIDERS JSON ARRAY");
+				String longitude = map.get(TAG_LONGITUDE);
+				String latitude = map.get(TAG_LATITUDE);
+				String providerName = map.get(TAG_PROVIDERNAME);
 
-			providers = json.getJSONArray(TAG_PROVIDERS);
+				// ////////////////////////////////////////////////////////////////////////////////
 
-			System.out.println("Beginning For Loop to go through array");
+				System.out.println(map.get(TAG_ID) + " 1  "
+						+ map.get(TAG_PROVIDERNAME) + " 2 "
+						+ map.get(TAG_LICENSEINFO) + " 3 "
+						+ map.get(TAG_OWNERNAME) + "  4 "
+						+ map.get(TAG_ADDRESS) + " 5 " + map.get(TAG_CITY)
+						+ "  6 " + map.get(TAG_STATE) + " 7 "
+						+ map.get(TAG_ZIPCODE) + "  8 "
+						+ map.get(TAG_PHONENUMBER) + "  9 "
+						+ map.get(TAG_PHONENUMBER) + " 10  "
+						+ map.get(TAG_LONGITUDE) + " 11 "
+						+ map.get(TAG_LATITUDE) + "  12 "
+						+ map.get(TAG_CAPACITY) + " 13 "
+						+ map.get(TAG_CAPACITY) + "  14 " + map.get(TAG_HOURS)
+						+ " 15  " + map.get(TAG_SPECIALIST) + " 16 "
+						+ map.get(TAG_SPECIALISTPHONE) + " 17 "
+						+ map.get(TAG_QUALITY) + " 18 ");
 
-			if (providers.length() == 0) {
-				System.out.println("No Return on Search");
-				// String sorry =
-				// "We are sorry, your search did not return anything";
-				// TextView textView = new TextView(this);
-				// textView.setTextSize(40);
-				// textView.setText(sorry);
-				Intent sorryIntent = new Intent(this,
-						SorryMessageActivity.class);
-				// intent.putExtra(SORRY_MESSAGE, sorry);
-				startActivity(sorryIntent);
-			} else {
-				for (int i = 0; i < providers.length(); i++) {
-					JSONObject p = providers.getJSONObject(i);
+				// ///////////////////////////////////////////////////////////////////
+				// add Hashlist to ArrayList
+				System.out
+						.println("Adding Tags to Map, adding map to providerList");
 
-					// store the json items in variables
-					String id = p.getString(TAG_ID);
-					String providerName = p.getString(TAG_PROVIDERNAME);
-					String licenseInfo = p.getString(TAG_LICENSEINFO);
-					String ownerName = p.getString(TAG_OWNERNAME);
-					String address = p.getString(TAG_ADDRESS);
-					String city = p.getString(TAG_CITY);
-					String state = p.getString(TAG_STATE);
-					String zipCode = p.getString(TAG_ZIPCODE);
-					String phoneNumber = p.getString(TAG_PHONENUMBER);
-					String longitude = p.getString(TAG_LONGITUDE);
-					String latitude = p.getString(TAG_LATITUDE);
-					String capacity = p.getString(TAG_CAPACITY);
-					String hours = p.getString(TAG_HOURS);
-					String specialist = p.getString(TAG_SPECIALIST);
-					String specialistPhone = p.getString(TAG_SPECIALISTPHONE);
-					String qualityLevel = p.getString(TAG_QUALITY);
+				double dbl_latitude = Double.parseDouble(latitude);
+				double dbl_longitude = Double.parseDouble(longitude);
 
-					HashMap<String, String> map = new HashMap<String, String>();
+				mMap = ((MapFragment) getFragmentManager().findFragmentById(
+						R.id.map)).getMap();
 
-					map.put(TAG_ID, id);
-					map.put(TAG_PROVIDERNAME, providerName);
-					map.put(TAG_LICENSEINFO, licenseInfo);
-					map.put(TAG_OWNERNAME, ownerName);
-					map.put(TAG_ADDRESS, address);
-					map.put(TAG_CITY, city);
-					map.put(TAG_STATE, state);
-					map.put(TAG_ZIPCODE, zipCode);
-					map.put(TAG_PHONENUMBER, phoneNumber);
-					map.put(TAG_LONGITUDE, longitude);
-					map.put(TAG_LATITUDE, latitude);
-					map.put(TAG_CAPACITY, capacity);
-					map.put(TAG_HOURS, hours);
-					map.put(TAG_SPECIALIST, specialist);
-					map.put(TAG_SPECIALISTPHONE, specialistPhone);
-					map.put(TAG_QUALITY, qualityLevel);
+				mMap.addMarker(new MarkerOptions().position(
+						new LatLng(dbl_latitude, dbl_longitude)).title(
+						providerName));
+				// ///////////////////////////////////////////////////
+				mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
 
-					// add Hashlist to ArrayList
-					System.out
-							.println("Adding Tags to Map, adding map to providerList");
-					providerList.add(map);
+					@Override
+					public boolean onMarkerClick(Marker aMarker) {
+						theMarker = (aMarker.getTitle());
+						aMarker.showInfoWindow();
+						goToCenter(theMarker, getApplicationContext());
+						return true;
+					}
 
-					double dbl_latitude = Double.parseDouble(latitude);
-					double dbl_longitude = Double.parseDouble(longitude);
+				});
+				// //////////////////////////////////
 
-					mMap = ((MapFragment) getFragmentManager()
-							.findFragmentById(R.id.map)).getMap();
-
-					mMap.addMarker(new MarkerOptions().position(
-							new LatLng(dbl_latitude, dbl_longitude)).title(
-							providerName));
-
-				}
-				mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-				mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
-						SOUTH_CAROLINA, 7));
 			}
-		} catch (JSONException e) {
-			e.printStackTrace();
+			mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+			mMap.moveCamera(CameraUpdateFactory
+					.newLatLngZoom(SOUTH_CAROLINA, 7));
 		}
 
-		
-		ListAdapter adapter = new SimpleAdapter(this, providerList,
-				R.layout.list_item, new String[] { TAG_PROVIDERNAME,
+		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
+				R.layout.list_item, new String[] { TAG_ID, TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
 						TAG_STATE, TAG_ZIPCODE, TAG_PHONENUMBER, TAG_LATITUDE,
-						TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST, TAG_SPECIALISTPHONE,
-						TAG_QUALITY }, new int[] { R.id.name, R.id.licenseInfo,
-						R.id.ownerName, R.id.address, R.id.city, R.id.state,
-						R.id.zipCode, R.id.phone, R.id.latitude,
-						R.id.longitude, R.id.capacity, R.id.hours, R.id.specialist, R.id.specialistPhone,
-						R.id.qualityLevel });
+						TAG_LONGITUDE, TAG_CAPACITY, TAG_HOURS, TAG_SPECIALIST,
+						TAG_SPECIALISTPHONE, TAG_QUALITY }, new int[] {
+						R.id.id, R.id.name, R.id.licenseInfo, R.id.ownerName,
+						R.id.address, R.id.city, R.id.state, R.id.zipCode,
+						R.id.phone, R.id.latitude, R.id.longitude,
+						R.id.capacity, R.id.hours, R.id.specialist,
+						R.id.specialistPhone, R.id.qualityLevel });
 
 		// Updating parsed JSON data into ListView
 		// ListAdapter adapter = new SimpleAdapter(this, providerList,
@@ -210,14 +200,21 @@ public class SearchResultsActivity extends ListActivity {
 
 		setListAdapter(adapter);
 
-		ListView lv = getListView();
-
+		final ListView lv = getListView();
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+
+				if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+					return;
+				}
+				mLastClickTime = SystemClock.elapsedRealtime();
+
 				// getting values from selected ListItem
+				String providerID = ((TextView) view.findViewById(R.id.id))
+						.getText().toString();
 				String providerName = ((TextView) view.findViewById(R.id.name))
 						.getText().toString();
 				String licenseInfo = ((TextView) view
@@ -242,7 +239,7 @@ public class SearchResultsActivity extends ListActivity {
 						.getText().toString();
 				String hours = ((TextView) view.findViewById(R.id.hours))
 						.getText().toString();
-				
+
 				String specialist = ((TextView) view
 						.findViewById(R.id.specialist)).getText().toString();
 				String specialistPhone = ((TextView) view
@@ -252,24 +249,33 @@ public class SearchResultsActivity extends ListActivity {
 						.findViewById(R.id.qualityLevel)).getText().toString();
 
 				// Starting new intent
-				Intent in = new Intent(getApplicationContext(),
-						SingleMenuItemActivity.class);
-				in.putExtra(TAG_PROVIDERNAME, providerName);
-				in.putExtra(TAG_LICENSEINFO, licenseInfo);
-				in.putExtra(TAG_OWNERNAME, ownerName);
-				in.putExtra(TAG_ADDRESS, address);
-				in.putExtra(TAG_CITY, city);
-				in.putExtra(TAG_STATE, state);
-				in.putExtra(TAG_ZIPCODE, zipCode);
-				in.putExtra(TAG_PHONENUMBER, phoneNumber);
-				in.putExtra(TAG_LATITUDE, latitude);
-				in.putExtra(TAG_LONGITUDE, longitude);
-				in.putExtra(TAG_CAPACITY, capacity);
-				in.putExtra(TAG_HOURS, hours);
-				in.putExtra(TAG_SPECIALIST, specialist);
-				in.putExtra(TAG_SPECIALISTPHONE, specialistPhone);
-				in.putExtra(TAG_QUALITY, qualityLevel);
-				startActivity(in);
+				// Intent in = new Intent(getApplicationContext(),
+				// SingleMenuItemActivity.class);
+
+				HashMap<String, String> map = new HashMap<String, String>();
+
+				map.put(TAG_ID, providerID);
+				map.put(TAG_PROVIDERNAME, providerName);
+				map.put(TAG_LICENSEINFO, licenseInfo);
+				map.put(TAG_OWNERNAME, ownerName);
+				map.put(TAG_ADDRESS, address);
+				map.put(TAG_CITY, city);
+				map.put(TAG_STATE, state);
+				map.put(TAG_ZIPCODE, zipCode);
+				map.put(TAG_PHONENUMBER, phoneNumber);
+				map.put(TAG_LATITUDE, latitude);
+				map.put(TAG_LONGITUDE, longitude);
+				map.put(TAG_CAPACITY, capacity);
+				map.put(TAG_HOURS, hours);
+				map.put(TAG_SPECIALIST, specialist);
+				map.put(TAG_SPECIALISTPHONE, specialistPhone);
+				map.put(TAG_QUALITY, qualityLevel);
+
+				SingleItemResults singleItem = new SingleItemResults(lv
+						.getContext(), map);
+				singleItem.execute(providerID);
+
+				// tartActivity(in);
 			}
 		});
 
@@ -283,31 +289,177 @@ public class SearchResultsActivity extends ListActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-	}
-	
-//	public boolean isURLReachable(Context context) {
-//		ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-//		NetworkInfo netInfo = cm.getActiveNetworkInfo();
-//		if (netInfo != null && netInfo.isConnected()) {
-//			try {
-//				URL url = new URL("http://54.201.44.59:3000");   // Change to "http://google.com" for www  test.
-//				HttpURLConnection urlc = (HttpURLConnection) url.openConnection();
-//				urlc.setConnectTimeout(10 * 1000);          // 10 s.
-//				urlc.connect();
-//				if (urlc.getResponseCode() == 200) {        // 200 = "OK" code (http connection is fine).
-//					Log.wtf("Connection", "Success !");
-//					return true;
-//				} else {
-//					return false;
-//				}
-//			} catch (MalformedURLException e1) {
-//				return false;
-//			} catch (IOException e) {
-//				return false;
-//			}
-//		}
-//		return false;
-//	}
 
+	}
+
+	private void goToCenter(final String aString, Context context) {
+		final Context aContext = context;
+
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder
+				.setMessage(
+						"Would you like more information about " + aString
+								+ " ?")
+				.setCancelable(false)
+				.setPositiveButton("Go to child care provider page",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								// ////////////////////////////////////////////////////////////////
+								int i = 0;
+								while (i < containingMaps.size()) {
+
+									HashMap<String, String> map = new HashMap<String, String>();
+									map = containingMaps.get(i);
+									String providerName = map
+											.get(TAG_PROVIDERNAME);
+									if (providerName.equals(aString)) {
+										SingleItemResults singleItem = new SingleItemResults(
+												aContext, map);
+										singleItem.execute(providerName);
+										break;
+									}
+									i++;
+								}
+
+								// /////////////////////////////////////////////////////////////////
+							}
+						});
+		alertDialogBuilder.setNegativeButton("Cancel",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = alertDialogBuilder.create();
+		alert.show();
+	}
+
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		savedInstanceState.putString(MainActivity.EXTRA_MESSAGE, message);
+		// Always call the superclass so it can save the view hierarchy state
+		super.onSaveInstanceState(savedInstanceState);
+	}
+
+	class SingleItemResults extends
+			AsyncTask<String, String, ArrayList<HashMap<String, String>>> {
+
+		String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
+		String complaintFullSearchURL = null;
+		JSONParser jComplaintParser = new JSONParser();
+
+		JSONArray complaints = null;
+		ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
+		private static final String TAG_COMPLAINTTYPE = "complaint_type";
+		private static final String TAG_COMPLAINTDATE = "issueDate";
+		private static final String TAG_COMPLAINTRESOLVED = "resolved";
+		private static final String TAG_COMPLAINTS = "providercomplaints";
+		private static final String TAG_CENTER_DATA = "dataforcenter";
+
+		Context aContext;
+		HashMap<String, String> theMap;
+
+		SingleItemResults(Context context, HashMap<String, String> aMap) {
+			aContext = context;
+			theMap = aMap;
+		}
+
+		protected void onPostExecute(ArrayList<HashMap<String, String>> result) {
+			Intent anIntent = new Intent(aContext.getApplicationContext(),
+					SingleMenuItemActivity.class);
+			anIntent.putExtra(TAG_COMPLAINTS, (Serializable) result);
+			anIntent.putExtra(TAG_CENTER_DATA, (Serializable) theMap);
+			startActivity(anIntent);
+		}
+
+		protected void onPreExecute() {
+			super.onPreExecute();
+			// progressBar.setVisibility(View.VISIBLE);
+		}
+
+		@Override
+		protected ArrayList<HashMap<String, String>> doInBackground(
+				String... params) {
+			//String providerName = params[0];
+			String providerID = params[0];
+			complaintFullSearchURL = complaintSearchURL + providerID;
+			String complaintActualSearch = complaintFullSearchURL.replace(" ",
+					"+");
+
+			if (isURLReachable(aContext)) {
+
+				JSONObject complaintjson = jComplaintParser
+						.getJSONFromUrl(complaintActualSearch);
+
+				System.out.println("COMPLAINT HTTP SUCCESSFUL");
+				try {
+					// get the array of providers
+					System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
+
+					complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
+					System.out
+							.println("Beginning For Loop to go through array");
+
+					for (int i = 0; i < complaints.length(); i++) {
+						JSONObject complaint = complaints.getJSONObject(i);
+
+						// store the json items in variables
+
+						String complaintType = complaint
+								.getString(TAG_COMPLAINTTYPE);
+						String issueDate = complaint
+								.getString(TAG_COMPLAINTDATE);
+						String complaintResolved = complaint
+								.getString(TAG_COMPLAINTRESOLVED).replace("1", "Resolved");
+
+						HashMap<String, String> cmap = new HashMap<String, String>();
+
+						cmap.put(TAG_COMPLAINTTYPE, complaintType);
+						cmap.put(TAG_COMPLAINTDATE, issueDate);
+						cmap.put(TAG_COMPLAINTRESOLVED, complaintResolved);
+
+						// add Hashlist to ArrayList
+						System.out
+								.println("Adding Tags to Map, adding map to providerList");
+						complaintList.add(cmap);
+
+					}
+
+				} catch (JSONException e) {
+					e.printStackTrace();
+				}
+
+			}
+			return complaintList;
+		}
+
+		public boolean isURLReachable(Context context) {
+			ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+			NetworkInfo netInfo = cm.getActiveNetworkInfo();
+			if (netInfo != null && netInfo.isConnected()) {
+				try {
+					URL url = new URL("http://54.201.44.59"); // Change to
+																// "http://google.com"
+																// for www test.
+					HttpURLConnection urlc = (HttpURLConnection) url
+							.openConnection();
+					urlc.setConnectTimeout(10 * 1000); // 10 s.
+					urlc.connect();
+					if (urlc.getResponseCode() == 200) { // 200 = "OK" code
+															// (http connection
+															// is fine).
+						Log.wtf("Connection", "Success !");
+						return true;
+					} else {
+						return false;
+					}
+				} catch (MalformedURLException e1) {
+					return false;
+				} catch (IOException e) {
+					return false;
+				}
+			}
+			return false;
+		}
+	}
 
 }
