@@ -6,13 +6,17 @@ import java.util.HashMap;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
 import org.apache.http.params.HttpConnectionParams;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
@@ -26,6 +30,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.scchildcare.Search_AsyncTask.GetSearchResults;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -67,6 +72,7 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_ALIAS = "user";
 	private static final String TAG_BODY = "body";
 	private static final String TAG_PROVIDER_COMMENT_ID = "provider_id";
+	private static final String TAG_JSON_COMMENT = "comment";
 	String provider_comment_ID;
 	HttpResponse response;
 	
@@ -78,8 +84,8 @@ public class SingleMenuItemActivity extends Activity {
 
 	// HTTP Stuff
 	//private static final String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
-	private static final String commentAddURL1 = "http://54.201.44.59:3000/provider/";
-	private static final String commentAddURL2 = "/comments/new";
+	private static final String commentAddURL1 = "http://54.201.44.59:3000/providers/";
+	private static final String commentAddURL2 = "/comments";
 	private static final String commentGetURL1 = "http://54.201.44.59:3000/providers/";
 	private static final String commentGetURL2 = "/comments.json";
 	private static final String TAG_COMMENTS = "comments";
@@ -386,6 +392,11 @@ public class SingleMenuItemActivity extends Activity {
 				String alias = aliasText.getText().toString();
 				String comment = commentText.getText().toString();
 
+				////////////////////////////////////////////////
+				commentSystem cSystem = new commentSystem();
+				 cSystem.execute(alias, comment);	
+				///////////////////////////////////////////////////////
+				
 				
 				
 				//String alias_spaces = alias.replace(" ", "%20");
@@ -394,31 +405,35 @@ public class SingleMenuItemActivity extends Activity {
 				//HashMap<String, String> commentMap = new HashMap<String, String>();
 				
 				//commentMap.put(TAG_PROVIDERID, providerID);
-				commentMap.put(TAG_ALIAS, alias);
-				commentMap.put(TAG_BODY, comment);
-				commentList.add(commentMap);
+				//commentMap.put(TAG_ALIAS, alias);
+				//commentMap.put(TAG_BODY, comment);
+				//commentList.add(commentMap);
 				
-				//Gson commentJSON = new Gson();
-				//commentJSON.toJson(commentMap);
+//				Gson commentJSON = new Gson();
+//				commentJSON.toJson(commentList);
 				
-				HttpClient postClient = new DefaultHttpClient();
-		        HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000); //Timeout Limit
+			//	HttpClient postClient = new DefaultHttpClient();
+		     //   HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000); //Timeout Limit
 			    
-		        
+		      /*  
 		        String postURL = commentAddURL1 + provider_comment_ID + commentAddURL2;
 				
-				JSONObject commentJSON = new JSONObject();
+				
 				try{
 					HttpPost post = new HttpPost(postURL);
+					
+				
 				commentJSON.put(TAG_PROVIDER_COMMENT_ID, provider_comment_ID);
 				commentJSON.put(TAG_ALIAS, alias);
 				commentJSON.put(TAG_BODY, comment);
+				JSON.put(TAG_JSON_COMMENT, commentJSON);
 				
-				//StringEntity se = new StringEntity("JSON: " + commentJSON.toString());
-				//se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+				StringEntity se = new StringEntity(JSON.toString());
+				se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
 				post.setHeader("Content-Type", "application/json");
-				
-				//post.setEntity(se);
+//				se.toString();
+//				System.out.println(se);
+				post.setEntity(se);
 //				response = postClient.execute(post);
 				
 				
@@ -428,12 +443,71 @@ public class SingleMenuItemActivity extends Activity {
 		         }
 //				
 				
-				System.out.println(commentJSON);
+				//System.out.println(JSON);
+				*/
 				
 
 			}
 
 		});
 	}
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+	class commentSystem extends AsyncTask<String, String, String>
+	{
+		JSONObject commentJSON = new JSONObject();
+		JSONObject JSON = new JSONObject();
+		HttpClient postClient = new DefaultHttpClient();
+      //  HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000);
+	  String postURL = commentAddURL1 + provider_comment_ID + commentAddURL2;
+		
+		@Override
+		protected void onPreExecute()
+		{
+		
+		}
+		
+		@Override
+		protected void onPostExecute(String here)
+		{
+		
+		}
+		
+		protected String doInBackground(String... args) 
+		{
+		
+			String alias = args[0];
+			String comment = args[1];
+			
+			System.out.println(alias + " " + comment);
+			try{
+				HttpPost post = new HttpPost(postURL);
+				
+			
+			commentJSON.put(TAG_PROVIDER_COMMENT_ID, provider_comment_ID);
+			commentJSON.put(TAG_ALIAS, alias);
+			commentJSON.put(TAG_BODY, comment);
+			JSON.put(TAG_JSON_COMMENT, commentJSON);
+			
+			StringEntity se = new StringEntity(JSON.toString());
+			se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+			post.setHeader("Content-Type", "application/json");
+//			se.toString();
+//			System.out.println(se);
+			post.setEntity(se);
+//			response = postClient.execute(post);
+			
+			
+			}catch(Exception e){
+	            e.printStackTrace();
+	            // createDialog("Error", "Cannot Estabilish Connection");
+	         }
+			
+			
+			
+			return null;
+		}
+		
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 }
