@@ -1,5 +1,6 @@
 package com.example.scchildcare;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -9,7 +10,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicHeader;
-import org.apache.http.params.HttpConnectionParams;
 import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -30,7 +30,6 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-import com.example.scchildcare.Search_AsyncTask.GetSearchResults;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -57,6 +56,7 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
+	String pID;
 	
 	
 
@@ -75,7 +75,7 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_JSON_COMMENT = "comment";
 	String provider_comment_ID;
 	HttpResponse response;
-	
+	HashMap<String, String> map = new HashMap<String, String>();
 	
 	
 	
@@ -119,7 +119,6 @@ public class SingleMenuItemActivity extends Activity {
 		ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
 		complaintList = (ArrayList<HashMap<String, String>>) getProviderData
 				.getSerializable(TAG_COMPLAINTS);
-		HashMap<String, String> map = new HashMap<String, String>();
 		map = (HashMap<String, String>) getProviderData
 				.getSerializable(TAG_CENTER_DATA);
 
@@ -127,6 +126,7 @@ public class SingleMenuItemActivity extends Activity {
 		// Get JSON values from previous intent
 		final String providerID = map.get(TAG_PROVIDERID);
 		String providerName = map.get(TAG_PROVIDERNAME);
+		pID = providerID;
 		String licenseInfo = map.get(TAG_LICENSEINFO);
 		String ownerName = map.get(TAG_OWNERNAME);
 		String address = map.get(TAG_ADDRESS);
@@ -393,8 +393,8 @@ public class SingleMenuItemActivity extends Activity {
 				String comment = commentText.getText().toString();
 
 				////////////////////////////////////////////////
-				commentSystem cSystem = new commentSystem();
-				 cSystem.execute(alias, comment);	
+				commentSystem cSystem = new commentSystem(SingleMenuItemActivity.this, map);
+				 cSystem.execute(alias, comment, pID);	
 				///////////////////////////////////////////////////////
 				
 				
@@ -454,22 +454,31 @@ public class SingleMenuItemActivity extends Activity {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 	class commentSystem extends AsyncTask<String, String, String>
 	{
+		Activity theActivity;
 		JSONObject commentJSON = new JSONObject();
 		JSONObject JSON = new JSONObject();
 		HttpClient postClient = new DefaultHttpClient();
+		String proID;
       //  HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000);
 	  String postURL = commentAddURL1 + provider_comment_ID + commentAddURL2;
-		
-		@Override
-		protected void onPreExecute()
-		{
-		
-		}
+	  HashMap<String, String> theMap = new HashMap<String, String>();
+	  
+	  
+	  commentSystem(Activity anActivity, HashMap<String, String> aMap)
+	  {
+		  theActivity = anActivity;
+		  theMap = aMap; 
+	  }
 		
 		@Override
 		protected void onPostExecute(String here)
 		{
-		
+		  theActivity.finish();
+		  Intent anIntent = new Intent(getApplicationContext(), Single_AsyncTask.class);
+		  anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
+          anIntent.putExtra("THE_PROVIDER", proID);
+          startActivity(anIntent);
+		  
 		}
 		
 		protected String doInBackground(String... args) 
@@ -477,7 +486,7 @@ public class SingleMenuItemActivity extends Activity {
 		
 			String alias = args[0];
 			String comment = args[1];
-			
+			proID = args[2];
 			System.out.println(alias + " " + comment);
 			try{
 				HttpPost post = new HttpPost(postURL);
@@ -494,7 +503,7 @@ public class SingleMenuItemActivity extends Activity {
 //			se.toString();
 //			System.out.println(se);
 			post.setEntity(se);
-//			response = postClient.execute(post);
+			response = postClient.execute(post);
 			
 			
 			}catch(Exception e){

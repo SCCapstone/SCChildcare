@@ -276,8 +276,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 					}
 	        	i++;
 	        	}
-	        	
-	        	
 	   ///////////////////////////////////////////////////////////////////     	
 	        }
 	    });

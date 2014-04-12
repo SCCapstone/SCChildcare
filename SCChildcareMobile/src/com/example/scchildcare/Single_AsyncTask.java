@@ -8,6 +8,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.http.client.HttpClient;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -62,9 +65,17 @@ public class Single_AsyncTask extends FragmentActivity{
 	  private static final String TAG_COMPLAINTRESOLVED = "resolved";
 	  private static final String TAG_COMPLAINTS = "providercomplaints";
 	  private static final String TAG_CENTER_DATA = "dataforcenter";
+	  private static final String commentGetURL1 = "http://54.201.44.59:3000/providers/";
+	  private static final String commentGetURL2 = "/comments.json";
+	  private static final String TAG_COMMENTS = "comments";
+	  private static final String TAG_PROVIDER_COMMENT_ID = "provider_id";
+	  private static final String TAG_ALIAS = "user";
+	  private static final String TAG_BODY = "body";
 	  boolean isConnected = false;
 	  Single_AsyncTask single;
 	  ProgressBar pBar;
+	  JSONParser jParser = new JSONParser();
+	  JSONArray comments = null;
 	  
 	   
     	Context aContext;
@@ -145,7 +156,57 @@ public class Single_AsyncTask extends FragmentActivity{
 			        } catch (JSONException e) {
 			            e.printStackTrace();
 			        }
+	///////////////////////////////////////////////////////////////////////////////		        
+			        HttpClient getClient = new DefaultHttpClient();
+			        HttpConnectionParams.setConnectionTimeout(getClient.getParams(), 10000); //Timeout Limit
+					
+    				String getURL = commentGetURL1 + providerName + commentGetURL2;
 				
+				JSONObject json = jParser.getJSONFromUrl(getURL);
+					
+					try{
+						comments = json.getJSONArray(TAG_COMMENTS);
+						
+						for (int i = 0; i < comments.length(); i++) {
+							System.out.println("Comment 1");
+		                    JSONObject complaint = comments.getJSONObject(i);
+		
+		                    // store the json items in variables
+		
+		                    String alias = complaint.getString(TAG_ALIAS);
+		                    String body = complaint.getString(TAG_BODY);
+		                    
+		
+	                    HashMap<String, String> commentMap = new HashMap<String, String>();
+		
+		                    commentMap.put(TAG_ALIAS, alias);
+		                    commentMap.put(TAG_BODY, body);
+		
+//		                    // add Hashlist to ArrayList
+		                    System.out.println("Adding Tags to Map, adding map to commentList");
+    	                    complaintList.add(commentMap);
+		
+		                }
+										
+     				} catch (JSONException e) {
+						e.printStackTrace();
+					}
+						        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+			        
+	////////////////////////////////////////////////////////////////////////////////////			
 			}
 			else{
 				isConnected = false;
