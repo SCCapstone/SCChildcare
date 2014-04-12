@@ -1,32 +1,18 @@
 package com.example.scchildcare;
 
-import java.io.IOException;
 import java.io.Serializable;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ListActivity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.os.SystemClock;
-import android.os.StrictMode.ThreadPolicy;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -37,12 +23,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 
-import com.example.scchildcare.SearchResultsActivity.SingleItemResults;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -71,9 +55,8 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
 	private static final String TAG_LIST_OF_PROVIDERS = "pList";
-	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 	private static final String TAG_CENTER_DATA = "dataforcenter";
-
+	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
 	private long mLastClickTime = 0;
 	String theMarker = "";
@@ -99,7 +82,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		setContentView(R.layout.activity_search_results);
 
 		// Hashmap for ListView
-
+	
 /////////////////////////////////////////////////////////////////////			
 			Intent intent = getIntent();
 			Bundle getProviders = intent.getExtras();
@@ -109,11 +92,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	    	
 	    	System.out.println(param_longitude + "  this is longitude " + param_latitude + " this is latitude");
 /////////////////////////////////////////////////////////////////////////
-	    	
-	    	/*
-	    	ThreadPolicy tp = ThreadPolicy.LAX;
-	    	StrictMode.setThreadPolicy(tp);
-	    	*/
 	    	
 			if (containingMaps.size() == 0) {
 				System.out.println("No Return on Search");
@@ -169,9 +147,7 @@ public class GPS_SearchResultsActivity extends ListActivity {
 		                           {
 		                             theMarker = (aMarker.getTitle());
 		                             aMarker.showInfoWindow();
-
 		                             goToCenter(theMarker);
-
 		                               return true;
 		                           }
 		                           
@@ -263,16 +239,11 @@ public class GPS_SearchResultsActivity extends ListActivity {
 				map.put(TAG_SPECIALIST, specialist);
 				map.put(TAG_SPECIALISTPHONE, specialistPhone);
 				map.put(TAG_QUALITY, qualityLevel);
-				
-				/*
-				SingleItemResults singleItem = new SingleItemResults(lv.getContext(), map);
-				singleItem.execute(providerName);*/
-				
+			
 				Intent anIntent = new Intent(lv.getContext(), Single_AsyncTask.class);
 				anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
-				anIntent.putExtra("THE_PROVIDER", providerName);
-				startActivity(anIntent);
-
+                anIntent.putExtra("THE_PROVIDER", providerID);
+                startActivity(anIntent);
 			}
 		});
 
@@ -280,7 +251,6 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	
 	private void goToCenter(final String aString){
 
-		
 	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 	    alertDialogBuilder.setMessage("Would you like more information about " + aString + " ?")
 	    .setCancelable(false)
@@ -294,14 +264,14 @@ public class GPS_SearchResultsActivity extends ListActivity {
 	    			
 					HashMap<String, String> map = new HashMap<String, String>();
 					map = containingMaps.get(i);
+					String providerID = map.get(TAG_ID);
 					String providerName = map.get(TAG_PROVIDERNAME);
 					if(providerName.equals(aString))
 					{
 						Intent anIntent = new Intent(getApplicationContext(), Single_AsyncTask.class);
 						anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
-						anIntent.putExtra("THE_PROVIDER", providerName);
-						startActivity(anIntent);
-
+		                anIntent.putExtra("THE_PROVIDER", providerID);
+		                startActivity(anIntent);
 					break;	
 					}
 	        	i++;

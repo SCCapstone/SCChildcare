@@ -11,6 +11,13 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#acacac"
+            android:textSize="0sp" />
+
         <!-- Name Label -->
 
         <TextView
@@ -30,8 +37,8 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="2dip"
-            android:textSize="15sp"
-            android:textColor="#acacac" >
+            android:textColor="#acacac"
+            android:textSize="15sp" >
         </TextView>
 
         <!-- Linear layout for city and state -->
@@ -94,8 +101,8 @@
         android:id="@+id/licenseInfo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
     <!-- Owner label -->
 
@@ -103,8 +110,8 @@
         android:id="@+id/ownerName"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
     <!-- Zipcode label -->
 
@@ -112,8 +119,8 @@
         android:id="@+id/zipCode"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
     <!-- Phone label -->
 
@@ -121,38 +128,38 @@
         android:id="@+id/phone"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
-    
+
     <!-- Latitude label -->
 
     <TextView
         android:id="@+id/latitude"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
-    
+
     <!-- Longitude label -->
 
     <TextView
         android:id="@+id/longitude"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
-    
+
     <!-- Capacity label -->
 
     <TextView
         android:id="@+id/capacity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
     <!-- Hours label -->
 
@@ -160,18 +167,18 @@
         android:id="@+id/hours"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
-    
+
     <!-- Specialist label -->
 
     <TextView
         android:id="@+id/specialist"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
     <!-- Specialist Phone label -->
 
@@ -179,8 +186,8 @@
         android:id="@+id/specialistPhone"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
     <!-- ABC Quality label -->
 
@@ -188,8 +195,8 @@
         android:id="@+id/qualityLevel"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="0sp"
-        android:textColor="#acacac" >
+        android:textColor="#acacac"
+        android:textSize="0sp" >
     </TextView>
 
 </LinearLayout>

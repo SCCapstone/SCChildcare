@@ -12,18 +12,6 @@
 
 package com.example.scchildcare;
 
-import java.io.IOException;
-import java.io.Serializable;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -35,7 +23,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.DialogFragment;
@@ -54,7 +41,6 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 
 public class MainActivity extends FragmentActivity implements
-<<<<<<< HEAD
 GooglePlayServicesClient.ConnectionCallbacks,
 GooglePlayServicesClient.OnConnectionFailedListener {
 public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
@@ -62,8 +48,6 @@ public final static String EXTRA_LONGITUDE = null;
 public final static String EXTRA_LATITUDE = null;
 private long mLastClickTime = 0;
 boolean check;
-//JSONParser jParser = new JSONParser();
-////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////////////
 EditText editText;
@@ -110,7 +94,7 @@ boolean done = false;
 public void onConnected(Bundle dataBundle) {
 // Display the connection status
 //Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
-
+}
 	private boolean servicesConnected() {
 		// Check that Google Play services is available
 		int resultCode = GooglePlayServicesUtil
@@ -146,7 +130,6 @@ void getResult(Boolean abool){
 	check = abool;
 }
 
-
 @Override
 protected void onCreate(Bundle savedInstanceState) {
 	System.out.println("Open instance");
@@ -165,49 +148,60 @@ System.out.println("getsystemservice");
  button2 = (ImageButton) findViewById(R.id.button_2);
  System.out.println("button1onclick");
  
- button1.setOnClickListener(new View.OnClickListener(){
+	button1.setOnClickListener(new View.OnClickListener() {
 
-	@Override
-	public void onClick(View v)
-	{
-		
-		 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-	            return;
-	        }
-	        mLastClickTime = SystemClock.elapsedRealtime();	
-///////////////////////	
-		
-		
+		@Override
+		public void onClick(View v) {
+
+			if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+				return;
+			}
+			mLastClickTime = SystemClock.elapsedRealtime();
+			// /////////////////////
+
 			// If Google Play Services is available
 			if (servicesConnected() && isNetworkAvailable()) {
-				
-				if(locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)){
-				
 
-			// Get the current location
-			mCurrentLocation = mLocationClient.getLastLocation();
+				if (locationManager
+						.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 
-			// Display the current location in the UI
-			double latitude = mCurrentLocation.getLatitude();
-			double longitude = mCurrentLocation.getLongitude();
-			String longlat = "latitude " + Double.toString(latitude) + " "
-			+ "longitude " + Double.toString(longitude);
-			System.out.println(longlat);
+					// Get the current location
+					mCurrentLocation = mLocationClient.getLastLocation();
 
-			String param_latitude = Double.toString(latitude);
-			String param_longitude = Double.toString(longitude);
+					// Display the current location in the UI
+					double latitude = mCurrentLocation.getLatitude();
+					double longitude = mCurrentLocation.getLongitude();
+					String longlat = "latitude "
+							+ Double.toString(latitude) + " "
+							+ "longitude " + Double.toString(longitude);
+					System.out.println(longlat);
 
-			//////////////////////////////////////////
-			Intent GPSSearch = new Intent(getApplicationContext(), GPS_Search_AsyncTask.class);
-			Bundle coordinates = new Bundle();
-			 coordinates.putString("EXTRA_LATITUDE", param_latitude);
-			 coordinates.putString("EXTRA_LONGITUDE", param_longitude);
-			 GPSSearch.putExtras(coordinates);
-			 startActivity(GPSSearch);
-			
+					String param_latitude = Double.toString(latitude);
+					String param_longitude = Double.toString(longitude);
+					// //////////////////////////////////////////
+
+					Intent GPSSearch = new Intent(getApplicationContext(), GPS_Search_AsyncTask.class);
+					Bundle coordinates = new Bundle();
+					coordinates.putString("EXTRA_LATITUDE", param_latitude);
+					coordinates.putString("EXTRA_LONGITUDE", param_longitude);
+					GPSSearch.putExtras(coordinates);
+					startActivity(GPSSearch);
+					
+				} else {
+					// makeToast("Internet connection not established");
+					if (locationManager
+							.isProviderEnabled(LocationManager.GPS_PROVIDER) != true) {
+						showGPSDisabledAlertToUser();
+					}
+				}
+			} else {
+				showConnectionAlertToUser();
 			}
 
-		});
+		}
+
+	});
+ 
 		System.out.println("button2onclick");
 		button2.setOnClickListener(new View.OnClickListener() {
 
@@ -228,25 +222,25 @@ System.out.println("getsystemservice");
 					String message2 = editText.getText().toString();
 					String message = editText.getText().toString()
 							.replace(" ", "%20");
-					if (!message2.isEmpty()) {
-						// intent.putExtra(EXTRA_MESSAGE, message);
-						// startActivity(intent);
-						GetSearchResults searchResults = new GetSearchResults(v
-								.getContext());
-						searchResults.execute(message);
+					if (!message2.isEmpty()) 
+					{				
+				        Intent intent = new Intent(getApplicationContext(), Search_AsyncTask.class);
+				        intent.putExtra(EXTRA_MESSAGE, message);
+                        startActivity(intent);					
+///////////////////////////////////////////////////////					
 					} else {
 						MessageToUser();
 					}
 				} else {
 
 					showConnectionAlertToUser();
-
 				}
 
 			}
 		});
 
-	}
+	
+ }
 
 	// //////////////////////////////////////
 	private void showConnectionAlertToUser() {
@@ -274,87 +268,6 @@ System.out.println("getsystemservice");
 		alert.show();
 	}
 
-	// /////////////////////
-	private void MessageToUser() {
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder
-				.setMessage(
-						"Must enter a child care provider name, address, or city")
-				.setCancelable(false)
-				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-		AlertDialog alert = alertDialogBuilder.create();
-		alert.show();
-	}
-
-	// /////////////////////////////////////////////////////////
-	@Override
-	public void onClick(View v) 
-	{
-	
-		
-		//////////////////////////	
-		 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-	            return;
-	        }
-	        mLastClickTime = SystemClock.elapsedRealtime();	
-///////////////////////	
-		
-		
-		if(isNetworkAvailable()){	
-		//	Intent intent = new Intent(this, SearchResultsActivity.class);
-			editText = (EditText)findViewById(R.id.edit_message);
-			String message2 = editText.getText().toString();
-            String message = editText.getText().toString().replace(" ", "%20");
-            if(message2.length()> 2)
-            {
-			//intent.putExtra(EXTRA_MESSAGE, message);
-		//	startActivity(intent);
-            Intent intent = new Intent(getApplicationContext(), Search_AsyncTask.class);
-            intent.putExtra(EXTRA_MESSAGE, message);
-    		startActivity(intent);
-           
-            }
-            else
-            {
-            MessageToUser();	     	
-            }
-			}
-			else{
-				
-		   showConnectionAlertToUser();	
-							
-			}
-	
-	}
- });
- 
-}
-////////////////////////////////////////
-private void showConnectionAlertToUser(){
-    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    alertDialogBuilder.setMessage("This app requires an internet connection. Would you like to enable it?")
-    .setCancelable(false)
-    .setPositiveButton("Go to Settings Page To Enable Internet Connection",
-            new DialogInterface.OnClickListener(){
-        public void onClick(DialogInterface dialog, int id){
-            Intent wirelessIntent = new Intent(
-                    android.provider.Settings.ACTION_WIFI_SETTINGS);
-            startActivity(wirelessIntent);
-        }
-    });
-    alertDialogBuilder.setNegativeButton("Cancel",
-            new DialogInterface.OnClickListener(){
-        public void onClick(DialogInterface dialog, int id){
-            dialog.cancel();
-        }
-    });
-    AlertDialog alert = alertDialogBuilder.create();
-    alert.show();
-}
 ///////////////////////
 private void MessageToUser(){
     AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -492,73 +405,33 @@ public void onDisconnected() {
 		alert.show();
 	}
 
-	// //////////////////////////////////////////////////////////////////////////
-	class GetGPSResults extends
-			AsyncTask<String, String, ArrayList<HashMap<String, String>>> {
-		String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
-		String gpsURL_2 = "&lat=";
-		String TAG_PROVIDERS = "providers";
-		String TAG_ID = "id";
-		String TAG_PROVIDERNAME = "providerName";
-		String TAG_LICENSEINFO = "licenseInfo";
-		String TAG_OWNERNAME = "ownerName";
-		String TAG_ADDRESS = "address";
-		String TAG_CITY = "city";
-		String TAG_STATE = "state";
-		String TAG_ZIPCODE = "zipCode";
-		String TAG_PHONENUMBER = "phoneNumber";
-		String TAG_LONGITUDE = "longitude";
-		String TAG_LATITUDE = "latitude";
-		String TAG_CAPACITY = "capacity";
-		String TAG_HOURS = "hours";
-		String TAG_SPECIALIST = "specialist";
-		String TAG_SPECIALISTPHONE = "specialistPhone";
-		String TAG_QUALITY = "qualityLevel";
-		String TAG_LIST_OF_PROVIDERS = "pList";
-		JSONParser jParser = new JSONParser();
-		String latit;
-		String longit;
-		JSONArray providers = null;
-		String fullGPS_URL = null;
-		// private ProgressBar progressBar;
-		ArrayList<HashMap<String, String>> storeData = new ArrayList<HashMap<String, String>>();
-		// JSON node names
-
-		// ProgressBar pBar;
-
-		Context aContext;
-
-		private GetGPSResults(Context context) {
-			aContext = context;
+	@Override
+	public void onConnectionFailed(ConnectionResult connectionResult) {
+		/*
+		 * Google Play services can resolve some errors it detects. If the error
+		 * has a resolution, try sending an Intent to start a Google Play
+		 * services activity that can resolve error.
+		 */
+		if (connectionResult.hasResolution()) {
+			try {
+				// Start an Activity that tries to resolve the error
+				connectionResult.startResolutionForResult(this,
+						CONNECTION_FAILURE_RESOLUTION_REQUEST);
+				/*
+				 * Thrown if Google Play services canceled the original
+				 * PendingIntent
+				 */
+			} catch (IntentSender.SendIntentException e) {
+				// Log the error
+				e.printStackTrace();
+			}
+		} else {
+			/*
+			 * If no resolution is available, display a dialog to the user with
+			 * the error.
+			 */
+			showErrorDialog(connectionResult.getErrorCode());
 		}
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			// pBar.setVisibility(View.VISIBLE);
-		}
-
-private void showGPSDisabledAlertToUser(){
-    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    alertDialogBuilder.setMessage("GPS is disabled in your device. Would you like to enable it?")
-    .setCancelable(false)
-    .setPositiveButton("Go to Settings Page To Enable GPS",
-            new DialogInterface.OnClickListener(){
-        public void onClick(DialogInterface dialog, int id){
-            Intent callGPSSettingIntent = new Intent(
-                    android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(callGPSSettingIntent);
-        }
-    });
-    alertDialogBuilder.setNegativeButton("Cancel",
-            new DialogInterface.OnClickListener(){
-        public void onClick(DialogInterface dialog, int id){
-            dialog.cancel();
-        }
-    });
-    AlertDialog alert = alertDialogBuilder.create();
-    alert.show();
-}
-
-
+	}
+	
 }
