@@ -9,6 +9,8 @@ import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -19,15 +21,24 @@ import android.widget.Button;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class SingleMenuItemActivity extends Activity {
-
+public class SingleMenuItemActivity extends Activity implements
+GooglePlayServicesClient.ConnectionCallbacks,
+GooglePlayServicesClient.OnConnectionFailedListener {
+	Location mCurrentLocation;
+	LocationClient mLocationClient;
+	double currentLatitude=0.0;
+	double currentLongitude=0.0; 
 	// JSON node keys for providers
 	private static final String TAG_PROVIDERNAME = "providerName";
 	private static final String TAG_LICENSEINFO = "licenseInfo";
@@ -48,8 +59,8 @@ public class SingleMenuItemActivity extends Activity {
 	private String startingAddress = null;
 	private String uriString = "http://maps.google.com/maps?saddr=start_lat,start_lon&daddr=end_lat,end_lot";
 	private String uriString2 = "http://maps.google.com/maps?saddr={start_address}&daddr={destination_address}";
-	private String uri = "http://maps.google.com/maps?saddr={"+startingAddress+"}&daddr={"+destinationAddress+"}";
-
+	private String uri;
+	
 
 
 
@@ -68,7 +79,9 @@ public class SingleMenuItemActivity extends Activity {
 
 	private static String complaintFullSearchURL = null;
 
+
 	GoogleMap mMap;
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -81,8 +94,11 @@ public class SingleMenuItemActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_list_item);
-
+		mLocationClient = new LocationClient(this, this, this);
+		mCurrentLocation = mLocationClient.getLastLocation();
 		Button getDirections = (Button) findViewById(R.id.maps_button);
+		currentLatitude = mCurrentLocation.getLatitude();
+		currentLongitude = mCurrentLocation.getLongitude();
 
 		// getting intent data
 		Intent in = getIntent();
@@ -197,8 +213,11 @@ public class SingleMenuItemActivity extends Activity {
 
 		// //Display parsed Complaint data-DO THIS********************
 		//
+		
 		destinationAddress = address;
-		startingAddress = null;
+		//startingAddress = ;
+		uri = "http://maps.google.com/maps?saddr="+currentLatitude+","+currentLongitude+"&daddr={"+destinationAddress+"}";
+		
 		getDirections.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
 				Intent intent = new Intent(android.content.Intent.ACTION_VIEW, Uri.parse(uri));
@@ -243,6 +262,50 @@ public class SingleMenuItemActivity extends Activity {
 			complaintTable.addView(complaintRow);
 
 		}
+	}
+
+	@Override
+	public void onConnectionFailed(ConnectionResult connectionResult) {
+		if (connectionResult.hasResolution()) {
+			try {
+				// Start an Activity that tries to resolve the error
+				connectionResult.startResolutionForResult(
+						this,
+						9000);
+			} catch (IntentSender.SendIntentException e) {
+				e.printStackTrace(); }
+		} else {
+			/*
+			 * If no resolution is available, display a dialog to the
+			 * user with the error.
+			 */
+			System.out.println(connectionResult.getErrorCode());
+		}
+
+	}
+
+	@Override
+	public void onConnected(Bundle arg0) {
+		Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+	}
+
+	@Override
+	public void onDisconnected() {
+		Toast.makeText(this, "Disconnected. Please re-connect.",
+				Toast.LENGTH_SHORT).show();
+
+	}
+	@Override
+	protected void onStart() {
+		super.onStart();
+		// Connect the client.
+		mLocationClient.connect();
+	}
+	@Override
+	protected void onStop() {
+		// Disconnecting the client invalidates it.
+		mLocationClient.disconnect();
+		super.onStop();
 	}
 }
 
