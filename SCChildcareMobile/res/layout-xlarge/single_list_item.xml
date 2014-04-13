@@ -293,7 +293,7 @@
                     android:id="@+id/aliasTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Alias:" />
+                    android:text="Name:" />
 
                 <EditText
                     android:id="@+id/aliasText"

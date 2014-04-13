@@ -179,6 +179,7 @@ public class Single_AsyncTask extends FragmentActivity{
 		                    String alias = complaint.getString(TAG_ALIAS);
 		                    String body = complaint.getString(TAG_BODY);
 		                    
+		                    alias = alias + " says:";
 		
 	                    HashMap<String, String> commentMap = new HashMap<String, String>();
 		

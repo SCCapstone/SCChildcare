@@ -38,7 +38,7 @@
                     android:id="@+id/qualityLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
+                    android:paddingTop="15dp"
                     android:text="@string/quality"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -294,7 +294,7 @@
                     android:id="@+id/aliasTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Alias:" />
+                    android:text="Name:" />
 
                 <EditText
                     android:id="@+id/aliasText"
@@ -321,7 +321,7 @@
                 <EditText
                     android:id="@+id/commentText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="119dp"
                     android:ems="10"
                     android:inputType="textMultiLine" />
             </LinearLayout>
@@ -329,7 +329,10 @@
             <Button
                 android:id="@+id/add_comment_button"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="right|center_vertical|center_horizontal"
+                android:text="@string/comment" />
 
          
         </LinearLayout>
