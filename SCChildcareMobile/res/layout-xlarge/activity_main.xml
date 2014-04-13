@@ -47,7 +47,7 @@
             android:orientation="horizontal" >
         
             <ImageButton
-                android:id="@+id/add_comment_button"
+                android:id="@+id/button1"
                 android:layout_width="88dp"
                 android:layout_height="88dp"
                 android:background="@drawable/gpstarget"
@@ -55,8 +55,10 @@
                 android:gravity="center"
                 android:onClick="getLocation"
                 android:text="@string/button_locate" />
+            
 
             <ImageButton
+                android:id="@+id/button_2"
                 android:layout_width="88dp"
                 android:layout_height="88dp"
                 android:background="@drawable/search_icon"
@@ -68,11 +70,15 @@
         </LinearLayout>
     </LinearLayout>
 
-    <com.facebook.widget.LoginButton
-        android:id="@+id/authButton"
-        android:layout_width="300dp"
+    <TextView
+        android:id="@+id/disclaimer"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="0dp"
-        android:gravity="center" />
+        android:gravity="center_horizontal"
+        android:paddingTop="60dp"
+        android:text="@string/disclaimer"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="#ff0000"
+        android:textStyle="italic" />
 
 </LinearLayout>
