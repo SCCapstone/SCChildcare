@@ -2,7 +2,7 @@
 
 *[http://www.scchildcare.org](http://www.scchildcare.org)
 
-[Download]() the Open Beta now: 
+[Download](https://www.dropbox.com/s/ezpqucls6mtvhw8/SCChildcareMobile.apk) the Open Beta now: 
 
 ### DESCRIPTION
 
@@ -28,6 +28,7 @@ view official ratings, and even communicate to other users via a forum/comment s
   - Network Issues with Comment System have been fixed. 
   - Various Bug Fixes. 
   - Layouts for different sizes have been modified. 
+  - Fully Converted to AsyncTask Android framework
 
 ###0.1.4
   - Changed the main search buttons to blue
