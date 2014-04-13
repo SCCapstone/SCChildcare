@@ -57,6 +57,7 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
 	String pID;
+	private static final String TAG_GET_COMMENTS = "grabbing comments";
 	
 	
 
@@ -121,6 +122,11 @@ public class SingleMenuItemActivity extends Activity {
 				.getSerializable(TAG_COMPLAINTS);
 		map = (HashMap<String, String>) getProviderData
 				.getSerializable(TAG_CENTER_DATA);
+		
+		/////////////////////////////////////////////////////////////
+		commentList =(ArrayList<HashMap<String, String>>) getProviderData
+				.getSerializable(TAG_GET_COMMENTS);
+		////////////////////////////////////////////////////////////
 
 		// ////////////////////////////////////////////
 		// Get JSON values from previous intent
@@ -257,12 +263,12 @@ public class SingleMenuItemActivity extends Activity {
 					TAG_COMPLAINTDATE);
 			String complaintResolvedData = complaintList.get(j).get(
 					TAG_COMPLAINTRESOLVED);
-
+/*
 			Log.d("What ComplaintData says",
 					complaintList.get(j).get(TAG_COMPLAINTTYPE));
 			Log.d("What ComplaintData says",
 					complaintList.get(j).get(TAG_COMPLAINTRESOLVED));
-
+*/
 			TextView lblComplaintType = new TextView(this);
 			TextView lblComplaintDate = new TextView(this);
 			TextView lblComplaintResolved = new TextView(this);
@@ -332,48 +338,53 @@ public class SingleMenuItemActivity extends Activity {
 //				e.printStackTrace();
 //			}
 //			
-			System.out.println("BREAK TEST");
-			TableLayout commentTable = (TableLayout) findViewById(R.id.commentTable);
-			System.out.println("BREAK TEST");
-			complaintTable.setStretchAllColumns(true);
-//			
-			System.out.println("Building Comment Table");
 			
-			
-			
-			for (int k = 0; k < commentList.size(); k++) {
-				TableRow commentRow = new TableRow(SingleMenuItemActivity.this);
-				System.out.println("Building Table");
-
-				String commentAlias = commentList.get(k).get(TAG_ALIAS);
-				String commentBody = commentList.get(k).get(TAG_BODY);
-
-				
-
-				TextView lblCommentAlias = new TextView(this);
-				TextView lblCommentBody = new TextView(this);
-				;
-
-				lblCommentAlias.setText(commentAlias);
-				lblCommentAlias.setPadding(10, 10, 10, 10);
-				lblCommentBody.setText(commentBody);
-				lblCommentBody.setPadding(10, 10, 10, 10);
-				
-
-				commentRow.addView(lblCommentAlias);
-
-				commentRow.addView(lblCommentBody);
-
-				commentTable.addView(commentRow);
-			
-			
-			}
 			
 			
 			
 
 		}
+		///////////////////////////////////
+		
+		System.out.println("BREAK TEST");
+		TableLayout commentTable = (TableLayout) findViewById(R.id.commentTable);
+		System.out.println("BREAK TEST");
+		complaintTable.setStretchAllColumns(true);
+//		
+		System.out.println("Building Comment Table");
+		
+		
+		
+		for (int k = 0; k < commentList.size(); k++) {
+			TableRow commentRow = new TableRow(SingleMenuItemActivity.this);
+			System.out.println("Building Table");
 
+			String commentAlias = commentList.get(k).get(TAG_ALIAS);
+			String commentBody = commentList.get(k).get(TAG_BODY);
+
+			
+
+			TextView lblCommentAlias = new TextView(this);
+			TextView lblCommentBody = new TextView(this);
+			;
+
+			lblCommentAlias.setText(commentAlias);
+			lblCommentAlias.setPadding(10, 10, 10, 10);
+			lblCommentBody.setText(commentBody);
+			lblCommentBody.setPadding(10, 10, 10, 10);
+			
+
+			commentRow.addView(lblCommentAlias);
+
+			commentRow.addView(lblCommentBody);
+
+			commentTable.addView(commentRow);
+		
+		
+		}
+		
+		
+////////////////////////////////////
 		// Comment System Stuff
 		/***********************************************************************
   *        

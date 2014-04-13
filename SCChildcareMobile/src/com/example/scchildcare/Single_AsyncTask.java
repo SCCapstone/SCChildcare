@@ -60,6 +60,7 @@ public class Single_AsyncTask extends FragmentActivity{
 	 
 	  JSONArray complaints = null;
 	  ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
+	  ArrayList<HashMap<String, String>> commentList = new ArrayList<HashMap<String, String>>();
 	  private static final String TAG_COMPLAINTTYPE = "complaint_type";
 	  private static final String TAG_COMPLAINTDATE = "issueDate";
 	  private static final String TAG_COMPLAINTRESOLVED = "resolved";
@@ -71,6 +72,7 @@ public class Single_AsyncTask extends FragmentActivity{
 	  private static final String TAG_PROVIDER_COMMENT_ID = "provider_id";
 	  private static final String TAG_ALIAS = "user";
 	  private static final String TAG_BODY = "body";
+	  private static final String TAG_GET_COMMENTS = "grabbing comments";
 	  boolean isConnected = false;
 	  Single_AsyncTask single;
 	  ProgressBar pBar;
@@ -94,6 +96,7 @@ public class Single_AsyncTask extends FragmentActivity{
     	Intent anIntent = new Intent(aContext.getApplicationContext(), SingleMenuItemActivity.class);
     	anIntent.putExtra(TAG_COMPLAINTS, (Serializable)result);
     	anIntent.putExtra(TAG_CENTER_DATA, (Serializable)theMap);
+    	anIntent.putExtra(TAG_GET_COMMENTS, (Serializable)commentList);
     	pBar.setVisibility(View.VISIBLE);
     	single.finish();
     	startActivity(anIntent);
@@ -157,10 +160,10 @@ public class Single_AsyncTask extends FragmentActivity{
 			            e.printStackTrace();
 			        }
 	///////////////////////////////////////////////////////////////////////////////		        
-			        HttpClient getClient = new DefaultHttpClient();
-			        HttpConnectionParams.setConnectionTimeout(getClient.getParams(), 10000); //Timeout Limit
+			    HttpClient getClient = new DefaultHttpClient();
+			    HttpConnectionParams.setConnectionTimeout(getClient.getParams(), 10000); //Timeout Limit
 					
-    				String getURL = commentGetURL1 + providerName + commentGetURL2;
+    			String getURL = commentGetURL1 + providerName + commentGetURL2;
 				
 				JSONObject json = jParser.getJSONFromUrl(getURL);
 					
@@ -184,7 +187,7 @@ public class Single_AsyncTask extends FragmentActivity{
 		
 //		                    // add Hashlist to ArrayList
 		                    System.out.println("Adding Tags to Map, adding map to commentList");
-    	                    complaintList.add(commentMap);
+    	                    commentList.add(commentMap);
 		
 		                }
 										
