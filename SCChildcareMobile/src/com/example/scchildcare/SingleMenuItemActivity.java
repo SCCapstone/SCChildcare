@@ -1,13 +1,22 @@
 package com.example.scchildcare;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHeader;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.util.Linkify;
 import android.util.Log;
@@ -47,6 +56,8 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_SPECIALIST = "specialist";
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
+	String pID;
+	private static final String TAG_GET_COMMENTS = "grabbing comments";
 	
 	
 
@@ -62,9 +73,10 @@ public class SingleMenuItemActivity extends Activity {
 	private static final String TAG_ALIAS = "user";
 	private static final String TAG_BODY = "body";
 	private static final String TAG_PROVIDER_COMMENT_ID = "provider_id";
+	private static final String TAG_JSON_COMMENT = "comment";
 	String provider_comment_ID;
 	HttpResponse response;
-	
+	HashMap<String, String> map = new HashMap<String, String>();
 	
 	
 	
@@ -73,8 +85,8 @@ public class SingleMenuItemActivity extends Activity {
 
 	// HTTP Stuff
 	//private static final String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?utf8=%E2%9C%93&search=";
-	private static final String commentAddURL1 = "http://54.201.44.59:3000/provider/";
-	private static final String commentAddURL2 = "/comments/new";
+	private static final String commentAddURL1 = "http://54.201.44.59:3000/providers/";
+	private static final String commentAddURL2 = "/comments";
 	private static final String commentGetURL1 = "http://54.201.44.59:3000/providers/";
 	private static final String commentGetURL2 = "/comments.json";
 	private static final String TAG_COMMENTS = "comments";
@@ -108,14 +120,19 @@ public class SingleMenuItemActivity extends Activity {
 		ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
 		complaintList = (ArrayList<HashMap<String, String>>) getProviderData
 				.getSerializable(TAG_COMPLAINTS);
-		HashMap<String, String> map = new HashMap<String, String>();
 		map = (HashMap<String, String>) getProviderData
 				.getSerializable(TAG_CENTER_DATA);
+		
+		/////////////////////////////////////////////////////////////
+		commentList =(ArrayList<HashMap<String, String>>) getProviderData
+				.getSerializable(TAG_GET_COMMENTS);
+		////////////////////////////////////////////////////////////
 
 		// ////////////////////////////////////////////
 		// Get JSON values from previous intent
 		final String providerID = map.get(TAG_PROVIDERID);
 		String providerName = map.get(TAG_PROVIDERNAME);
+		pID = providerID;
 		String licenseInfo = map.get(TAG_LICENSEINFO);
 		String ownerName = map.get(TAG_OWNERNAME);
 		String address = map.get(TAG_ADDRESS);
@@ -246,12 +263,12 @@ public class SingleMenuItemActivity extends Activity {
 					TAG_COMPLAINTDATE);
 			String complaintResolvedData = complaintList.get(j).get(
 					TAG_COMPLAINTRESOLVED);
-
+/*
 			Log.d("What ComplaintData says",
 					complaintList.get(j).get(TAG_COMPLAINTTYPE));
 			Log.d("What ComplaintData says",
 					complaintList.get(j).get(TAG_COMPLAINTRESOLVED));
-
+*/
 			TextView lblComplaintType = new TextView(this);
 			TextView lblComplaintDate = new TextView(this);
 			TextView lblComplaintResolved = new TextView(this);
@@ -321,48 +338,53 @@ public class SingleMenuItemActivity extends Activity {
 //				e.printStackTrace();
 //			}
 //			
-			System.out.println("BREAK TEST");
-			TableLayout commentTable = (TableLayout) findViewById(R.id.commentTable);
-			System.out.println("BREAK TEST");
-			complaintTable.setStretchAllColumns(true);
-//			
-			System.out.println("Building Comment Table");
 			
-			
-			
-			for (int k = 0; k < commentList.size(); k++) {
-				TableRow commentRow = new TableRow(SingleMenuItemActivity.this);
-				System.out.println("Building Table");
-
-				String commentAlias = commentList.get(k).get(TAG_ALIAS);
-				String commentBody = commentList.get(k).get(TAG_BODY);
-
-				
-
-				TextView lblCommentAlias = new TextView(this);
-				TextView lblCommentBody = new TextView(this);
-				;
-
-				lblCommentAlias.setText(commentAlias);
-				lblCommentAlias.setPadding(10, 10, 10, 10);
-				lblCommentBody.setText(commentBody);
-				lblCommentBody.setPadding(10, 10, 10, 10);
-				
-
-				commentRow.addView(lblCommentAlias);
-
-				commentRow.addView(lblCommentBody);
-
-				commentTable.addView(commentRow);
-			
-			
-			}
 			
 			
 			
 
 		}
+		///////////////////////////////////
+		
+		System.out.println("BREAK TEST");
+		TableLayout commentTable = (TableLayout) findViewById(R.id.commentTable);
+		System.out.println("BREAK TEST");
+		complaintTable.setStretchAllColumns(true);
+//		
+		System.out.println("Building Comment Table");
+		
+		
+		
+		for (int k = 0; k < commentList.size(); k++) {
+			TableRow commentRow = new TableRow(SingleMenuItemActivity.this);
+			System.out.println("Building Table");
 
+			String commentAlias = commentList.get(k).get(TAG_ALIAS);
+			String commentBody = commentList.get(k).get(TAG_BODY);
+
+			
+
+			TextView lblCommentAlias = new TextView(this);
+			TextView lblCommentBody = new TextView(this);
+			;
+
+			lblCommentAlias.setText(commentAlias);
+			lblCommentAlias.setPadding(10, 10, 10, 10);
+			lblCommentBody.setText(commentBody);
+			lblCommentBody.setPadding(10, 10, 10, 10);
+			
+
+			commentRow.addView(lblCommentAlias);
+
+			commentRow.addView(lblCommentBody);
+
+			commentTable.addView(commentRow);
+		
+		
+		}
+		
+		
+////////////////////////////////////
 		// Comment System Stuff
 		/***********************************************************************
   *        
@@ -381,6 +403,11 @@ public class SingleMenuItemActivity extends Activity {
 				String alias = aliasText.getText().toString();
 				String comment = commentText.getText().toString();
 
+				////////////////////////////////////////////////
+				commentSystem cSystem = new commentSystem(SingleMenuItemActivity.this, map);
+				 cSystem.execute(alias, comment, pID);	
+				///////////////////////////////////////////////////////
+				
 				
 				
 				//String alias_spaces = alias.replace(" ", "%20");
@@ -389,46 +416,118 @@ public class SingleMenuItemActivity extends Activity {
 				//HashMap<String, String> commentMap = new HashMap<String, String>();
 				
 				//commentMap.put(TAG_PROVIDERID, providerID);
-				commentMap.put(TAG_ALIAS, alias);
-				commentMap.put(TAG_BODY, comment);
-				commentList.add(commentMap);
+				//commentMap.put(TAG_ALIAS, alias);
+				//commentMap.put(TAG_BODY, comment);
+				//commentList.add(commentMap);
 				
-				//Gson commentJSON = new Gson();
-				//commentJSON.toJson(commentMap);
+//				Gson commentJSON = new Gson();
+//				commentJSON.toJson(commentList);
 				
-//				HttpClient postClient = new DefaultHttpClient();
-//		        HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000); //Timeout Limit
-//			    
-//		        
-//		        String postURL = commentAddURL1 + provider_comment_ID + commentAddURL2;
-//				
-//				JSONObject commentJSON = new JSONObject();
-//				try{
-//					HttpPost post = new HttpPost(postURL);
-//				commentJSON.put(TAG_PROVIDER_COMMENT_ID, provider_comment_ID);
-//				commentJSON.put(TAG_ALIAS, alias);
-//				commentJSON.put(TAG_BODY, comment);
-//				
-//				//StringEntity se = new StringEntity("JSON: " + commentJSON.toString());
-//				//se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
-//				post.setHeader("Content-Type", "application/json");
-//				
-//				//post.setEntity(se);
+			//	HttpClient postClient = new DefaultHttpClient();
+		     //   HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000); //Timeout Limit
+			    
+		      /*  
+		        String postURL = commentAddURL1 + provider_comment_ID + commentAddURL2;
+				
+				
+				try{
+					HttpPost post = new HttpPost(postURL);
+					
+				
+				commentJSON.put(TAG_PROVIDER_COMMENT_ID, provider_comment_ID);
+				commentJSON.put(TAG_ALIAS, alias);
+				commentJSON.put(TAG_BODY, comment);
+				JSON.put(TAG_JSON_COMMENT, commentJSON);
+				
+				StringEntity se = new StringEntity(JSON.toString());
+				se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+				post.setHeader("Content-Type", "application/json");
+//				se.toString();
+//				System.out.println(se);
+				post.setEntity(se);
 //				response = postClient.execute(post);
-//				
-//				
-//				}catch(Exception e){
-//		            e.printStackTrace();
-//		            // createDialog("Error", "Cannot Estabilish Connection");
-//		         }
+				
+				
+				}catch(Exception e){
+		            e.printStackTrace();
+		            // createDialog("Error", "Cannot Estabilish Connection");
+		         }
 //				
 				
-//				System.out.println(commentJSON);
+				//System.out.println(JSON);
+				*/
 				
 
 			}
 
 		});
 	}
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+	class commentSystem extends AsyncTask<String, String, String>
+	{
+		Activity theActivity;
+		JSONObject commentJSON = new JSONObject();
+		JSONObject JSON = new JSONObject();
+		HttpClient postClient = new DefaultHttpClient();
+		String proID;
+      //  HttpConnectionParams.setConnectionTimeout(postClient.getParams(), 10000);
+	  String postURL = commentAddURL1 + provider_comment_ID + commentAddURL2;
+	  HashMap<String, String> theMap = new HashMap<String, String>();
+	  
+	  
+	  commentSystem(Activity anActivity, HashMap<String, String> aMap)
+	  {
+		  theActivity = anActivity;
+		  theMap = aMap; 
+	  }
+		
+		@Override
+		protected void onPostExecute(String here)
+		{
+		  theActivity.finish();
+		  Intent anIntent = new Intent(getApplicationContext(), Single_AsyncTask.class);
+		  anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
+          anIntent.putExtra("THE_PROVIDER", proID);
+          startActivity(anIntent);
+		  
+		}
+		
+		protected String doInBackground(String... args) 
+		{
+		
+			String alias = args[0];
+			String comment = args[1];
+			proID = args[2];
+			System.out.println(alias + " " + comment);
+			try{
+				HttpPost post = new HttpPost(postURL);
+				
+			
+			commentJSON.put(TAG_PROVIDER_COMMENT_ID, provider_comment_ID);
+			commentJSON.put(TAG_ALIAS, alias);
+			commentJSON.put(TAG_BODY, comment);
+			JSON.put(TAG_JSON_COMMENT, commentJSON);
+			
+			StringEntity se = new StringEntity(JSON.toString());
+			se.setContentEncoding(new BasicHeader(HTTP.CONTENT_TYPE, "application/json"));
+			post.setHeader("Content-Type", "application/json");
+//			se.toString();
+//			System.out.println(se);
+			post.setEntity(se);
+			response = postClient.execute(post);
+			
+			
+			}catch(Exception e){
+	            e.printStackTrace();
+	            // createDialog("Error", "Cannot Estabilish Connection");
+	         }
+			
+			
+			
+			return null;
+		}
+		
+	}
+	
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 }

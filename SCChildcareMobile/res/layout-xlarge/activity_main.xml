@@ -55,6 +55,7 @@
                 android:gravity="center"
                 android:onClick="getLocation"
                 android:text="@string/button_locate" />
+            
 
             <ImageButton
                 android:id="@+id/button_2"

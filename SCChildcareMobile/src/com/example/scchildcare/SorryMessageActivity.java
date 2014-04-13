@@ -33,6 +33,7 @@ public class SorryMessageActivity extends Activity {
         // Create the text view
         TextView textView = (TextView) findViewById(R.id.sorry_label);
         //textView.setTextSize(25);
+        textView.setTextSize(40);
         textView.setText(sorry);
         
 

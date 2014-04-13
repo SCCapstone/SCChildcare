@@ -209,6 +209,8 @@
             android:layout_width="match_parent"
             android:layout_height="324dp" />
 
+        
+
         <TextView
             android:id="@+id/complaints_Table_label"
             android:layout_width="fill_parent"
@@ -268,6 +270,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
+<<<<<<< HEAD
+            
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/sign_in_button"
+=======
 
             <TextView
                 android:id="@+id/commentSecLabel"
@@ -328,6 +335,7 @@
 
             <Button
                 android:id="@+id/add_comment_button"
+>>>>>>> 7f18d2c942e379b7d6ca20e72548548416495b83
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
