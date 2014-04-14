@@ -302,6 +302,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                     android:maxLength="15"
                     android:selectAllOnFocus="false" >
 
                     <requestFocus />
@@ -324,6 +325,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                     android:maxLength="240"
                     android:inputType="textMultiLine" />
             </LinearLayout>
 
