@@ -301,6 +301,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                      android:maxLength="15"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     android:selectAllOnFocus="false" >
 
                     <requestFocus />
@@ -324,7 +326,9 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:maxLength="240"
-                    android:inputType="textMultiLine" />
+                    android:imeOptions="actionDone"
+                    android:inputType="text"
+                    />
             </LinearLayout>
 
             <Button

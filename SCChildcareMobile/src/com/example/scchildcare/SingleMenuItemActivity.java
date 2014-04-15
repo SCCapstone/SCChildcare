@@ -15,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -24,6 +26,7 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -398,14 +401,22 @@ public class SingleMenuItemActivity extends Activity {
 				// TODO Auto-generated method stub
 
 				EditText aliasText = (EditText) findViewById(R.id.aliasText);
+				//aliasText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
 				EditText commentText = (EditText) findViewById(R.id.commentText);
 
 				String alias = aliasText.getText().toString();
 				String comment = commentText.getText().toString();
 
 				////////////////////////////////////////////////
+				
+				if(alias.length() >= 3){
 				commentSystem cSystem = new commentSystem(SingleMenuItemActivity.this, map);
 				 cSystem.execute(alias, comment, pID);	
+				}
+				else{
+					AliasAlert();
+				}
+				 
 				///////////////////////////////////////////////////////
 				
 				
@@ -527,6 +538,20 @@ public class SingleMenuItemActivity extends Activity {
 			return null;
 		}
 		
+	}
+	
+	private void AliasAlert(){
+	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+	    alertDialogBuilder.setMessage("Name must be a minimum of 3 characters.")
+	    .setCancelable(false)
+	    .setPositiveButton("OK",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id){
+	        	dialog.cancel();
+	        }
+	    });
+	    AlertDialog alert = alertDialogBuilder.create();
+	    alert.show();
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
