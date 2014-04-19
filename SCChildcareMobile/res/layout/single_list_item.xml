@@ -282,7 +282,8 @@
             <TableLayout
                 android:id="@+id/commentTable"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="wrap_content" 
+                android:shrinkColumns="0">
             </TableLayout>
 
             <LinearLayout
@@ -326,8 +327,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                     android:maxLength="240"
-                    android:inputType="textMultiLine" />
+                    android:maxLength="255"
+                    android:inputType="text"
+ 		    android:imeOptions="actionDone"
+                    android:gravity="top"/>
             </LinearLayout>
 
             <Button

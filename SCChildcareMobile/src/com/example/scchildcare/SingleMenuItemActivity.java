@@ -18,15 +18,15 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.util.Linkify;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TableLayout;
@@ -114,6 +114,7 @@ public class SingleMenuItemActivity extends Activity {
 	@SuppressWarnings("unchecked")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.single_list_item);
 
@@ -277,12 +278,15 @@ public class SingleMenuItemActivity extends Activity {
 			TextView lblComplaintResolved = new TextView(this);
 
 			lblComplaintType.setText(complaintTypeData);
-			lblComplaintType.setPadding(20, 20, 50, 20);
+			lblComplaintType.setTextSize(15);
+			lblComplaintType.setPadding(10, 20, 80, 20);
 			lblComplaintType.setLayoutParams(new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1));
 			lblComplaintDate.setText(complaintIssueDate);
-			lblComplaintDate.setPadding(80, 20, 50, 20);
+			lblComplaintDate.setTextSize(15);
+			lblComplaintDate.setPadding(10, 20, 0, 20);
 			lblComplaintResolved.setText(complaintResolvedData);
-			lblComplaintResolved.setPadding(80, 20, 20, 20);
+			lblComplaintResolved.setTextSize(15);
+			lblComplaintResolved.setPadding(50, 20, 20, 20);
 			
 			
 			complaintRow.setGravity(Gravity.CENTER);
@@ -359,6 +363,7 @@ public class SingleMenuItemActivity extends Activity {
 		
 		
 		for (int k = 0; k < commentList.size(); k++) {
+			TableRow aliasRow = new TableRow(SingleMenuItemActivity.this);
 			TableRow commentRow = new TableRow(SingleMenuItemActivity.this);
 			System.out.println("Building Table");
 
@@ -369,18 +374,23 @@ public class SingleMenuItemActivity extends Activity {
 
 			TextView lblCommentAlias = new TextView(this);
 			TextView lblCommentBody = new TextView(this);
-			;
-
-			lblCommentAlias.setText(commentAlias);
-			lblCommentAlias.setPadding(10, 10, 10, 10);
-			lblCommentBody.setText(commentBody);
-			lblCommentBody.setPadding(10, 10, 10, 10);
 			
 
-			commentRow.addView(lblCommentAlias);
+			
+			lblCommentAlias.setText(commentAlias);
+			lblCommentAlias.setTypeface(null, Typeface.ITALIC);
+			lblCommentAlias.setTextColor(Color.parseColor("#0069a3"));
+			lblCommentAlias.setTextSize(17);
+			lblCommentAlias.setPadding(10, 10, 10, 10);
+			lblCommentBody.setText(commentBody);
+			lblCommentBody.setTextSize(17);
+			lblCommentBody.setPadding(10, 10, 10, 10);
+			
+			aliasRow.addView(lblCommentAlias);
 
 			commentRow.addView(lblCommentBody);
-
+			
+			commentTable.addView(aliasRow);
 			commentTable.addView(commentRow);
 		
 		
@@ -393,6 +403,7 @@ public class SingleMenuItemActivity extends Activity {
   *        
   */
 		Button addComment = (Button) findViewById(R.id.add_comment_button);
+		
 
 		addComment.setOnClickListener(new View.OnClickListener() {
 

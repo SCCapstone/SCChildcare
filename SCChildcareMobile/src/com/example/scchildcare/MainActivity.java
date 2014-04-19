@@ -1,6 +1,6 @@
 /**
  * 
- * Version 0.1.4
+ * Version 1.0.0
  * 
  * 
  * 
@@ -30,6 +30,7 @@ import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -41,32 +42,32 @@ import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.location.LocationClient;
 
 public class MainActivity extends FragmentActivity implements
-GooglePlayServicesClient.ConnectionCallbacks,
-GooglePlayServicesClient.OnConnectionFailedListener {
-public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
-public final static String EXTRA_LONGITUDE = null;
-public final static String EXTRA_LATITUDE = null;
-private long mLastClickTime = 0;
-boolean check;
+		GooglePlayServicesClient.ConnectionCallbacks,
+		GooglePlayServicesClient.OnConnectionFailedListener {
+	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+	public final static String EXTRA_LONGITUDE = null;
+	public final static String EXTRA_LATITUDE = null;
+	private long mLastClickTime = 0;
+	boolean check;
 
-/////////////////////////////////////////////////////////////////////
-EditText editText;
-// Label instructing input for EditText
-TextView geocodeLabel;
-// EditText textbox1; //new hidden textbox
-ImageButton button1;
-ImageButton button2;
-// Text box for entering address
-EditText addressText;
-// android:onClick="getLocation"android:onClick="getLocation"private
-// TextView LongLat;
-private LocationClient mLocationClient;
-Location mCurrentLocation;
-//private TextView LongLat1;
-private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
-LocationManager locationManager;
-public static final String APPTAG = "Location Updates";
-boolean done = false;
+	// ///////////////////////////////////////////////////////////////////
+	EditText editText;
+	// Label instructing input for EditText
+	TextView geocodeLabel;
+	// EditText textbox1; //new hidden textbox
+	ImageButton button1;
+	ImageButton button2;
+	// Text box for entering address
+	EditText addressText;
+	// android:onClick="getLocation"android:onClick="getLocation"private
+	// TextView LongLat;
+	private LocationClient mLocationClient;
+	Location mCurrentLocation;
+	// private TextView LongLat1;
+	private final static int CONNECTION_FAILURE_RESOLUTION_REQUEST = 9000;
+	LocationManager locationManager;
+	public static final String APPTAG = "Location Updates";
+	boolean done = false;
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -90,11 +91,12 @@ boolean done = false;
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 
-@Override
-public void onConnected(Bundle dataBundle) {
-// Display the connection status
-//Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
-}
+	@Override
+	public void onConnected(Bundle dataBundle) {
+		// Display the connection status
+		// Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
+	}
+
 	private boolean servicesConnected() {
 		// Check that Google Play services is available
 		int resultCode = GooglePlayServicesUtil
@@ -126,82 +128,85 @@ public void onConnected(Bundle dataBundle) {
 
 	}
 
-void getResult(Boolean abool){
-	check = abool;
-}
+	void getResult(Boolean abool) {
+		check = abool;
+	}
 
-@Override
-protected void onCreate(Bundle savedInstanceState) {
-	System.out.println("Open instance");
-super.onCreate(savedInstanceState);
-System.out.println("set layout");
-setContentView(R.layout.activity_main);
-System.out.println("new locationclient");
-mLocationClient = new LocationClient(this, this, this);
-System.out.println("getsystemservice");
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		System.out.println("Open instance");
+		super.onCreate(savedInstanceState);
+		System.out.println("set layout");
+		setContentView(R.layout.activity_main);
+		System.out.println("new locationclient");
+		mLocationClient = new LocationClient(this, this, this);
+		System.out.println("getsystemservice");
 
- locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
- System.out.println("button1");
-///////////////////////////////////////////
- button1 = (ImageButton) findViewById(R.id.button1);
- System.out.println("button2");
- button2 = (ImageButton) findViewById(R.id.button_2);
- System.out.println("button1onclick");
- 
-	button1.setOnClickListener(new View.OnClickListener() {
+		locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+		System.out.println("button1");
+		// /////////////////////////////////////////
+		button1 = (ImageButton) findViewById(R.id.button1);
+		System.out.println("button2");
+		button2 = (ImageButton) findViewById(R.id.button_2);
+		System.out.println("button1onclick");
 
-		@Override
-		public void onClick(View v) {
+		button1.setOnClickListener(new View.OnClickListener() {
 
-			if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-				return;
-			}
-			mLastClickTime = SystemClock.elapsedRealtime();
-			// /////////////////////
+			@Override
+			public void onClick(View v) {
 
-			// If Google Play Services is available
-			if (servicesConnected() && isNetworkAvailable()) {
-
-				if (locationManager
-						.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-
-					// Get the current location
-					mCurrentLocation = mLocationClient.getLastLocation();
-
-					// Display the current location in the UI
-					double latitude = mCurrentLocation.getLatitude();
-					double longitude = mCurrentLocation.getLongitude();
-					String longlat = "latitude "
-							+ Double.toString(latitude) + " "
-							+ "longitude " + Double.toString(longitude);
-					System.out.println(longlat);
-
-					String param_latitude = Double.toString(latitude);
-					String param_longitude = Double.toString(longitude);
-					// //////////////////////////////////////////
-
-					Intent GPSSearch = new Intent(getApplicationContext(), GPS_Search_AsyncTask.class);
-					Bundle coordinates = new Bundle();
-					coordinates.putString("EXTRA_LATITUDE", param_latitude);
-					coordinates.putString("EXTRA_LONGITUDE", param_longitude);
-					GPSSearch.putExtras(coordinates);
-					startActivity(GPSSearch);
-					
-				} else {
-					// makeToast("Internet connection not established");
-					if (locationManager
-							.isProviderEnabled(LocationManager.GPS_PROVIDER) != true) {
-						showGPSDisabledAlertToUser();
-					}
+				if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
+					return;
 				}
-			} else {
-				showConnectionAlertToUser();
+				mLastClickTime = SystemClock.elapsedRealtime();
+				// /////////////////////
+
+				// If Google Play Services is available
+				if (servicesConnected() && isNetworkAvailable()) {
+
+					if (locationManager
+							.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+
+						// Get the current location
+						mCurrentLocation = mLocationClient.getLastLocation();
+
+						// Display the current location in the UI
+						double latitude = mCurrentLocation.getLatitude();
+						double longitude = mCurrentLocation.getLongitude();
+						String longlat = "latitude "
+								+ Double.toString(latitude) + " "
+								+ "longitude " + Double.toString(longitude);
+						System.out.println(longlat);
+
+						String param_latitude = Double.toString(latitude);
+						String param_longitude = Double.toString(longitude);
+						// //////////////////////////////////////////
+
+						Intent GPSSearch = new Intent(getApplicationContext(),
+								GPS_Search_AsyncTask.class);
+						Bundle coordinates = new Bundle();
+						coordinates.putString("EXTRA_LATITUDE", param_latitude);
+						coordinates.putString("EXTRA_LONGITUDE",
+								param_longitude);
+						GPSSearch.putExtras(coordinates);
+						startActivity(GPSSearch);
+
+					} else {
+						// makeToast("Internet connection not established");
+						if (locationManager
+								.isProviderEnabled(LocationManager.GPS_PROVIDER) != true) {
+							showGPSDisabledAlertToUser();
+						}
+					}
+				} else {
+					showConnectionAlertToUser();
+				}
+
 			}
 
-		}
+		});
 
-	});
- 
 		System.out.println("button2onclick");
 		button2.setOnClickListener(new View.OnClickListener() {
 
@@ -219,15 +224,16 @@ System.out.println("getsystemservice");
 					// Intent intent = new Intent(this,
 					// SearchResultsActivity.class);
 					editText = (EditText) findViewById(R.id.edit_message);
+					
 					String message2 = editText.getText().toString();
 					String message = editText.getText().toString()
 							.replace(" ", "%20");
-					if (!message2.isEmpty()) 
-					{				
-				        Intent intent = new Intent(getApplicationContext(), Search_AsyncTask.class);
-				        intent.putExtra(EXTRA_MESSAGE, message);
-                        startActivity(intent);					
-///////////////////////////////////////////////////////					
+					if (!message2.isEmpty()) {
+						Intent intent = new Intent(getApplicationContext(),
+								Search_AsyncTask.class);
+						intent.putExtra(EXTRA_MESSAGE, message);
+						startActivity(intent);
+						// /////////////////////////////////////////////////////
 					} else {
 						MessageToUser();
 					}
@@ -239,8 +245,7 @@ System.out.println("getsystemservice");
 			}
 		});
 
-	
- }
+	}
 
 	// //////////////////////////////////////
 	private void showConnectionAlertToUser() {
@@ -268,27 +273,29 @@ System.out.println("getsystemservice");
 		alert.show();
 	}
 
-///////////////////////
-private void MessageToUser(){
-    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-    alertDialogBuilder.setMessage("Search requires a minimum of 3 characters. Enter a child care provider name, address, or city")
-    .setCancelable(false)
-    .setPositiveButton("OK",
-            new DialogInterface.OnClickListener(){
-        public void onClick(DialogInterface dialog, int id){
-        	dialog.cancel();
-        }
-    });
-    AlertDialog alert = alertDialogBuilder.create();
-    alert.show();
-}
-///////////////////////////////////////////////////////////
-@Override
-public void onDisconnected() {
-// Display the connection status
-//Toast.makeText(this, "Disconnected. Please re-connect.",
-//Toast.LENGTH_SHORT).show();
-}
+	// /////////////////////
+	private void MessageToUser() {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder
+				.setMessage(
+						"Search requires a minimum of 3 characters. Enter a child care provider name, address, or city")
+				.setCancelable(false)
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = alertDialogBuilder.create();
+		alert.show();
+	}
+
+	// /////////////////////////////////////////////////////////
+	@Override
+	public void onDisconnected() {
+		// Display the connection status
+		// Toast.makeText(this, "Disconnected. Please re-connect.",
+		// Toast.LENGTH_SHORT).show();
+	}
 
 	protected void onDestroy() {
 		super.onDestroy();
@@ -433,5 +440,5 @@ public void onDisconnected() {
 			showErrorDialog(connectionResult.getErrorCode());
 		}
 	}
-	
+
 }
