@@ -222,7 +222,8 @@
         <TableLayout
             android:id="@+id/complaintTable"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:shrinkColumns="0">
 
             <TableRow
                 android:id="@+id/complaint_title_row"
@@ -244,7 +245,8 @@
                     android:layout_height="wrap_content"
                     android:paddingLeft="40dp"
                     android:text="@string/complaintIssueDate"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF" 
+                    android:paddingRight="40dp"/>
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -252,7 +254,8 @@
                     android:layout_weight="1"
                     android:paddingLeft="55dp"
                     android:text="@string/resolve"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF" 
+                    android:paddingRight="40dp"/>
 
             </TableRow>
 
@@ -302,7 +305,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:selectAllOnFocus="false" >
+                    android:selectAllOnFocus="false" 
+                    android:focusable="false">
 
                     <requestFocus />
                 </EditText>
@@ -325,7 +329,8 @@
                     android:layout_height="119dp"
                     android:ems="10"
                     android:inputType="textMultiLine" 
-                    android:gravity="top"/>
+                    android:gravity="top"
+                    android:focusable="false"/>
             </LinearLayout>
 
             <Button

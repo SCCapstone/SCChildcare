@@ -23,6 +23,7 @@ import android.os.Bundle;
 import android.text.util.Linkify;
 import android.view.Gravity;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.WindowManager;
@@ -79,6 +80,9 @@ public class SingleMenuItemActivity extends Activity {
 	String provider_comment_ID;
 	HttpResponse response;
 	HashMap<String, String> map = new HashMap<String, String>();
+	
+	
+	
 	
 	
 	
@@ -278,13 +282,15 @@ public class SingleMenuItemActivity extends Activity {
 
 			lblComplaintType.setText(complaintTypeData);
 			lblComplaintType.setTextSize(15);
-			lblComplaintType.setPadding(10, 20, 80, 20);
-			lblComplaintType.setLayoutParams(new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1));
+			lblComplaintType.setPadding(10, 20, 100, 20);
+			//lblComplaintType.setLayoutParams(new TableRow.LayoutParams(0, LayoutParams.WRAP_CONTENT, 1));
 			lblComplaintDate.setText(complaintIssueDate);
 			lblComplaintDate.setTextSize(15);
-			lblComplaintDate.setPadding(10, 20, 0, 20);
+			lblComplaintDate.setGravity(Gravity.CENTER);
+			lblComplaintDate.setPadding(0, 20, 0, 20);
 			lblComplaintResolved.setText(complaintResolvedData);
 			lblComplaintResolved.setTextSize(15);
+			lblComplaintResolved.setGravity(Gravity.CENTER);
 			lblComplaintResolved.setPadding(50, 20, 20, 20);
 			
 			
@@ -401,6 +407,34 @@ public class SingleMenuItemActivity extends Activity {
 		/***********************************************************************
   *        
   */
+				
+
+		final EditText aliasText = (EditText) findViewById(R.id.aliasText);
+		final EditText commentText = (EditText) findViewById(R.id.commentText);
+		
+		
+		aliasText.setOnTouchListener(new View.OnTouchListener() {
+
+	        @Override
+	        public boolean onTouch(View a, MotionEvent event) {
+
+	            a.setFocusable(true);
+	            a.setFocusableInTouchMode(true);
+	            return false;
+	        }
+	    });
+		
+		commentText.setOnTouchListener(new View.OnTouchListener() {
+
+	        @Override
+	        public boolean onTouch(View c, MotionEvent event) {
+
+	            c.setFocusable(true);
+	            c.setFocusableInTouchMode(true);
+	            return false;
+	        }
+	    });
+		
 		Button addComment = (Button) findViewById(R.id.add_comment_button);
 		
 
@@ -409,9 +443,10 @@ public class SingleMenuItemActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
-				EditText aliasText = (EditText) findViewById(R.id.aliasText);
-				EditText commentText = (EditText) findViewById(R.id.commentText);
+				
+				
+				
+								
 
 				String alias = aliasText.getText().toString();
 				String comment = commentText.getText().toString();
