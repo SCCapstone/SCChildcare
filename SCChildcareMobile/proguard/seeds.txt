@@ -46,6 +46,8 @@ com.example.scchildcare.ConnectionErrorActivity
 com.example.scchildcare.ConnectionErrorActivity: ConnectionErrorActivity()
 com.example.scchildcare.GPS_SearchResultsActivity
 com.example.scchildcare.GPS_SearchResultsActivity: GPS_SearchResultsActivity()
+com.example.scchildcare.GPS_Search_AsyncTask
+com.example.scchildcare.GPS_Search_AsyncTask: GPS_Search_AsyncTask()
 com.example.scchildcare.MainActivity
 com.example.scchildcare.MainActivity: MainActivity()
 com.example.scchildcare.R$attr: int adSize
@@ -82,6 +84,149 @@ com.example.scchildcare.R$attr: int uiZoomControls
 com.example.scchildcare.R$attr: int uiZoomGestures
 com.example.scchildcare.R$attr: int useViewLifecycle
 com.example.scchildcare.R$attr: int zOrderOnTop
+com.example.scchildcare.R$color: int AliceBlue
+com.example.scchildcare.R$color: int AntiqueWhite
+com.example.scchildcare.R$color: int Aqua
+com.example.scchildcare.R$color: int Aquamarine
+com.example.scchildcare.R$color: int Azure
+com.example.scchildcare.R$color: int Beige
+com.example.scchildcare.R$color: int Bisque
+com.example.scchildcare.R$color: int Black
+com.example.scchildcare.R$color: int BlanchedAlmond
+com.example.scchildcare.R$color: int Blue
+com.example.scchildcare.R$color: int BlueViolet
+com.example.scchildcare.R$color: int Brown
+com.example.scchildcare.R$color: int BurlyWood
+com.example.scchildcare.R$color: int CadetBlue
+com.example.scchildcare.R$color: int Chartreuse
+com.example.scchildcare.R$color: int Chocolate
+com.example.scchildcare.R$color: int Coral
+com.example.scchildcare.R$color: int CornflowerBlue
+com.example.scchildcare.R$color: int Cornsilk
+com.example.scchildcare.R$color: int Crimson
+com.example.scchildcare.R$color: int Cyan
+com.example.scchildcare.R$color: int DarkBlue
+com.example.scchildcare.R$color: int DarkCyan
+com.example.scchildcare.R$color: int DarkGoldenrod
+com.example.scchildcare.R$color: int DarkGray
+com.example.scchildcare.R$color: int DarkGreen
+com.example.scchildcare.R$color: int DarkKhaki
+com.example.scchildcare.R$color: int DarkMagenta
+com.example.scchildcare.R$color: int DarkOliveGreen
+com.example.scchildcare.R$color: int DarkOrange
+com.example.scchildcare.R$color: int DarkOrchid
+com.example.scchildcare.R$color: int DarkRed
+com.example.scchildcare.R$color: int DarkSalmon
+com.example.scchildcare.R$color: int DarkSeaGreen
+com.example.scchildcare.R$color: int DarkSlateBlue
+com.example.scchildcare.R$color: int DarkSlateGray
+com.example.scchildcare.R$color: int DarkTurquoise
+com.example.scchildcare.R$color: int DarkViolet
+com.example.scchildcare.R$color: int DeepPink
+com.example.scchildcare.R$color: int DeepSkyBlue
+com.example.scchildcare.R$color: int DimGray
+com.example.scchildcare.R$color: int DodgerBlue
+com.example.scchildcare.R$color: int FireBrick
+com.example.scchildcare.R$color: int FloralWhite
+com.example.scchildcare.R$color: int ForestGreen
+com.example.scchildcare.R$color: int Fuchsia
+com.example.scchildcare.R$color: int Gainsboro
+com.example.scchildcare.R$color: int GhostWhite
+com.example.scchildcare.R$color: int Gold
+com.example.scchildcare.R$color: int Goldenrod
+com.example.scchildcare.R$color: int Gray
+com.example.scchildcare.R$color: int Green
+com.example.scchildcare.R$color: int GreenYellow
+com.example.scchildcare.R$color: int Honeydew
+com.example.scchildcare.R$color: int HotPink
+com.example.scchildcare.R$color: int IndianRed
+com.example.scchildcare.R$color: int Indigo
+com.example.scchildcare.R$color: int Ivory
+com.example.scchildcare.R$color: int Khaki
+com.example.scchildcare.R$color: int Lavender
+com.example.scchildcare.R$color: int LavenderBlush
+com.example.scchildcare.R$color: int LawnGreen
+com.example.scchildcare.R$color: int LemonChiffon
+com.example.scchildcare.R$color: int LightBlue
+com.example.scchildcare.R$color: int LightCoral
+com.example.scchildcare.R$color: int LightCyan
+com.example.scchildcare.R$color: int LightGoldenrodYellow
+com.example.scchildcare.R$color: int LightGreen
+com.example.scchildcare.R$color: int LightGrey
+com.example.scchildcare.R$color: int LightPink
+com.example.scchildcare.R$color: int LightSalmon
+com.example.scchildcare.R$color: int LightSeaGreen
+com.example.scchildcare.R$color: int LightSkyBlue
+com.example.scchildcare.R$color: int LightSlateGray
+com.example.scchildcare.R$color: int LightSteelBlue
+com.example.scchildcare.R$color: int LightYellow
+com.example.scchildcare.R$color: int Lime
+com.example.scchildcare.R$color: int LimeGreen
+com.example.scchildcare.R$color: int Linen
+com.example.scchildcare.R$color: int Magenta
+com.example.scchildcare.R$color: int Maroon
+com.example.scchildcare.R$color: int MediumAquamarine
+com.example.scchildcare.R$color: int MediumBlue
+com.example.scchildcare.R$color: int MediumOrchid
+com.example.scchildcare.R$color: int MediumPurple
+com.example.scchildcare.R$color: int MediumSeaGreen
+com.example.scchildcare.R$color: int MediumSlateBlue
+com.example.scchildcare.R$color: int MediumSpringGreen
+com.example.scchildcare.R$color: int MediumTurquoise
+com.example.scchildcare.R$color: int MediumVioletRed
+com.example.scchildcare.R$color: int MidnightBlue
+com.example.scchildcare.R$color: int MintCream
+com.example.scchildcare.R$color: int MistyRose
+com.example.scchildcare.R$color: int Moccasin
+com.example.scchildcare.R$color: int NavajoWhite
+com.example.scchildcare.R$color: int Navy
+com.example.scchildcare.R$color: int OldLace
+com.example.scchildcare.R$color: int Olive
+com.example.scchildcare.R$color: int OliveDrab
+com.example.scchildcare.R$color: int Orange
+com.example.scchildcare.R$color: int OrangeRed
+com.example.scchildcare.R$color: int Orchid
+com.example.scchildcare.R$color: int PaleGoldenrod
+com.example.scchildcare.R$color: int PaleGreen
+com.example.scchildcare.R$color: int PaleTurquoise
+com.example.scchildcare.R$color: int PaleVioletRed
+com.example.scchildcare.R$color: int PapayaWhip
+com.example.scchildcare.R$color: int PeachPuff
+com.example.scchildcare.R$color: int Peru
+com.example.scchildcare.R$color: int Pink
+com.example.scchildcare.R$color: int Plum
+com.example.scchildcare.R$color: int PowderBlue
+com.example.scchildcare.R$color: int Purple
+com.example.scchildcare.R$color: int Red
+com.example.scchildcare.R$color: int RosyBrown
+com.example.scchildcare.R$color: int RoyalBlue
+com.example.scchildcare.R$color: int SCChildcareBlue
+com.example.scchildcare.R$color: int SaddleBrown
+com.example.scchildcare.R$color: int Salmon
+com.example.scchildcare.R$color: int SandyBrown
+com.example.scchildcare.R$color: int SeaGreen
+com.example.scchildcare.R$color: int Seashell
+com.example.scchildcare.R$color: int Sienna
+com.example.scchildcare.R$color: int Silver
+com.example.scchildcare.R$color: int SkyBlue
+com.example.scchildcare.R$color: int SlateBlue
+com.example.scchildcare.R$color: int SlateGray
+com.example.scchildcare.R$color: int Snow
+com.example.scchildcare.R$color: int SpringGreen
+com.example.scchildcare.R$color: int SteelBlue
+com.example.scchildcare.R$color: int Tan
+com.example.scchildcare.R$color: int Teal
+com.example.scchildcare.R$color: int Thistle
+com.example.scchildcare.R$color: int Tomato
+com.example.scchildcare.R$color: int Turquoise
+com.example.scchildcare.R$color: int Violet
+com.example.scchildcare.R$color: int Wheat
+com.example.scchildcare.R$color: int WhiteSmoke
+com.example.scchildcare.R$color: int Yellow
+com.example.scchildcare.R$color: int YellowGreen
+com.example.scchildcare.R$color: int aqua
+com.example.scchildcare.R$color: int black
+com.example.scchildcare.R$color: int blue
 com.example.scchildcare.R$color: int com_facebook_blue
 com.example.scchildcare.R$color: int com_facebook_loginview_text_color
 com.example.scchildcare.R$color: int com_facebook_picker_search_bar_background
@@ -101,6 +246,19 @@ com.example.scchildcare.R$color: int common_signin_btn_light_text_focused
 com.example.scchildcare.R$color: int common_signin_btn_light_text_pressed
 com.example.scchildcare.R$color: int common_signin_btn_text_dark
 com.example.scchildcare.R$color: int common_signin_btn_text_light
+com.example.scchildcare.R$color: int fuchsia
+com.example.scchildcare.R$color: int gray
+com.example.scchildcare.R$color: int green
+com.example.scchildcare.R$color: int lime
+com.example.scchildcare.R$color: int maroon
+com.example.scchildcare.R$color: int navy
+com.example.scchildcare.R$color: int olive
+com.example.scchildcare.R$color: int purple
+com.example.scchildcare.R$color: int red
+com.example.scchildcare.R$color: int silver
+com.example.scchildcare.R$color: int teal
+com.example.scchildcare.R$color: int white
+com.example.scchildcare.R$color: int yellow
 com.example.scchildcare.R$dimen: int activity_horizontal_margin
 com.example.scchildcare.R$dimen: int activity_vertical_margin
 com.example.scchildcare.R$dimen: int com_facebook_loginview_compound_drawable_padding
@@ -253,9 +411,11 @@ com.example.scchildcare.R$id: int owner_label
 com.example.scchildcare.R$id: int phone
 com.example.scchildcare.R$id: int phone_label
 com.example.scchildcare.R$id: int picker_subtitle
+com.example.scchildcare.R$id: int progressBar1
 com.example.scchildcare.R$id: int qualityLabel
 com.example.scchildcare.R$id: int qualityLevel
 com.example.scchildcare.R$id: int qualityLevel_label
+com.example.scchildcare.R$id: int relativelayoutid
 com.example.scchildcare.R$id: int satellite
 com.example.scchildcare.R$id: int small
 com.example.scchildcare.R$id: int sorry_label
@@ -292,6 +452,7 @@ com.example.scchildcare.R$layout: int com_facebook_placepickerfragment_list_row
 com.example.scchildcare.R$layout: int com_facebook_search_bar_layout
 com.example.scchildcare.R$layout: int com_facebook_usersettingsfragment
 com.example.scchildcare.R$layout: int list_item
+com.example.scchildcare.R$layout: int p_bar
 com.example.scchildcare.R$layout: int progress_bar
 com.example.scchildcare.R$layout: int single_list_item
 com.example.scchildcare.R$menu: int connection_error
@@ -456,8 +617,12 @@ com.example.scchildcare.R$styleable: int com_facebook_profile_picture_view_is_cr
 com.example.scchildcare.R$styleable: int com_facebook_profile_picture_view_preset_size
 com.example.scchildcare.SearchResultsActivity
 com.example.scchildcare.SearchResultsActivity: SearchResultsActivity()
+com.example.scchildcare.Search_AsyncTask
+com.example.scchildcare.Search_AsyncTask: Search_AsyncTask()
 com.example.scchildcare.SingleMenuItemActivity
 com.example.scchildcare.SingleMenuItemActivity: SingleMenuItemActivity()
+com.example.scchildcare.Single_AsyncTask
+com.example.scchildcare.Single_AsyncTask: Single_AsyncTask()
 com.example.scchildcare.SorryMessageActivity
 com.example.scchildcare.SorryMessageActivity: SorryMessageActivity()
 com.facebook.AccessTokenSource: com.facebook.AccessTokenSource[] values()

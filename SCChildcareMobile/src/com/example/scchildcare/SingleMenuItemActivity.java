@@ -385,7 +385,6 @@ public class SingleMenuItemActivity extends Activity {
 			lblCommentBody.setTextSize(17);
 			lblCommentBody.setPadding(10, 10, 10, 10);
 			
-
 			aliasRow.addView(lblCommentAlias);
 
 			commentRow.addView(lblCommentBody);
