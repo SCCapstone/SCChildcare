@@ -408,14 +408,28 @@ public class SingleMenuItemActivity extends Activity {
 				String comment = commentText.getText().toString();
 
 				////////////////////////////////////////////////
-				
-				if(alias.length() >= 3){
+				/*
+				if(alias.length() >= 5){
 				commentSystem cSystem = new commentSystem(SingleMenuItemActivity.this, map);
 				 cSystem.execute(alias, comment, pID);	
 				}
 				else{
 					AliasAlert();
 				}
+				*/
+				if(alias.length() < 5){
+					AliasAlert();
+				}
+				else if(comment.length() < 10){
+					CommentAlert();
+				}
+				else{
+					commentSystem cSystem = new commentSystem(SingleMenuItemActivity.this, map);
+					 cSystem.execute(alias, comment, pID);	
+				}
+					
+				
+				
 				 
 				///////////////////////////////////////////////////////
 				
@@ -542,7 +556,21 @@ public class SingleMenuItemActivity extends Activity {
 	
 	private void AliasAlert(){
 	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-	    alertDialogBuilder.setMessage("Name must be a minimum of 3 characters.")
+	    alertDialogBuilder.setMessage("Name must be a minimum of 5 characters.")
+	    .setCancelable(false)
+	    .setPositiveButton("OK",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id){
+	        	dialog.cancel();
+	        }
+	    });
+	    AlertDialog alert = alertDialogBuilder.create();
+	    alert.show();
+	}
+	
+	private void CommentAlert(){
+	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+	    alertDialogBuilder.setMessage("Comment must contain a minimum of 10 characters.")
 	    .setCancelable(false)
 	    .setPositiveButton("OK",
 	            new DialogInterface.OnClickListener(){
