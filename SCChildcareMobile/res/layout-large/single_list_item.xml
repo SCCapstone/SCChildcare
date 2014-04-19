@@ -306,7 +306,10 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:selectAllOnFocus="false" 
-                    android:focusable="false">
+                    android:focusable="false"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    android:maxLength="20">
 
                     <requestFocus />
                 </EditText>
@@ -328,9 +331,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="119dp"
                     android:ems="10"
-                    android:inputType="textMultiLine" 
+                    android:inputType="text" 
                     android:gravity="top"
-                    android:focusable="false"/>
+                    android:focusable="false"
+                    android:imeOptions="actionDone"
+                    android:maxLength="255"/>
             </LinearLayout>
 
             <Button

@@ -15,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -389,7 +391,7 @@ public class SingleMenuItemActivity extends Activity {
 			lblCommentAlias.setPadding(10, 10, 10, 10);
 			lblCommentBody.setText(commentBody);
 			lblCommentBody.setTextSize(17);
-			lblCommentBody.setPadding(10, 10, 10, 10);
+			lblCommentBody.setPadding(10, 10, 10, 60);
 			
 			aliasRow.addView(lblCommentAlias);
 
@@ -452,8 +454,20 @@ public class SingleMenuItemActivity extends Activity {
 				String comment = commentText.getText().toString();
 
 				////////////////////////////////////////////////
-				commentSystem cSystem = new commentSystem(SingleMenuItemActivity.this, map);
-				 cSystem.execute(alias, comment, pID);	
+				
+				if(alias.length() < 5){
+					AliasAlert();
+				}
+				else if(comment.length() < 10){
+					CommentAlert();
+				}
+				else{
+					commentSystem cSystem = new commentSystem(SingleMenuItemActivity.this, map);
+					 cSystem.execute(alias, comment, pID);
+				}
+				
+				
+					
 				///////////////////////////////////////////////////////
 				
 				
@@ -575,6 +589,37 @@ public class SingleMenuItemActivity extends Activity {
 			return null;
 		}
 		
+	}
+	
+	
+	private void AliasAlert() {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder
+				.setMessage(
+						"Name must contain a minimum of 5 characters")
+				.setCancelable(false)
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = alertDialogBuilder.create();
+		alert.show();
+	}
+	
+	private void CommentAlert() {
+		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+		alertDialogBuilder
+				.setMessage(
+						"Comment must contain a minimum of 10 characters")
+				.setCancelable(false)
+				.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int id) {
+						dialog.cancel();
+					}
+				});
+		AlertDialog alert = alertDialogBuilder.create();
+		alert.show();
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
