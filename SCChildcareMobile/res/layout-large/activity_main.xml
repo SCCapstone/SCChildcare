@@ -20,8 +20,6 @@
             android:contentDescription="@null"
             android:src="@drawable/ic_scchildcare_logo" />
         
-        
-
     </LinearLayout>
 
 
