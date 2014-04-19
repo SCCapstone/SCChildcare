@@ -302,6 +302,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+                      android:maxLength="20"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     android:selectAllOnFocus="false" >
 
                     <requestFocus />
@@ -324,7 +327,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textMultiLine" 
+                    android:maxLength="255"
+                    android:inputType="text"
+ 		    android:imeOptions="actionDone"
                     android:gravity="top"/>
             </LinearLayout>
 

@@ -445,16 +445,17 @@ public class SingleMenuItemActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
-				
-				
-								
+
+				EditText aliasText = (EditText) findViewById(R.id.aliasText);
+				//aliasText.setImeOptions(EditorInfo.IME_ACTION_NEXT);
+				EditText commentText = (EditText) findViewById(R.id.commentText);
+
 
 				String alias = aliasText.getText().toString();
 				String comment = commentText.getText().toString();
 
 				////////////////////////////////////////////////
-				
+
 				if(alias.length() < 5){
 					AliasAlert();
 				}
@@ -590,8 +591,7 @@ public class SingleMenuItemActivity extends Activity {
 		}
 		
 	}
-	
-	
+
 	private void AliasAlert() {
 		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
 		alertDialogBuilder
@@ -620,6 +620,7 @@ public class SingleMenuItemActivity extends Activity {
 				});
 		AlertDialog alert = alertDialogBuilder.create();
 		alert.show();
+
 	}
 	
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

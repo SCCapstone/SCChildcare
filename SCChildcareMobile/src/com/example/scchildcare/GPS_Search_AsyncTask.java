@@ -201,6 +201,7 @@ public class GPS_Search_AsyncTask extends FragmentActivity{
 	  	       }
 	  			return storeData;
 	  }
+	  	
 	  	 public boolean isURLReachable(Context context) {
 	  	    ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 	  	    NetworkInfo netInfo = cm.getActiveNetworkInfo();
@@ -223,7 +224,32 @@ public class GPS_Search_AsyncTask extends FragmentActivity{
 	  	        }
 	  	    }
 	  	    return false;
-	  	}	
+	  	}
+	  	 /*
+	  	
+	  	public static boolean isReachableByPing(String host) {
+	  	    try{
+	  	        String cmd = "";
+
+	  	        if(System.getProperty("os.name").startsWith("Windows"))
+	  	            cmd = "ping -n 1 " + host; // For Windows
+	  	        else
+	  	            cmd = "ping -c 1 " + host; // For Linux and OSX
+
+	  	        Process myProcess = Runtime.getRuntime().exec(cmd);
+	  	        myProcess.waitFor();
+
+	  	        return myProcess.exitValue() == 0;
+	  	    } catch( Exception e ) {
+	  	        e.printStackTrace();
+	  	        return false;
+	  	    }
+	  	}
+	  	
+	  	 
+	  	 */
+	  	 
+	  	 
 	  }
 
 	  
