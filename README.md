@@ -1,8 +1,8 @@
-#SCChildcare Mobile v0.1.4
+#SCChildcare Mobile v1.0.0
 
 *[http://www.scchildcare.org](http://www.scchildcare.org)
 
-[Download](https://www.dropbox.com/s/0mhjicr4jz32uet/SCChildcareMobile.apk) the Open Beta now: 
+[Download](https://www.dropbox.com/s/ezpqucls6mtvhw8/SCChildcareMobile.apk) the Open Beta now: 
 
 ### DESCRIPTION
 
@@ -14,16 +14,21 @@ view official ratings, and even communicate to other users via a forum/comment s
 
 * Fast and fully functioning childcare database
 * Google Maps support
-* Google+ authentication
+
 
 
 ##Known Bugs
-  - Our comment system is currently down due to networking issues. A hotfix is planned for later this week to fix these. 
   - Some layouts need to be adjusted for different size devices
   
 
 
 ##Update History
+
+###1.0.0
+  - Network Issues with Comment System have been fixed. 
+  - Various Bug Fixes. 
+  - Layouts for different sizes have been modified. 
+  - Fully Converted to AsyncTask Android framework
 
 ###0.1.4
   - Changed the main search buttons to blue
