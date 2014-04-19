@@ -327,13 +327,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="119dp"
                     android:ems="10"
-<<<<<<< HEAD
                      android:maxLength="240"
-                    android:inputType="textMultiLine" />
-=======
-                    android:inputType="textMultiLine" 
+                    android:inputType="text" 
                     android:gravity="top"/>
->>>>>>> e4ec448d991c7d95e30e51e0ae747a3a67c5281d
+                
             </LinearLayout>
 
             <Button
