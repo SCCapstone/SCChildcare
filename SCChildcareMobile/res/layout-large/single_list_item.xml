@@ -38,7 +38,8 @@
                     android:id="@+id/qualityLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingTop="10dp"
+
+                    android:paddingTop="15dp"
                     android:text="@string/quality"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -209,7 +210,6 @@
             android:layout_width="match_parent"
             android:layout_height="324dp" />
 
-        
 
         <TextView
             android:id="@+id/complaints_Table_label"
@@ -224,7 +224,8 @@
         <TableLayout
             android:id="@+id/complaintTable"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:shrinkColumns="0">
 
             <TableRow
                 android:id="@+id/complaint_title_row"
@@ -238,22 +239,27 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:text="@string/complaintType"
+<
                     android:textColor="#FFFFFF" />
 
                 <TextView
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="40dp"
                     android:text="@string/complaintIssueDate"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF" 
+                    android:paddingRight="40dp"/>
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
-                    android:paddingLeft="60dp"
+
+                    android:paddingLeft="55dp"
                     android:text="@string/resolve"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF" 
+                    android:paddingRight="40dp"/>
 
             </TableRow>
 
@@ -283,7 +289,9 @@
             <TableLayout
                 android:id="@+id/commentTable"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+
+                android:layout_height="wrap_content" 
+                android:shrinkColumns="0">
             </TableLayout>
 
             <LinearLayout
@@ -295,14 +303,22 @@
                     android:id="@+id/aliasTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Alias:" />
+
+                    android:text="Name:" />
 
                 <EditText
                     android:id="@+id/aliasText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:selectAllOnFocus="false" >
+
+
+                    android:selectAllOnFocus="false" 
+                    android:focusable="false"
+                    android:singleLine="true"
+                    android:imeOptions="actionNext"
+                    android:maxLength="20">
+
 
                     <requestFocus />
                 </EditText>
@@ -322,9 +338,16 @@
                 <EditText
                     android:id="@+id/commentText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+
+                    android:layout_height="119dp"
+
                     android:ems="10"
-                    android:inputType="textMultiLine" />
+                    android:inputType="text" 
+                    android:gravity="top"
+                    android:focusable="false"
+                    android:imeOptions="actionDone"
+                    android:maxLength="255"/>
+
             </LinearLayout>
 
             <Button
@@ -334,6 +357,8 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="right|center_vertical|center_horizontal"
                 android:text="@string/comment" />
+
+         
         </LinearLayout>
     </LinearLayout>
 

@@ -652,6 +652,7 @@ com.example.scchildcare.GPS_SearchResultsActivity$SingleItemResults:
     private static final java.lang.String TAG_CENTER_DATA
 com.example.scchildcare.MainActivity:
     public static final java.lang.String EXTRA_MESSAGE
+
     android.widget.TextView geocodeLabel
     android.widget.EditText addressText
     private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST
@@ -659,6 +660,7 @@ com.example.scchildcare.MainActivity:
     430:431:public void makeToast(java.lang.String)
 com.example.scchildcare.MainFragment
 com.example.scchildcare.MainFragment$1
+
 com.example.scchildcare.R
 com.example.scchildcare.R$attr
 com.example.scchildcare.R$color
@@ -696,6 +698,7 @@ com.example.scchildcare.SearchResultsActivity$SingleItemResults:
     private static final java.lang.String TAG_COMPLAINTRESOLVED
     private static final java.lang.String TAG_COMPLAINTS
     private static final java.lang.String TAG_CENTER_DATA
+
 com.example.scchildcare.SingleMenuItemActivity:
     private static final java.lang.String TAG_PROVIDERID
     private static final java.lang.String TAG_PROVIDERNAME
@@ -713,6 +716,8 @@ com.example.scchildcare.SingleMenuItemActivity:
     private static final java.lang.String TAG_SPECIALIST
     private static final java.lang.String TAG_SPECIALISTPHONE
     private static final java.lang.String TAG_QUALITY
+
+    private static final java.lang.String TAG_GET_COMMENTS
     private static final java.lang.String TAG_COMPLAINTS
     private static final java.lang.String TAG_COMPLAINTTYPE
     private static final java.lang.String TAG_COMPLAINTDATE
@@ -721,12 +726,29 @@ com.example.scchildcare.SingleMenuItemActivity:
     private static final java.lang.String TAG_ALIAS
     private static final java.lang.String TAG_BODY
     private static final java.lang.String TAG_PROVIDER_COMMENT_ID
-    org.apache.http.HttpResponse response
+
+    private static final java.lang.String TAG_JSON_COMMENT
     private static final java.lang.String commentAddURL1
     private static final java.lang.String commentAddURL2
     private static final java.lang.String commentGetURL1
     private static final java.lang.String commentGetURL2
     private static final java.lang.String TAG_COMMENTS
+
+com.example.scchildcare.Single_AsyncTask:
+    private static final java.lang.String TAG_CENTER_DATA
+com.example.scchildcare.Single_AsyncTask$SingleItemResults:
+    private static final java.lang.String TAG_COMPLAINTTYPE
+    private static final java.lang.String TAG_COMPLAINTDATE
+    private static final java.lang.String TAG_COMPLAINTRESOLVED
+    private static final java.lang.String TAG_COMPLAINTS
+    private static final java.lang.String TAG_CENTER_DATA
+    private static final java.lang.String commentGetURL1
+    private static final java.lang.String commentGetURL2
+    private static final java.lang.String TAG_COMMENTS
+    private static final java.lang.String TAG_PROVIDER_COMMENT_ID
+    private static final java.lang.String TAG_ALIAS
+    private static final java.lang.String TAG_BODY
+    private static final java.lang.String TAG_GET_COMMENTS
 com.facebook.AccessToken:
     private static final long serialVersionUID
     static final java.lang.String ACCESS_TOKEN_KEY
@@ -1113,7 +1135,8 @@ com.facebook.Settings:
     118:121:public static final void removeLoggingBehavior(com.facebook.LoggingBehavior)
     130:133:public static final void clearLoggingBehaviors()
     180:184:public static void setExecutor(java.util.concurrent.Executor)
-    208:209:public static void setFacebookDomain(java.lang.String)
+
+    205:209:public static void setFacebookDomain(java.lang.String)
     247:248:public static void publishInstallAsync(android.content.Context,java.lang.String)
     263:280:public static void publishInstallAsync(android.content.Context,java.lang.String,com.facebook.Request$Callback)
     318:319:public static boolean publishInstallAndWait(android.content.Context,java.lang.String)

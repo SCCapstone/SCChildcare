@@ -862,9 +862,15 @@ com.example.scchildcare.GPS_SearchResultsActivity -> com.example.scchildcare.GPS
     org.json.JSONArray providers -> d
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     void onCreate(android.os.Bundle) -> onCreate
+<<<<<<< HEAD
     void goToCenter(java.lang.String,android.content.Context) -> a
     boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
     void access$0(com.example.scchildcare.GPS_SearchResultsActivity,java.lang.String,android.content.Context) -> a
+=======
+    void goToCenter(java.lang.String) -> a
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    void access$0(com.example.scchildcare.GPS_SearchResultsActivity,java.lang.String) -> a
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     long access$1(com.example.scchildcare.GPS_SearchResultsActivity) -> a
     void access$2(com.example.scchildcare.GPS_SearchResultsActivity,long) -> a
 com.example.scchildcare.GPS_SearchResultsActivity$1 -> com.example.scchildcare.a:
@@ -877,11 +883,15 @@ com.example.scchildcare.GPS_SearchResultsActivity$2 -> com.example.scchildcare.b
 com.example.scchildcare.GPS_SearchResultsActivity$3 -> com.example.scchildcare.c:
     com.example.scchildcare.GPS_SearchResultsActivity this$0 -> a
     java.lang.String val$aString -> b
+<<<<<<< HEAD
     android.content.Context val$aContext -> c
+=======
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     void onClick(android.content.DialogInterface,int) -> onClick
 com.example.scchildcare.GPS_SearchResultsActivity$4 -> com.example.scchildcare.d:
     com.example.scchildcare.GPS_SearchResultsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
+<<<<<<< HEAD
 com.example.scchildcare.GPS_SearchResultsActivity$SingleItemResults -> com.example.scchildcare.e:
     java.lang.String complaintSearchURL -> a
     java.lang.String complaintFullSearchURL -> b
@@ -893,6 +903,46 @@ com.example.scchildcare.GPS_SearchResultsActivity$SingleItemResults -> com.examp
     com.example.scchildcare.GPS_SearchResultsActivity this$0 -> h
     void onPostExecute(java.util.ArrayList) -> a
     void onPreExecute() -> onPreExecute
+=======
+com.example.scchildcare.GPS_Search_AsyncTask -> com.example.scchildcare.GPS_Search_AsyncTask:
+    android.widget.ProgressBar progressBar -> m
+    java.lang.String param_latitude -> n
+    java.lang.String param_longitude -> o
+    void onCreate(android.os.Bundle) -> onCreate
+com.example.scchildcare.GPS_Search_AsyncTask$GetGPSResults -> com.example.scchildcare.e:
+    java.lang.String gpsURL_1 -> a
+    java.lang.String gpsURL_2 -> b
+    java.lang.String TAG_PROVIDERS -> c
+    java.lang.String TAG_ID -> d
+    java.lang.String TAG_PROVIDERNAME -> e
+    java.lang.String TAG_LICENSEINFO -> f
+    java.lang.String TAG_OWNERNAME -> g
+    java.lang.String TAG_ADDRESS -> h
+    java.lang.String TAG_CITY -> i
+    java.lang.String TAG_STATE -> j
+    java.lang.String TAG_ZIPCODE -> k
+    java.lang.String TAG_PHONENUMBER -> l
+    java.lang.String TAG_LONGITUDE -> m
+    java.lang.String TAG_LATITUDE -> n
+    java.lang.String TAG_CAPACITY -> o
+    java.lang.String TAG_HOURS -> p
+    java.lang.String TAG_SPECIALIST -> q
+    java.lang.String TAG_SPECIALISTPHONE -> r
+    java.lang.String TAG_QUALITY -> s
+    java.lang.String TAG_LIST_OF_PROVIDERS -> t
+    com.example.scchildcare.JSONParser jParser -> u
+    java.lang.String latit -> v
+    java.lang.String longit -> w
+    org.json.JSONArray providers -> x
+    java.lang.String fullGPS_URL -> y
+    boolean isConnected -> z
+    java.util.ArrayList storeData -> A
+    android.widget.ProgressBar pBar -> B
+    com.example.scchildcare.GPS_Search_AsyncTask GPS_AsyncTask -> C
+    android.content.Context aContext -> D
+    com.example.scchildcare.GPS_Search_AsyncTask this$0 -> E
+    void onPostExecute(java.util.ArrayList) -> a
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     java.util.ArrayList doInBackground(java.lang.String[]) -> a
     boolean isURLReachable(android.content.Context) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
@@ -905,6 +955,7 @@ com.example.scchildcare.JSONParser -> com.example.scchildcare.f:
 com.example.scchildcare.MainActivity -> com.example.scchildcare.MainActivity:
     java.lang.String EXTRA_LONGITUDE -> m
     java.lang.String EXTRA_LATITUDE -> n
+<<<<<<< HEAD
     long mLastClickTime -> t
     android.widget.EditText editText -> o
     android.widget.ImageButton button1 -> p
@@ -915,11 +966,27 @@ com.example.scchildcare.MainActivity -> com.example.scchildcare.MainActivity:
     void onActivityResult(int,int,android.content.Intent) -> onActivityResult
     boolean servicesConnected() -> g
     void onConnected(android.os.Bundle) -> a
+=======
+    long mLastClickTime -> u
+    android.widget.EditText editText -> o
+    android.widget.ImageButton button1 -> p
+    android.widget.ImageButton button2 -> q
+    com.google.android.gms.location.LocationClient mLocationClient -> v
+    android.location.Location mCurrentLocation -> r
+    android.location.LocationManager locationManager -> s
+    boolean done -> t
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void onConnected(android.os.Bundle) -> a
+    boolean servicesConnected() -> g
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     void onCreate(android.os.Bundle) -> onCreate
     void showConnectionAlertToUser() -> h
     void MessageToUser() -> i
     void onDisconnected() -> f
+<<<<<<< HEAD
     void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
+=======
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     void onDestroy() -> onDestroy
     void onPause() -> onPause
     void onResume() -> onResume
@@ -929,6 +996,10 @@ com.example.scchildcare.MainActivity -> com.example.scchildcare.MainActivity:
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     boolean isNetworkAvailable() -> j
     void showGPSDisabledAlertToUser() -> k
+<<<<<<< HEAD
+=======
+    void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     long access$0(com.example.scchildcare.MainActivity) -> a
     void access$1(com.example.scchildcare.MainActivity,long) -> a
     boolean access$2(com.example.scchildcare.MainActivity) -> b
@@ -962,6 +1033,7 @@ com.example.scchildcare.MainActivity$ErrorDialogFragment -> com.example.scchildc
     android.app.Dialog mDialog -> W
     void setDialog(android.app.Dialog) -> a
     android.app.Dialog onCreateDialog(android.os.Bundle) -> c
+<<<<<<< HEAD
 com.example.scchildcare.MainActivity$GetGPSResults -> com.example.scchildcare.o:
     java.lang.String gpsURL_1 -> a
     java.lang.String gpsURL_2 -> b
@@ -998,6 +1070,43 @@ com.example.scchildcare.MainActivity$GetGPSResults -> com.example.scchildcare.o:
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
 com.example.scchildcare.MainActivity$GetSearchResults -> com.example.scchildcare.p:
+=======
+com.example.scchildcare.SearchResultsActivity -> com.example.scchildcare.SearchResultsActivity:
+    java.lang.String message -> a
+    long mLastClickTime -> f
+    java.util.ArrayList containingMaps -> b
+    com.google.android.gms.maps.model.LatLng SOUTH_CAROLINA -> g
+    com.google.android.gms.maps.GoogleMap mMap -> c
+    java.lang.String theMarker -> d
+    org.json.JSONArray providers -> e
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    void goToCenter(java.lang.String) -> a
+    void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    void access$0(com.example.scchildcare.SearchResultsActivity,java.lang.String) -> a
+    long access$1(com.example.scchildcare.SearchResultsActivity) -> a
+    void access$2(com.example.scchildcare.SearchResultsActivity,long) -> a
+com.example.scchildcare.SearchResultsActivity$1 -> com.example.scchildcare.o:
+    com.example.scchildcare.SearchResultsActivity this$0 -> a
+    boolean onMarkerClick(com.google.android.gms.maps.model.Marker) -> a
+com.example.scchildcare.SearchResultsActivity$2 -> com.example.scchildcare.p:
+    com.example.scchildcare.SearchResultsActivity this$0 -> a
+    android.widget.ListView val$lv -> b
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+com.example.scchildcare.SearchResultsActivity$3 -> com.example.scchildcare.q:
+    com.example.scchildcare.SearchResultsActivity this$0 -> a
+    java.lang.String val$aString -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.example.scchildcare.SearchResultsActivity$4 -> com.example.scchildcare.r:
+    com.example.scchildcare.SearchResultsActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.example.scchildcare.Search_AsyncTask -> com.example.scchildcare.Search_AsyncTask:
+    java.lang.String message -> m
+    android.widget.ProgressBar progressBar -> n
+    void onCreate(android.os.Bundle) -> onCreate
+com.example.scchildcare.Search_AsyncTask$GetSearchResults -> com.example.scchildcare.s:
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     java.lang.String searchURL -> a
     java.lang.String fullSearchURL -> b
     java.lang.String aMessage -> c
@@ -1023,13 +1132,21 @@ com.example.scchildcare.MainActivity$GetSearchResults -> com.example.scchildcare
     org.json.JSONArray providers -> w
     java.lang.String TAG_LIST_OF_PROVIDERS -> x
     android.content.Context aContext -> y
+<<<<<<< HEAD
     com.example.scchildcare.MainActivity this$0 -> z
+=======
+    com.example.scchildcare.Search_AsyncTask search -> z
+    boolean isConnected -> A
+    android.widget.ProgressBar pBar -> B
+    com.example.scchildcare.Search_AsyncTask this$0 -> C
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     void onPreExecute() -> onPreExecute
     void onPostExecute(java.util.ArrayList) -> a
     java.util.ArrayList doInBackground(java.lang.String[]) -> a
     boolean isURLReachable(android.content.Context) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+<<<<<<< HEAD
 com.example.scchildcare.SearchResultsActivity -> com.example.scchildcare.SearchResultsActivity:
     java.lang.String message -> a
     long mLastClickTime -> f
@@ -1062,20 +1179,69 @@ com.example.scchildcare.SearchResultsActivity$4 -> com.example.scchildcare.t:
     com.example.scchildcare.SearchResultsActivity this$0 -> a
     void onClick(android.content.DialogInterface,int) -> onClick
 com.example.scchildcare.SearchResultsActivity$SingleItemResults -> com.example.scchildcare.u:
+=======
+com.example.scchildcare.SingleMenuItemActivity -> com.example.scchildcare.SingleMenuItemActivity:
+    java.lang.String pID -> a
+    java.lang.String provider_comment_ID -> b
+    org.apache.http.HttpResponse response -> c
+    java.util.HashMap map -> d
+    java.util.HashMap commentMap -> e
+    java.util.ArrayList commentList -> f
+    com.example.scchildcare.JSONParser jParser -> g
+    org.json.JSONArray comments -> h
+    com.google.android.gms.maps.GoogleMap mMap -> i
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    void onCreate(android.os.Bundle) -> onCreate
+com.example.scchildcare.SingleMenuItemActivity$1 -> com.example.scchildcare.t:
+    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+com.example.scchildcare.SingleMenuItemActivity$commentSystem -> com.example.scchildcare.u:
+    android.app.Activity theActivity -> a
+    org.json.JSONObject commentJSON -> b
+    org.json.JSONObject JSON -> c
+    org.apache.http.client.HttpClient postClient -> d
+    java.lang.String proID -> e
+    java.lang.String postURL -> f
+    java.util.HashMap theMap -> g
+    com.example.scchildcare.SingleMenuItemActivity this$0 -> h
+    void onPostExecute(java.lang.String) -> a
+    java.lang.String doInBackground(java.lang.String[]) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+com.example.scchildcare.Single_AsyncTask -> com.example.scchildcare.Single_AsyncTask:
+    android.widget.ProgressBar progressBar -> m
+    java.lang.String providerName -> n
+    void onCreate(android.os.Bundle) -> onCreate
+com.example.scchildcare.Single_AsyncTask$SingleItemResults -> com.example.scchildcare.v:
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     java.lang.String complaintSearchURL -> a
     java.lang.String complaintFullSearchURL -> b
     com.example.scchildcare.JSONParser jComplaintParser -> c
     org.json.JSONArray complaints -> d
     java.util.ArrayList complaintList -> e
+<<<<<<< HEAD
     android.content.Context aContext -> f
     java.util.HashMap theMap -> g
     com.example.scchildcare.SearchResultsActivity this$0 -> h
     void onPostExecute(java.util.ArrayList) -> a
     void onPreExecute() -> onPreExecute
+=======
+    java.util.ArrayList commentList -> f
+    boolean isConnected -> g
+    com.example.scchildcare.Single_AsyncTask single -> h
+    android.widget.ProgressBar pBar -> i
+    com.example.scchildcare.JSONParser jParser -> j
+    org.json.JSONArray comments -> k
+    android.content.Context aContext -> l
+    java.util.HashMap theMap -> m
+    com.example.scchildcare.Single_AsyncTask this$0 -> n
+    void onPostExecute(java.util.ArrayList) -> a
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     java.util.ArrayList doInBackground(java.lang.String[]) -> a
     boolean isURLReachable(android.content.Context) -> a
     void onPostExecute(java.lang.Object) -> onPostExecute
     java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+<<<<<<< HEAD
 com.example.scchildcare.SingleMenuItemActivity -> com.example.scchildcare.SingleMenuItemActivity:
     java.lang.String provider_comment_ID -> a
     java.util.HashMap commentMap -> b
@@ -1088,6 +1254,8 @@ com.example.scchildcare.SingleMenuItemActivity -> com.example.scchildcare.Single
 com.example.scchildcare.SingleMenuItemActivity$1 -> com.example.scchildcare.v:
     com.example.scchildcare.SingleMenuItemActivity this$0 -> a
     void onClick(android.view.View) -> onClick
+=======
+>>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
 com.example.scchildcare.SorryMessageActivity -> com.example.scchildcare.SorryMessageActivity:
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     void onCreate(android.os.Bundle) -> onCreate

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -32,6 +33,7 @@
         android:id="@+id/edit_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+		android:singleLine="true"
         android:hint="@string/edit_message" />
 
     <LinearLayout
@@ -77,6 +79,7 @@
             android:layout_width="305dp"
             android:layout_height="225dp"
             android:gravity="center_horizontal"
+			android:paddingTop="60dp"
             android:text="@string/disclaimer"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="#ff0000"

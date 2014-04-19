@@ -51,7 +51,6 @@
                     android:textSize="17sp" />
 
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -193,6 +192,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/specialistPhone"
+
                 android:textSize="20sp" />
 
             <TextView
@@ -201,7 +201,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <fragment
@@ -283,7 +282,9 @@
             <TableLayout
                 android:id="@+id/commentTable"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+
+                android:layout_height="wrap_content"
+                android:shrinkColumns="0" >
             </TableLayout>
 
             <LinearLayout
@@ -295,13 +296,19 @@
                     android:id="@+id/aliasTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Alias:" />
+
+                    android:text="Name:" />
 
                 <EditText
                     android:id="@+id/aliasText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+
+
+                    android:maxLength="20"
+                    android:imeOptions="actionNext"
+                    android:singleLine="true"
                     android:selectAllOnFocus="false" >
 
                     <requestFocus />
@@ -324,7 +331,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textMultiLine" />
+
+                    android:maxLength="255"
+                    android:inputType="text"
+ 		    android:imeOptions="actionDone"
+		    android:gravity="top"/>
             </LinearLayout>
 
             <Button
