@@ -1071,10 +1071,26 @@ com.example.scchildcare.SingleMenuItemActivity -> com.example.scchildcare.Single
     com.google.android.gms.maps.GoogleMap mMap -> i
     boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
     void onCreate(android.os.Bundle) -> onCreate
+    void AliasAlert() -> a
+    void CommentAlert() -> b
+    void access$0(com.example.scchildcare.SingleMenuItemActivity) -> a
+    void access$1(com.example.scchildcare.SingleMenuItemActivity) -> b
 com.example.scchildcare.SingleMenuItemActivity$1 -> com.example.scchildcare.t:
     com.example.scchildcare.SingleMenuItemActivity this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+com.example.scchildcare.SingleMenuItemActivity$2 -> com.example.scchildcare.u:
+    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+com.example.scchildcare.SingleMenuItemActivity$3 -> com.example.scchildcare.v:
+    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
     void onClick(android.view.View) -> onClick
-com.example.scchildcare.SingleMenuItemActivity$commentSystem -> com.example.scchildcare.u:
+com.example.scchildcare.SingleMenuItemActivity$4 -> com.example.scchildcare.w:
+    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.example.scchildcare.SingleMenuItemActivity$5 -> com.example.scchildcare.x:
+    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+com.example.scchildcare.SingleMenuItemActivity$commentSystem -> com.example.scchildcare.y:
     android.app.Activity theActivity -> a
     org.json.JSONObject commentJSON -> b
     org.json.JSONObject JSON -> c
@@ -1091,7 +1107,7 @@ com.example.scchildcare.Single_AsyncTask -> com.example.scchildcare.Single_Async
     android.widget.ProgressBar progressBar -> m
     java.lang.String providerName -> n
     void onCreate(android.os.Bundle) -> onCreate
-com.example.scchildcare.Single_AsyncTask$SingleItemResults -> com.example.scchildcare.v:
+com.example.scchildcare.Single_AsyncTask$SingleItemResults -> com.example.scchildcare.z:
     java.lang.String complaintSearchURL -> a
     java.lang.String complaintFullSearchURL -> b
     com.example.scchildcare.JSONParser jComplaintParser -> c
