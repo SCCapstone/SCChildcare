@@ -269,6 +269,7 @@ public class MainActivity extends FragmentActivity implements
 
 		}
 		else{
+		//send message that connection isn't established
 			makeToast("Internet connection not established");
 		}
 	}
