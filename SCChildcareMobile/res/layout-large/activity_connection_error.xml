@@ -16,5 +16,4 @@
     android:paddingBottom="10dip"
     android:textColor="#21628d"
     android:text="@string/connectionError" />
-
 </LinearLayout>

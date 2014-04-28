@@ -38,10 +38,12 @@ public class ConnectionErrorActivity extends Activity {
         // Set the text view as the activity layout
         setContentView(textView);
     }
-
+    //Navigate the user to the selected page 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+        //if the user selects Home in the menu options,
+        //the app will return to the home page
         case android.R.id.home:
             NavUtils.navigateUpFromSameTask(this);
             return true;

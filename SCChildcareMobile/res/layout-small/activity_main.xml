@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -66,8 +67,7 @@
 
         <TextView
             android:id="@+id/disclaimer"
-            android:layout_width="wrap_content"
-<<<<<<< HEAD
+            android:layout_width="wrap_content
             android:layout_height="100dp"
             android:gravity="center_horizontal"
             android:paddingBottom="0dp"
@@ -77,16 +77,6 @@
             android:textColor="#ff0000"
             android:textSize="8sp"
             android:textStyle="italic" />
-
-=======
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:paddingTop="60dp"
-            android:text="@string/disclaimer"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="#ff0000"
-            android:textStyle="italic" />
->>>>>>> 67cf0578b1a4060ee0eca726fb5d9ac961e9ef6f
     </LinearLayout>
 
 </LinearLayout>
