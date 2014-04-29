@@ -1,4 +1,4 @@
-package com.example.scchildcare;
+package com.mobile.scchildcare;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,14 +18,14 @@ import android.app.Activity;
 import android.content.Intent;
 import android.util.Log;
 
-public class GPS_JSONParser extends Activity{
+public class JSONParser extends Activity{
 	
 	static InputStream is = null;
     static JSONObject jObj = null;
     static String json = "";	
 	
 	//constructor
-	public GPS_JSONParser() {
+	public JSONParser() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -47,16 +47,16 @@ public JSONObject getJSONFromUrl(String url) {
         HttpEntity httpEntity = httpResponse.getEntity();
        
         is = httpEntity.getContent();          
-       // System.out.println("Input Stream: " + is);
+        System.out.println("Input Stream: " + is);
 
     } catch (UnsupportedEncodingException e) {
-    	//System.out.println("UnsupportedEncodingException");
+    	System.out.println("UnsupportedEncodingException");
     	Intent errorIntent = new Intent(this, ConnectionErrorActivity.class);
     	startActivity(errorIntent);
     	System.out.println("Sent to error page");
         e.printStackTrace();
     } catch (ClientProtocolException e) {
-    	//System.out.println("ClientProtocolException");
+    	System.out.println("ClientProtocolException");
     	Intent errorIntent = new Intent(this, ConnectionErrorActivity.class);
     	startActivity(errorIntent);
     	System.out.println("Sent to error page");

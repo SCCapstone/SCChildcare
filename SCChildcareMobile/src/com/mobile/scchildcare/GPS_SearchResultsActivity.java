@@ -1,9 +1,11 @@
-package com.example.scchildcare;
+package com.mobile.scchildcare;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import org.json.JSONArray;
+
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -21,6 +23,8 @@ import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+
+import com.example.scchildcare.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
@@ -28,12 +32,11 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 //import com.google.android.gms.maps.model.LatLngBounds;
 
 //import com.example.myfirstapp.trackdata.TrackData;
 
-public class SearchResultsActivity extends ListActivity {
+public class GPS_SearchResultsActivity extends ListActivity {
 
 	// JSON node names
 	//private static final String TAG_PROVIDERS = "providers";
@@ -54,19 +57,13 @@ public class SearchResultsActivity extends ListActivity {
 	private static final String TAG_SPECIALISTPHONE = "specialistPhone";
 	private static final String TAG_QUALITY = "qualityLevel";
 	private static final String TAG_LIST_OF_PROVIDERS = "pList";
-	String message;
-	private long mLastClickTime = 0;
+	private static final String TAG_CENTER_DATA = "dataforcenter";
 	public static final String SORRY_MESSAGE = "com.example.myfirstapp.SORRY";
 	ArrayList<HashMap<String, String>> containingMaps = new ArrayList<HashMap<String, String>>();
-	private static final LatLng SOUTH_CAROLINA = new LatLng(34.0096138,
-			-81.0392966);
-	private static final String TAG_CENTER_DATA = "dataforcenter";
+	private long mLastClickTime = 0;
+	String theMarker = "";
 
 	GoogleMap mMap;
-
-	// ///////////////////
-	String theMarker = "";
-	// //////////////////
 
 	// providers JSONArray
 	JSONArray providers = null;
@@ -86,78 +83,83 @@ public class SearchResultsActivity extends ListActivity {
 		// Set the text view as the activity layout
 		setContentView(R.layout.activity_search_results);
 
-		Intent intent = getIntent();
-		Bundle getProviders = intent.getExtras();
-		containingMaps = (ArrayList<HashMap<String, String>>) getProviders
-				.getSerializable(TAG_LIST_OF_PROVIDERS);
-		// ////////////////////////////////////////////////////////////////////
+		// Hashmap for ListView
+	
+/////////////////////////////////////////////////////////////////////			
+			Intent intent = getIntent();
+			Bundle getProviders = intent.getExtras();
+	        containingMaps = (ArrayList<HashMap<String, String>>) getProviders.getSerializable(TAG_LIST_OF_PROVIDERS);
+	    	String param_longitude = getProviders.getString("EXTRA_LONGITUDE");
+	    	String param_latitude = getProviders.getString("EXTRA_LATITUDE");
+	    	
+	    	System.out.println(param_longitude + "  this is longitude " + param_latitude + " this is latitude");
+/////////////////////////////////////////////////////////////////////////
+	    	
+			if (containingMaps.size() == 0) {
+				System.out.println("No Return on Search");
 
-		if (containingMaps.size() == 0) {
-			System.out.println("No Return on Search");
-			Intent sorryIntent = new Intent(this, SorryMessageActivity.class);
-			this.finish();
-			startActivity(sorryIntent);
-		} else {
-			for (int i = 0; i < containingMaps.size(); i++) {
+				Intent sorryIntent = new Intent(this,
+						SorryMessageActivity.class);
+				this.finish();
+				startActivity(sorryIntent);
+			} else {
+				for (int i = 0; i < containingMaps.size(); i++) {
+				//	JSONObject p = providers.getJSONObject(i);
+					HashMap<String, String> map = new HashMap<String, String>();
+					map = containingMaps.get(i);
+					// store the json items in variables
+					
+					String longitude = map.get(TAG_LONGITUDE);
+					String latitude =  map.get(TAG_LATITUDE);
+					String providerName = map.get(TAG_PROVIDERNAME);
+			        
+					
+					
+					System.out
+							.println("Adding Tags to Map, adding map to providerList");
 
-				HashMap<String, String> map = new HashMap<String, String>();
-				map = containingMaps.get(i);
+					double dbl_latitude = Double.parseDouble(latitude);
+					double dbl_longitude = Double.parseDouble(longitude);
 
-				String longitude = map.get(TAG_LONGITUDE);
-				String latitude = map.get(TAG_LATITUDE);
-				String providerName = map.get(TAG_PROVIDERNAME);
+					double your_latitude = Double.parseDouble(param_latitude);
+				    double your_longitude = Double.parseDouble(param_longitude);
+				    
+				    System.out.println(your_latitude + " " + your_longitude);
 
-				System.out.println(map.get(TAG_ID) + " 1  "
-						+ map.get(TAG_PROVIDERNAME) + " 2 "
-						+ map.get(TAG_LICENSEINFO) + " 3 "
-						+ map.get(TAG_OWNERNAME) + "  4 "
-						+ map.get(TAG_ADDRESS) + " 5 " + map.get(TAG_CITY)
-						+ "  6 " + map.get(TAG_STATE) + " 7 "
-						+ map.get(TAG_ZIPCODE) + "  8 "
-						+ map.get(TAG_PHONENUMBER) + "  9 "
-						+ map.get(TAG_PHONENUMBER) + " 10  "
-						+ map.get(TAG_LONGITUDE) + " 11 "
-						+ map.get(TAG_LATITUDE) + "  12 "
-						+ map.get(TAG_CAPACITY) + " 13 "
-						+ map.get(TAG_CAPACITY) + "  14 " + map.get(TAG_HOURS)
-						+ " 15  " + map.get(TAG_SPECIALIST) + " 16 "
-						+ map.get(TAG_SPECIALISTPHONE) + " 17 "
-						+ map.get(TAG_QUALITY) + " 18 ");
+					LatLng YOUR_LOCATION = new LatLng(your_latitude,
+							your_longitude);
 
-				// ///////////////////////////////////////////////////////////////////
-				// add Hashlist to ArrayList
-				System.out
-						.println("Adding Tags to Map, adding map to providerList");
+							mMap = ((MapFragment) getFragmentManager()
+							.findFragmentById(R.id.map)).getMap();
+						
+							mMap.setMyLocationEnabled(true);
 
-				double dbl_latitude = Double.parseDouble(latitude);
-				double dbl_longitude = Double.parseDouble(longitude);
+							mMap.addMarker(new MarkerOptions().position(
+							new LatLng(dbl_latitude, dbl_longitude)).title(
+							providerName));
 
-				mMap = ((MapFragment) getFragmentManager().findFragmentById(
-						R.id.map)).getMap();
+							mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(
+							YOUR_LOCATION, 12));
+							
+							  mMap.setOnMarkerClickListener(new OnMarkerClickListener()
+		                       {
 
-				mMap.addMarker(new MarkerOptions().position(
-						new LatLng(dbl_latitude, dbl_longitude)).title(
-						providerName));
-				// ///////////////////////////////////////////////////
-				mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
+		                           @Override
+		                           public boolean onMarkerClick(Marker aMarker) 
+		                           {
+		                             theMarker = (aMarker.getTitle());
+		                             aMarker.showInfoWindow();
+		                             goToCenter(theMarker);
+		                               return true;
+		                           }
+		                           
+		                           
+		                       });
 
-					@Override
-					public boolean onMarkerClick(Marker aMarker) {
-						theMarker = (aMarker.getTitle());
-						aMarker.showInfoWindow();
-						goToCenter(theMarker);
-						return true;
-					}
-
-				});
-				// //////////////////////////////////
-
+				}
 			}
-			mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-			mMap.moveCamera(CameraUpdateFactory
-					.newLatLngZoom(SOUTH_CAROLINA, 7));
-		}
 
+		// FIGURE OUT HOW TO GET STRINGS TO THE SINGLE VIEW
 		ListAdapter adapter = new SimpleAdapter(this, containingMaps,
 				R.layout.list_item, new String[] { TAG_ID, TAG_PROVIDERNAME,
 						TAG_LICENSEINFO, TAG_OWNERNAME, TAG_ADDRESS, TAG_CITY,
@@ -170,13 +172,6 @@ public class SearchResultsActivity extends ListActivity {
 						R.id.capacity, R.id.hours, R.id.specialist,
 						R.id.specialistPhone, R.id.qualityLevel });
 
-		// Updating parsed JSON data into ListView
-		// ListAdapter adapter = new SimpleAdapter(this, providerList,
-		// R.layout.list_item, new String[] { TAG_PROVIDERNAME,
-		// TAG_ADDRESS, TAG_CITY, TAG_STATE, TAG_ZIPCODE },
-		// new int[] { R.id.name, R.id.address, R.id.city, R.id.state,
-		// R.id.zipCode });
-
 		setListAdapter(adapter);
 
 		final ListView lv = getListView();
@@ -185,12 +180,13 @@ public class SearchResultsActivity extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
-				if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
-					return;
-				}
-				mLastClickTime = SystemClock.elapsedRealtime();
-
+				
+				
+				 if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+			            return;
+			        }
+			        mLastClickTime = SystemClock.elapsedRealtime();	
+				
 				// getting values from selected ListItem
 				String providerID = ((TextView) view.findViewById(R.id.id))
 						.getText().toString();
@@ -202,6 +198,10 @@ public class SearchResultsActivity extends ListActivity {
 						.findViewById(R.id.ownerName)).getText().toString();
 				String address = ((TextView) view.findViewById(R.id.address))
 						.getText().toString();
+				String latitude = ((TextView) view.findViewById(R.id.latitude))
+						.getText().toString();
+				String longitude = ((TextView) view
+						.findViewById(R.id.longitude)).getText().toString();
 				String city = ((TextView) view.findViewById(R.id.city))
 						.getText().toString();
 				String state = ((TextView) view.findViewById(R.id.state))
@@ -210,15 +210,10 @@ public class SearchResultsActivity extends ListActivity {
 						.getText().toString();
 				String phoneNumber = ((TextView) view.findViewById(R.id.phone))
 						.getText().toString();
-				String latitude = ((TextView) view.findViewById(R.id.latitude))
-						.getText().toString();
-				String longitude = ((TextView) view
-						.findViewById(R.id.longitude)).getText().toString();
 				String capacity = ((TextView) view.findViewById(R.id.capacity))
 						.getText().toString();
 				String hours = ((TextView) view.findViewById(R.id.hours))
 						.getText().toString();
-
 				String specialist = ((TextView) view
 						.findViewById(R.id.specialist)).getText().toString();
 				String specialistPhone = ((TextView) view
@@ -228,11 +223,8 @@ public class SearchResultsActivity extends ListActivity {
 						.findViewById(R.id.qualityLevel)).getText().toString();
 
 				// Starting new intent
-				// Intent in = new Intent(getApplicationContext(),
-				// SingleMenuItemActivity.class);
-
-				HashMap<String, String> map = new HashMap<String, String>();
-
+                HashMap<String, String> map = new HashMap<String, String>();
+				
 				map.put(TAG_ID, providerID);
 				map.put(TAG_PROVIDERNAME, providerName);
 				map.put(TAG_LICENSEINFO, licenseInfo);
@@ -249,15 +241,56 @@ public class SearchResultsActivity extends ListActivity {
 				map.put(TAG_SPECIALIST, specialist);
 				map.put(TAG_SPECIALISTPHONE, specialistPhone);
 				map.put(TAG_QUALITY, qualityLevel);
-  
+			
 				Intent anIntent = new Intent(lv.getContext(), Single_AsyncTask.class);
 				anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
-				anIntent.putExtra("THE_PROVIDER", providerID);
-			    startActivity(anIntent);
+                anIntent.putExtra("THE_PROVIDER", providerID);
+                startActivity(anIntent);
 			}
 		});
 
 	}
+	
+	private void goToCenter(final String aString){
+
+	    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+	    alertDialogBuilder.setMessage("Would you like more information about " + aString + " ?")
+	    .setCancelable(false)
+	    .setPositiveButton("Go to child care provider page",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id)
+	        {
+	   //////////////////////////////////////////////////////////////////
+	        	int i = 0;
+	        	while(i < containingMaps.size()) {
+	    			
+					HashMap<String, String> map = new HashMap<String, String>();
+					map = containingMaps.get(i);
+					String providerID = map.get(TAG_ID);
+					String providerName = map.get(TAG_PROVIDERNAME);
+					if(providerName.equals(aString))
+					{
+						Intent anIntent = new Intent(getApplicationContext(), Single_AsyncTask.class);
+						anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
+		                anIntent.putExtra("THE_PROVIDER", providerID);
+		                startActivity(anIntent);
+					break;	
+					}
+	        	i++;
+	        	}
+	   ///////////////////////////////////////////////////////////////////     	
+	        }
+	    });
+	    alertDialogBuilder.setNegativeButton("Cancel",
+	            new DialogInterface.OnClickListener(){
+	        public void onClick(DialogInterface dialog, int id){
+	            dialog.cancel();
+	        }
+	    });
+	    AlertDialog alert = alertDialogBuilder.create();
+	    alert.show();
+	}
+	
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -267,56 +300,6 @@ public class SearchResultsActivity extends ListActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-
 	}
-
-	private void goToCenter(final String aString) {
-
-		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-		alertDialogBuilder
-				.setMessage(
-						"Would you like more information about " + aString
-								+ " ?")
-				.setCancelable(false)
-				.setPositiveButton("Go to child care provider page",
-						new DialogInterface.OnClickListener() {
-							public void onClick(DialogInterface dialog, int id) {
-								// ////////////////////////////////////////////////////////////////
-								int i = 0;
-								while (i < containingMaps.size()) {
-
-									HashMap<String, String> map = new HashMap<String, String>();
-									map = containingMaps.get(i);
-									String providerName = map
-											.get(TAG_PROVIDERNAME);
-									String providerID = map.get(TAG_ID);
-									if (providerName.equals(aString)) {
-										Intent anIntent = new Intent(getApplicationContext(), Single_AsyncTask.class);
-										anIntent.putExtra(TAG_CENTER_DATA, (Serializable)map);
-						                anIntent.putExtra("THE_PROVIDER", providerID);
-						                startActivity(anIntent);
-										break;
-									}
-									i++;
-								}
-
-								// /////////////////////////////////////////////////////////////////
-							}
-						});
-		alertDialogBuilder.setNegativeButton("Cancel",
-				new DialogInterface.OnClickListener() {
-					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
-					}
-				});
-		AlertDialog alert = alertDialogBuilder.create();
-		alert.show();
-	}
-
-	public void onSaveInstanceState(Bundle savedInstanceState) {
-		savedInstanceState.putString(MainActivity.EXTRA_MESSAGE, message);
-		// Always call the superclass so it can save the view hierarchy state
-		super.onSaveInstanceState(savedInstanceState);
-	}
-
+	
 }

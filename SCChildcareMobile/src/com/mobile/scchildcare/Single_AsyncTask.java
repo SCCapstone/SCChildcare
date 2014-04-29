@@ -1,4 +1,4 @@
-package com.example.scchildcare;
+package com.mobile.scchildcare;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -14,6 +14,8 @@ import org.apache.http.params.HttpConnectionParams;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import com.example.scchildcare.R;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

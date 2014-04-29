@@ -1,4 +1,4 @@
-package com.example.scchildcare;
+package com.mobile.scchildcare;
 
 import java.io.IOException;
 import java.io.Serializable;
@@ -12,7 +12,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.example.scchildcare.GPS_Search_AsyncTask.GetGPSResults;
+import com.example.scchildcare.R;
+import com.mobile.scchildcare.GPS_Search_AsyncTask.GetGPSResults;
 
 import android.content.Context;
 import android.content.Intent;

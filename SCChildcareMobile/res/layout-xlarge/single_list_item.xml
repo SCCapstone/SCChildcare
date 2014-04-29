@@ -2,6 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
     android:scrollbarAlwaysDrawVerticalTrack="true" >
 
     <LinearLayout
@@ -81,7 +83,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -102,7 +103,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -136,7 +136,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -157,7 +156,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -178,7 +176,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -199,7 +196,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <fragment
@@ -252,7 +248,6 @@
                     android:paddingLeft="60dp"
                     android:text="@string/resolve"
                     android:textColor="#FFFFFF" />
-
             </TableRow>
 
             <TableRow
@@ -281,8 +276,8 @@
             <TableLayout
                 android:id="@+id/commentTable"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                android:shrinkColumns="0">
+                android:layout_height="wrap_content"
+                android:shrinkColumns="0" >
             </TableLayout>
 
             <LinearLayout
@@ -301,10 +296,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                     android:maxLength="20"
                     android:imeOptions="actionNext"
-                    android:singleLine="true"
-                    android:selectAllOnFocus="false" >
+                    android:maxLength="20"
+                    android:selectAllOnFocus="false"
+                    android:singleLine="true" >
 
                     <requestFocus />
                 </EditText>
@@ -326,11 +321,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:maxLength="255"
+                    android:gravity="top"
                     android:imeOptions="actionDone"
                     android:inputType="text"
-                    android:gravity="top"/>
-
+                    android:maxLength="255" />
             </LinearLayout>
 
             <Button

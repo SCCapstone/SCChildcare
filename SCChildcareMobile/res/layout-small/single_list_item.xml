@@ -2,6 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
     android:scrollbarAlwaysDrawVerticalTrack="true" >
 
     <LinearLayout
@@ -294,11 +296,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-
-                    android:maxLength="20"
                     android:imeOptions="actionNext"
-                    android:singleLine="true"
-                    android:selectAllOnFocus="false" >
+                    android:maxLength="20"
+                    android:selectAllOnFocus="false"
+                    android:singleLine="true" >
 
                     <requestFocus />
                 </EditText>
@@ -320,10 +321,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:maxLength="255"
+                    android:gravity="top"
+                    android:imeOptions="actionDone"
                     android:inputType="text"
- 		    android:imeOptions="actionDone"
-		    android:gravity="top"/>
+                    android:maxLength="255" />
             </LinearLayout>
 
             <Button

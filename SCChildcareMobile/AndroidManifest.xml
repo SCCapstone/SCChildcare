@@ -35,7 +35,7 @@
 
         <!-- Main Page View -->
         <activity
-            android:name="com.example.scchildcare.MainActivity"
+            android:name="com.mobile.scchildcare.MainActivity"
             android:theme="@style/NoActionBar" 
 
             android:screenOrientation="portrait" >
@@ -51,8 +51,8 @@
 
         <!-- Search Results Page View -->
         <activity
-            android:name="com.example.scchildcare.SearchResultsActivity"
-            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:name="com.mobile.scchildcare.SearchResultsActivity"
+            android:parentActivityName="com.mobile.scchildcare.MainActivity"
 
             android:theme="@style/NoActionBar" 
 
@@ -64,8 +64,8 @@
 
         <!-- GPS Search Results Page View -->
         <activity
-            android:name="com.example.scchildcare.GPS_SearchResultsActivity"
-            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:name="com.mobile.scchildcare.GPS_SearchResultsActivity"
+            android:parentActivityName="com.mobile.scchildcare.MainActivity"
             android:theme="@style/NoActionBar"
 
             android:screenOrientation="portrait" >
@@ -77,8 +77,8 @@
         
           <!-- GPS Search AsyncTask -->
         <activity
-            android:name="com.example.scchildcare.GPS_Search_AsyncTask"
-            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:name="com.mobile.scchildcare.GPS_Search_AsyncTask"
+            android:parentActivityName="com.mobile.scchildcare.MainActivity"
             android:theme="@style/NoActionBar"
 
             android:screenOrientation="portrait" >
@@ -90,8 +90,8 @@
         
           <!-- Text Search AsyncTask -->
         <activity
-            android:name="com.example.scchildcare.Search_AsyncTask"
-            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:name="com.mobile.scchildcare.Search_AsyncTask"
+            android:parentActivityName="com.mobile.scchildcare.MainActivity"
             android:theme="@style/NoActionBar"
 
             android:screenOrientation="portrait" >
@@ -103,8 +103,8 @@
         
             <!-- Single Provider AsyncTask -->
         <activity
-            android:name="com.example.scchildcare.Single_AsyncTask"
-            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:name="com.mobile.scchildcare.Single_AsyncTask"
+            android:parentActivityName="com.mobile.scchildcare.MainActivity"
             android:theme="@style/NoActionBar"
 
             android:screenOrientation="portrait" >
@@ -122,9 +122,9 @@
 
         -->
         <activity
-            android:name="com.example.scchildcare.SingleMenuItemActivity"
+            android:name="com.mobile.scchildcare.SingleMenuItemActivity"
             android:label="Single Menu Item"
-            android:parentActivityName="com.example.scchildcare.SearchResultsActivity"
+            android:parentActivityName="com.mobile.scchildcare.SearchResultsActivity"
             android:theme="@style/NoActionBar"
 
             android:screenOrientation="portrait" >
@@ -136,9 +136,9 @@
 
         <!-- Sorry Page View -->
         <activity
-            android:name="com.example.scchildcare.SorryMessageActivity"
+            android:name="com.mobile.scchildcare.SorryMessageActivity"
             android:label="Oops!"
-            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:parentActivityName="com.mobile.scchildcare.MainActivity"
             android:theme="@style/NoActionBar" 
 
             android:screenOrientation="portrait" >
@@ -150,9 +150,9 @@
 
         <!-- HTTP Error Page View -->
         <activity
-            android:name="com.example.scchildcare.ConnectionErrorActivity"
+            android:name="com.mobile.scchildcare.ConnectionErrorActivity"
             android:label="Oops!"
-            android:parentActivityName="com.example.scchildcare.MainActivity"
+            android:parentActivityName="com.mobile.scchildcare.MainActivity"
             android:theme="@style/NoActionBar" 
 
             android:screenOrientation="portrait" >

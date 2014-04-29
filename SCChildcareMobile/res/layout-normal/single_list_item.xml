@@ -2,6 +2,8 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingLeft="3dp"
+    android:paddingRight="3dp"
     android:scrollbarAlwaysDrawVerticalTrack="true" >
 
     <LinearLayout
@@ -215,7 +217,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dip"
             android:paddingTop="25dip"
-            android:text="Complaints: "
+            android:text="Complaints and Review: "
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -223,7 +225,8 @@
         <TableLayout
             android:id="@+id/complaintTable"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content" 
+            android:shrinkColumns="0">
 
             <TableRow
                 android:id="@+id/complaint_title_row"

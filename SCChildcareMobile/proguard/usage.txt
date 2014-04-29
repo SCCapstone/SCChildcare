@@ -1121,7 +1121,7 @@ com.facebook.Settings:
     118:121:public static final void removeLoggingBehavior(com.facebook.LoggingBehavior)
     130:133:public static final void clearLoggingBehaviors()
     180:184:public static void setExecutor(java.util.concurrent.Executor)
-    205:209:public static void setFacebookDomain(java.lang.String)
+    208:209:public static void setFacebookDomain(java.lang.String)
     247:248:public static void publishInstallAsync(android.content.Context,java.lang.String)
     263:280:public static void publishInstallAsync(android.content.Context,java.lang.String,com.facebook.Request$Callback)
     318:319:public static boolean publishInstallAndWait(android.content.Context,java.lang.String)

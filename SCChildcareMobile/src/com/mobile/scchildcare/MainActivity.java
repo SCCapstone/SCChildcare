@@ -10,7 +10,7 @@
  * 
  */
 
-package com.example.scchildcare;
+package com.mobile.scchildcare;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -36,6 +36,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.scchildcare.R;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -134,7 +135,8 @@ public class MainActivity extends FragmentActivity implements
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		this.getWindow().setSoftInputMode(
+				WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		System.out.println("Open instance");
 		super.onCreate(savedInstanceState);
 		System.out.println("set layout");
@@ -224,7 +226,7 @@ public class MainActivity extends FragmentActivity implements
 					// Intent intent = new Intent(this,
 					// SearchResultsActivity.class);
 					editText = (EditText) findViewById(R.id.edit_message);
-					
+
 					String message2 = editText.getText().toString();
 					String message = editText.getText().toString()
 							.replace(" ", "%20");

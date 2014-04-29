@@ -1,22 +1,22 @@
-package com.example.scchildcare;
+package com.mobile.scchildcare;
 
 import com.example.scchildcare.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+//import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-//import android.content.Intent;
 
-public class ConnectionErrorActivity extends Activity {
+public class SorryMessageActivity extends Activity {
 	
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.connection_error, menu);
+		getMenuInflater().inflate(R.menu.sorry_message, menu);
 		return true;
 	}
 
@@ -24,19 +24,21 @@ public class ConnectionErrorActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sorry);
 
         // Get the message from the intent
         //Intent intent = getIntent();
-        String sorry = getString(R.string.connectionError);
+        String sorry = getString(R.string.sorry);
 
         // Create the text view
-        TextView textView = new TextView(this);
+        TextView textView = (TextView) findViewById(R.id.sorry_label);
+        //textView.setTextSize(25);
         textView.setTextSize(40);
         textView.setText(sorry);
         
 
         // Set the text view as the activity layout
-        setContentView(textView);
+       
     }
 
     @Override
