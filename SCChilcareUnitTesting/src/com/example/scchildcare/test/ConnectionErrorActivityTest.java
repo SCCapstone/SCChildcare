@@ -17,5 +17,6 @@ public class ConnectionErrorActivityTest extends ActivityUnitTestCase<Connection
 		Intent intent = new Intent(getInstrumentation().getTargetContext(), ConnectionErrorActivity.class);
 		startActivity(intent, null, null);
 		mCEA = getActivity();
+		assertNotNull("ConnectionErrorActivity is null", mCEA);
 	}
 }
