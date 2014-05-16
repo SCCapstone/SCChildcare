@@ -210,7 +210,7 @@ android.support.v4.app.FragmentActivity -> android.support.v4.app.h:
     void onPause() -> onPause
     void onResume() -> onResume
     void onPostResume() -> onPostResume
-    void onResumeFragments() -> a
+    void onResumeFragments() -> a_
     boolean onPreparePanel(int,android.view.View,android.view.Menu) -> onPreparePanel
     java.lang.Object onRetainNonConfigurationInstance() -> onRetainNonConfigurationInstance
     void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
@@ -850,287 +850,6 @@ android.support.v4.widget.EdgeEffectCompatIcs -> android.support.v4.d.e:
     boolean onPull(java.lang.Object,float) -> a
     boolean onRelease(java.lang.Object) -> c
     boolean draw(java.lang.Object,android.graphics.Canvas) -> a
-com.example.scchildcare.ConnectionErrorActivity -> com.example.scchildcare.ConnectionErrorActivity:
-    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    void onCreate(android.os.Bundle) -> onCreate
-    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-com.example.scchildcare.GPS_SearchResultsActivity -> com.example.scchildcare.GPS_SearchResultsActivity:
-    java.util.ArrayList containingMaps -> a
-    long mLastClickTime -> e
-    java.lang.String theMarker -> b
-    com.google.android.gms.maps.GoogleMap mMap -> c
-    org.json.JSONArray providers -> d
-    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    void onCreate(android.os.Bundle) -> onCreate
-    void goToCenter(java.lang.String) -> a
-    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    void access$0(com.example.scchildcare.GPS_SearchResultsActivity,java.lang.String) -> a
-    long access$1(com.example.scchildcare.GPS_SearchResultsActivity) -> a
-    void access$2(com.example.scchildcare.GPS_SearchResultsActivity,long) -> a
-com.example.scchildcare.GPS_SearchResultsActivity$1 -> com.example.scchildcare.a:
-    com.example.scchildcare.GPS_SearchResultsActivity this$0 -> a
-    boolean onMarkerClick(com.google.android.gms.maps.model.Marker) -> a
-com.example.scchildcare.GPS_SearchResultsActivity$2 -> com.example.scchildcare.b:
-    com.example.scchildcare.GPS_SearchResultsActivity this$0 -> a
-    android.widget.ListView val$lv -> b
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.example.scchildcare.GPS_SearchResultsActivity$3 -> com.example.scchildcare.c:
-    com.example.scchildcare.GPS_SearchResultsActivity this$0 -> a
-    java.lang.String val$aString -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.GPS_SearchResultsActivity$4 -> com.example.scchildcare.d:
-    com.example.scchildcare.GPS_SearchResultsActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.GPS_Search_AsyncTask -> com.example.scchildcare.GPS_Search_AsyncTask:
-    android.widget.ProgressBar progressBar -> m
-    java.lang.String param_latitude -> n
-    java.lang.String param_longitude -> o
-    void onCreate(android.os.Bundle) -> onCreate
-com.example.scchildcare.GPS_Search_AsyncTask$GetGPSResults -> com.example.scchildcare.e:
-    java.lang.String gpsURL_1 -> a
-    java.lang.String gpsURL_2 -> b
-    java.lang.String TAG_PROVIDERS -> c
-    java.lang.String TAG_ID -> d
-    java.lang.String TAG_PROVIDERNAME -> e
-    java.lang.String TAG_LICENSEINFO -> f
-    java.lang.String TAG_OWNERNAME -> g
-    java.lang.String TAG_ADDRESS -> h
-    java.lang.String TAG_CITY -> i
-    java.lang.String TAG_STATE -> j
-    java.lang.String TAG_ZIPCODE -> k
-    java.lang.String TAG_PHONENUMBER -> l
-    java.lang.String TAG_LONGITUDE -> m
-    java.lang.String TAG_LATITUDE -> n
-    java.lang.String TAG_CAPACITY -> o
-    java.lang.String TAG_HOURS -> p
-    java.lang.String TAG_SPECIALIST -> q
-    java.lang.String TAG_SPECIALISTPHONE -> r
-    java.lang.String TAG_QUALITY -> s
-    java.lang.String TAG_LIST_OF_PROVIDERS -> t
-    com.example.scchildcare.JSONParser jParser -> u
-    java.lang.String latit -> v
-    java.lang.String longit -> w
-    org.json.JSONArray providers -> x
-    java.lang.String fullGPS_URL -> y
-    boolean isConnected -> z
-    java.util.ArrayList storeData -> A
-    android.widget.ProgressBar pBar -> B
-    com.example.scchildcare.GPS_Search_AsyncTask GPS_AsyncTask -> C
-    android.content.Context aContext -> D
-    com.example.scchildcare.GPS_Search_AsyncTask this$0 -> E
-    void onPostExecute(java.util.ArrayList) -> a
-    java.util.ArrayList doInBackground(java.lang.String[]) -> a
-    boolean isURLReachable(android.content.Context) -> a
-    void onPostExecute(java.lang.Object) -> onPostExecute
-    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.example.scchildcare.JSONParser -> com.example.scchildcare.f:
-    java.io.InputStream is -> a
-    org.json.JSONObject jObj -> b
-    java.lang.String json -> c
-    org.json.JSONObject getJSONFromUrl(java.lang.String) -> a
-com.example.scchildcare.MainActivity -> com.example.scchildcare.MainActivity:
-    java.lang.String EXTRA_LONGITUDE -> m
-    java.lang.String EXTRA_LATITUDE -> n
-    long mLastClickTime -> u
-    android.widget.EditText editText -> o
-    android.widget.ImageButton button1 -> p
-    android.widget.ImageButton button2 -> q
-    com.google.android.gms.location.LocationClient mLocationClient -> v
-    android.location.Location mCurrentLocation -> r
-    android.location.LocationManager locationManager -> s
-    boolean done -> t
-    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
-    void onConnected(android.os.Bundle) -> a
-    boolean servicesConnected() -> g
-    void onCreate(android.os.Bundle) -> onCreate
-    void showConnectionAlertToUser() -> h
-    void MessageToUser() -> i
-    void onDisconnected() -> f
-    void onDestroy() -> onDestroy
-    void onPause() -> onPause
-    void onResume() -> onResume
-    void onStart() -> onStart
-    void onStop() -> onStop
-    void showErrorDialog(int) -> b
-    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    boolean isNetworkAvailable() -> j
-    void showGPSDisabledAlertToUser() -> k
-    void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
-    long access$0(com.example.scchildcare.MainActivity) -> a
-    void access$1(com.example.scchildcare.MainActivity,long) -> a
-    boolean access$2(com.example.scchildcare.MainActivity) -> b
-    boolean access$3(com.example.scchildcare.MainActivity) -> c
-    com.google.android.gms.location.LocationClient access$4(com.example.scchildcare.MainActivity) -> d
-    void access$5(com.example.scchildcare.MainActivity) -> e
-    void access$6(com.example.scchildcare.MainActivity) -> f
-    void access$7(com.example.scchildcare.MainActivity) -> g
-com.example.scchildcare.MainActivity$1 -> com.example.scchildcare.g:
-    com.example.scchildcare.MainActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.example.scchildcare.MainActivity$2 -> com.example.scchildcare.h:
-    com.example.scchildcare.MainActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.example.scchildcare.MainActivity$3 -> com.example.scchildcare.i:
-    com.example.scchildcare.MainActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.MainActivity$4 -> com.example.scchildcare.j:
-    com.example.scchildcare.MainActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.MainActivity$5 -> com.example.scchildcare.k:
-    com.example.scchildcare.MainActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.MainActivity$6 -> com.example.scchildcare.l:
-    com.example.scchildcare.MainActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.MainActivity$7 -> com.example.scchildcare.m:
-    com.example.scchildcare.MainActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.MainActivity$ErrorDialogFragment -> com.example.scchildcare.n:
-    android.app.Dialog mDialog -> W
-    void setDialog(android.app.Dialog) -> a
-    android.app.Dialog onCreateDialog(android.os.Bundle) -> c
-com.example.scchildcare.SearchResultsActivity -> com.example.scchildcare.SearchResultsActivity:
-    java.lang.String message -> a
-    long mLastClickTime -> f
-    java.util.ArrayList containingMaps -> b
-    com.google.android.gms.maps.model.LatLng SOUTH_CAROLINA -> g
-    com.google.android.gms.maps.GoogleMap mMap -> c
-    java.lang.String theMarker -> d
-    org.json.JSONArray providers -> e
-    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    void onCreate(android.os.Bundle) -> onCreate
-    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
-    void goToCenter(java.lang.String) -> a
-    void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    void access$0(com.example.scchildcare.SearchResultsActivity,java.lang.String) -> a
-    long access$1(com.example.scchildcare.SearchResultsActivity) -> a
-    void access$2(com.example.scchildcare.SearchResultsActivity,long) -> a
-com.example.scchildcare.SearchResultsActivity$1 -> com.example.scchildcare.o:
-    com.example.scchildcare.SearchResultsActivity this$0 -> a
-    boolean onMarkerClick(com.google.android.gms.maps.model.Marker) -> a
-com.example.scchildcare.SearchResultsActivity$2 -> com.example.scchildcare.p:
-    com.example.scchildcare.SearchResultsActivity this$0 -> a
-    android.widget.ListView val$lv -> b
-    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
-com.example.scchildcare.SearchResultsActivity$3 -> com.example.scchildcare.q:
-    com.example.scchildcare.SearchResultsActivity this$0 -> a
-    java.lang.String val$aString -> b
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.SearchResultsActivity$4 -> com.example.scchildcare.r:
-    com.example.scchildcare.SearchResultsActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.Search_AsyncTask -> com.example.scchildcare.Search_AsyncTask:
-    java.lang.String message -> m
-    android.widget.ProgressBar progressBar -> n
-    void onCreate(android.os.Bundle) -> onCreate
-com.example.scchildcare.Search_AsyncTask$GetSearchResults -> com.example.scchildcare.s:
-    java.lang.String searchURL -> a
-    java.lang.String fullSearchURL -> b
-    java.lang.String aMessage -> c
-    java.lang.String TAG_PROVIDERS -> d
-    java.lang.String TAG_ID -> e
-    java.lang.String TAG_PROVIDERNAME -> f
-    java.lang.String TAG_LICENSEINFO -> g
-    java.lang.String TAG_OWNERNAME -> h
-    java.lang.String TAG_ADDRESS -> i
-    java.lang.String TAG_CITY -> j
-    java.lang.String TAG_STATE -> k
-    java.lang.String TAG_ZIPCODE -> l
-    java.lang.String TAG_PHONENUMBER -> m
-    java.lang.String TAG_LONGITUDE -> n
-    java.lang.String TAG_LATITUDE -> o
-    java.lang.String TAG_CAPACITY -> p
-    java.lang.String TAG_HOURS -> q
-    java.lang.String TAG_SPECIALIST -> r
-    java.lang.String TAG_SPECIALISTPHONE -> s
-    java.lang.String TAG_QUALITY -> t
-    java.util.ArrayList storeData -> u
-    com.example.scchildcare.JSONParser jParser -> v
-    org.json.JSONArray providers -> w
-    java.lang.String TAG_LIST_OF_PROVIDERS -> x
-    android.content.Context aContext -> y
-    com.example.scchildcare.Search_AsyncTask search -> z
-    boolean isConnected -> A
-    android.widget.ProgressBar pBar -> B
-    com.example.scchildcare.Search_AsyncTask this$0 -> C
-    void onPreExecute() -> onPreExecute
-    void onPostExecute(java.util.ArrayList) -> a
-    java.util.ArrayList doInBackground(java.lang.String[]) -> a
-    boolean isURLReachable(android.content.Context) -> a
-    void onPostExecute(java.lang.Object) -> onPostExecute
-    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.example.scchildcare.SingleMenuItemActivity -> com.example.scchildcare.SingleMenuItemActivity:
-    java.lang.String pID -> a
-    java.lang.String provider_comment_ID -> b
-    org.apache.http.HttpResponse response -> c
-    java.util.HashMap map -> d
-    java.util.HashMap commentMap -> e
-    java.util.ArrayList commentList -> f
-    com.example.scchildcare.JSONParser jParser -> g
-    org.json.JSONArray comments -> h
-    com.google.android.gms.maps.GoogleMap mMap -> i
-    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    void onCreate(android.os.Bundle) -> onCreate
-    void AliasAlert() -> a
-    void CommentAlert() -> b
-    void access$0(com.example.scchildcare.SingleMenuItemActivity) -> a
-    void access$1(com.example.scchildcare.SingleMenuItemActivity) -> b
-com.example.scchildcare.SingleMenuItemActivity$1 -> com.example.scchildcare.t:
-    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
-    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-com.example.scchildcare.SingleMenuItemActivity$2 -> com.example.scchildcare.u:
-    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
-    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
-com.example.scchildcare.SingleMenuItemActivity$3 -> com.example.scchildcare.v:
-    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
-    void onClick(android.view.View) -> onClick
-com.example.scchildcare.SingleMenuItemActivity$4 -> com.example.scchildcare.w:
-    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.SingleMenuItemActivity$5 -> com.example.scchildcare.x:
-    com.example.scchildcare.SingleMenuItemActivity this$0 -> a
-    void onClick(android.content.DialogInterface,int) -> onClick
-com.example.scchildcare.SingleMenuItemActivity$commentSystem -> com.example.scchildcare.y:
-    android.app.Activity theActivity -> a
-    org.json.JSONObject commentJSON -> b
-    org.json.JSONObject JSON -> c
-    org.apache.http.client.HttpClient postClient -> d
-    java.lang.String proID -> e
-    java.lang.String postURL -> f
-    java.util.HashMap theMap -> g
-    com.example.scchildcare.SingleMenuItemActivity this$0 -> h
-    void onPostExecute(java.lang.String) -> a
-    java.lang.String doInBackground(java.lang.String[]) -> a
-    void onPostExecute(java.lang.Object) -> onPostExecute
-    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.example.scchildcare.Single_AsyncTask -> com.example.scchildcare.Single_AsyncTask:
-    android.widget.ProgressBar progressBar -> m
-    java.lang.String providerName -> n
-    void onCreate(android.os.Bundle) -> onCreate
-com.example.scchildcare.Single_AsyncTask$SingleItemResults -> com.example.scchildcare.z:
-    java.lang.String complaintSearchURL -> a
-    java.lang.String complaintFullSearchURL -> b
-    com.example.scchildcare.JSONParser jComplaintParser -> c
-    org.json.JSONArray complaints -> d
-    java.util.ArrayList complaintList -> e
-    java.util.ArrayList commentList -> f
-    boolean isConnected -> g
-    com.example.scchildcare.Single_AsyncTask single -> h
-    android.widget.ProgressBar pBar -> i
-    com.example.scchildcare.JSONParser jParser -> j
-    org.json.JSONArray comments -> k
-    android.content.Context aContext -> l
-    java.util.HashMap theMap -> m
-    com.example.scchildcare.Single_AsyncTask this$0 -> n
-    void onPostExecute(java.util.ArrayList) -> a
-    java.util.ArrayList doInBackground(java.lang.String[]) -> a
-    boolean isURLReachable(android.content.Context) -> a
-    void onPostExecute(java.lang.Object) -> onPostExecute
-    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
-com.example.scchildcare.SorryMessageActivity -> com.example.scchildcare.SorryMessageActivity:
-    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
-    void onCreate(android.os.Bundle) -> onCreate
-    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
 com.facebook.AccessToken -> com.facebook.a:
     java.util.Date MIN_DATE -> b
     java.util.Date MAX_DATE -> c
@@ -2748,7 +2467,7 @@ com.google.android.gms.common.ConnectionResult -> com.google.android.gms.common.
 com.google.android.gms.common.GooglePlayServicesClient -> com.google.android.gms.common.b:
 com.google.android.gms.common.GooglePlayServicesClient$ConnectionCallbacks -> com.google.android.gms.common.c:
     void onConnected(android.os.Bundle) -> a
-    void onDisconnected() -> f
+    void onDisconnected() -> a
 com.google.android.gms.common.GooglePlayServicesClient$OnConnectionFailedListener -> com.google.android.gms.common.d:
     void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
 com.google.android.gms.common.GooglePlayServicesNotAvailableException -> com.google.android.gms.common.e:
@@ -6159,3 +5878,310 @@ com.google.android.gms.wallet.k -> com.google.android.gms.wallet.k:
     void a(com.google.android.gms.wallet.ProxyCard,android.os.Parcel,int) -> a
     java.lang.Object[] newArray(int) -> newArray
     java.lang.Object createFromParcel(android.os.Parcel) -> createFromParcel
+mobile.scchildcare.ConnectionErrorActivity -> mobile.scchildcare.ConnectionErrorActivity:
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+mobile.scchildcare.GPS_SearchResultsActivity -> mobile.scchildcare.GPS_SearchResultsActivity:
+    java.util.ArrayList containingMaps -> a
+    long mLastClickTime -> i
+    java.lang.String theMarker -> b
+    double yourlat -> c
+    double yourlong -> d
+    java.lang.String param_long -> e
+    java.lang.String param_lat -> f
+    com.google.android.gms.maps.GoogleMap mMap -> g
+    org.json.JSONArray providers -> h
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    void onCreate(android.os.Bundle) -> onCreate
+    void goToCenter(java.lang.String) -> a
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    void access$0(mobile.scchildcare.GPS_SearchResultsActivity,java.lang.String) -> a
+    long access$1(mobile.scchildcare.GPS_SearchResultsActivity) -> a
+    void access$2(mobile.scchildcare.GPS_SearchResultsActivity,long) -> a
+mobile.scchildcare.GPS_SearchResultsActivity$1 -> mobile.scchildcare.a:
+    mobile.scchildcare.GPS_SearchResultsActivity this$0 -> a
+    boolean onMarkerClick(com.google.android.gms.maps.model.Marker) -> a
+mobile.scchildcare.GPS_SearchResultsActivity$2 -> mobile.scchildcare.b:
+    mobile.scchildcare.GPS_SearchResultsActivity this$0 -> a
+    android.widget.ListView val$lv -> b
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+mobile.scchildcare.GPS_SearchResultsActivity$3 -> mobile.scchildcare.c:
+    mobile.scchildcare.GPS_SearchResultsActivity this$0 -> a
+    java.lang.String val$aString -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.GPS_SearchResultsActivity$4 -> mobile.scchildcare.d:
+    mobile.scchildcare.GPS_SearchResultsActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.GPS_Search_AsyncTask -> mobile.scchildcare.GPS_Search_AsyncTask:
+    android.widget.ProgressBar progressBar -> m
+    java.lang.String param_latitude -> n
+    java.lang.String param_longitude -> o
+    void onCreate(android.os.Bundle) -> onCreate
+mobile.scchildcare.GPS_Search_AsyncTask$GetGPSResults -> mobile.scchildcare.e:
+    java.lang.String gpsURL_1 -> a
+    java.lang.String gpsURL_2 -> b
+    java.lang.String TAG_PROVIDERS -> c
+    java.lang.String TAG_ID -> d
+    java.lang.String TAG_PROVIDERNAME -> e
+    java.lang.String TAG_LICENSEINFO -> f
+    java.lang.String TAG_OWNERNAME -> g
+    java.lang.String TAG_ADDRESS -> h
+    java.lang.String TAG_CITY -> i
+    java.lang.String TAG_STATE -> j
+    java.lang.String TAG_ZIPCODE -> k
+    java.lang.String TAG_PHONENUMBER -> l
+    java.lang.String TAG_LONGITUDE -> m
+    java.lang.String TAG_LATITUDE -> n
+    java.lang.String TAG_CAPACITY -> o
+    java.lang.String TAG_HOURS -> p
+    java.lang.String TAG_SPECIALIST -> q
+    java.lang.String TAG_SPECIALISTPHONE -> r
+    java.lang.String TAG_QUALITY -> s
+    java.lang.String TAG_LIST_OF_PROVIDERS -> t
+    mobile.scchildcare.JSONParser jParser -> u
+    java.lang.String latit -> v
+    java.lang.String longit -> w
+    org.json.JSONArray providers -> x
+    java.lang.String fullGPS_URL -> y
+    boolean isConnected -> z
+    java.util.ArrayList storeData -> A
+    android.widget.ProgressBar pBar -> B
+    mobile.scchildcare.GPS_Search_AsyncTask GPS_AsyncTask -> C
+    android.content.Context aContext -> D
+    mobile.scchildcare.GPS_Search_AsyncTask this$0 -> E
+    void onPostExecute(java.util.ArrayList) -> a
+    java.util.ArrayList doInBackground(java.lang.String[]) -> a
+    boolean isURLReachable(android.content.Context) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+mobile.scchildcare.JSONParser -> mobile.scchildcare.f:
+    java.io.InputStream is -> a
+    org.json.JSONObject jObj -> b
+    java.lang.String json -> c
+    org.json.JSONObject getJSONFromUrl(java.lang.String) -> a
+mobile.scchildcare.MainActivity -> mobile.scchildcare.MainActivity:
+    java.lang.String EXTRA_LONGITUDE -> m
+    java.lang.String EXTRA_LATITUDE -> n
+    long mLastClickTime -> u
+    android.widget.EditText editText -> o
+    android.widget.ImageButton button1 -> p
+    android.widget.ImageButton button2 -> q
+    com.google.android.gms.location.LocationClient mLocationClient -> v
+    android.location.Location mCurrentLocation -> r
+    android.location.LocationManager locationManager -> s
+    boolean done -> t
+    void onActivityResult(int,int,android.content.Intent) -> onActivityResult
+    void onConnected(android.os.Bundle) -> a
+    boolean servicesConnected() -> f
+    void onCreate(android.os.Bundle) -> onCreate
+    void showConnectionAlertToUser() -> g
+    void MessageToUser() -> h
+    void onDisconnected() -> a
+    void onDestroy() -> onDestroy
+    void onPause() -> onPause
+    void onResume() -> onResume
+    void onStart() -> onStart
+    void onStop() -> onStop
+    void showErrorDialog(int) -> b
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    boolean isNetworkAvailable() -> i
+    void showGPSDisabledAlertToUser() -> j
+    void onConnectionFailed(com.google.android.gms.common.ConnectionResult) -> a
+    long access$0(mobile.scchildcare.MainActivity) -> a
+    void access$1(mobile.scchildcare.MainActivity,long) -> a
+    boolean access$2(mobile.scchildcare.MainActivity) -> b
+    boolean access$3(mobile.scchildcare.MainActivity) -> c
+    com.google.android.gms.location.LocationClient access$4(mobile.scchildcare.MainActivity) -> d
+    void access$5(mobile.scchildcare.MainActivity) -> e
+    void access$6(mobile.scchildcare.MainActivity) -> f
+    void access$7(mobile.scchildcare.MainActivity) -> g
+mobile.scchildcare.MainActivity$1 -> mobile.scchildcare.g:
+    mobile.scchildcare.MainActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+mobile.scchildcare.MainActivity$2 -> mobile.scchildcare.h:
+    mobile.scchildcare.MainActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+mobile.scchildcare.MainActivity$3 -> mobile.scchildcare.i:
+    mobile.scchildcare.MainActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.MainActivity$4 -> mobile.scchildcare.j:
+    mobile.scchildcare.MainActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.MainActivity$5 -> mobile.scchildcare.k:
+    mobile.scchildcare.MainActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.MainActivity$6 -> mobile.scchildcare.l:
+    mobile.scchildcare.MainActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.MainActivity$7 -> mobile.scchildcare.m:
+    mobile.scchildcare.MainActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.MainActivity$ErrorDialogFragment -> mobile.scchildcare.n:
+    android.app.Dialog mDialog -> W
+    void setDialog(android.app.Dialog) -> a
+    android.app.Dialog onCreateDialog(android.os.Bundle) -> c
+mobile.scchildcare.SearchResultsActivity -> mobile.scchildcare.SearchResultsActivity:
+    java.lang.String message -> a
+    long mLastClickTime -> j
+    double yourlong -> b
+    double yourlat -> c
+    java.util.ArrayList containingMaps -> d
+    com.google.android.gms.maps.model.LatLng SOUTH_CAROLINA -> k
+    com.google.android.gms.maps.GoogleMap mMap -> e
+    java.lang.String param_long -> f
+    java.lang.String param_lat -> g
+    java.lang.String theMarker -> h
+    org.json.JSONArray providers -> i
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
+    void goToCenter(java.lang.String) -> a
+    void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    void access$0(mobile.scchildcare.SearchResultsActivity,java.lang.String) -> a
+    long access$1(mobile.scchildcare.SearchResultsActivity) -> a
+    void access$2(mobile.scchildcare.SearchResultsActivity,long) -> a
+mobile.scchildcare.SearchResultsActivity$1 -> mobile.scchildcare.o:
+    mobile.scchildcare.SearchResultsActivity this$0 -> a
+    boolean onMarkerClick(com.google.android.gms.maps.model.Marker) -> a
+mobile.scchildcare.SearchResultsActivity$2 -> mobile.scchildcare.p:
+    mobile.scchildcare.SearchResultsActivity this$0 -> a
+    android.widget.ListView val$lv -> b
+    void onItemClick(android.widget.AdapterView,android.view.View,int,long) -> onItemClick
+mobile.scchildcare.SearchResultsActivity$3 -> mobile.scchildcare.q:
+    mobile.scchildcare.SearchResultsActivity this$0 -> a
+    java.lang.String val$aString -> b
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.SearchResultsActivity$4 -> mobile.scchildcare.r:
+    mobile.scchildcare.SearchResultsActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.Search_AsyncTask -> mobile.scchildcare.Search_AsyncTask:
+    java.lang.String message -> m
+    android.widget.ProgressBar progressBar -> n
+    void onCreate(android.os.Bundle) -> onCreate
+mobile.scchildcare.Search_AsyncTask$GetSearchResults -> mobile.scchildcare.s:
+    java.lang.String searchURL -> a
+    java.lang.String fullSearchURL -> b
+    java.lang.String aMessage -> c
+    java.lang.String TAG_PROVIDERS -> d
+    java.lang.String TAG_ID -> e
+    java.lang.String TAG_PROVIDERNAME -> f
+    java.lang.String TAG_LICENSEINFO -> g
+    java.lang.String TAG_OWNERNAME -> h
+    java.lang.String TAG_ADDRESS -> i
+    java.lang.String TAG_CITY -> j
+    java.lang.String TAG_STATE -> k
+    java.lang.String TAG_ZIPCODE -> l
+    java.lang.String TAG_PHONENUMBER -> m
+    java.lang.String TAG_LONGITUDE -> n
+    java.lang.String TAG_LATITUDE -> o
+    java.lang.String TAG_CAPACITY -> p
+    java.lang.String TAG_HOURS -> q
+    java.lang.String TAG_SPECIALIST -> r
+    java.lang.String TAG_SPECIALISTPHONE -> s
+    java.lang.String TAG_QUALITY -> t
+    java.util.ArrayList storeData -> u
+    mobile.scchildcare.JSONParser jParser -> v
+    org.json.JSONArray providers -> w
+    java.lang.String TAG_LIST_OF_PROVIDERS -> x
+    android.content.Context aContext -> y
+    mobile.scchildcare.Search_AsyncTask search -> z
+    boolean isConnected -> A
+    android.widget.ProgressBar pBar -> B
+    mobile.scchildcare.Search_AsyncTask this$0 -> C
+    void onPreExecute() -> onPreExecute
+    void onPostExecute(java.util.ArrayList) -> a
+    java.util.ArrayList doInBackground(java.lang.String[]) -> a
+    boolean isURLReachable(android.content.Context) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+mobile.scchildcare.SingleMenuItemActivity -> mobile.scchildcare.SingleMenuItemActivity:
+    java.lang.String pID -> a
+    java.lang.String theMarker -> b
+    java.lang.String provider_comment_ID -> c
+    org.apache.http.HttpResponse response -> d
+    java.util.HashMap map -> e
+    java.lang.String lat1 -> f
+    java.lang.String long1 -> g
+    double lat_1 -> h
+    double long_1 -> i
+    java.util.HashMap commentMap -> j
+    java.util.ArrayList commentList -> k
+    mobile.scchildcare.JSONParser jParser -> l
+    org.json.JSONArray comments -> m
+    com.google.android.gms.maps.GoogleMap mMap -> n
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    void onCreate(android.os.Bundle) -> onCreate
+    void AliasAlert() -> a
+    void CommentAlert() -> b
+    void GPS_check() -> c
+    void access$0(mobile.scchildcare.SingleMenuItemActivity) -> a
+    void access$1(mobile.scchildcare.SingleMenuItemActivity) -> b
+    void access$2(mobile.scchildcare.SingleMenuItemActivity) -> c
+mobile.scchildcare.SingleMenuItemActivity$1 -> mobile.scchildcare.t:
+    mobile.scchildcare.SingleMenuItemActivity this$0 -> a
+    java.lang.String val$destinationAddress -> b
+    boolean onMarkerClick(com.google.android.gms.maps.model.Marker) -> a
+mobile.scchildcare.SingleMenuItemActivity$2 -> mobile.scchildcare.u:
+    mobile.scchildcare.SingleMenuItemActivity this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+mobile.scchildcare.SingleMenuItemActivity$3 -> mobile.scchildcare.v:
+    mobile.scchildcare.SingleMenuItemActivity this$0 -> a
+    boolean onTouch(android.view.View,android.view.MotionEvent) -> onTouch
+mobile.scchildcare.SingleMenuItemActivity$4 -> mobile.scchildcare.w:
+    mobile.scchildcare.SingleMenuItemActivity this$0 -> a
+    void onClick(android.view.View) -> onClick
+mobile.scchildcare.SingleMenuItemActivity$5 -> mobile.scchildcare.x:
+    mobile.scchildcare.SingleMenuItemActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.SingleMenuItemActivity$6 -> mobile.scchildcare.y:
+    mobile.scchildcare.SingleMenuItemActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.SingleMenuItemActivity$7 -> mobile.scchildcare.z:
+    mobile.scchildcare.SingleMenuItemActivity this$0 -> a
+    void onClick(android.content.DialogInterface,int) -> onClick
+mobile.scchildcare.SingleMenuItemActivity$commentSystem -> mobile.scchildcare.aa:
+    android.app.Activity theActivity -> a
+    org.json.JSONObject commentJSON -> b
+    org.json.JSONObject JSON -> c
+    org.apache.http.client.HttpClient postClient -> d
+    java.lang.String proID -> e
+    java.lang.String postURL -> f
+    java.util.HashMap theMap -> g
+    mobile.scchildcare.SingleMenuItemActivity this$0 -> h
+    void onPostExecute(java.lang.String) -> a
+    java.lang.String doInBackground(java.lang.String[]) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+mobile.scchildcare.Single_AsyncTask -> mobile.scchildcare.Single_AsyncTask:
+    android.widget.ProgressBar progressBar -> m
+    java.lang.String providerName -> n
+    java.lang.String yourlat -> o
+    java.lang.String yourlong -> p
+    void onCreate(android.os.Bundle) -> onCreate
+mobile.scchildcare.Single_AsyncTask$SingleItemResults -> mobile.scchildcare.ab:
+    java.lang.String complaintSearchURL -> a
+    java.lang.String complaintFullSearchURL -> b
+    mobile.scchildcare.JSONParser jComplaintParser -> c
+    org.json.JSONArray complaints -> d
+    java.util.ArrayList complaintList -> e
+    java.util.ArrayList commentList -> f
+    boolean isConnected -> g
+    mobile.scchildcare.Single_AsyncTask single -> h
+    android.widget.ProgressBar pBar -> i
+    mobile.scchildcare.JSONParser jParser -> j
+    org.json.JSONArray comments -> k
+    java.lang.String lat1 -> l
+    java.lang.String long1 -> m
+    android.content.Context aContext -> n
+    java.util.HashMap theMap -> o
+    mobile.scchildcare.Single_AsyncTask this$0 -> p
+    void onPostExecute(java.util.ArrayList) -> a
+    java.util.ArrayList doInBackground(java.lang.String[]) -> a
+    boolean isURLReachable(android.content.Context) -> a
+    void onPostExecute(java.lang.Object) -> onPostExecute
+    java.lang.Object doInBackground(java.lang.Object[]) -> doInBackground
+mobile.scchildcare.SorryMessageActivity -> mobile.scchildcare.SorryMessageActivity:
+    boolean onCreateOptionsMenu(android.view.Menu) -> onCreateOptionsMenu
+    void onCreate(android.os.Bundle) -> onCreate
+    boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected

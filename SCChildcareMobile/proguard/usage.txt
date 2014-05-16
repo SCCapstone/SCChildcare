@@ -623,118 +623,6 @@ android.support.v4.widget.SearchViewCompatHoneycomb$OnQueryTextListenerCompatBri
 android.support.v4.widget.SimpleCursorAdapter
 android.support.v4.widget.SimpleCursorAdapter$CursorToStringConverter
 android.support.v4.widget.SimpleCursorAdapter$ViewBinder
-com.example.scchildcare.BuildConfig
-com.example.scchildcare.GPS_JSONParser
-com.example.scchildcare.GPS_SearchResultsActivity:
-    private static final java.lang.String TAG_ID
-    private static final java.lang.String TAG_PROVIDERNAME
-    private static final java.lang.String TAG_LICENSEINFO
-    private static final java.lang.String TAG_OWNERNAME
-    private static final java.lang.String TAG_ADDRESS
-    private static final java.lang.String TAG_CITY
-    private static final java.lang.String TAG_STATE
-    private static final java.lang.String TAG_ZIPCODE
-    private static final java.lang.String TAG_PHONENUMBER
-    private static final java.lang.String TAG_LONGITUDE
-    private static final java.lang.String TAG_LATITUDE
-    private static final java.lang.String TAG_CAPACITY
-    private static final java.lang.String TAG_HOURS
-    private static final java.lang.String TAG_SPECIALIST
-    private static final java.lang.String TAG_SPECIALISTPHONE
-    private static final java.lang.String TAG_QUALITY
-    private static final java.lang.String TAG_LIST_OF_PROVIDERS
-    private static final java.lang.String TAG_CENTER_DATA
-    public static final java.lang.String SORRY_MESSAGE
-com.example.scchildcare.MainActivity:
-    public static final java.lang.String EXTRA_MESSAGE
-    boolean check
-    android.widget.TextView geocodeLabel
-    android.widget.EditText addressText
-    private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST
-    public static final java.lang.String APPTAG
-    132:133:void getResult(java.lang.Boolean)
-    380:381:public void makeToast(java.lang.String)
-com.example.scchildcare.R
-com.example.scchildcare.R$attr
-com.example.scchildcare.R$color
-com.example.scchildcare.R$dimen
-com.example.scchildcare.R$drawable
-com.example.scchildcare.R$id
-com.example.scchildcare.R$integer
-com.example.scchildcare.R$layout
-com.example.scchildcare.R$menu
-com.example.scchildcare.R$string
-com.example.scchildcare.R$style
-com.example.scchildcare.R$styleable
-com.example.scchildcare.SearchResultsActivity:
-    private static final java.lang.String TAG_ID
-    private static final java.lang.String TAG_PROVIDERNAME
-    private static final java.lang.String TAG_LICENSEINFO
-    private static final java.lang.String TAG_OWNERNAME
-    private static final java.lang.String TAG_ADDRESS
-    private static final java.lang.String TAG_CITY
-    private static final java.lang.String TAG_STATE
-    private static final java.lang.String TAG_ZIPCODE
-    private static final java.lang.String TAG_PHONENUMBER
-    private static final java.lang.String TAG_LONGITUDE
-    private static final java.lang.String TAG_LATITUDE
-    private static final java.lang.String TAG_CAPACITY
-    private static final java.lang.String TAG_HOURS
-    private static final java.lang.String TAG_SPECIALIST
-    private static final java.lang.String TAG_SPECIALISTPHONE
-    private static final java.lang.String TAG_QUALITY
-    private static final java.lang.String TAG_LIST_OF_PROVIDERS
-    public static final java.lang.String SORRY_MESSAGE
-    private static final java.lang.String TAG_CENTER_DATA
-com.example.scchildcare.Search_AsyncTask:
-    public static final java.lang.String EXTRA_MESSAGE
-com.example.scchildcare.SingleMenuItemActivity:
-    private static final java.lang.String TAG_PROVIDERID
-    private static final java.lang.String TAG_PROVIDERNAME
-    private static final java.lang.String TAG_LICENSEINFO
-    private static final java.lang.String TAG_OWNERNAME
-    private static final java.lang.String TAG_ADDRESS
-    private static final java.lang.String TAG_CITY
-    private static final java.lang.String TAG_STATE
-    private static final java.lang.String TAG_ZIPCODE
-    private static final java.lang.String TAG_PHONENUMBER
-    private static final java.lang.String TAG_LONGITUDE
-    private static final java.lang.String TAG_LATITUDE
-    private static final java.lang.String TAG_CAPACITY
-    private static final java.lang.String TAG_HOURS
-    private static final java.lang.String TAG_SPECIALIST
-    private static final java.lang.String TAG_SPECIALISTPHONE
-    private static final java.lang.String TAG_QUALITY
-    private static final java.lang.String TAG_GET_COMMENTS
-    private static final java.lang.String TAG_COMPLAINTS
-    private static final java.lang.String TAG_COMPLAINTTYPE
-    private static final java.lang.String TAG_COMPLAINTDATE
-    private static final java.lang.String TAG_COMPLAINTRESOLVED
-    private static final java.lang.String TAG_CENTER_DATA
-    private static final java.lang.String TAG_ALIAS
-    private static final java.lang.String TAG_BODY
-    private static final java.lang.String TAG_PROVIDER_COMMENT_ID
-    private static final java.lang.String TAG_JSON_COMMENT
-    private static final java.lang.String commentAddURL1
-    private static final java.lang.String commentAddURL2
-    private static final java.lang.String commentGetURL1
-    private static final java.lang.String commentGetURL2
-    private static final java.lang.String TAG_COMMENTS
-com.example.scchildcare.Single_AsyncTask:
-    private static final java.lang.String TAG_CENTER_DATA
-com.example.scchildcare.Single_AsyncTask$SingleItemResults:
-    private static final java.lang.String TAG_COMPLAINTTYPE
-    private static final java.lang.String TAG_COMPLAINTDATE
-    private static final java.lang.String TAG_COMPLAINTRESOLVED
-    private static final java.lang.String TAG_COMPLAINTS
-    private static final java.lang.String TAG_CENTER_DATA
-    private static final java.lang.String commentGetURL1
-    private static final java.lang.String commentGetURL2
-    private static final java.lang.String TAG_COMMENTS
-    private static final java.lang.String TAG_PROVIDER_COMMENT_ID
-    private static final java.lang.String TAG_ALIAS
-    private static final java.lang.String TAG_BODY
-    private static final java.lang.String TAG_GET_COMMENTS
 com.facebook.AccessToken:
     private static final long serialVersionUID
     static final java.lang.String ACCESS_TOKEN_KEY
@@ -4057,6 +3945,118 @@ javax.annotation.meta.TypeQualifierDefault
 javax.annotation.meta.TypeQualifierNickname
 javax.annotation.meta.TypeQualifierValidator
 javax.annotation.meta.When
+mobile.scchildcare.BuildConfig
+mobile.scchildcare.GPS_JSONParser
+mobile.scchildcare.GPS_SearchResultsActivity:
+    private static final java.lang.String TAG_ID
+    private static final java.lang.String TAG_PROVIDERNAME
+    private static final java.lang.String TAG_LICENSEINFO
+    private static final java.lang.String TAG_OWNERNAME
+    private static final java.lang.String TAG_ADDRESS
+    private static final java.lang.String TAG_CITY
+    private static final java.lang.String TAG_STATE
+    private static final java.lang.String TAG_ZIPCODE
+    private static final java.lang.String TAG_PHONENUMBER
+    private static final java.lang.String TAG_LONGITUDE
+    private static final java.lang.String TAG_LATITUDE
+    private static final java.lang.String TAG_CAPACITY
+    private static final java.lang.String TAG_HOURS
+    private static final java.lang.String TAG_SPECIALIST
+    private static final java.lang.String TAG_SPECIALISTPHONE
+    private static final java.lang.String TAG_QUALITY
+    private static final java.lang.String TAG_LIST_OF_PROVIDERS
+    private static final java.lang.String TAG_CENTER_DATA
+    public static final java.lang.String SORRY_MESSAGE
+mobile.scchildcare.MainActivity:
+    public static final java.lang.String EXTRA_MESSAGE
+    boolean check
+    android.widget.TextView geocodeLabel
+    android.widget.EditText addressText
+    private static final int CONNECTION_FAILURE_RESOLUTION_REQUEST
+    public static final java.lang.String APPTAG
+    133:134:void getResult(java.lang.Boolean)
+    382:383:public void makeToast(java.lang.String)
+mobile.scchildcare.R
+mobile.scchildcare.R$attr
+mobile.scchildcare.R$color
+mobile.scchildcare.R$dimen
+mobile.scchildcare.R$drawable
+mobile.scchildcare.R$id
+mobile.scchildcare.R$integer
+mobile.scchildcare.R$layout
+mobile.scchildcare.R$menu
+mobile.scchildcare.R$string
+mobile.scchildcare.R$style
+mobile.scchildcare.R$styleable
+mobile.scchildcare.SearchResultsActivity:
+    private static final java.lang.String TAG_ID
+    private static final java.lang.String TAG_PROVIDERNAME
+    private static final java.lang.String TAG_LICENSEINFO
+    private static final java.lang.String TAG_OWNERNAME
+    private static final java.lang.String TAG_ADDRESS
+    private static final java.lang.String TAG_CITY
+    private static final java.lang.String TAG_STATE
+    private static final java.lang.String TAG_ZIPCODE
+    private static final java.lang.String TAG_PHONENUMBER
+    private static final java.lang.String TAG_LONGITUDE
+    private static final java.lang.String TAG_LATITUDE
+    private static final java.lang.String TAG_CAPACITY
+    private static final java.lang.String TAG_HOURS
+    private static final java.lang.String TAG_SPECIALIST
+    private static final java.lang.String TAG_SPECIALISTPHONE
+    private static final java.lang.String TAG_QUALITY
+    private static final java.lang.String TAG_LIST_OF_PROVIDERS
+    public static final java.lang.String SORRY_MESSAGE
+    private static final java.lang.String TAG_CENTER_DATA
+mobile.scchildcare.Search_AsyncTask:
+    public static final java.lang.String EXTRA_MESSAGE
+mobile.scchildcare.SingleMenuItemActivity:
+    private static final java.lang.String TAG_PROVIDERID
+    private static final java.lang.String TAG_PROVIDERNAME
+    private static final java.lang.String TAG_LICENSEINFO
+    private static final java.lang.String TAG_OWNERNAME
+    private static final java.lang.String TAG_ADDRESS
+    private static final java.lang.String TAG_CITY
+    private static final java.lang.String TAG_STATE
+    private static final java.lang.String TAG_ZIPCODE
+    private static final java.lang.String TAG_PHONENUMBER
+    private static final java.lang.String TAG_LONGITUDE
+    private static final java.lang.String TAG_LATITUDE
+    private static final java.lang.String TAG_CAPACITY
+    private static final java.lang.String TAG_HOURS
+    private static final java.lang.String TAG_SPECIALIST
+    private static final java.lang.String TAG_SPECIALISTPHONE
+    private static final java.lang.String TAG_QUALITY
+    private static final java.lang.String TAG_GET_COMMENTS
+    private static final java.lang.String TAG_COMPLAINTS
+    private static final java.lang.String TAG_COMPLAINTTYPE
+    private static final java.lang.String TAG_COMPLAINTDATE
+    private static final java.lang.String TAG_COMPLAINTRESOLVED
+    private static final java.lang.String TAG_CENTER_DATA
+    private static final java.lang.String TAG_ALIAS
+    private static final java.lang.String TAG_BODY
+    private static final java.lang.String TAG_PROVIDER_COMMENT_ID
+    private static final java.lang.String TAG_JSON_COMMENT
+    private static final java.lang.String commentAddURL1
+    private static final java.lang.String commentAddURL2
+    private static final java.lang.String commentGetURL1
+    private static final java.lang.String commentGetURL2
+    private static final java.lang.String TAG_COMMENTS
+mobile.scchildcare.Single_AsyncTask:
+    private static final java.lang.String TAG_CENTER_DATA
+mobile.scchildcare.Single_AsyncTask$SingleItemResults:
+    private static final java.lang.String TAG_COMPLAINTTYPE
+    private static final java.lang.String TAG_COMPLAINTDATE
+    private static final java.lang.String TAG_COMPLAINTRESOLVED
+    private static final java.lang.String TAG_COMPLAINTS
+    private static final java.lang.String TAG_CENTER_DATA
+    private static final java.lang.String commentGetURL1
+    private static final java.lang.String commentGetURL2
+    private static final java.lang.String TAG_COMMENTS
+    private static final java.lang.String TAG_PROVIDER_COMMENT_ID
+    private static final java.lang.String TAG_ALIAS
+    private static final java.lang.String TAG_BODY
+    private static final java.lang.String TAG_GET_COMMENTS
 org.codehaus.jackson.Base64Variant
 org.codehaus.jackson.Base64Variants
 org.codehaus.jackson.FormatSchema

@@ -210,7 +210,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dip"
             android:paddingTop="25dip"
-            android:text="Complaints:"
+            android:text="Complaints and Review: "
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold" />

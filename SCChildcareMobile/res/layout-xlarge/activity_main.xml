@@ -18,7 +18,7 @@
             android:layout_width="0dp"
             android:layout_height="211dp"
             android:layout_weight="0.67"
-            android:src="@drawable/ic_scchildcare_logo" />
+            android:src="@drawable/cdrc" />
     </LinearLayout>
 
     <EditText

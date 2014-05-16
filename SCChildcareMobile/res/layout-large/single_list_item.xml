@@ -2,9 +2,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:scrollbarAlwaysDrawVerticalTrack="true"
     android:paddingLeft="3dp"
-    android:paddingRight="3dp" >
+    android:paddingRight="3dp"
+    android:scrollbarAlwaysDrawVerticalTrack="true" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,9 +50,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp" />
-
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -84,7 +82,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -105,7 +102,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -139,7 +135,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -160,7 +155,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -181,7 +175,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -202,7 +195,6 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
-
         </LinearLayout>
 
         <fragment
@@ -217,6 +209,7 @@
             android:layout_height="wrap_content"
             android:paddingBottom="10dip"
             android:paddingTop="25dip"
+            android:text="Complaints and Review: "
             android:textColor="#000000"
             android:textSize="25sp"
             android:textStyle="bold" />
@@ -246,19 +239,18 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
                     android:text="@string/complaintIssueDate"
-                    android:textColor="#FFFFFF" 
-                    android:paddingRight="40dp"/>
+                    android:textColor="#FFFFFF" />
 
                 <TextView
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:paddingLeft="55dp"
+                    android:paddingRight="40dp"
                     android:text="@string/resolve"
-                    android:textColor="#FFFFFF" 
-                    android:paddingRight="40dp"/>
-
+                    android:textColor="#FFFFFF" />
             </TableRow>
 
             <TableRow
@@ -287,8 +279,8 @@
             <TableLayout
                 android:id="@+id/commentTable"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" 
-                android:shrinkColumns="0">
+                android:layout_height="wrap_content"
+                android:shrinkColumns="0" >
             </TableLayout>
 
             <LinearLayout
@@ -307,13 +299,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-
-                    android:selectAllOnFocus="false" 
                     android:focusable="false"
-                    android:singleLine="true"
                     android:imeOptions="actionNext"
-                    android:maxLength="20">
-
+                    android:maxLength="20"
+                    android:selectAllOnFocus="false"
+                    android:singleLine="true" >
 
                     <requestFocus />
                 </EditText>
@@ -334,14 +324,12 @@
                     android:id="@+id/commentText"
                     android:layout_width="match_parent"
                     android:layout_height="119dp"
-
                     android:ems="10"
-                    android:inputType="text" 
-                    android:gravity="top"
                     android:focusable="false"
+                    android:gravity="top"
                     android:imeOptions="actionDone"
-                    android:maxLength="255"/>
-
+                    android:inputType="text"
+                    android:maxLength="255" />
             </LinearLayout>
 
             <Button
@@ -351,8 +339,6 @@
                 android:layout_gravity="center_horizontal"
                 android:gravity="right|center_vertical|center_horizontal"
                 android:text="@string/comment" />
-
-         
         </LinearLayout>
     </LinearLayout>
 
