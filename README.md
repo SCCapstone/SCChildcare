@@ -1,8 +1,7 @@
-#SCChildcare Mobile v1.0.0
+#SCChildcare Mobile v1.0.2
 
 *[http://www.scchildcare.org](http://www.scchildcare.org)
 
-[Download](https://www.dropbox.com/s/0jro5rcdlh32fru/SCChildcareMobile.apk) now: 
 
 ### DESCRIPTION
 
@@ -18,11 +17,15 @@ view official ratings, and even communicate to other users via a forum/comment s
 
 
 ##Known Bugs
-  - Some layouts need to be adjusted for different size devices
+  - Currently does not ready JSONObject after searching. App gets the array and converts it to object, but the getString() method will not work
   
 
 
 ##Update History
+
+###1.0.2
+  - Changed Logo
+  - Converted to new complaint search
 
 
 ###1.0.0
