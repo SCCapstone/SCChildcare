@@ -285,6 +285,7 @@
             <TableLayout
                 android:id="@+id/commentTable"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content" 
                 android:shrinkColumns="0"
                 >
@@ -299,6 +300,7 @@
                     android:id="@+id/aliasTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:text="Name:" />
 
                 <EditText
@@ -306,6 +308,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+
                     android:maxLength="20"
                     android:imeOptions="actionNext"
                     android:singleLine="true"
@@ -331,6 +334,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+
                     android:maxLength="255"
                     android:inputType="text"
  		    android:imeOptions="actionDone"

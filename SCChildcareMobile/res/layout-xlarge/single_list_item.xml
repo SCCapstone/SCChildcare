@@ -278,6 +278,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:shrinkColumns="0" >
+
             </TableLayout>
 
             <LinearLayout
@@ -289,6 +290,7 @@
                     android:id="@+id/aliasTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:text="Name:" />
 
                 <EditText
@@ -296,6 +298,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+
+
+                     android:maxLength="20"
+
                     android:imeOptions="actionNext"
                     android:maxLength="20"
                     android:selectAllOnFocus="false"
@@ -322,6 +328,7 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:gravity="top"
+
                     android:imeOptions="actionDone"
                     android:inputType="text"
                     android:maxLength="255" />
@@ -336,5 +343,6 @@
                 android:text="@string/comment" />
         </LinearLayout>
     </LinearLayout>
+
 
 </ScrollView>

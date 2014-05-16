@@ -17,9 +17,9 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <!--
-     The following two permissions are not required to use
-     Google Maps Android API v2, but are recommended.
-    -->
+The following two permissions are not required to use
+Google Maps Android API v2, but are recommended.
+-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
@@ -36,7 +36,7 @@
         <!-- Main Page View -->
         <activity
             android:name="mobile.scchildcare.MainActivity"
-            android:theme="@style/NoActionBar" 
+            android:theme="@style/NoActionBar"
 
             android:screenOrientation="portrait" >
 
@@ -54,7 +54,7 @@
             android:name="mobile.scchildcare.SearchResultsActivity"
             android:parentActivityName="mobile.scchildcare.MainActivity"
 
-            android:theme="@style/NoActionBar" 
+            android:theme="@style/NoActionBar"
 
             android:screenOrientation="portrait" >
             <meta-data
@@ -117,10 +117,10 @@
 
         <!-- Single List Item View -->
         <!--
-     BUG REPORT: When the parent activity up arrow is used, this will attempt to fill the list view with an empty array, sending it to 
-	the sorry page immediately, need to figure out how to fix this
+BUG REPORT: When the parent activity up arrow is used, this will attempt to fill the list view with an empty array, sending it to
+the sorry page immediately, need to figure out how to fix this
 
-        -->
+-->
         <activity
             android:name="mobile.scchildcare.SingleMenuItemActivity"
             android:label="Single Menu Item"
@@ -139,7 +139,7 @@
             android:name="mobile.scchildcare.SorryMessageActivity"
             android:label="Oops!"
             android:parentActivityName="mobile.scchildcare.MainActivity"
-            android:theme="@style/NoActionBar" 
+            android:theme="@style/NoActionBar"
 
             android:screenOrientation="portrait" >
 
@@ -153,7 +153,7 @@
             android:name="mobile.scchildcare.ConnectionErrorActivity"
             android:label="Oops!"
             android:parentActivityName="mobile.scchildcare.MainActivity"
-            android:theme="@style/NoActionBar" 
+            android:theme="@style/NoActionBar"
 
             android:screenOrientation="portrait" >
 
@@ -171,19 +171,20 @@
 
         <activity
             android:name="com.facebook.LoginActivity"
-            android:label="@string/app_name" 
+            android:label="@string/app_name"
             android:screenOrientation="portrait" >
         </activity>
         
-        <meta-data 
+        <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         
 
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBvQo88jZblKNeNDKJBZi6dTdl_Gkdc4CM​" 
+            android:value="AIzaSyBvQo88jZblKNeNDKJBZi6dTdl_Gkdc4CM​"
             />
     </application>
 
 </manifest>
+

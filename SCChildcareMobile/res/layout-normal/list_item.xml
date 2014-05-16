@@ -201,5 +201,4 @@
         android:textSize="0sp"
         android:textColor="#acacac" >
     </TextView>
-
 </LinearLayout>

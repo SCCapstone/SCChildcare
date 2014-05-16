@@ -112,6 +112,7 @@ public class MainActivity extends FragmentActivity implements
 		// Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 	}
 
+<<<<<<< HEAD:SCChildcareMobile/src/mobile/scchildcare/MainActivity.java
 	/**
 	 * servicesConnected() method: ensures that GooglePlayServices is connected
 	 * to the internet, which is required to function. Using utilities and
@@ -119,6 +120,9 @@ public class MainActivity extends FragmentActivity implements
 	 * definitive code for why the app is not connected.
 	 * 
 	 */
+=======
+	//Attempt to connect to Google Play Service
+>>>>>>> 5638a2977b14cbb200b432f9b022465a7f54a51c:SCChildcareMobile/src/com/example/scchildcare/MainActivity.java
 	private boolean servicesConnected() {
 		// Check that Google Play services is available
 		int resultCode = GooglePlayServicesUtil
@@ -381,7 +385,7 @@ public class MainActivity extends FragmentActivity implements
 		mLocationClient.disconnect();
 		super.onStop();
 	}
-
+	//Display the error dialog
 	private void showErrorDialog(int errorCode) {
 
 		// Get the error dialog from Google Play services
@@ -402,7 +406,7 @@ public class MainActivity extends FragmentActivity implements
 		}
 
 	}
-
+	
 	public static class ErrorDialogFragment extends DialogFragment {
 		// Global field to contain the error dialog
 		private Dialog mDialog;
@@ -424,7 +428,7 @@ public class MainActivity extends FragmentActivity implements
 			return mDialog;
 		}
 	}
-
+	//If available, add options to the action bar
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -432,6 +436,7 @@ public class MainActivity extends FragmentActivity implements
 		return true;
 	}
 
+	//shows a message in a pop up 
 	public void makeToast(String message) {
 		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}

@@ -277,6 +277,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:shrinkColumns="0" >
+
             </TableLayout>
 
             <LinearLayout
@@ -294,7 +295,9 @@
                     android:id="@+id/aliasText"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+
                     android:ems="10"
+                    android:maxLength="20"
                     android:imeOptions="actionNext"
                     android:maxLength="20"
                     android:selectAllOnFocus="false"
@@ -335,5 +338,6 @@
                 android:text="@string/comment" />
         </LinearLayout>
     </LinearLayout>
+
 
 </ScrollView>

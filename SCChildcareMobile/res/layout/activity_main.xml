@@ -25,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="@string/tagLine"
             android:textAppearance="?android:attr/textAppearanceSmall"
-			android:visibility="gone"
+android:visibility="gone"
             android:textStyle="italic|bold" />
     </LinearLayout>
 
@@ -89,3 +89,6 @@
 
 
 </LinearLayout>
+
+
+

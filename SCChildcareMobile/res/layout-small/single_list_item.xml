@@ -51,6 +51,7 @@
                     android:layout_height="wrap_content"
                     android:paddingBottom="10dp"
                     android:textSize="17sp" />
+
             </LinearLayout>
         </LinearLayout>
 
@@ -83,6 +84,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -103,6 +105,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -136,6 +139,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -156,6 +160,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -176,6 +181,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="2dp"
                 android:textSize="20sp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -188,6 +194,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/specialistPhone"
+
                 android:textSize="20sp" />
 
             <TextView
@@ -248,6 +255,7 @@
                     android:paddingLeft="60dp"
                     android:text="@string/resolve"
                     android:textColor="#FFFFFF" />
+
             </TableRow>
 
             <TableRow
@@ -276,6 +284,7 @@
             <TableLayout
                 android:id="@+id/commentTable"
                 android:layout_width="match_parent"
+
                 android:layout_height="wrap_content"
                 android:shrinkColumns="0" >
             </TableLayout>
@@ -289,6 +298,7 @@
                     android:id="@+id/aliasTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:text="Name:" />
 
                 <EditText
@@ -296,6 +306,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+
+
+
+                    android:maxLength="20"
                     android:imeOptions="actionNext"
                     android:maxLength="20"
                     android:selectAllOnFocus="false"
@@ -323,6 +337,7 @@
                     android:ems="10"
                     android:gravity="top"
                     android:imeOptions="actionDone"
+
                     android:inputType="text"
                     android:maxLength="255" />
             </LinearLayout>
@@ -336,5 +351,6 @@
                 android:text="@string/comment" />
         </LinearLayout>
     </LinearLayout>
+
 
 </ScrollView>

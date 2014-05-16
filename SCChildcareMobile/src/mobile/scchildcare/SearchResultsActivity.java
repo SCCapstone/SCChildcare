@@ -41,6 +41,7 @@ public class SearchResultsActivity extends ListActivity {
 
 	// JSON node names
 	// private static final String TAG_PROVIDERS = "providers";
+
 	private static final String TAG_ID = "id";
 	private static final String TAG_PROVIDERNAME = "providerName";
 	private static final String TAG_LICENSEINFO = "licenseInfo";
@@ -76,6 +77,7 @@ public class SearchResultsActivity extends ListActivity {
 	String theMarker = "";
 	// //////////////////
 
+
 	// providers JSONArray
 	JSONArray providers = null;
 
@@ -87,6 +89,7 @@ public class SearchResultsActivity extends ListActivity {
 	}
 
 	@SuppressWarnings("unchecked")
+
 	@SuppressLint("NewApi")
 	/**
 	 * This class gets the search results for the standard search, in the form of a JSONObject Array, 
@@ -102,7 +105,7 @@ public class SearchResultsActivity extends ListActivity {
 		super.onCreate(savedInstanceState);
 		// Set the text view as the activity layout
 		setContentView(R.layout.activity_search_results);
-
+		//get the message from the intent
 		Intent intent = getIntent();
 		Bundle getProviders = intent.getExtras();
 		containingMaps = (ArrayList<HashMap<String, String>>) getProviders
@@ -202,7 +205,6 @@ public class SearchResultsActivity extends ListActivity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-
 				if (SystemClock.elapsedRealtime() - mLastClickTime < 1000) {
 					return;
 				}
@@ -211,6 +213,7 @@ public class SearchResultsActivity extends ListActivity {
 				// getting values from selected ListItem
 				String providerID = ((TextView) view.findViewById(R.id.id))
 						.getText().toString();
+
 				String providerName = ((TextView) view.findViewById(R.id.name))
 						.getText().toString();
 				String licenseInfo = ((TextView) view
@@ -287,7 +290,6 @@ public class SearchResultsActivity extends ListActivity {
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
-
 	}
 
 	/**

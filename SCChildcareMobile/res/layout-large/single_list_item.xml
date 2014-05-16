@@ -40,6 +40,7 @@
                     android:id="@+id/qualityLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:paddingTop="15dp"
                     android:text="@string/quality"
                     android:textSize="20sp"
@@ -203,6 +204,7 @@
             android:layout_width="match_parent"
             android:layout_height="324dp" />
 
+
         <TextView
             android:id="@+id/complaints_Table_label"
             android:layout_width="fill_parent"
@@ -232,6 +234,7 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:text="@string/complaintType"
+<
                     android:textColor="#FFFFFF" />
 
                 <TextView
@@ -247,6 +250,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
+
                     android:paddingLeft="55dp"
                     android:paddingRight="40dp"
                     android:text="@string/resolve"
@@ -281,6 +285,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:shrinkColumns="0" >
+
             </TableLayout>
 
             <LinearLayout
@@ -292,6 +297,7 @@
                     android:id="@+id/aliasTag"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+
                     android:text="Name:" />
 
                 <EditText
@@ -299,6 +305,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
+
+
+
+                    android:selectAllOnFocus="false" 
                     android:focusable="false"
                     android:imeOptions="actionNext"
                     android:maxLength="20"
@@ -323,6 +333,7 @@
                 <EditText
                     android:id="@+id/commentText"
                     android:layout_width="match_parent"
+
                     android:layout_height="119dp"
                     android:ems="10"
                     android:focusable="false"
@@ -341,5 +352,6 @@
                 android:text="@string/comment" />
         </LinearLayout>
     </LinearLayout>
+
 
 </ScrollView>
