@@ -311,7 +311,6 @@
 
                     android:maxLength="20"
                     android:imeOptions="actionNext"
-                    android:maxLength="20"
                     android:selectAllOnFocus="false"
                     android:singleLine="true" >
 
