@@ -60,6 +60,7 @@ public class Search_AsyncTask extends FragmentActivity {
 	class GetSearchResults extends
 			AsyncTask<String, String, ArrayList<HashMap<String, String>>> {
 		
+		//New JSON Server for testing
 		String searchURL = "https://api.myjson.com/bins/53lof";
 		//String searchURL = "http://54.201.44.59:3000/providers.json?utf8=%E2%9C%93&search=";
 		// private static byte[] buff = new byte[1024];
@@ -212,6 +213,7 @@ public class Search_AsyncTask extends FragmentActivity {
 			return storeData;
 		}
 
+//Does not appropriately test URL. Server could be up but search results not//
 		public boolean isURLReachable(Context context) {
 			ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo netInfo = cm.getActiveNetworkInfo();
