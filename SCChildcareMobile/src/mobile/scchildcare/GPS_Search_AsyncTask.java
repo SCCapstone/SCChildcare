@@ -62,7 +62,7 @@ public class GPS_Search_AsyncTask extends FragmentActivity {
 	 */
 	class GetGPSResults extends
 			AsyncTask<String, String, ArrayList<HashMap<String, String>>> {
-		String gpsURL_1 = "http://54.201.44.59:3000/providers/gpssearch.json?utf8=%E2%9C%93&long=";
+		String gpsURL_1 = "https://api.myjson.com/bins/1pwnr?utf8=%E2%9C%93&long=";
 		String gpsURL_2 = "&lat=";
 		String TAG_PROVIDERS = "providers";
 		String TAG_ID = "id";
@@ -150,69 +150,71 @@ public class GPS_Search_AsyncTask extends FragmentActivity {
 					// ThreadPolicy tp = ThreadPolicy.LAX;
 					// StrictMode.setThreadPolicy(tp);
 					// System.out.println("Getting JSON with HTTP");
-					JSONObject json = jParser.getJSONFromUrl(fullGPS_URL);
-					if (json.length() > 0) {
-						System.out.println("non null json object");
-					}
+					getJson f = new getJson();
+					String result=f.getStringGet(fullGPS_URL);
+					Log.e("result",result);
+
+					JSONArray providers = null;
 					try {
-						providers = json.getJSONArray(TAG_PROVIDERS);
-						// System.out.println(json.toString());
-						System.out.println(" providers length "
-								+ providers.length());
-						if (providers.length() > 0) {
-							System.out.println(" providers list is not empty ");
-
-							Log.d("JSON ARRAY", providers.toString());
-							for (int i = 0; i < providers.length(); i++) {
-								JSONObject p = providers.getJSONObject(i);
-								Log.i("Object i/id:", p.toString());
-								String id = p.getString(TAG_ID);
-								String providerName = p
-										.getString(TAG_PROVIDERNAME);
-								String licenseInfo = p
-										.getString(TAG_LICENSEINFO);
-								String ownerName = p.getString(TAG_OWNERNAME);
-								String address = p.getString(TAG_ADDRESS);
-								String city = p.getString(TAG_CITY);
-								String state = p.getString(TAG_STATE);
-								String zipCode = p.getString(TAG_ZIPCODE);
-								String phoneNumber = p
-										.getString(TAG_PHONENUMBER);
-								String longitude = p.getString(TAG_LONGITUDE);
-								String latitude = p.getString(TAG_LATITUDE);
-								String capacity = p.getString(TAG_CAPACITY);
-								String hours = p.getString(TAG_HOURS);
-								String specialist = p.getString(TAG_SPECIALIST);
-								String specialistPhone = p
-										.getString(TAG_SPECIALISTPHONE);
-								String qualityLevel = p.getString(TAG_QUALITY);
-
-								HashMap<String, String> map = new HashMap<String, String>();
-
-								map.put(TAG_ID, id);
-								map.put(TAG_PROVIDERNAME, providerName);
-								map.put(TAG_LICENSEINFO, licenseInfo);
-								map.put(TAG_OWNERNAME, ownerName);
-								map.put(TAG_ADDRESS, address);
-								map.put(TAG_CITY, city);
-								map.put(TAG_STATE, state);
-								map.put(TAG_ZIPCODE, zipCode);
-								map.put(TAG_PHONENUMBER, phoneNumber);
-								map.put(TAG_LONGITUDE, longitude);
-								map.put(TAG_LATITUDE, latitude);
-								map.put(TAG_CAPACITY, capacity);
-								map.put(TAG_HOURS, hours);
-								map.put(TAG_SPECIALIST, specialist);
-								map.put(TAG_SPECIALISTPHONE, specialistPhone);
-								map.put(TAG_QUALITY, qualityLevel);
-
-								storeData.add(map);
-
-							}
-						}
-					} catch (JSONException e) {
-						e.printStackTrace();
+						providers = new JSONArray(result);
+					} catch (JSONException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
 					}
+					
+					for (int i = 0; i < providers.length(); i++) {
+						try {
+							JSONObject p = providers.getJSONObject(i);
+							String id = p.getString(TAG_ID);
+							String providerName = p
+									.getString(TAG_PROVIDERNAME);
+							String licenseInfo = p
+									.getString(TAG_LICENSEINFO);
+							String ownerName = p.getString(TAG_OWNERNAME);
+							String address = p.getString(TAG_ADDRESS);
+							String city = p.getString(TAG_CITY);
+							String state = p.getString(TAG_STATE);
+							String zipCode = p.getString(TAG_ZIPCODE);
+							String phoneNumber = p
+									.getString(TAG_PHONENUMBER);
+							String longitude = p.getString(TAG_LONGITUDE);
+							String latitude = p.getString(TAG_LATITUDE);
+							//String longitude = "-122.365";
+							//String latitude = "37.25525";
+							String capacity = p.getString(TAG_CAPACITY);
+							String hours = p.getString(TAG_HOURS);
+							String specialist = p.getString(TAG_SPECIALIST);
+							String specialistPhone = p
+									.getString(TAG_SPECIALISTPHONE);
+							//String qualityLevel = p.getString(TAG_QUALITY);
+							String qualityLevel ="1";
+
+							HashMap<String, String> map = new HashMap<String, String>();
+
+							map.put(TAG_ID, id);
+							map.put(TAG_PROVIDERNAME, providerName);
+							map.put(TAG_LICENSEINFO, licenseInfo);
+							map.put(TAG_OWNERNAME, ownerName);
+							map.put(TAG_ADDRESS, address);
+							map.put(TAG_CITY, city);
+							map.put(TAG_STATE, state);
+							map.put(TAG_ZIPCODE, zipCode);
+							map.put(TAG_PHONENUMBER, phoneNumber);
+							map.put(TAG_LONGITUDE, longitude);
+							map.put(TAG_LATITUDE, latitude);
+							map.put(TAG_CAPACITY, capacity);
+							map.put(TAG_HOURS, hours);
+							map.put(TAG_SPECIALIST, specialist);
+							map.put(TAG_SPECIALISTPHONE, specialistPhone);
+							map.put(TAG_QUALITY, qualityLevel);
+
+							storeData.add(map);
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+
 				}
 			} else {
 				isConnected = false;

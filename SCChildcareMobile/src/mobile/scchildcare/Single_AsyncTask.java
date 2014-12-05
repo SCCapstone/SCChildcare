@@ -76,9 +76,9 @@ public class Single_AsyncTask extends FragmentActivity {
 	class SingleItemResults extends
 			AsyncTask<String, String, ArrayList<HashMap<String, String>>> {
 
-		String complaintSearchURL = "http://54.201.44.59:3000/providercomplaints.json?provider_id=";
+		String complaintSearchURL = "https://api.myjson.com/bins/rtt3?provider_id=";
 		String complaintFullSearchURL = null;
-		JSONParser jComplaintParser = new JSONParser();
+	//	JSONParser jComplaintParser = new JSONParser();
 
 		JSONArray complaints = null;
 		ArrayList<HashMap<String, String>> complaintList = new ArrayList<HashMap<String, String>>();
@@ -88,8 +88,8 @@ public class Single_AsyncTask extends FragmentActivity {
 		private static final String TAG_COMPLAINTRESOLVED = "resolved";
 		private static final String TAG_COMPLAINTS = "providercomplaints";
 		private static final String TAG_CENTER_DATA = "dataforcenter";
-		private static final String commentGetURL1 = "http://54.201.44.59:3000/providers/";
-		private static final String commentGetURL2 = "/comments.json";
+		private static final String commentGetURL1 = "https://api.myjson.com/bins/5007b?";
+		private static final String commentGetURL2 = "";
 		private static final String TAG_COMMENTS = "comments";
 		// private static final String TAG_PROVIDER_COMMENT_ID = "provider_id";
 		private static final String TAG_ALIAS = "user";
@@ -145,24 +145,27 @@ public class Single_AsyncTask extends FragmentActivity {
 			String complaintActualSearch = complaintFullSearchURL.replace(" ",
 					"+");
 
-			if (isURLReachable(aContext)) {
+			if (isURLReachable(aContext)){
 
 				System.out.println("TESTING COMPLAINT SEARCH");
 				isConnected = true;
 				System.out.println("COMPLAINTJSON.GETJSONFROMURL");
-				JSONObject complaintjson = jComplaintParser
-						.getJSONFromUrl(complaintActualSearch);
-
-				System.out.println("COMPLAINT HTTP SUCCESSFUL");
+				
+				getJson f = new getJson();
+				String result=f.getStringGet(complaintActualSearch);
+				Log.e("result",result);
+								
+				JSONArray complaints = null;
 				try {
-					// get the array of providers
-					System.out.println("CREATING THE COMPLAINTS JSON ARRAY");
+					complaints = new JSONArray(result);
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
 
-					complaints = complaintjson.getJSONArray(TAG_COMPLAINTS);
-					System.out
-							.println("Beginning For Loop to go through array");
-
+			
 					for (int i = 0; i < complaints.length(); i++) {
+						try{
 						JSONObject complaint = complaints.getJSONObject(i);
 
 						// System.out.println("COMPLAINT:" + complaint);
@@ -185,13 +188,11 @@ public class Single_AsyncTask extends FragmentActivity {
 						// add Hashlist to ArrayList
 						System.out
 								.println("Adding Tags to Map, adding map to providerList");
-						complaintList.add(cmap);
-
-					}
-
-				} catch (JSONException e) {
+						complaintList.add(cmap);				
+					
+					}catch (JSONException e) {
 					e.printStackTrace();
-				}
+				}}
 				// /////////////////////////////////////////////////////////////////////////////
 				HttpClient getClient = new DefaultHttpClient();
 				HttpConnectionParams.setConnectionTimeout(
@@ -199,12 +200,22 @@ public class Single_AsyncTask extends FragmentActivity {
 
 				String getURL = commentGetURL1 + providerName + commentGetURL2;
 
-				JSONObject json = jParser.getJSONFromUrl(getURL);
-
+				getJson json = new getJson();
+				String s1 = json.getStringGet(getURL);
+				Log.e("result2",s1);
+							
+				
+				JSONArray comments = null;
 				try {
-					comments = json.getJSONArray(TAG_COMMENTS);
+					comments = new JSONArray(s1);
+				} catch (JSONException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
 
+			
 					for (int i = 0; i < comments.length(); i++) {
+						try {
 						System.out.println("Comment 1");
 						JSONObject complaint = comments.getJSONObject(i);
 
@@ -224,15 +235,11 @@ public class Single_AsyncTask extends FragmentActivity {
 						System.out
 								.println("Adding Tags to Map, adding map to commentList");
 						commentList.add(commentMap);
-
-					}
-
-				} catch (JSONException e) {
+					} catch (JSONException e) {
 					e.printStackTrace();
-				}
-
+				}}
 				// //////////////////////////////////////////////////////////////////////////////////
-			} else {
+			}else {
 				isConnected = false;
 			}
 			return complaintList;
@@ -243,7 +250,7 @@ public class Single_AsyncTask extends FragmentActivity {
 			NetworkInfo netInfo = cm.getActiveNetworkInfo();
 			if (netInfo != null && netInfo.isConnected()) {
 				try {
-					URL url = new URL("http://54.201.44.59"); // Change to
+					URL url = new URL("http://google.com"); // Change to
 																// "http://google.com"
 																// for www test.
 					HttpURLConnection urlc = (HttpURLConnection) url
@@ -266,6 +273,4 @@ public class Single_AsyncTask extends FragmentActivity {
 			}
 			return false;
 		}
-	}
-
-}
+	}}

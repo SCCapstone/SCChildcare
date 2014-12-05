@@ -43,7 +43,6 @@ public class getJson {
 
 	public static String link = "";
 	private InputStream is;
-	private StringBuilder sb;
 	private String result;
 
 
