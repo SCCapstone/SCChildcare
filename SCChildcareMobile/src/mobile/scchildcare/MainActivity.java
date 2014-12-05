@@ -64,7 +64,7 @@ public class MainActivity extends FragmentActivity implements
 	public final static String EXTRA_LATITUDE = null;
 	private long mLastClickTime = 0;
 	boolean check;
-
+	
 	// ///////////////////////////////////////////////////////////////////
 	EditText editText;
 	// Label instructing input for EditText
@@ -111,18 +111,7 @@ public class MainActivity extends FragmentActivity implements
 		// Display the connection status
 		// Toast.makeText(this, "Connected", Toast.LENGTH_SHORT).show();
 	}
-
-<<<<<<< HEAD:SCChildcareMobile/src/mobile/scchildcare/MainActivity.java
-	/**
-	 * servicesConnected() method: ensures that GooglePlayServices is connected
-	 * to the internet, which is required to function. Using utilities and
-	 * built-in method with GooglePS, the app will give the developer's logCat a
-	 * definitive code for why the app is not connected.
-	 * 
-	 */
-=======
-	//Attempt to connect to Google Play Service
->>>>>>> 5638a2977b14cbb200b432f9b022465a7f54a51c:SCChildcareMobile/src/com/example/scchildcare/MainActivity.java
+ 
 	private boolean servicesConnected() {
 		// Check that Google Play services is available
 		int resultCode = GooglePlayServicesUtil
